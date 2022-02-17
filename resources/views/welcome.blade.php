@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="page-heading">
+<!-- <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
@@ -32,5 +32,7 @@
             </div>
         </div>
     </section>
-</div>
+</div> -->
+<div id="example"></div>
+<div id="debt"></div>
 @endsection
