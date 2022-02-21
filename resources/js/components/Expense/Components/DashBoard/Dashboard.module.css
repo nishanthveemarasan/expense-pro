@@ -1,0 +1,26 @@
+* {
+    font-weight: bold;
+}
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    background-color: white;
+    color: darkslategrey;
+    margin: 3% 0;
+}
+
+.activityHeading {
+    display: flex;
+    flex-direction: column;
+    margin: 3% 0;
+    padding: 0 10px;
+    border: 2px black solid;
+}
+
+.activityHeading .activityBody {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

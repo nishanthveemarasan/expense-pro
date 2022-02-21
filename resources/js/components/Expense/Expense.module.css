@@ -1,0 +1,9 @@
+.nav-item .nav-link a.active {
+    background-color: blue;
+}
+
+.add {
+    position: fixed;
+    bottom: 80px;
+    right: 0;
+}
