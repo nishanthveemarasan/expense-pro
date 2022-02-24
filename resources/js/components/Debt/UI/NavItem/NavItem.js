@@ -1,13 +1,12 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { expenseStoreAction } from "../../Store/Store";
+import { debtStoreAction } from "../../../Expense/Store/Store";
 
 const NavItem = (props) => {
     const dispatch = useDispatch();
     const onPageHandler = (page) => {
-        dispatch(expenseStoreAction.updatePage({ page }));
+        dispatch(debtStoreAction.updatePage({ page }));
     };
     return (
         <Nav.Item>

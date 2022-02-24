@@ -15,9 +15,14 @@ import { useSelector, useDispatch } from "react-redux";
 import store, { expenseStoreAction } from "./Store/Store";
 import { getDate } from "../Helper/Helper";
 import Avatar from "./UI/Avatar/Avatar";
+import "react-datepicker/dist/react-datepicker.css";
 
 const DashBoard = React.lazy(() => import("./Components/DashBoard/DashBoard"));
 const Payment = React.lazy(() => import("./Components/MakePayment/Payment"));
+const Category = React.lazy(() =>
+    import("./Components/MakePayment/Category/Category")
+);
+
 const Expense = () => {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -28,55 +33,48 @@ const Expense = () => {
         return {
             data: state.expenseStore.data,
             payment: state.expenseStore.data.showPayment,
+            page: state.expenseStore.page,
         };
     };
     const state = useSelector(mapStateToProps);
     return (
         <>
             <React.Suspense fallback="">
-                {state.payment && (
+                {state.page == "dashboard" && (
                     <Nav justify variant="tabs" defaultActiveKey="/home">
                         <NavItem
-                            path="/"
+                            path="dashboard"
                             eventKey="linked-1"
                             link="DashBoard"
                         />
                         <NavItem
-                            path="/home"
+                            path="summary"
                             eventKey="linked-2"
                             link="Summary"
                         />
                         <NavItem
-                            path="/home"
+                            path="recurring"
                             eventKey="linked-4"
                             link="Recurring"
                         />
                     </Nav>
                 )}
+
                 <main>
-                    <Routes>
-                        <Route path="/" element={<Navigate to="/payment" />} />
-                        <Route
-                            path="/dashboard"
-                            element={<DashBoard showPayment={true} />}
-                        />
-                        <Route
-                            path="/payment"
-                            element={<Payment showPayment={false} />}
-                        />
-                    </Routes>
-                    {state.payment && (
+                    {state.page == "dashboard" && <DashBoard />}
+                    {state.page == "payment" && <Payment />}
+                    {state.page == "category" && <Category />}
+                    {state.page == "dashboard" && (
                         <div className={classes.add}>
-                            <Avatar size="xl" color="primary">
-                                <NavLink
-                                    to="/payment"
+                            <Avatar size="xl" color="primary" align="5">
+                                <NavItem
+                                    path="payment"
+                                    link="+"
                                     style={{
                                         color: "white",
                                         textDecoration: "none",
                                     }}
-                                >
-                                    +
-                                </NavLink>
+                                />
                             </Avatar>
                         </div>
                     )}

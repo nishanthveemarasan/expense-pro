@@ -7,7 +7,14 @@ const Option = (props) => {
         <div className="row" style={{ margin: "7% 0" }}>
             <div className={`col-3 ${classes.position}`}>{props.heading}</div>
             <div className={`col-7 ${classes.position}`}>
-                <input type="text" className={classes.textbox} />
+                <input
+                    type="text"
+                    className={classes.textbox}
+                    value={props.value}
+                    onChange={(e) => props.change(e)}
+                    disabled={props.disabled}
+                    style={{ color: props.tColor ? props.tColor : "black" }}
+                />
             </div>
             <div className="col-2">
                 <Avatar size="md" color={props.color}>

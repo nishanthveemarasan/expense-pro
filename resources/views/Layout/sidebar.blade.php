@@ -6,7 +6,7 @@
                     <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
                 </div>
                 <div class="toggler">
-                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                    <a href="" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                 </div>
             </div>
         </div>
@@ -15,16 +15,16 @@
                 <li class="sidebar-title">Menu</li>
 
                 <li class="sidebar-item  ">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="/" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
-                        <span>Dashboard</span>
+                        <span>Expense</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="table.html" class='sidebar-link'>
+                    <a href="/debt" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
-                        <span>Table</span>
+                        <span>Debt</span>
                     </a>
                 </li>
 

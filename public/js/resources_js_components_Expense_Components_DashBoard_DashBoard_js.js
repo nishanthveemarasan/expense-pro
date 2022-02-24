@@ -170,18 +170,6 @@ var DashBoard = function DashBoard(props) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_5__["default"], {
           heading: state.date.thisYear,
           body: state.data.todayExpense
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          heading: state.date.today,
-          body: state.data.todayExpense
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          heading: state.date.thisWeek,
-          body: state.data.todayExpense
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          heading: state.date.thisMonth,
-          body: state.data.todayExpense
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          heading: state.date.thisYear,
-          body: state.data.todayExpense
         })]
       })
     })]

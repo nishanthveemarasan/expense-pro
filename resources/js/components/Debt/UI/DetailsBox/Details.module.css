@@ -1,0 +1,38 @@
+.outline {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3% 0;
+    padding: 0 10px;
+    height: 70px;
+    border-bottom: 1px lightgray solid;
+}
+
+.details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.details .name {
+    font-weight: bold;
+}
+
+.details .date {
+    color: rgb(190, 186, 186);
+}
+
+.amount {
+    font-weight: bold;
+    font-size: 20px;
+}
+.lend {
+    color: blue;
+}
+.borrow {
+    color: red;
+}
+.bold {
+    font-weight: bold;
+}

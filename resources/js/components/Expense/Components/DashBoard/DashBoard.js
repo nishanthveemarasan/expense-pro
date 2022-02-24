@@ -55,22 +55,6 @@ const DashBoard = (props) => {
                             heading={state.date.thisYear}
                             body={state.data.todayExpense}
                         />
-                        <Activity
-                            heading={state.date.today}
-                            body={state.data.todayExpense}
-                        />
-                        <Activity
-                            heading={state.date.thisWeek}
-                            body={state.data.todayExpense}
-                        />
-                        <Activity
-                            heading={state.date.thisMonth}
-                            body={state.data.todayExpense}
-                        />
-                        <Activity
-                            heading={state.date.thisYear}
-                            body={state.data.todayExpense}
-                        />
                     </>
                 )}
             </div>

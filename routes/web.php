@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.expense');
 });
+Route::get('/debt', function () {
+    return view('admin.debt');
+});

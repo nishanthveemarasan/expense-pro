@@ -8083,6 +8083,189 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/components/Debt/DebtCategory/Borrow/Borrow.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Debt/DebtCategory/Borrow/Borrow.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _UI_DetailsBox_SingbleBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../UI/DetailsBox/SingbleBox */ "./resources/js/components/Debt/UI/DetailsBox/SingbleBox.js");
+/* harmony import */ var _UI_NavItem_AddCircle_Add__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../UI/NavItem/AddCircle/Add */ "./resources/js/components/Debt/UI/NavItem/AddCircle/Add.js");
+/* harmony import */ var _Borrow_module_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Borrow.module.css */ "./resources/js/components/Debt/DebtCategory/Borrow/Borrow.module.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+var Borrow = function Borrow(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_UI_DetailsBox_SingbleBox__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: _Borrow_module_css__WEBPACK_IMPORTED_MODULE_3__["default"].add,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_UI_NavItem_AddCircle_Add__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Borrow);
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/DebtCategory/DebtCategory.js":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/Debt/DebtCategory/DebtCategory.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Nav.js");
+/* harmony import */ var _UI_NavItem_NavItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UI/NavItem/NavItem */ "./resources/js/components/Debt/UI/NavItem/NavItem.js");
+/* harmony import */ var _Lend_Lend__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Lend/Lend */ "./resources/js/components/Debt/DebtCategory/Lend/Lend.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _Borrow_Borrow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Borrow/Borrow */ "./resources/js/components/Debt/DebtCategory/Borrow/Borrow.js");
+/* harmony import */ var _Individual_Individual__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Individual/Individual */ "./resources/js/components/Debt/DebtCategory/Individual/Individual.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+
+
+
+var DebtCategory = function DebtCategory(props) {
+  var mapStateToProps = function mapStateToProps(state) {
+    return {
+      page: state.debtStore.page
+    };
+  };
+
+  var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(mapStateToProps);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      justify: true,
+      variant: "tabs",
+      defaultActiveKey: "/home",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_UI_NavItem_NavItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        path: "giveto",
+        eventKey: "linked-1",
+        link: "LEND"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_UI_NavItem_NavItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        path: "borrowfrom",
+        eventKey: "linked-2",
+        link: "BORROW"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_UI_NavItem_NavItem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        path: "individual",
+        eventKey: "linked-4",
+        link: "INDIVIDUALS"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("main", {
+      children: [state.page == "giveto" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Lend_Lend__WEBPACK_IMPORTED_MODULE_2__["default"], {}), state.page == "borrowfrom" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Borrow_Borrow__WEBPACK_IMPORTED_MODULE_4__["default"], {}), state.page == "individual" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Individual_Individual__WEBPACK_IMPORTED_MODULE_5__["default"], {})]
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DebtCategory);
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/DebtCategory/Individual/Individual.js":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Debt/DebtCategory/Individual/Individual.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _UI_DetailsBox_DetailsBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../UI/DetailsBox/DetailsBox */ "./resources/js/components/Debt/UI/DetailsBox/DetailsBox.js");
+/* harmony import */ var _UI_NavItem_AddCircle_Add__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../UI/NavItem/AddCircle/Add */ "./resources/js/components/Debt/UI/NavItem/AddCircle/Add.js");
+/* harmony import */ var _Individual_module_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Individual.module.css */ "./resources/js/components/Debt/DebtCategory/Individual/Individual.module.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+var Individual = function Individual(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_UI_DetailsBox_DetailsBox__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: _Individual_module_css__WEBPACK_IMPORTED_MODULE_3__["default"].add,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_UI_NavItem_AddCircle_Add__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Individual);
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/DebtCategory/Lend/Lend.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/Debt/DebtCategory/Lend/Lend.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _Expense_UI_Avatar_Avatar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Expense/UI/Avatar/Avatar */ "./resources/js/components/Expense/UI/Avatar/Avatar.js");
+/* harmony import */ var _UI_DetailsBox_DetailsBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../UI/DetailsBox/DetailsBox */ "./resources/js/components/Debt/UI/DetailsBox/DetailsBox.js");
+/* harmony import */ var _UI_DetailsBox_SingbleBox__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../UI/DetailsBox/SingbleBox */ "./resources/js/components/Debt/UI/DetailsBox/SingbleBox.js");
+/* harmony import */ var _UI_NavItem_AddCircle_Add__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../UI/NavItem/AddCircle/Add */ "./resources/js/components/Debt/UI/NavItem/AddCircle/Add.js");
+/* harmony import */ var _UI_NavItem_NavItem__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../UI/NavItem/NavItem */ "./resources/js/components/Debt/UI/NavItem/NavItem.js");
+/* harmony import */ var _Lend_module_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Lend.module.css */ "./resources/js/components/Debt/DebtCategory/Lend/Lend.module.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+
+
+
+var Lend = function Lend(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_UI_DetailsBox_DetailsBox__WEBPACK_IMPORTED_MODULE_2__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+      className: _Lend_module_css__WEBPACK_IMPORTED_MODULE_6__["default"].add,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_UI_NavItem_AddCircle_Add__WEBPACK_IMPORTED_MODULE_4__["default"], {})
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Lend);
+
+/***/ }),
+
 /***/ "./resources/js/components/Debt/Dept.js":
 /*!**********************************************!*\
   !*** ./resources/js/components/Debt/Dept.js ***!
@@ -8096,73 +8279,234 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _Expense_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Expense/UI/Nav/NavItem */ "./resources/js/components/Expense/UI/Nav/NavItem.js");
+/* harmony import */ var _Expense_Store_Store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Expense/Store/Store */ "./resources/js/components/Expense/Store/Store.js");
+/* harmony import */ var _DebtCategory_DebtCategory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DebtCategory/DebtCategory */ "./resources/js/components/Debt/DebtCategory/DebtCategory.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
 
 
 
 
 
 var Debt = function Debt() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    "class": "page-heading",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      "class": "page-title",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        "class": "row",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          "class": "col-12 col-md-6 order-md-1 order-last",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
-            children: "Vertical Layout with Navbar"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-            "class": "text-subtitle text-muted",
-            children: "Navbar will appear in top of the page."
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          "class": "col-12 col-md-6 order-md-2 order-first",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("nav", {
-            "aria-label": "breadcrumb",
-            "class": "breadcrumb-header float-start float-lg-end",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ol", {
-              "class": "breadcrumb",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                "class": "breadcrumb-item",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-                  href: "index.html",
-                  children: "Dashboard"
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                "class": "breadcrumb-item active",
-                "aria-current": "page",
-                children: "Layout Vertical Navbar"
-              })]
-            })
-          })
-        })]
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("section", {
-      "class": "section",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        "class": "card",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          "class": "card-header",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
-            "class": "card-title",
-            children: "Example Content"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          "class": "card-body",
-          children: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quas omnis laudantium tempore exercitationem, expedita aspernatur sed officia asperiores unde tempora maxime odio reprehenderit distinctio incidunt! Vel aspernatur dicta consequatur!"
-        })]
-      })
-    })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_DebtCategory_DebtCategory__WEBPACK_IMPORTED_MODULE_5__["default"], {})
   });
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Debt);
 
 if (document.getElementById("debt")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Debt, {}), document.getElementById("debt"));
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
+    store: _Expense_Store_Store__WEBPACK_IMPORTED_MODULE_4__["default"],
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Debt, {})
+  }), document.getElementById("debt"));
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/UI/DetailsBox/DetailsBox.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/Debt/UI/DetailsBox/DetailsBox.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _Expense_UI_Avatar_Avatar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Expense/UI/Avatar/Avatar */ "./resources/js/components/Expense/UI/Avatar/Avatar.js");
+/* harmony import */ var _Details_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Details.module.css */ "./resources/js/components/Debt/UI/DetailsBox/Details.module.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+var DetailsBox = function DetailsBox(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: _Details_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].outline,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: _Details_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].details,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Expense_UI_Avatar_Avatar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          size: "lg",
+          color: "primary",
+          align: "3",
+          children: "N"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: _Details_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].name,
+          children: "Nishanth"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: _Details_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].date,
+            children: "Total Lend : "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: _Details_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].lend,
+            children: "1245"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: _Details_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].date,
+            children: "Total Borrow : "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: _Details_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].borrow,
+            children: "4500"
+          })]
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "".concat(_Details_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].amount, " ").concat(_Details_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].lend),
+      children: "5000"
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DetailsBox);
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/UI/DetailsBox/SingbleBox.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/Debt/UI/DetailsBox/SingbleBox.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _SingbleBox_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SingbleBox.module.css */ "./resources/js/components/Debt/UI/DetailsBox/SingbleBox.module.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+var SingbleBox = function SingbleBox(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    className: _SingbleBox_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].outline,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: _SingbleBox_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].details,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: _SingbleBox_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].name,
+        children: "Nishanth"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        children: "ddsdas ad asd asd as dsd"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+          className: _SingbleBox_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].date,
+          children: "borrowed Date : "
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: _SingbleBox_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].amount,
+      children: "5000"
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SingbleBox);
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/UI/NavItem/AddCircle/Add.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/Debt/UI/NavItem/AddCircle/Add.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _Expense_UI_Avatar_Avatar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../Expense/UI/Avatar/Avatar */ "./resources/js/components/Expense/UI/Avatar/Avatar.js");
+/* harmony import */ var _NavItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../NavItem */ "./resources/js/components/Debt/UI/NavItem/NavItem.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+var Add = function Add(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Expense_UI_Avatar_Avatar__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    size: "xl",
+    color: "primary",
+    align: "5",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_NavItem__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      path: "payment",
+      link: "+",
+      style: {
+        color: "white",
+        textDecoration: "none"
+      }
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Add);
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/UI/NavItem/NavItem.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/Debt/UI/NavItem/NavItem.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Nav.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _Expense_Store_Store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../Expense/Store/Store */ "./resources/js/components/Expense/Store/Store.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+var NavItem = function NavItem(props) {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+
+  var onPageHandler = function onPageHandler(page) {
+    dispatch(_Expense_Store_Store__WEBPACK_IMPORTED_MODULE_2__.debtStoreAction.updatePage({
+      page: page
+    }));
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["default"].Item, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["default"].Link, {
+      onClick: function onClick() {
+        return onPageHandler(props.path);
+      },
+      eventKey: props.eventKey,
+      style: props.style,
+      children: props.link
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavItem);
 
 /***/ }),
 
@@ -8229,15 +8573,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _Expense_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Expense.module.css */ "./resources/js/components/Expense/Expense.module.css");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Nav.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Nav.js");
 /* harmony import */ var _UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UI/Nav/NavItem */ "./resources/js/components/Expense/UI/Nav/NavItem.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _Store_Store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Store/Store */ "./resources/js/components/Expense/Store/Store.js");
 /* harmony import */ var _Helper_Helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Helper/Helper */ "./resources/js/components/Helper/Helper.js");
 /* harmony import */ var _UI_Avatar_Avatar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./UI/Avatar/Avatar */ "./resources/js/components/Expense/UI/Avatar/Avatar.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -8258,6 +8603,9 @@ var DashBoard = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function ()
 var Payment = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Expense_Components_MakePayment_Payment_js").then(__webpack_require__.bind(__webpack_require__, /*! ./Components/MakePayment/Payment */ "./resources/js/components/Expense/Components/MakePayment/Payment.js"));
 });
+var Category = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_Expense_Components_MakePayment_Category_Category_js").then(__webpack_require__.bind(__webpack_require__, /*! ./Components/MakePayment/Category/Category */ "./resources/js/components/Expense/Components/MakePayment/Category/Category.js"));
+});
 
 var Expense = function Expense() {
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useDispatch)();
@@ -8271,61 +8619,46 @@ var Expense = function Expense() {
   var mapStateToProps = function mapStateToProps(state) {
     return {
       data: state.expenseStore.data,
-      payment: state.expenseStore.data.showPayment
+      payment: state.expenseStore.data.showPayment,
+      page: state.expenseStore.page
     };
   };
 
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useSelector)(mapStateToProps);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
       fallback: "",
-      children: [state.payment && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      children: [state.page == "dashboard" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["default"], {
         justify: true,
         variant: "tabs",
         defaultActiveKey: "/home",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          path: "/",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          path: "dashboard",
           eventKey: "linked-1",
           link: "DashBoard"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          path: "/home",
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          path: "summary",
           eventKey: "linked-2",
           link: "Summary"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          path: "/home",
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          path: "recurring",
           eventKey: "linked-4",
           link: "Recurring"
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("main", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Routes, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
-            path: "/",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Navigate, {
-              to: "/payment"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
-            path: "/dashboard",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(DashBoard, {
-              showPayment: true
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
-            path: "/payment",
-            element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(Payment, {
-              showPayment: false
-            })
-          })]
-        }), state.payment && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("main", {
+        children: [state.page == "dashboard" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(DashBoard, {}), state.page == "payment" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(Payment, {}), state.page == "category" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(Category, {}), state.page == "dashboard" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
           className: _Expense_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].add,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_UI_Avatar_Avatar__WEBPACK_IMPORTED_MODULE_7__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UI_Avatar_Avatar__WEBPACK_IMPORTED_MODULE_7__["default"], {
             size: "xl",
             color: "primary",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.NavLink, {
-              to: "/payment",
+            align: "5",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              path: "payment",
+              link: "+",
               style: {
                 color: "white",
                 textDecoration: "none"
-              },
-              children: "+"
+              }
             })
           })
         })]
@@ -8337,10 +8670,10 @@ var Expense = function Expense() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Expense);
 
 if (document.getElementById("expense")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_4__.Provider, {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_4__.Provider, {
       store: _Store_Store__WEBPACK_IMPORTED_MODULE_5__["default"],
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(Expense, {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(Expense, {})
     })
   }), document.getElementById("expense"));
 }
@@ -8357,19 +8690,53 @@ if (document.getElementById("expense")) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "expenseStoreAction": () => (/* binding */ expenseStoreAction),
+/* harmony export */   "debtStoreAction": () => (/* binding */ debtStoreAction),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
-/* harmony import */ var _expense_slice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./expense-slice */ "./resources/js/components/Expense/Store/expense-slice.js");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+/* harmony import */ var _debt_slice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./debt-slice */ "./resources/js/components/Expense/Store/debt-slice.js");
+/* harmony import */ var _expense_slice__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./expense-slice */ "./resources/js/components/Expense/Store/expense-slice.js");
 
 
-var store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.configureStore)({
+
+var store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_2__.configureStore)({
   reducer: {
-    expenseStore: _expense_slice__WEBPACK_IMPORTED_MODULE_0__["default"].reducer
+    expenseStore: _expense_slice__WEBPACK_IMPORTED_MODULE_1__["default"].reducer,
+    debtStore: _debt_slice__WEBPACK_IMPORTED_MODULE_0__["default"].reducer
   }
 });
-var expenseStoreAction = _expense_slice__WEBPACK_IMPORTED_MODULE_0__["default"].actions;
+var expenseStoreAction = _expense_slice__WEBPACK_IMPORTED_MODULE_1__["default"].actions;
+var debtStoreAction = _debt_slice__WEBPACK_IMPORTED_MODULE_0__["default"].actions;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
+
+/***/ }),
+
+/***/ "./resources/js/components/Expense/Store/debt-slice.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/Expense/Store/debt-slice.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+
+var initialState = {
+  page: "giveto"
+};
+var debtSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
+  name: "debt",
+  initialState: initialState,
+  reducers: {
+    updatePage: function updatePage(state, action) {
+      state.page = action.payload.page;
+    }
+  }
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (debtSlice);
 
 /***/ }),
 
@@ -8385,9 +8752,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 
 var initialState = {
+  page: "dashboard",
+  subCategoryPage: "maincategory",
   dateGroup: null,
+  payDate: null,
   data: {
     totalBalance: {
       balance: -24000
@@ -8398,7 +8786,61 @@ var initialState = {
       balance: 22000
     },
     showPayment: true
-  }
+  },
+  model: false,
+  payment: {
+    type: "",
+    add: {
+      selectedCategory: "",
+      amount: ""
+    },
+    data: [],
+    category: [{
+      category: "Automobile",
+      items: ["Fuel", "insurance", "Lease", "Maintainance", "Registration"],
+      color: "primary"
+    }, {
+      category: "EnterTainment",
+      items: ["Concert", "Movies", "Party", "Sports"],
+      color: "warning"
+    }, {
+      category: "Food",
+      items: ["Groceries", "Restaurent"],
+      color: "danger"
+    }, {
+      category: "Health",
+      items: ["Medical", "Prescription", "Insurance"],
+      color: "dark"
+    }, {
+      category: "House",
+      items: ["Appliance", "Home Maintenance", "Rent", "House Items"],
+      color: "secondary"
+    }, {
+      category: "Electronices",
+      items: ["Computer", "Electronics", "Stationary", "House Items"],
+      color: "danger"
+    }, {
+      category: "Loans",
+      items: ["Student", "Mortage", "Car Loans", "Other Loans"],
+      color: "info"
+    }, {
+      category: "Personal",
+      items: ["Clothing", "Donation", "Gift", "Shopping"],
+      color: "success"
+    }, {
+      category: "Utilities",
+      items: ["Electric", "Gas", "Internet", "Telephone", "Water"],
+      color: "primary"
+    }, {
+      category: "Vacation",
+      items: ["Aroplane", "Food", "Hotel", "Transport"],
+      color: "warning"
+    }]
+  },
+  selectedCategory: [{
+    id: -1,
+    show: false
+  }]
 };
 var expenseSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
   name: "expense",
@@ -8409,7 +8851,102 @@ var expenseSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)
     },
     setDate: function setDate(state, action) {
       state.dateGroup = action.payload.dateGroup;
-      console.log(state.dateGroup);
+      state.payDate = action.payload.dateGroup.today.date;
+    },
+    setPayDate: function setPayDate(state, action) {
+      state.payDate = action.payload.date;
+      state.model = !state.model;
+    },
+    showModel: function showModel(state, action) {
+      state.model = !state.model;
+    },
+    setPaymentType: function setPaymentType(state, action) {
+      state.payment.type = action.payload.type;
+    },
+    removeTransactionItem: function removeTransactionItem(state, action) {
+      var id = action.payload.id;
+
+      var copyData = _toConsumableArray(state.payment.data);
+
+      copyData.splice(id, 1);
+      state.payment = _objectSpread(_objectSpread({}, state.payment), {}, {
+        data: _toConsumableArray(copyData)
+      });
+    },
+    addTranssactionItem: function addTranssactionItem(state, action) {
+      var copyData = [].concat(_toConsumableArray(state.payment.data), [action.payload.data]);
+      state.payment = _objectSpread(_objectSpread({}, state.payment), {}, {
+        data: _toConsumableArray(copyData)
+      });
+      state.payment.add = {
+        selectedCategory: "",
+        amount: ""
+      };
+    },
+    updateSelectedCategory: function updateSelectedCategory(state, action) {
+      var id = action.payload.id;
+      var currentArray = state.selectedCategory.slice();
+      var findIndex = currentArray.findIndex(function (el) {
+        return el.id == id;
+      });
+
+      if (findIndex !== -1) {
+        var existingItem = currentArray[findIndex];
+
+        var data = _objectSpread(_objectSpread({}, existingItem), {}, {
+          show: !existingItem.show
+        });
+
+        currentArray[findIndex] = data;
+      } else {
+        var _data = {
+          id: id,
+          show: true
+        };
+        currentArray.push(_data);
+      }
+
+      state.selectedCategory = _toConsumableArray(currentArray);
+    },
+    updatePage: function updatePage(state, action) {
+      state.page = action.payload.page;
+    },
+    updateSubPage: function updateSubPage(state, action) {
+      state.subCategoryPage = action.payload.page;
+    },
+    addNewCategory: function addNewCategory(state, action) {
+      var copyArray = state.payment.category.slice();
+      copyArray.push(action.payload.category);
+      state.payment = _objectSpread(_objectSpread({}, state.payment), {}, {
+        category: _toConsumableArray(copyArray)
+      });
+      state.subCategoryPage = "maincategory";
+    },
+    updateChosenCategory: function updateChosenCategory(state, action) {
+      state.payment.add = _objectSpread(_objectSpread({}, state.payment.add), {}, {
+        selectedCategory: action.payload.value
+      });
+      state.page = "payment";
+      state.selectedCategory = [{
+        id: -1,
+        show: false
+      }];
+    },
+    updateAddPaymentAmount: function updateAddPaymentAmount(state, action) {
+      state.payment.add = _objectSpread(_objectSpread({}, state.payment.add), {}, {
+        amount: action.payload.value
+      });
+    },
+    savePayment: function savePayment(state, action) {
+      state.payment = _objectSpread(_objectSpread({}, state.payment), {}, {
+        type: "",
+        add: {
+          selectedCategory: "",
+          amount: ""
+        },
+        data: []
+      });
+      state.page = "dashboard";
     }
   }
 });
@@ -8435,7 +8972,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Avatar = function Avatar(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    className: "avatar avatar-".concat(props.size, " bg-").concat(props.color, " me-5"),
+    className: "avatar avatar-".concat(props.size, " bg-").concat(props.color, " me-").concat(props.align),
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
       className: "avatar-content",
       children: props.children
@@ -8459,27 +8996,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Nav.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Nav.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _Store_Store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Store/Store */ "./resources/js/components/Expense/Store/Store.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 
 
 var NavItem = function NavItem(props) {
-  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
 
-  var onPageHandler = function onPageHandler(path) {
-    navigate(path);
+  var onPageHandler = function onPageHandler(page) {
+    dispatch(_Store_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.updatePage({
+      page: page
+    }));
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["default"].Item, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__["default"].Link, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["default"].Item, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["default"].Link, {
       onClick: function onClick() {
         return onPageHandler(props.path);
       },
       eventKey: props.eventKey,
+      style: props.style,
       children: props.link
     })
   });
@@ -8498,13 +9041,18 @@ var NavItem = function NavItem(props) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getDate": () => (/* binding */ getDate)
+/* harmony export */   "getDate": () => (/* binding */ getDate),
+/* harmony export */   "extractDate": () => (/* binding */ extractDate),
+/* harmony export */   "getFirstLetterUpper": () => (/* binding */ getFirstLetterUpper),
+/* harmony export */   "getFirstLetterUpperWord": () => (/* binding */ getFirstLetterUpperWord),
+/* harmony export */   "colorArray": () => (/* binding */ colorArray),
+/* harmony export */   "getIndex": () => (/* binding */ getIndex)
 /* harmony export */ });
 var getDate = function getDate() {
   var date = new Date();
   var year = date.getFullYear();
   var month = date.getMonth();
-  var monthString = month.toString().padStart(2, "0");
+  var monthString = (month + 1).toString().padStart(2, "0");
   var day = date.getDate();
   var dayString = date.getDate().toString().padStart(2, 0);
   var dayWeek = date.getDay();
@@ -8529,6 +9077,23 @@ var getDate = function getDate() {
       date: "01-01 - ".concat(monthString, "-").concat(dayString)
     }
   };
+};
+var extractDate = function extractDate(value) {
+  var date = new Date(value);
+  var year = date.getFullYear();
+  var month = (date.getMonth() + 1).toString().padStart(2, "0");
+  var day = date.getDate().toString().padStart(2, 0);
+  return "".concat(year, "-").concat(month, "-").concat(day);
+};
+var getFirstLetterUpper = function getFirstLetterUpper(string) {
+  return string[0].toUpperCase();
+};
+var getFirstLetterUpperWord = function getFirstLetterUpperWord(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+var colorArray = ["primary", "success", "warning", "danger", "dark", "secondary", "info"];
+var getIndex = function getIndex(max, min) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 /***/ }),
@@ -13623,6 +14188,176 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	} else {}
 }());
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/react-datepicker/dist/react-datepicker.css":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/react-datepicker/dist/react-datepicker.css ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.react-datepicker__year-read-view--down-arrow,\n.react-datepicker__month-read-view--down-arrow,\n.react-datepicker__month-year-read-view--down-arrow, .react-datepicker__navigation-icon::before {\n  border-color: #ccc;\n  border-style: solid;\n  border-width: 3px 3px 0 0;\n  content: \"\";\n  display: block;\n  height: 9px;\n  position: absolute;\n  top: 6px;\n  width: 9px;\n}\n.react-datepicker-popper[data-placement^=top] .react-datepicker__triangle, .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle {\n  margin-left: -4px;\n  position: absolute;\n  width: 0;\n}\n.react-datepicker-popper[data-placement^=top] .react-datepicker__triangle::before, .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before, .react-datepicker-popper[data-placement^=top] .react-datepicker__triangle::after, .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::after {\n  box-sizing: content-box;\n  position: absolute;\n  border: 8px solid transparent;\n  height: 0;\n  width: 1px;\n  content: \"\";\n  z-index: -1;\n  border-width: 8px;\n  left: -8px;\n}\n.react-datepicker-popper[data-placement^=top] .react-datepicker__triangle::before, .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before {\n  border-bottom-color: #aeaeae;\n}\n\n.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle {\n  top: 0;\n  margin-top: -8px;\n}\n.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before, .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::after {\n  border-top: none;\n  border-bottom-color: #f0f0f0;\n}\n.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::after {\n  top: 0;\n}\n.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before {\n  top: -1px;\n  border-bottom-color: #aeaeae;\n}\n\n.react-datepicker-popper[data-placement^=top] .react-datepicker__triangle {\n  bottom: 0;\n  margin-bottom: -8px;\n}\n.react-datepicker-popper[data-placement^=top] .react-datepicker__triangle::before, .react-datepicker-popper[data-placement^=top] .react-datepicker__triangle::after {\n  border-bottom: none;\n  border-top-color: #fff;\n}\n.react-datepicker-popper[data-placement^=top] .react-datepicker__triangle::after {\n  bottom: 0;\n}\n.react-datepicker-popper[data-placement^=top] .react-datepicker__triangle::before {\n  bottom: -1px;\n  border-top-color: #aeaeae;\n}\n\n.react-datepicker-wrapper {\n  display: inline-block;\n  padding: 0;\n  border: 0;\n  width: 100%;\n}\n\n.react-datepicker {\n  font-family: \"Helvetica Neue\", helvetica, arial, sans-serif;\n  font-size: 0.8rem;\n  background-color: #fff;\n  color: #000;\n  border: 1px solid #aeaeae;\n  border-radius: 0.3rem;\n  display: inline-block;\n  position: relative;\n}\n\n.react-datepicker--time-only .react-datepicker__triangle {\n  left: 35px;\n}\n.react-datepicker--time-only .react-datepicker__time-container {\n  border-left: 0;\n}\n.react-datepicker--time-only .react-datepicker__time,\n.react-datepicker--time-only .react-datepicker__time-box {\n  border-bottom-left-radius: 0.3rem;\n  border-bottom-right-radius: 0.3rem;\n}\n\n.react-datepicker__triangle {\n  position: absolute;\n  left: 50px;\n}\n\n.react-datepicker-popper {\n  z-index: 1;\n}\n.react-datepicker-popper[data-placement^=bottom] {\n  padding-top: 10px;\n}\n.react-datepicker-popper[data-placement=bottom-end] .react-datepicker__triangle, .react-datepicker-popper[data-placement=top-end] .react-datepicker__triangle {\n  left: auto;\n  right: 50px;\n}\n.react-datepicker-popper[data-placement^=top] {\n  padding-bottom: 10px;\n}\n.react-datepicker-popper[data-placement^=right] {\n  padding-left: 8px;\n}\n.react-datepicker-popper[data-placement^=right] .react-datepicker__triangle {\n  left: auto;\n  right: 42px;\n}\n.react-datepicker-popper[data-placement^=left] {\n  padding-right: 8px;\n}\n.react-datepicker-popper[data-placement^=left] .react-datepicker__triangle {\n  left: 42px;\n  right: auto;\n}\n\n.react-datepicker__header {\n  text-align: center;\n  background-color: #f0f0f0;\n  border-bottom: 1px solid #aeaeae;\n  border-top-left-radius: 0.3rem;\n  padding: 8px 0;\n  position: relative;\n}\n.react-datepicker__header--time {\n  padding-bottom: 8px;\n  padding-left: 5px;\n  padding-right: 5px;\n}\n.react-datepicker__header--time:not(.react-datepicker__header--time--only) {\n  border-top-left-radius: 0;\n}\n.react-datepicker__header:not(.react-datepicker__header--has-time-select) {\n  border-top-right-radius: 0.3rem;\n}\n\n.react-datepicker__year-dropdown-container--select,\n.react-datepicker__month-dropdown-container--select,\n.react-datepicker__month-year-dropdown-container--select,\n.react-datepicker__year-dropdown-container--scroll,\n.react-datepicker__month-dropdown-container--scroll,\n.react-datepicker__month-year-dropdown-container--scroll {\n  display: inline-block;\n  margin: 0 2px;\n}\n\n.react-datepicker__current-month,\n.react-datepicker-time__header,\n.react-datepicker-year-header {\n  margin-top: 0;\n  color: #000;\n  font-weight: bold;\n  font-size: 0.944rem;\n}\n\n.react-datepicker-time__header {\n  text-overflow: ellipsis;\n  white-space: nowrap;\n  overflow: hidden;\n}\n\n.react-datepicker__navigation {\n  align-items: center;\n  background: none;\n  display: flex;\n  justify-content: center;\n  text-align: center;\n  cursor: pointer;\n  position: absolute;\n  top: 2px;\n  padding: 0;\n  border: none;\n  z-index: 1;\n  height: 32px;\n  width: 32px;\n  text-indent: -999em;\n  overflow: hidden;\n}\n.react-datepicker__navigation--previous {\n  left: 2px;\n}\n.react-datepicker__navigation--next {\n  right: 2px;\n}\n.react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {\n  right: 85px;\n}\n.react-datepicker__navigation--years {\n  position: relative;\n  top: 0;\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n}\n.react-datepicker__navigation--years-previous {\n  top: 4px;\n}\n.react-datepicker__navigation--years-upcoming {\n  top: -4px;\n}\n.react-datepicker__navigation:hover *::before {\n  border-color: #a6a6a6;\n}\n\n.react-datepicker__navigation-icon {\n  position: relative;\n  top: -1px;\n  font-size: 20px;\n  width: 0;\n}\n.react-datepicker__navigation-icon--next {\n  left: -2px;\n}\n.react-datepicker__navigation-icon--next::before {\n  transform: rotate(45deg);\n  left: -7px;\n}\n.react-datepicker__navigation-icon--previous {\n  right: -2px;\n}\n.react-datepicker__navigation-icon--previous::before {\n  transform: rotate(225deg);\n  right: -7px;\n}\n\n.react-datepicker__month-container {\n  float: left;\n}\n\n.react-datepicker__year {\n  margin: 0.4rem;\n  text-align: center;\n}\n.react-datepicker__year-wrapper {\n  display: flex;\n  flex-wrap: wrap;\n  max-width: 180px;\n}\n.react-datepicker__year .react-datepicker__year-text {\n  display: inline-block;\n  width: 4rem;\n  margin: 2px;\n}\n\n.react-datepicker__month {\n  margin: 0.4rem;\n  text-align: center;\n}\n.react-datepicker__month .react-datepicker__month-text,\n.react-datepicker__month .react-datepicker__quarter-text {\n  display: inline-block;\n  width: 4rem;\n  margin: 2px;\n}\n\n.react-datepicker__input-time-container {\n  clear: both;\n  width: 100%;\n  float: left;\n  margin: 5px 0 10px 15px;\n  text-align: left;\n}\n.react-datepicker__input-time-container .react-datepicker-time__caption {\n  display: inline-block;\n}\n.react-datepicker__input-time-container .react-datepicker-time__input-container {\n  display: inline-block;\n}\n.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input {\n  display: inline-block;\n  margin-left: 10px;\n}\n.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input {\n  width: auto;\n}\n.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input[type=time]::-webkit-inner-spin-button,\n.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input[type=time]::-webkit-outer-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input[type=time] {\n  -moz-appearance: textfield;\n}\n.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__delimiter {\n  margin-left: 5px;\n  display: inline-block;\n}\n\n.react-datepicker__time-container {\n  float: right;\n  border-left: 1px solid #aeaeae;\n  width: 85px;\n}\n.react-datepicker__time-container--with-today-button {\n  display: inline;\n  border: 1px solid #aeaeae;\n  border-radius: 0.3rem;\n  position: absolute;\n  right: -72px;\n  top: 0;\n}\n.react-datepicker__time-container .react-datepicker__time {\n  position: relative;\n  background: white;\n  border-bottom-right-radius: 0.3rem;\n}\n.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box {\n  width: 85px;\n  overflow-x: hidden;\n  margin: 0 auto;\n  text-align: center;\n  border-bottom-right-radius: 0.3rem;\n}\n.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list {\n  list-style: none;\n  margin: 0;\n  height: calc(195px + (1.7rem / 2));\n  overflow-y: scroll;\n  padding-right: 0;\n  padding-left: 0;\n  width: 100%;\n  box-sizing: content-box;\n}\n.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item {\n  height: 30px;\n  padding: 5px 10px;\n  white-space: nowrap;\n}\n.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item:hover {\n  cursor: pointer;\n  background-color: #f0f0f0;\n}\n.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected {\n  background-color: #216ba5;\n  color: white;\n  font-weight: bold;\n}\n.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--selected:hover {\n  background-color: #216ba5;\n}\n.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--disabled {\n  color: #ccc;\n}\n.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list li.react-datepicker__time-list-item--disabled:hover {\n  cursor: default;\n  background-color: transparent;\n}\n\n.react-datepicker__week-number {\n  color: #ccc;\n  display: inline-block;\n  width: 1.7rem;\n  line-height: 1.7rem;\n  text-align: center;\n  margin: 0.166rem;\n}\n.react-datepicker__week-number.react-datepicker__week-number--clickable {\n  cursor: pointer;\n}\n.react-datepicker__week-number.react-datepicker__week-number--clickable:hover {\n  border-radius: 0.3rem;\n  background-color: #f0f0f0;\n}\n\n.react-datepicker__day-names,\n.react-datepicker__week {\n  white-space: nowrap;\n}\n\n.react-datepicker__day-names {\n  margin-bottom: -8px;\n}\n\n.react-datepicker__day-name,\n.react-datepicker__day,\n.react-datepicker__time-name {\n  color: #000;\n  display: inline-block;\n  width: 1.7rem;\n  line-height: 1.7rem;\n  text-align: center;\n  margin: 0.166rem;\n}\n\n.react-datepicker__month--selected, .react-datepicker__month--in-selecting-range, .react-datepicker__month--in-range,\n.react-datepicker__quarter--selected,\n.react-datepicker__quarter--in-selecting-range,\n.react-datepicker__quarter--in-range {\n  border-radius: 0.3rem;\n  background-color: #216ba5;\n  color: #fff;\n}\n.react-datepicker__month--selected:hover, .react-datepicker__month--in-selecting-range:hover, .react-datepicker__month--in-range:hover,\n.react-datepicker__quarter--selected:hover,\n.react-datepicker__quarter--in-selecting-range:hover,\n.react-datepicker__quarter--in-range:hover {\n  background-color: #1d5d90;\n}\n.react-datepicker__month--disabled,\n.react-datepicker__quarter--disabled {\n  color: #ccc;\n  pointer-events: none;\n}\n.react-datepicker__month--disabled:hover,\n.react-datepicker__quarter--disabled:hover {\n  cursor: default;\n  background-color: transparent;\n}\n\n.react-datepicker__day,\n.react-datepicker__month-text,\n.react-datepicker__quarter-text,\n.react-datepicker__year-text {\n  cursor: pointer;\n}\n.react-datepicker__day:hover,\n.react-datepicker__month-text:hover,\n.react-datepicker__quarter-text:hover,\n.react-datepicker__year-text:hover {\n  border-radius: 0.3rem;\n  background-color: #f0f0f0;\n}\n.react-datepicker__day--today,\n.react-datepicker__month-text--today,\n.react-datepicker__quarter-text--today,\n.react-datepicker__year-text--today {\n  font-weight: bold;\n}\n.react-datepicker__day--highlighted,\n.react-datepicker__month-text--highlighted,\n.react-datepicker__quarter-text--highlighted,\n.react-datepicker__year-text--highlighted {\n  border-radius: 0.3rem;\n  background-color: #3dcc4a;\n  color: #fff;\n}\n.react-datepicker__day--highlighted:hover,\n.react-datepicker__month-text--highlighted:hover,\n.react-datepicker__quarter-text--highlighted:hover,\n.react-datepicker__year-text--highlighted:hover {\n  background-color: #32be3f;\n}\n.react-datepicker__day--highlighted-custom-1,\n.react-datepicker__month-text--highlighted-custom-1,\n.react-datepicker__quarter-text--highlighted-custom-1,\n.react-datepicker__year-text--highlighted-custom-1 {\n  color: magenta;\n}\n.react-datepicker__day--highlighted-custom-2,\n.react-datepicker__month-text--highlighted-custom-2,\n.react-datepicker__quarter-text--highlighted-custom-2,\n.react-datepicker__year-text--highlighted-custom-2 {\n  color: green;\n}\n.react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range,\n.react-datepicker__month-text--selected,\n.react-datepicker__month-text--in-selecting-range,\n.react-datepicker__month-text--in-range,\n.react-datepicker__quarter-text--selected,\n.react-datepicker__quarter-text--in-selecting-range,\n.react-datepicker__quarter-text--in-range,\n.react-datepicker__year-text--selected,\n.react-datepicker__year-text--in-selecting-range,\n.react-datepicker__year-text--in-range {\n  border-radius: 0.3rem;\n  background-color: #216ba5;\n  color: #fff;\n}\n.react-datepicker__day--selected:hover, .react-datepicker__day--in-selecting-range:hover, .react-datepicker__day--in-range:hover,\n.react-datepicker__month-text--selected:hover,\n.react-datepicker__month-text--in-selecting-range:hover,\n.react-datepicker__month-text--in-range:hover,\n.react-datepicker__quarter-text--selected:hover,\n.react-datepicker__quarter-text--in-selecting-range:hover,\n.react-datepicker__quarter-text--in-range:hover,\n.react-datepicker__year-text--selected:hover,\n.react-datepicker__year-text--in-selecting-range:hover,\n.react-datepicker__year-text--in-range:hover {\n  background-color: #1d5d90;\n}\n.react-datepicker__day--keyboard-selected,\n.react-datepicker__month-text--keyboard-selected,\n.react-datepicker__quarter-text--keyboard-selected,\n.react-datepicker__year-text--keyboard-selected {\n  border-radius: 0.3rem;\n  background-color: #2a87d0;\n  color: #fff;\n}\n.react-datepicker__day--keyboard-selected:hover,\n.react-datepicker__month-text--keyboard-selected:hover,\n.react-datepicker__quarter-text--keyboard-selected:hover,\n.react-datepicker__year-text--keyboard-selected:hover {\n  background-color: #1d5d90;\n}\n.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range,\n.react-datepicker__month-text--in-range,\n.react-datepicker__quarter-text--in-range,\n.react-datepicker__year-text--in-range),\n.react-datepicker__month-text--in-selecting-range:not(.react-datepicker__day--in-range,\n.react-datepicker__month-text--in-range,\n.react-datepicker__quarter-text--in-range,\n.react-datepicker__year-text--in-range),\n.react-datepicker__quarter-text--in-selecting-range:not(.react-datepicker__day--in-range,\n.react-datepicker__month-text--in-range,\n.react-datepicker__quarter-text--in-range,\n.react-datepicker__year-text--in-range),\n.react-datepicker__year-text--in-selecting-range:not(.react-datepicker__day--in-range,\n.react-datepicker__month-text--in-range,\n.react-datepicker__quarter-text--in-range,\n.react-datepicker__year-text--in-range) {\n  background-color: rgba(33, 107, 165, 0.5);\n}\n.react-datepicker__month--selecting-range .react-datepicker__day--in-range:not(.react-datepicker__day--in-selecting-range,\n.react-datepicker__month-text--in-selecting-range,\n.react-datepicker__quarter-text--in-selecting-range,\n.react-datepicker__year-text--in-selecting-range),\n.react-datepicker__month--selecting-range .react-datepicker__month-text--in-range:not(.react-datepicker__day--in-selecting-range,\n.react-datepicker__month-text--in-selecting-range,\n.react-datepicker__quarter-text--in-selecting-range,\n.react-datepicker__year-text--in-selecting-range),\n.react-datepicker__month--selecting-range .react-datepicker__quarter-text--in-range:not(.react-datepicker__day--in-selecting-range,\n.react-datepicker__month-text--in-selecting-range,\n.react-datepicker__quarter-text--in-selecting-range,\n.react-datepicker__year-text--in-selecting-range),\n.react-datepicker__month--selecting-range .react-datepicker__year-text--in-range:not(.react-datepicker__day--in-selecting-range,\n.react-datepicker__month-text--in-selecting-range,\n.react-datepicker__quarter-text--in-selecting-range,\n.react-datepicker__year-text--in-selecting-range) {\n  background-color: #f0f0f0;\n  color: #000;\n}\n.react-datepicker__day--disabled,\n.react-datepicker__month-text--disabled,\n.react-datepicker__quarter-text--disabled,\n.react-datepicker__year-text--disabled {\n  cursor: default;\n  color: #ccc;\n}\n.react-datepicker__day--disabled:hover,\n.react-datepicker__month-text--disabled:hover,\n.react-datepicker__quarter-text--disabled:hover,\n.react-datepicker__year-text--disabled:hover {\n  background-color: transparent;\n}\n\n.react-datepicker__month-text.react-datepicker__month--selected:hover, .react-datepicker__month-text.react-datepicker__month--in-range:hover, .react-datepicker__month-text.react-datepicker__quarter--selected:hover, .react-datepicker__month-text.react-datepicker__quarter--in-range:hover,\n.react-datepicker__quarter-text.react-datepicker__month--selected:hover,\n.react-datepicker__quarter-text.react-datepicker__month--in-range:hover,\n.react-datepicker__quarter-text.react-datepicker__quarter--selected:hover,\n.react-datepicker__quarter-text.react-datepicker__quarter--in-range:hover {\n  background-color: #216ba5;\n}\n.react-datepicker__month-text:hover,\n.react-datepicker__quarter-text:hover {\n  background-color: #f0f0f0;\n}\n\n.react-datepicker__input-container {\n  position: relative;\n  display: inline-block;\n  width: 100%;\n}\n\n.react-datepicker__year-read-view,\n.react-datepicker__month-read-view,\n.react-datepicker__month-year-read-view {\n  border: 1px solid transparent;\n  border-radius: 0.3rem;\n  position: relative;\n}\n.react-datepicker__year-read-view:hover,\n.react-datepicker__month-read-view:hover,\n.react-datepicker__month-year-read-view:hover {\n  cursor: pointer;\n}\n.react-datepicker__year-read-view:hover .react-datepicker__year-read-view--down-arrow,\n.react-datepicker__year-read-view:hover .react-datepicker__month-read-view--down-arrow,\n.react-datepicker__month-read-view:hover .react-datepicker__year-read-view--down-arrow,\n.react-datepicker__month-read-view:hover .react-datepicker__month-read-view--down-arrow,\n.react-datepicker__month-year-read-view:hover .react-datepicker__year-read-view--down-arrow,\n.react-datepicker__month-year-read-view:hover .react-datepicker__month-read-view--down-arrow {\n  border-top-color: #b3b3b3;\n}\n.react-datepicker__year-read-view--down-arrow,\n.react-datepicker__month-read-view--down-arrow,\n.react-datepicker__month-year-read-view--down-arrow {\n  transform: rotate(135deg);\n  right: -16px;\n  top: 0;\n}\n\n.react-datepicker__year-dropdown,\n.react-datepicker__month-dropdown,\n.react-datepicker__month-year-dropdown {\n  background-color: #f0f0f0;\n  position: absolute;\n  width: 50%;\n  left: 25%;\n  top: 30px;\n  z-index: 1;\n  text-align: center;\n  border-radius: 0.3rem;\n  border: 1px solid #aeaeae;\n}\n.react-datepicker__year-dropdown:hover,\n.react-datepicker__month-dropdown:hover,\n.react-datepicker__month-year-dropdown:hover {\n  cursor: pointer;\n}\n.react-datepicker__year-dropdown--scrollable,\n.react-datepicker__month-dropdown--scrollable,\n.react-datepicker__month-year-dropdown--scrollable {\n  height: 150px;\n  overflow-y: scroll;\n}\n\n.react-datepicker__year-option,\n.react-datepicker__month-option,\n.react-datepicker__month-year-option {\n  line-height: 20px;\n  width: 100%;\n  display: block;\n  margin-left: auto;\n  margin-right: auto;\n}\n.react-datepicker__year-option:first-of-type,\n.react-datepicker__month-option:first-of-type,\n.react-datepicker__month-year-option:first-of-type {\n  border-top-left-radius: 0.3rem;\n  border-top-right-radius: 0.3rem;\n}\n.react-datepicker__year-option:last-of-type,\n.react-datepicker__month-option:last-of-type,\n.react-datepicker__month-year-option:last-of-type {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  border-bottom-left-radius: 0.3rem;\n  border-bottom-right-radius: 0.3rem;\n}\n.react-datepicker__year-option:hover,\n.react-datepicker__month-option:hover,\n.react-datepicker__month-year-option:hover {\n  background-color: #ccc;\n}\n.react-datepicker__year-option:hover .react-datepicker__navigation--years-upcoming,\n.react-datepicker__month-option:hover .react-datepicker__navigation--years-upcoming,\n.react-datepicker__month-year-option:hover .react-datepicker__navigation--years-upcoming {\n  border-bottom-color: #b3b3b3;\n}\n.react-datepicker__year-option:hover .react-datepicker__navigation--years-previous,\n.react-datepicker__month-option:hover .react-datepicker__navigation--years-previous,\n.react-datepicker__month-year-option:hover .react-datepicker__navigation--years-previous {\n  border-top-color: #b3b3b3;\n}\n.react-datepicker__year-option--selected,\n.react-datepicker__month-option--selected,\n.react-datepicker__month-year-option--selected {\n  position: absolute;\n  left: 15px;\n}\n\n.react-datepicker__close-icon {\n  cursor: pointer;\n  background-color: transparent;\n  border: 0;\n  outline: 0;\n  padding: 0 6px 0 0;\n  position: absolute;\n  top: 0;\n  right: 0;\n  height: 100%;\n  display: table-cell;\n  vertical-align: middle;\n}\n.react-datepicker__close-icon::after {\n  cursor: pointer;\n  background-color: #216ba5;\n  color: #fff;\n  border-radius: 50%;\n  height: 16px;\n  width: 16px;\n  padding: 2px;\n  font-size: 12px;\n  line-height: 1;\n  text-align: center;\n  display: table-cell;\n  vertical-align: middle;\n  content: \"×\";\n}\n\n.react-datepicker__today-button {\n  background: #f0f0f0;\n  border-top: 1px solid #aeaeae;\n  cursor: pointer;\n  text-align: center;\n  font-weight: bold;\n  padding: 5px 0;\n  clear: left;\n}\n\n.react-datepicker__portal {\n  position: fixed;\n  width: 100vw;\n  height: 100vh;\n  background-color: rgba(0, 0, 0, 0.8);\n  left: 0;\n  top: 0;\n  justify-content: center;\n  align-items: center;\n  display: flex;\n  z-index: 2147483647;\n}\n.react-datepicker__portal .react-datepicker__day-name,\n.react-datepicker__portal .react-datepicker__day,\n.react-datepicker__portal .react-datepicker__time-name {\n  width: 3rem;\n  line-height: 3rem;\n}\n@media (max-width: 400px), (max-height: 550px) {\n  .react-datepicker__portal .react-datepicker__day-name,\n.react-datepicker__portal .react-datepicker__day,\n.react-datepicker__portal .react-datepicker__time-name {\n    width: 2rem;\n    line-height: 2rem;\n  }\n}\n.react-datepicker__portal .react-datepicker__current-month,\n.react-datepicker__portal .react-datepicker-time__header {\n  font-size: 1.44rem;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DebtCategory/Borrow/Borrow.module.css":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DebtCategory/Borrow/Borrow.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".NjJfCdF\\+Hs1AnTNe4RCPug\\=\\= {\r\n    position: fixed;\r\n    bottom: 80px;\r\n    right: 0;\r\n}\r\n", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"add": "NjJfCdF+Hs1AnTNe4RCPug=="
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DebtCategory/Individual/Individual.module.css":
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DebtCategory/Individual/Individual.module.css ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".Ig8Ril5T4sTzADGH4k7AJQ\\=\\= {\r\n    position: fixed;\r\n    bottom: 80px;\r\n    right: 0;\r\n}\r\n", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"add": "Ig8Ril5T4sTzADGH4k7AJQ=="
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DebtCategory/Lend/Lend.module.css":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DebtCategory/Lend/Lend.module.css ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".HGr64R7w5xA3Xq9LxvW4Pw\\=\\= {\r\n    position: fixed;\r\n    bottom: 80px;\r\n    right: 0;\r\n}\r\n", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"add": "HGr64R7w5xA3Xq9LxvW4Pw=="
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/UI/DetailsBox/Details.module.css":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/UI/DetailsBox/Details.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".CllJJLO0z\\+U6FaPwdUOGpA\\=\\= {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin: 3% 0;\r\n    padding: 0 10px;\r\n    height: 70px;\r\n    border-bottom: 1px lightgray solid;\r\n}\r\n\r\n.nPOrJLqZ5tpq4zpTkJiCbQ\\=\\= {\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\r\n}\r\n\r\n.nPOrJLqZ5tpq4zpTkJiCbQ\\=\\= .IVQsbado8zH5tz1V2Ezv2w\\=\\= {\r\n    font-weight: bold;\r\n}\r\n\r\n.nPOrJLqZ5tpq4zpTkJiCbQ\\=\\= .U7WN6LJTFqKmRm1bwe76WQ\\=\\= {\r\n    color: rgb(190, 186, 186);\r\n}\r\n\r\n.cT5pQi6KB9xQ\\+iGS8sCj2A\\=\\= {\r\n    font-weight: bold;\r\n    font-size: 20px;\r\n}\r\n.v2yamMneCcow\\+CI4TAYedg\\=\\= {\r\n    color: blue;\r\n}\r\n.N-xDZR1wbkqG0jdwNiPEyA\\=\\= {\r\n    color: red;\r\n}\r\n.zpZ5Rj0\\+V5ogdV96a8nHwQ\\=\\= {\r\n    font-weight: bold;\r\n}\r\n", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"outline": "CllJJLO0z+U6FaPwdUOGpA==",
+	"details": "nPOrJLqZ5tpq4zpTkJiCbQ==",
+	"name": "IVQsbado8zH5tz1V2Ezv2w==",
+	"date": "U7WN6LJTFqKmRm1bwe76WQ==",
+	"amount": "cT5pQi6KB9xQ+iGS8sCj2A==",
+	"lend": "v2yamMneCcow+CI4TAYedg==",
+	"borrow": "N-xDZR1wbkqG0jdwNiPEyA==",
+	"bold": "zpZ5Rj0+V5ogdV96a8nHwQ=="
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/UI/DetailsBox/SingbleBox.module.css":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/UI/DetailsBox/SingbleBox.module.css ***!
+  \************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".mb0QsxGxsQrUqRiAGrC9qg\\=\\= {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin: 3% 0;\r\n    padding: 0 10px;\r\n    height: 70px;\r\n    border-bottom: 1px lightgray solid;\r\n}\r\n\r\n.E9aohXYKWFZIVp4aDE8hnQ\\=\\= {\r\n    display: flex;\r\n    flex-direction: column;\r\n}\r\n\r\n.E9aohXYKWFZIVp4aDE8hnQ\\=\\= ._1uTCt1t\\+twuWKi\\+k6icB1A\\=\\= {\r\n    font-weight: bold;\r\n}\r\n\r\n.E9aohXYKWFZIVp4aDE8hnQ\\=\\= .dWv7GMgpro9RxDVK1nRRXQ\\=\\= {\r\n    color: lightgray;\r\n}\r\n\r\n._6rIQdAoPclfeoI5nNjYtTg\\=\\= {\r\n    font-weight: bold;\r\n    font-size: 20px;\r\n}\r\n", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"outline": "mb0QsxGxsQrUqRiAGrC9qg==",
+	"details": "E9aohXYKWFZIVp4aDE8hnQ==",
+	"name": "_1uTCt1t+twuWKi+k6icB1A==",
+	"date": "dWv7GMgpro9RxDVK1nRRXQ==",
+	"amount": "_6rIQdAoPclfeoI5nNjYtTg=="
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
 
 /***/ }),
@@ -68636,6 +69371,186 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/react-datepicker/dist/react-datepicker.css":
+/*!*****************************************************************!*\
+  !*** ./node_modules/react-datepicker/dist/react-datepicker.css ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_react_datepicker_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./react-datepicker.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/react-datepicker/dist/react-datepicker.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_react_datepicker_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_react_datepicker_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/DebtCategory/Borrow/Borrow.module.css":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Debt/DebtCategory/Borrow/Borrow.module.css ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Borrow_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./Borrow.module.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DebtCategory/Borrow/Borrow.module.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Borrow_module_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Borrow_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/DebtCategory/Individual/Individual.module.css":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/Debt/DebtCategory/Individual/Individual.module.css ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Individual_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./Individual.module.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DebtCategory/Individual/Individual.module.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Individual_module_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Individual_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/DebtCategory/Lend/Lend.module.css":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/Debt/DebtCategory/Lend/Lend.module.css ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Lend_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./Lend.module.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DebtCategory/Lend/Lend.module.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Lend_module_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Lend_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/UI/DetailsBox/Details.module.css":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/Debt/UI/DetailsBox/Details.module.css ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Details_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./Details.module.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/UI/DetailsBox/Details.module.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Details_module_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Details_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/UI/DetailsBox/SingbleBox.module.css":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Debt/UI/DetailsBox/SingbleBox.module.css ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_SingbleBox_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./SingbleBox.module.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/UI/DetailsBox/SingbleBox.module.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_SingbleBox_module_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_SingbleBox_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./resources/js/components/Expense/Expense.module.css":
 /*!************************************************************!*\
   !*** ./resources/js/components/Expense/Expense.module.css ***!
@@ -69595,7 +70510,7 @@ module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBun
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Expense_Components_DashBoard_DashBoard_js":1,"resources_js_components_Expense_Components_MakePayment_Payment_js":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Expense_Components_DashBoard_DashBoard_js":1,"resources_js_components_Expense_Components_MakePayment_Payment_js":1,"resources_js_components_Expense_Components_MakePayment_Category_Category_js":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

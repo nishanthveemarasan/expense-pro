@@ -1,0 +1,46 @@
+.date {
+    color: grey;
+}
+.activityHeading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3% 0;
+    padding: 0 10px;
+    border: 2px black solid;
+    height: 50px;
+}
+.activityBody {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    color: darkslategray;
+    margin-top: 0.5%;
+}
+
+.activityValue {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: darkslategray;
+}
+.income {
+    color: green;
+    font-weight: bold;
+}
+
+.expense {
+    color: red;
+    font-weight: bold;
+}
+.incomecat {
+    color: green;
+    font-weight: bold;
+}
+
+.expensecat {
+    color: blue;
+    font-weight: bold;
+}

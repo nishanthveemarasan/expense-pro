@@ -4,12 +4,15 @@ import { expenseStoreAction } from "../../Store/Store";
 import PaySwitch from "./Switch/PaySwitch";
 import classes from "./Payment.module.css";
 import AddPayment from "./AddPayment/AddPayment";
-useDispatch;
+import DatePicker from "react-datepicker";
+import PaymentModal from "./PaymentModal/PaymentModal";
+import Transaction from "./Transaction/Transaction";
+
 const Payment = (props) => {
     const { showPayment } = props;
     const mapStateToProps = (state) => {
         return {
-            today: state.expenseStore.dateGroup.today.date,
+            payDate: state.expenseStore.payDate,
         };
     };
     const state = useSelector(mapStateToProps);
@@ -17,13 +20,21 @@ const Payment = (props) => {
     useEffect(() => {
         dispatch(expenseStoreAction.showPayment({ showPayment }));
     }, [showPayment]);
+
+    const onShowModelHandler = () => {
+        dispatch(expenseStoreAction.showModel());
+    };
     return (
         <div>
+            <PaymentModal />
             <div className={classes.switch}>
                 <PaySwitch />
-                <div className={classes.today}>{state.today}</div>
+                <div className={classes.today} onClick={onShowModelHandler}>
+                    {state.payDate}
+                </div>
             </div>
             <AddPayment />
+            <Transaction />
         </div>
     );
 };
