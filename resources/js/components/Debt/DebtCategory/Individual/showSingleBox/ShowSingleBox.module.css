@@ -1,0 +1,40 @@
+.outlineLend {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3% 0;
+    padding: 0 10px;
+    height: 70px;
+    border-bottom: 1px lightgray solid;
+    border-left: 10px green solid;
+}
+.outlineBorrow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3% 0;
+    padding: 0 10px;
+    height: 70px;
+    border-bottom: 1px lightgray solid;
+    border-left: 10px red solid;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+}
+
+.details .name {
+    font-weight: bold;
+}
+
+.details .date {
+    color: lightgray;
+}
+
+.amount {
+    font-weight: bold;
+    font-size: 15px;
+}

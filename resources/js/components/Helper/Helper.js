@@ -59,3 +59,7 @@ export const colorArray = [
 export const getIndex = (max, min) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
+
+export const uuid = () => {
+    return Date.now();
+};

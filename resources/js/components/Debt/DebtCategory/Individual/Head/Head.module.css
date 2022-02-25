@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+.head {
+    background-color: blue;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4%;
+    padding-left: 5%;
+    padding-right: 10%;
+}
+
+.heading {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.icon {
+    color: white;
+    font-size: 1.4rem;
+}
+
+.span {
+    color: red;
+    margin: 0 30%;
+}

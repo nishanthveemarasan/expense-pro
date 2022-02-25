@@ -14,12 +14,26 @@ const DebtCategory = (props) => {
     const state = useSelector(mapStateToProps);
     return (
         <>
-            <Nav justify variant="tabs" defaultActiveKey="/home">
-                <NavItem path="giveto" eventKey="linked-1" link="LEND" />
-                <NavItem path="borrowfrom" eventKey="linked-2" link="BORROW" />
+            <Nav justify variant="tabs" defaultActiveKey={state.page}>
                 <NavItem
-                    path="individual"
-                    eventKey="linked-4"
+                    page="giveto"
+                    type="subpage"
+                    mainPage="debtcategory"
+                    eventKey="giveto"
+                    link="LEND"
+                />
+                <NavItem
+                    page="borrowfrom"
+                    type="subpage"
+                    mainPage="debtcategory"
+                    eventKey="borrowfrom"
+                    link="BORROW"
+                />
+                <NavItem
+                    page="individual"
+                    mainPage="debtcategory"
+                    type="subpage"
+                    eventKey="individual"
                     link="INDIVIDUALS"
                 />
             </Nav>

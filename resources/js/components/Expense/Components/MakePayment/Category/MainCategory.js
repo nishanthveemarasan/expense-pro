@@ -34,7 +34,7 @@ const MainCategory = (props) => {
         dispatch(expenseStoreAction.updateChosenCategory({ value }));
     };
     return (
-        <ul>
+        <ul style={{ color: "black" }}>
             {state.data.map((element, i) => {
                 return (
                     <li className={classes.NavbarItem} key={i}>

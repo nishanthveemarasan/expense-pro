@@ -1,14 +1,19 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import DetailsBox from "../../UI/DetailsBox/DetailsBox";
-import Add from "../../UI/NavItem/AddCircle/Add";
-import classes from "./Individual.module.css";
 const Individual = (props) => {
+    const mapStateToProps = (state) => {
+        return {
+            data: state.debtStore.debtData,
+        };
+    };
+    const state = useSelector(mapStateToProps);
     return (
         <>
-            <DetailsBox />
-            <div className={classes.add}>
-                <Add />
-            </div>
+            {state.data &&
+                state.data.map((element, id) => {
+                    return <DetailsBox key={id} {...element} />;
+                })}
         </>
     );
 };

@@ -2,13 +2,30 @@ import React from "react";
 import { Nav } from "react-bootstrap";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import NavItem from "../Expense/UI/Nav/NavItem";
 import store from "../Expense/Store/Store";
-import DebtCategory from "./DebtCategory/DebtCategory";
+
+import { useSelector } from "react-redux";
+import ShowIndividual from "./DebtCategory/Individual/ShowIndividual/ShowIndividual";
+
+const DebtCategory = React.lazy(() => import("./DebtCategory/DebtCategory"));
+const AddDebt = React.lazy(() => import("./AddDebt/AddDebt"));
 const Debt = () => {
+    const mapStateToProps = (state) => {
+        return {
+            mainPage: state.debtStore.mainPage,
+            action: state.debtStore.action,
+        };
+    };
+    const state = useSelector(mapStateToProps);
     return (
         <>
-            <DebtCategory />
+            <React.Suspense fallback="">
+                {state.mainPage == "debtcategory" && <DebtCategory />}
+                {state.mainPage == "adddebt" && (
+                    <AddDebt action={state.action} />
+                )}
+                {state.mainPage == "showindividual" && <ShowIndividual />}
+            </React.Suspense>
         </>
     );
 };

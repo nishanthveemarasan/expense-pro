@@ -6,7 +6,11 @@ const Add = (props) => {
     return (
         <Avatar size="xl" color="primary" align="5">
             <NavItem
-                path="payment"
+                page={props.page}
+                type={props.type}
+                action={props.action}
+                mainPage={props.mainPage}
+                create={props.create}
                 link="+"
                 style={{
                     color: "white",
