@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     page: "giveto",
-    mainPage: "debtcategory",
+    mainPage: "debtsummary",
     action: "",
     createDebt: "",
     formData: {

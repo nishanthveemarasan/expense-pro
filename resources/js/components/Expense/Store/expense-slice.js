@@ -3,7 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     page: "dashboard",
     subCategoryPage: "maincategory",
+    mainPage: "expenseCategory",
+    action: "",
+    createDebt: "",
     dateGroup: null,
+    heading: "Expense Manager",
     payDate: null,
     data: {
         totalBalance: {
@@ -20,65 +24,83 @@ const initialState = {
     payment: {
         type: "",
         add: { selectedCategory: "", amount: "" },
-        data: [],
-        category: [
-            {
-                category: "Automobile",
-                items: [
-                    "Fuel",
-                    "insurance",
-                    "Lease",
-                    "Maintainance",
-                    "Registration",
-                ],
-                color: "primary",
-            },
-            {
-                category: "EnterTainment",
-                items: ["Concert", "Movies", "Party", "Sports"],
-                color: "warning",
-            },
-            {
-                category: "Food",
-                items: ["Groceries", "Restaurent"],
-                color: "danger",
-            },
-            {
-                category: "Health",
-                items: ["Medical", "Prescription", "Insurance"],
-                color: "dark",
-            },
-            {
-                category: "House",
-                items: ["Appliance", "Home Maintenance", "Rent", "House Items"],
-                color: "secondary",
-            },
-            {
-                category: "Electronices",
-                items: ["Computer", "Electronics", "Stationary", "House Items"],
-                color: "danger",
-            },
-            {
-                category: "Loans",
-                items: ["Student", "Mortage", "Car Loans", "Other Loans"],
-                color: "info",
-            },
-            {
-                category: "Personal",
-                items: ["Clothing", "Donation", "Gift", "Shopping"],
-                color: "success",
-            },
-            {
-                category: "Utilities",
-                items: ["Electric", "Gas", "Internet", "Telephone", "Water"],
-                color: "primary",
-            },
-            {
-                category: "Vacation",
-                items: ["Aroplane", "Food", "Hotel", "Transport"],
-                color: "warning",
-            },
-        ],
+        transData: [],
+        data: {
+            category: [
+                {
+                    category: "Automobile",
+                    items: [
+                        "Fuel",
+                        "insurance",
+                        "Lease",
+                        "Maintainance",
+                        "Registration",
+                    ],
+                    color: "primary",
+                },
+                {
+                    category: "EnterTainment",
+                    items: ["Concert", "Movies", "Party", "Sports"],
+                    color: "warning",
+                },
+                {
+                    category: "Food",
+                    items: ["Groceries", "Restaurent"],
+                    color: "danger",
+                },
+                {
+                    category: "Health",
+                    items: ["Medical", "Prescription", "Insurance"],
+                    color: "dark",
+                },
+                {
+                    category: "House",
+                    items: [
+                        "Appliance",
+                        "Home Maintenance",
+                        "Rent",
+                        "House Items",
+                    ],
+                    color: "secondary",
+                },
+                {
+                    category: "Electronices",
+                    items: [
+                        "Computer",
+                        "Electronics",
+                        "Stationary",
+                        "House Items",
+                    ],
+                    color: "danger",
+                },
+                {
+                    category: "Loans",
+                    items: ["Student", "Mortage", "Car Loans", "Other Loans"],
+                    color: "info",
+                },
+                {
+                    category: "Personal",
+                    items: ["Clothing", "Donation", "Gift", "Shopping"],
+                    color: "success",
+                },
+                {
+                    category: "Utilities",
+                    items: [
+                        "Electric",
+                        "Gas",
+                        "Internet",
+                        "Telephone",
+                        "Water",
+                    ],
+                    color: "primary",
+                },
+                {
+                    category: "Vacation",
+                    items: ["Aroplane", "Food", "Hotel", "Transport"],
+                    color: "warning",
+                },
+            ],
+        },
     },
 
     selectedCategory: [
@@ -112,19 +134,19 @@ const expenseSlice = createSlice({
         },
         removeTransactionItem(state, action) {
             const id = action.payload.id;
-            const copyData = [...state.payment.data];
+            const copyData = [...state.payment.transData];
 
             copyData.splice(id, 1);
             state.payment = {
                 ...state.payment,
-                data: [...copyData],
+                transData: [...copyData],
             };
         },
         addTranssactionItem(state, action) {
-            const copyData = [...state.payment.data, action.payload.data];
+            const copyData = [...state.payment.transData, action.payload.data];
             state.payment = {
                 ...state.payment,
-                data: [...copyData],
+                transData: [...copyData],
             };
             state.payment.add = {
                 selectedCategory: "",
@@ -155,7 +177,8 @@ const expenseSlice = createSlice({
         },
 
         updatePage(state, action) {
-            state.page = action.payload.page;
+            state.mainPage = action.payload.mainPage;
+            console.log(state.mainPage);
         },
         updateSubPage(state, action) {
             state.subCategoryPage = action.payload.page;
@@ -174,7 +197,7 @@ const expenseSlice = createSlice({
                 ...state.payment.add,
                 selectedCategory: action.payload.value,
             };
-            state.page = "payment";
+            state.mainPage = "payment";
             state.selectedCategory = [
                 {
                     id: -1,
@@ -193,9 +216,9 @@ const expenseSlice = createSlice({
                 ...state.payment,
                 type: "",
                 add: { selectedCategory: "", amount: "" },
-                data: [],
+                transData: [],
             };
-            state.page = "dashboard";
+            state.mainPage = "expenseCategory";
         },
     },
 });

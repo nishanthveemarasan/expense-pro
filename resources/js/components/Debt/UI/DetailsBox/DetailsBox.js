@@ -2,7 +2,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { debtStoreAction } from "../../../Expense/Store/Store";
 import Avatar from "../../../Expense/UI/Avatar/Avatar";
-import { getFirstLetterUpper } from "../../../Helper/Helper";
+import {
+    colorArray,
+    getFirstLetterUpper,
+    getIndex,
+} from "../../../Helper/Helper";
 import classes from "./Details.module.css";
 const DetailsBox = (props) => {
     const dispatch = useDispatch();
@@ -21,7 +25,11 @@ const DetailsBox = (props) => {
         <div className={classes.outline} onClick={onOpenIndividualData}>
             <div className={classes.details}>
                 <div>
-                    <Avatar size="lg" color="primary" align="3">
+                    <Avatar
+                        size="lg"
+                        color={colorArray[getIndex(6, 0)]}
+                        align="3"
+                    >
                         {getFirstLetterUpper(props.name)}
                     </Avatar>
                 </div>

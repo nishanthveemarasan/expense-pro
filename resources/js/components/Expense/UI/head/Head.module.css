@@ -1,0 +1,19 @@
+.headMiddle {
+    background-color: blue;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 4% 0;
+    padding: 2.4% 0 6% 0;
+}
+
+.headSpaceBetween {
+    background-color: blue;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 4% 0;
+    padding: 2.4% 2% 6% 2.5%;
+}

@@ -99,22 +99,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Container.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Container.js");
 /* harmony import */ var _Components_TotalBalance_TotalBalance__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/TotalBalance/TotalBalance */ "./resources/js/components/Expense/Components/DashBoard/Components/TotalBalance/TotalBalance.js");
 /* harmony import */ var _Dashboard_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Dashboard.module.css */ "./resources/js/components/Expense/Components/DashBoard/Dashboard.module.css");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _Helper_Helper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Helper/Helper */ "./resources/js/components/Helper/Helper.js");
-/* harmony import */ var _Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/Activity/Activity */ "./resources/js/components/Expense/Components/DashBoard/Components/Activity/Activity.js");
-/* harmony import */ var _Store_Store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../Store/Store */ "./resources/js/components/Expense/Store/Store.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Activity/Activity */ "./resources/js/components/Expense/Components/DashBoard/Components/Activity/Activity.js");
+/* harmony import */ var _Store_Store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../Store/Store */ "./resources/js/components/Expense/Store/Store.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
 
 
 
-
- // import { Bar } from "react-chartjs-2";
 
 
 
@@ -131,7 +128,7 @@ var DashBoard = function DashBoard(props) {
   var showPayment = props.showPayment;
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    dispatch(_Store_Store__WEBPACK_IMPORTED_MODULE_6__.expenseStoreAction.showPayment({
+    dispatch(_Store_Store__WEBPACK_IMPORTED_MODULE_5__.expenseStoreAction.showPayment({
       showPayment: showPayment
     }));
   }, [showPayment]);
@@ -139,40 +136,43 @@ var DashBoard = function DashBoard(props) {
   var mapStateToProps = function mapStateToProps(state) {
     return {
       data: state.expenseStore.data,
-      date: state.expenseStore.dateGroup
+      date: state.expenseStore.dateGroup,
+      heading: state.expenseStore.heading
     };
   };
 
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(mapStateToProps);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_TotalBalance_TotalBalance__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      balance: state.data.totalBalance.balance
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-      className: _Dashboard_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].heading,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        children: "Income"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        children: "Expense"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        children: "Balance"
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-      children: ((_state$date = state.date) === null || _state$date === void 0 ? void 0 : _state$date.today) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          heading: state.date.today,
-          body: state.data.todayExpense
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          heading: state.date.thisWeek,
-          body: state.data.todayExpense
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          heading: state.date.thisMonth,
-          body: state.data.todayExpense
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          heading: state.date.thisYear,
-          body: state.data.todayExpense
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Components_TotalBalance_TotalBalance__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        balance: state.data.totalBalance.balance
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: _Dashboard_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].heading,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          children: "Income"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          children: "Expense"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          children: "Balance"
         })]
-      })
-    })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        children: ((_state$date = state.date) === null || _state$date === void 0 ? void 0 : _state$date.today) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            heading: state.date.today,
+            body: state.data.todayExpense
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            heading: state.date.thisWeek,
+            body: state.data.todayExpense
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            heading: state.date.thisMonth,
+            body: state.data.todayExpense
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Components_Activity_Activity__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            heading: state.date.thisYear,
+            body: state.data.todayExpense
+          })]
+        })
+      })]
+    })
   });
 };
 
@@ -252,9 +252,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    font-weight: bold;\r\n}\r\n.vUBxAoLjUnxoG7vfqpTXbQ\\=\\= {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 10px 10px;\r\n    background-color: white;\r\n    color: darkslategrey;\r\n    margin: 3% 0;\r\n}\r\n\r\n.cwIvGg5fH4kLd\\+WjR0QnLg\\=\\= {\r\n    display: flex;\r\n    flex-direction: column;\r\n    margin: 3% 0;\r\n    padding: 0 10px;\r\n    border: 2px black solid;\r\n}\r\n\r\n.cwIvGg5fH4kLd\\+WjR0QnLg\\=\\= .L4EUeOo1zWdZWEFazORa-A\\=\\= {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    font-weight: bold;\r\n}\r\n.dNPylfsm\\+XgMJSq8Ji84tw\\=\\= {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    height: 50px;\r\n}\r\n\r\n.vUBxAoLjUnxoG7vfqpTXbQ\\=\\= {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 10px 10px;\r\n    background-color: white;\r\n    color: darkslategrey;\r\n    margin: 3% 0;\r\n}\r\n\r\n.cwIvGg5fH4kLd\\+WjR0QnLg\\=\\= {\r\n    display: flex;\r\n    flex-direction: column;\r\n    margin: 3% 0;\r\n    padding: 0 10px;\r\n    border: 2px black solid;\r\n}\r\n\r\n.cwIvGg5fH4kLd\\+WjR0QnLg\\=\\= .L4EUeOo1zWdZWEFazORa-A\\=\\= {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n}\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
+	"head": "dNPylfsm+XgMJSq8Ji84tw==",
 	"heading": "vUBxAoLjUnxoG7vfqpTXbQ==",
 	"activityHeading": "cwIvGg5fH4kLd+WjR0QnLg==",
 	"activityBody": "L4EUeOo1zWdZWEFazORa-A=="

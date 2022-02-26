@@ -56,24 +56,22 @@ const Head = (props) => {
         onCancelDebtHandler();
     };
     return (
-        <>
-            <div className={classes.head}>
-                <div className={classes.heading}>{props.heading}</div>
-                <div>
-                    <div className={classes.action}>
-                        <i
-                            className={`bi bi-x-circle-fill ${classes.icon}`}
-                            onClick={onCancelDebtHandler}
-                        ></i>
-                        <span className={classes.span}> </span>
-                        <i
-                            className={`bi bi-check-circle-fill ${classes.icon}`}
-                            onClick={onCreateDebtHandler}
-                        ></i>
-                    </div>
+        <div className={classes.head}>
+            <div className={classes.heading}>{props.heading}</div>
+            <div>
+                <div className={classes.action}>
+                    <i
+                        className={`bi bi-x-circle-fill ${classes.icon}`}
+                        onClick={onCancelDebtHandler}
+                    ></i>
+                    <span className={classes.span}> </span>
+                    <i
+                        className={`bi bi-check-circle-fill ${classes.icon}`}
+                        onClick={onCreateDebtHandler}
+                    ></i>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 export default Head;

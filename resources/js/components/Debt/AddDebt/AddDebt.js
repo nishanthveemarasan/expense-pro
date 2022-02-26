@@ -15,7 +15,7 @@ const AddDebt = (props) => {
                     action={props.action}
                 />
             </div>
-            <main>
+            <main style={{ padding: "0 2%" }}>
                 <DebtBody />
             </main>
         </>

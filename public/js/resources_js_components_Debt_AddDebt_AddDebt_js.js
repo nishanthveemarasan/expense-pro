@@ -1836,6 +1836,9 @@ var AddDebt = function AddDebt(props) {
         action: props.action
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("main", {
+      style: {
+        padding: "0 2%"
+      },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_UI_DebtBody_DebtBody__WEBPACK_IMPORTED_MODULE_1__["default"], {})
     })]
   });
@@ -1907,7 +1910,7 @@ var DebtBody = function DebtBody(props) {
   var onDateCHangeHandler = function onDateCHangeHandler(value) {
     var date = (0,_Helper_Helper__WEBPACK_IMPORTED_MODULE_5__.extractDate)(value);
     dispatch(_Expense_Store_Store__WEBPACK_IMPORTED_MODULE_6__.debtStoreAction.updateFormData({
-      value: value,
+      date: date,
       type: "date"
     }));
   };
@@ -1932,7 +1935,7 @@ var DebtBody = function DebtBody(props) {
         change: onInputChangeHandler,
         type: "name"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Input_DInput__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        type: "text",
+        type: "number",
         "class": _DebtBody_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].textbox,
         placeholder: "Amount",
         change: onInputChangeHandler,
@@ -1981,7 +1984,6 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -2046,28 +2048,26 @@ var Head = function Head(props) {
     onCancelDebtHandler();
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-      className: _Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].head,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: _Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].heading,
-        children: props.heading
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-          className: _Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].action,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-            className: "bi bi-x-circle-fill ".concat(_Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].icon),
-            onClick: onCancelDebtHandler
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-            className: _Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].span,
-            children: " "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-            className: "bi bi-check-circle-fill ".concat(_Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].icon),
-            onClick: onCreateDebtHandler
-          })]
-        })
-      })]
-    })
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    className: _Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].head,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: _Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].heading,
+      children: props.heading
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: _Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].action,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+          className: "bi bi-x-circle-fill ".concat(_Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].icon),
+          onClick: onCancelDebtHandler
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: _Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].span,
+          children: " "
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+          className: "bi bi-check-circle-fill ".concat(_Head_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].icon),
+          onClick: onCreateDebtHandler
+        })]
+      })
+    })]
   });
 };
 
@@ -2196,7 +2196,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.AvMuVhOAJEfPP32YBgHtOQ\\=\\= {\r\n    background-color: blue;\r\n    height: 70px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin-bottom: 4%;\r\n    padding-left: 5%;\r\n    padding-right: 10%;\r\n}\r\n\r\n.tbvPSTTOVUyGyTo9Dm99yA\\=\\= {\r\n    color: white;\r\n    font-weight: bold;\r\n    font-size: 1.1rem;\r\n}\r\n\r\n.psgrUmg7PMFgB9Aw1XAtiQ\\=\\= {\r\n    display: flex;\r\n    align-items: center;\r\n    flex-direction: row;\r\n}\r\n\r\n.K71H-tu4fLghekomok2Wbg\\=\\= {\r\n    color: white;\r\n    font-size: 1.4rem;\r\n}\r\n\r\n.ruHYQgeLT1Fne4bHTnYDYQ\\=\\= {\r\n    color: red;\r\n    margin: 0 30%;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.AvMuVhOAJEfPP32YBgHtOQ\\=\\= {\r\n    background-color: blue;\r\n    height: 50px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin-bottom: 4%;\r\n    padding: 2.4% 10% 6% 5%;\r\n}\r\n\r\n.tbvPSTTOVUyGyTo9Dm99yA\\=\\= {\r\n    color: white;\r\n    font-weight: bold;\r\n    font-size: 1.1rem;\r\n}\r\n\r\n.psgrUmg7PMFgB9Aw1XAtiQ\\=\\= {\r\n    display: flex;\r\n    align-items: center;\r\n    flex-direction: row;\r\n}\r\n\r\n.K71H-tu4fLghekomok2Wbg\\=\\= {\r\n    color: white;\r\n    font-size: 1.4rem;\r\n}\r\n\r\n.ruHYQgeLT1Fne4bHTnYDYQ\\=\\= {\r\n    color: red;\r\n    margin: 0 30%;\r\n}\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"head": "AvMuVhOAJEfPP32YBgHtOQ==",

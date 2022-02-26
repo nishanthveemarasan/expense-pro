@@ -9,7 +9,7 @@ const MainCategory = (props) => {
 
     const mapStateToProps = (state) => {
         return {
-            data: state.expenseStore.payment.category,
+            data: state.expenseStore.payment.data.category,
             selectedCategory: state.expenseStore.selectedCategory,
         };
     };

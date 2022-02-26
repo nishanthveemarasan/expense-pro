@@ -13,10 +13,12 @@ const ShowIndividual = (props) => {
     return (
         <>
             <Head name={state.data.name} />
-            {state.data &&
-                state.data.data.map((element, id) => {
-                    return <ShowSingleBox key={id} {...element} />;
-                })}
+            <main style={{ padding: "2% 4%" }}>
+                {state.data &&
+                    state.data.data.map((element, id) => {
+                        return <ShowSingleBox key={id} {...element} />;
+                    })}
+            </main>
         </>
     );
 };

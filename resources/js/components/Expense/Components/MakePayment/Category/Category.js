@@ -17,8 +17,9 @@ const Category = (props) => {
     };
     const state = useSelector(mapStateToProps);
     const onUpdatePageHandler = () => {
+        console.log(state.subCategoryPage);
         if (state.subCategoryPage == "maincategory") {
-            dispatch(expenseStoreAction.updatePage({ page: "payment" }));
+            dispatch(expenseStoreAction.updatePage({ mainPage: "payment" }));
         } else {
             dispatch(
                 expenseStoreAction.updateSubPage({ page: "maincategory" })
@@ -52,8 +53,10 @@ const Category = (props) => {
                     ></i>
                 )}
             </div>
-            {state.subCategoryPage == "maincategory" && <MainCategory />}
-            {state.subCategoryPage == "addcategory" && <AddCategory />}
+            <div style={{ padding: "0% 3% 5% 3%" }}>
+                {state.subCategoryPage == "maincategory" && <MainCategory />}
+                {state.subCategoryPage == "addcategory" && <AddCategory />}
+            </div>
         </>
     );
 };

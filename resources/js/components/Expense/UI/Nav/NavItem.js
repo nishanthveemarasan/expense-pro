@@ -6,13 +6,13 @@ import { expenseStoreAction } from "../../Store/Store";
 
 const NavItem = (props) => {
     const dispatch = useDispatch();
-    const onPageHandler = (page) => {
-        dispatch(expenseStoreAction.updatePage({ page }));
+    const onPageHandler = (mainPage) => {
+        dispatch(expenseStoreAction.updatePage({ mainPage }));
     };
     return (
         <Nav.Item>
             <Nav.Link
-                onClick={() => onPageHandler(props.path)}
+                onClick={() => onPageHandler(props.mainPage)}
                 eventKey={props.eventKey}
                 style={props.style}
             >

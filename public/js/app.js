@@ -8020,6 +8020,75 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/Chart/BarChart/BarChart.js":
+/*!*************************************************!*\
+  !*** ./resources/js/Chart/BarChart/BarChart.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var BarChart = function BarChart(_ref) {
+  var data = _ref.data,
+      colors = _ref.colors,
+      categories = _ref.categories;
+  var chartData = {
+    series: [{
+      data: data
+    }],
+    options: {
+      chart: {
+        height: 350,
+        type: "bar",
+        events: {
+          click: function click(chart, w, e) {// console.log(chart, w, e)
+          }
+        }
+      },
+      colors: colors,
+      plotOptions: {
+        bar: {
+          columnWidth: "45%",
+          distributed: true
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      legend: {
+        show: false
+      },
+      xaxis: {
+        categories: categories,
+        labels: {
+          style: {
+            colors: colors,
+            fontSize: "12px"
+          }
+        }
+      }
+    }
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(ReactApexChart, {
+    options: chartData.options,
+    series: chartData.series,
+    type: "bar",
+    height: 350
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BarChart);
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -8080,6 +8149,211 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/DashBoard/DashBoard.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/Debt/DashBoard/DashBoard.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _Expense_Store_Store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Expense/Store/Store */ "./resources/js/components/Expense/Store/Store.js");
+/* harmony import */ var _Expense_UI_Button_Ebutton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Expense/UI/Button/Ebutton */ "./resources/js/components/Expense/UI/Button/Ebutton.js");
+/* harmony import */ var _DashBoard_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DashBoard.module.css */ "./resources/js/components/Debt/DashBoard/DashBoard.module.css");
+/* harmony import */ var _DebtChart__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DebtChart */ "./resources/js/components/Debt/DashBoard/DebtChart.js");
+/* harmony import */ var _DebtSummary__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DebtSummary */ "./resources/js/components/Debt/DashBoard/DebtSummary.js");
+/* harmony import */ var _Head__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Head */ "./resources/js/components/Debt/DashBoard/Head.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+
+
+
+
+var DashBoard = function DashBoard(props) {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+
+  var mapStateToProps = function mapStateToProps(state) {
+    return {
+      debtData: state.debtStore.debtData
+    };
+  };
+
+  var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(mapStateToProps);
+  console.log(state.debtData);
+  var sum = {
+    borrow: 0,
+    lend: 0,
+    total: 0
+  };
+  var total = state.debtData.forEach(function (el, i) {
+    sum.borrow += el.borrowTotal;
+    sum.lend += el.lendTotal;
+    sum.total += el.lendTotal - el.borrowTotal;
+  });
+
+  var onPageChangeHandler = function onPageChangeHandler() {
+    var data = {
+      page: "giveto",
+      mainPage: "debtcategory",
+      action: "",
+      type: "mainpage"
+    };
+    dispatch(_Expense_Store_Store__WEBPACK_IMPORTED_MODULE_2__.debtStoreAction.updatePage(data));
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Head__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      "class": _DashBoard_module_css__WEBPACK_IMPORTED_MODULE_4__["default"]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+      className: _DashBoard_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].dashboard,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_DebtSummary__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        css: _DashBoard_module_css__WEBPACK_IMPORTED_MODULE_4__["default"],
+        balance: sum.total
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_DebtChart__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        css: _DashBoard_module_css__WEBPACK_IMPORTED_MODULE_4__["default"],
+        total: sum
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+      className: _DashBoard_module_css__WEBPACK_IMPORTED_MODULE_4__["default"].debtManagerButton,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Expense_UI_Button_Ebutton__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        name: "Go To Debt Manager",
+        variant: "primary",
+        onClick: onPageChangeHandler
+      })
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DashBoard);
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/DashBoard/DebtChart.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/Debt/DashBoard/DebtChart.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _Chart_BarChart_BarChart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Chart/BarChart/BarChart */ "./resources/js/Chart/BarChart/BarChart.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+var colors = ["#26a69a", "#FF4560"];
+
+var DebtChart = function DebtChart(_ref) {
+  var css = _ref.css,
+      total = _ref.total;
+  var chartData = {
+    colors: colors,
+    data: [total.lend, total.borrow],
+    categories: [["Total Owed to Me", "$".concat(total.lend)], ["Total Owed by Me ", "$".concat(total.borrow)]]
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: css.chart,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Chart_BarChart_BarChart__WEBPACK_IMPORTED_MODULE_1__["default"], _objectSpread({}, chartData))
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DebtChart);
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/DashBoard/DebtSummary.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/Debt/DashBoard/DebtSummary.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var DebtSummary = function DebtSummary(_ref) {
+  var css = _ref.css,
+      balance = _ref.balance;
+  console.log();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: css.debtSummary,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      children: "OVER ALL"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: css.balance,
+        children: "Balance : "
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: balance >= 0 ? css.lend : css.borrow,
+        children: "".concat(balance >= 0 ? "+" : "").concat(balance)
+      })]
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DebtSummary);
+
+/***/ }),
+
+/***/ "./resources/js/components/Debt/DashBoard/Head.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/Debt/DashBoard/Head.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+var Head = function Head(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: props["class"].head,
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: props["class"].heading,
+      children: "Debt Summary"
+    })
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Head);
 
 /***/ }),
 
@@ -8194,8 +8468,13 @@ var ShowIndividual = function ShowIndividual(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_Head_Head__WEBPACK_IMPORTED_MODULE_2__["default"], {
       name: state.data.name
-    }), state.data && state.data.data.map(function (element, id) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_showSingleBox_showSingleBox__WEBPACK_IMPORTED_MODULE_3__["default"], _objectSpread({}, element), id);
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("main", {
+      style: {
+        padding: "2% 4%"
+      },
+      children: state.data && state.data.data.map(function (element, id) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_showSingleBox_showSingleBox__WEBPACK_IMPORTED_MODULE_3__["default"], _objectSpread({}, element), id);
+      })
     })]
   });
 };
@@ -8269,7 +8548,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _Expense_Store_Store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Expense/Store/Store */ "./resources/js/components/Expense/Store/Store.js");
 /* harmony import */ var _DebtCategory_Individual_ShowIndividual_ShowIndividual__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DebtCategory/Individual/ShowIndividual/ShowIndividual */ "./resources/js/components/Debt/DebtCategory/Individual/ShowIndividual/ShowIndividual.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _DashBoard_DashBoard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DashBoard/DashBoard */ "./resources/js/components/Debt/DashBoard/DashBoard.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -8296,12 +8577,12 @@ var Debt = function Debt() {
   };
 
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(mapStateToProps);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
       fallback: "",
-      children: [state.mainPage == "debtcategory" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(DebtCategory, {}), state.mainPage == "adddebt" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AddDebt, {
+      children: [state.mainPage == "debtsummary" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_DashBoard_DashBoard__WEBPACK_IMPORTED_MODULE_5__["default"], {}), state.mainPage == "debtcategory" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(DebtCategory, {}), state.mainPage == "adddebt" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(AddDebt, {
         action: state.action
-      }), state.mainPage == "showindividual" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_DebtCategory_Individual_ShowIndividual_ShowIndividual__WEBPACK_IMPORTED_MODULE_4__["default"], {})]
+      }), state.mainPage == "showindividual" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_DebtCategory_Individual_ShowIndividual_ShowIndividual__WEBPACK_IMPORTED_MODULE_4__["default"], {})]
     })
   });
 };
@@ -8309,9 +8590,9 @@ var Debt = function Debt() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Debt);
 
 if (document.getElementById("debt")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
     store: _Expense_Store_Store__WEBPACK_IMPORTED_MODULE_3__["default"],
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Debt, {})
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Debt, {})
   }), document.getElementById("debt"));
 }
 
@@ -8380,7 +8661,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _Expense_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Expense.module.css */ "./resources/js/components/Expense/Expense.module.css");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Nav.js");
 /* harmony import */ var _UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UI/Nav/NavItem */ "./resources/js/components/Expense/UI/Nav/NavItem.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -8388,7 +8668,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Helper_Helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Helper/Helper */ "./resources/js/components/Helper/Helper.js");
 /* harmony import */ var _UI_Avatar_Avatar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./UI/Avatar/Avatar */ "./resources/js/components/Expense/UI/Avatar/Avatar.js");
 /* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _UI_head_Head__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./UI/head/Head */ "./resources/js/components/Expense/UI/head/Head.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -8404,8 +8685,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var DashBoard = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () {
-  return __webpack_require__.e(/*! import() */ "resources_js_components_Expense_Components_DashBoard_DashBoard_js").then(__webpack_require__.bind(__webpack_require__, /*! ./Components/DashBoard/DashBoard */ "./resources/js/components/Expense/Components/DashBoard/DashBoard.js"));
+
+var ExpenseCategory = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () {
+  return __webpack_require__.e(/*! import() */ "resources_js_components_Expense_Components_ExpenseCategory_ExpenseCategory_js").then(__webpack_require__.bind(__webpack_require__, /*! ./Components/ExpenseCategory/ExpenseCategory */ "./resources/js/components/Expense/Components/ExpenseCategory/ExpenseCategory.js"));
 });
 var Payment = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Expense_Components_MakePayment_Payment_js").then(__webpack_require__.bind(__webpack_require__, /*! ./Components/MakePayment/Payment */ "./resources/js/components/Expense/Components/MakePayment/Payment.js"));
@@ -8415,61 +8697,17 @@ var Category = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () 
 });
 
 var Expense = function Expense() {
-  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useDispatch)();
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var dateGroup = (0,_Helper_Helper__WEBPACK_IMPORTED_MODULE_6__.getDate)();
-    dispatch(_Store_Store__WEBPACK_IMPORTED_MODULE_5__.expenseStoreAction.setDate({
-      dateGroup: dateGroup
-    }));
-  }, []);
-
   var mapStateToProps = function mapStateToProps(state) {
     return {
-      data: state.expenseStore.data,
-      payment: state.expenseStore.data.showPayment,
-      page: state.expenseStore.page
+      mainPage: state.expenseStore.mainPage
     };
   };
 
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useSelector)(mapStateToProps);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
       fallback: "",
-      children: [state.page == "dashboard" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        justify: true,
-        variant: "tabs",
-        defaultActiveKey: "/home",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          path: "dashboard",
-          eventKey: "linked-1",
-          link: "DashBoard"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          path: "summary",
-          eventKey: "linked-2",
-          link: "Summary"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          path: "recurring",
-          eventKey: "linked-4",
-          link: "Recurring"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("main", {
-        children: [state.page == "dashboard" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(DashBoard, {}), state.page == "payment" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(Payment, {}), state.page == "category" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(Category, {}), state.page == "dashboard" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-          className: _Expense_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].add,
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UI_Avatar_Avatar__WEBPACK_IMPORTED_MODULE_7__["default"], {
-            size: "xl",
-            color: "primary",
-            align: "5",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_3__["default"], {
-              path: "payment",
-              link: "+",
-              style: {
-                color: "white",
-                textDecoration: "none"
-              }
-            })
-          })
-        })]
-      })]
+      children: [state.mainPage == "expenseCategory" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(ExpenseCategory, {}), state.mainPage == "payment" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(Payment, {}), state.mainPage == "category" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(Category, {})]
     })
   });
 };
@@ -8477,10 +8715,10 @@ var Expense = function Expense() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Expense);
 
 if (document.getElementById("expense")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_4__.Provider, {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_4__.Provider, {
       store: _Store_Store__WEBPACK_IMPORTED_MODULE_5__["default"],
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(Expense, {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(Expense, {})
     })
   }), document.getElementById("expense"));
 }
@@ -8551,7 +8789,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   page: "giveto",
-  mainPage: "debtcategory",
+  mainPage: "debtsummary",
   action: "",
   createDebt: "",
   formData: {
@@ -8773,7 +9011,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var initialState = {
   page: "dashboard",
   subCategoryPage: "maincategory",
+  mainPage: "expenseCategory",
+  action: "",
+  createDebt: "",
   dateGroup: null,
+  heading: "Expense Manager",
   payDate: null,
   data: {
     totalBalance: {
@@ -8793,48 +9035,50 @@ var initialState = {
       selectedCategory: "",
       amount: ""
     },
-    data: [],
-    category: [{
-      category: "Automobile",
-      items: ["Fuel", "insurance", "Lease", "Maintainance", "Registration"],
-      color: "primary"
-    }, {
-      category: "EnterTainment",
-      items: ["Concert", "Movies", "Party", "Sports"],
-      color: "warning"
-    }, {
-      category: "Food",
-      items: ["Groceries", "Restaurent"],
-      color: "danger"
-    }, {
-      category: "Health",
-      items: ["Medical", "Prescription", "Insurance"],
-      color: "dark"
-    }, {
-      category: "House",
-      items: ["Appliance", "Home Maintenance", "Rent", "House Items"],
-      color: "secondary"
-    }, {
-      category: "Electronices",
-      items: ["Computer", "Electronics", "Stationary", "House Items"],
-      color: "danger"
-    }, {
-      category: "Loans",
-      items: ["Student", "Mortage", "Car Loans", "Other Loans"],
-      color: "info"
-    }, {
-      category: "Personal",
-      items: ["Clothing", "Donation", "Gift", "Shopping"],
-      color: "success"
-    }, {
-      category: "Utilities",
-      items: ["Electric", "Gas", "Internet", "Telephone", "Water"],
-      color: "primary"
-    }, {
-      category: "Vacation",
-      items: ["Aroplane", "Food", "Hotel", "Transport"],
-      color: "warning"
-    }]
+    transData: [],
+    data: {
+      category: [{
+        category: "Automobile",
+        items: ["Fuel", "insurance", "Lease", "Maintainance", "Registration"],
+        color: "primary"
+      }, {
+        category: "EnterTainment",
+        items: ["Concert", "Movies", "Party", "Sports"],
+        color: "warning"
+      }, {
+        category: "Food",
+        items: ["Groceries", "Restaurent"],
+        color: "danger"
+      }, {
+        category: "Health",
+        items: ["Medical", "Prescription", "Insurance"],
+        color: "dark"
+      }, {
+        category: "House",
+        items: ["Appliance", "Home Maintenance", "Rent", "House Items"],
+        color: "secondary"
+      }, {
+        category: "Electronices",
+        items: ["Computer", "Electronics", "Stationary", "House Items"],
+        color: "danger"
+      }, {
+        category: "Loans",
+        items: ["Student", "Mortage", "Car Loans", "Other Loans"],
+        color: "info"
+      }, {
+        category: "Personal",
+        items: ["Clothing", "Donation", "Gift", "Shopping"],
+        color: "success"
+      }, {
+        category: "Utilities",
+        items: ["Electric", "Gas", "Internet", "Telephone", "Water"],
+        color: "primary"
+      }, {
+        category: "Vacation",
+        items: ["Aroplane", "Food", "Hotel", "Transport"],
+        color: "warning"
+      }]
+    }
   },
   selectedCategory: [{
     id: -1,
@@ -8865,17 +9109,17 @@ var expenseSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)
     removeTransactionItem: function removeTransactionItem(state, action) {
       var id = action.payload.id;
 
-      var copyData = _toConsumableArray(state.payment.data);
+      var copyData = _toConsumableArray(state.payment.transData);
 
       copyData.splice(id, 1);
       state.payment = _objectSpread(_objectSpread({}, state.payment), {}, {
-        data: _toConsumableArray(copyData)
+        transData: _toConsumableArray(copyData)
       });
     },
     addTranssactionItem: function addTranssactionItem(state, action) {
-      var copyData = [].concat(_toConsumableArray(state.payment.data), [action.payload.data]);
+      var copyData = [].concat(_toConsumableArray(state.payment.transData), [action.payload.data]);
       state.payment = _objectSpread(_objectSpread({}, state.payment), {}, {
-        data: _toConsumableArray(copyData)
+        transData: _toConsumableArray(copyData)
       });
       state.payment.add = {
         selectedCategory: "",
@@ -8908,7 +9152,8 @@ var expenseSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)
       state.selectedCategory = _toConsumableArray(currentArray);
     },
     updatePage: function updatePage(state, action) {
-      state.page = action.payload.page;
+      state.mainPage = action.payload.mainPage;
+      console.log(state.mainPage);
     },
     updateSubPage: function updateSubPage(state, action) {
       state.subCategoryPage = action.payload.page;
@@ -8925,7 +9170,7 @@ var expenseSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)
       state.payment.add = _objectSpread(_objectSpread({}, state.payment.add), {}, {
         selectedCategory: action.payload.value
       });
-      state.page = "payment";
+      state.mainPage = "payment";
       state.selectedCategory = [{
         id: -1,
         show: false
@@ -8943,9 +9188,9 @@ var expenseSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)
           selectedCategory: "",
           amount: ""
         },
-        data: []
+        transData: []
       });
-      state.page = "dashboard";
+      state.mainPage = "expenseCategory";
     }
   }
 });
@@ -8983,6 +9228,40 @@ var Avatar = function Avatar(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/Expense/UI/Button/Ebutton.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/Expense/UI/Button/Ebutton.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+var Ebutton = function Ebutton(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"], _objectSpread(_objectSpread({}, props), {}, {
+    children: props.name
+  }));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Ebutton);
+
+/***/ }),
+
 /***/ "./resources/js/components/Expense/UI/Nav/NavItem.js":
 /*!***********************************************************!*\
   !*** ./resources/js/components/Expense/UI/Nav/NavItem.js ***!
@@ -9009,16 +9288,16 @@ __webpack_require__.r(__webpack_exports__);
 var NavItem = function NavItem(props) {
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
 
-  var onPageHandler = function onPageHandler(page) {
+  var onPageHandler = function onPageHandler(mainPage) {
     dispatch(_Store_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.updatePage({
-      page: page
+      mainPage: mainPage
     }));
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["default"].Item, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["default"].Link, {
       onClick: function onClick() {
-        return onPageHandler(props.path);
+        return onPageHandler(props.mainPage);
       },
       eventKey: props.eventKey,
       style: props.style,
@@ -9028,6 +9307,37 @@ var NavItem = function NavItem(props) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavItem);
+
+/***/ }),
+
+/***/ "./resources/js/components/Expense/UI/head/Head.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Expense/UI/head/Head.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _Head_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Head.module.css */ "./resources/js/components/Expense/UI/head/Head.module.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+var Head = function Head(_ref) {
+  var type = _ref.type,
+      children = _ref.children;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: type == "middle" ? _Head_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].headMiddle : _Head_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].headSpaceBetween,
+    children: children
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Head);
 
 /***/ }),
 
@@ -14219,6 +14529,41 @@ ___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n.react-datepicker
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DashBoard/DashBoard.module.css":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DashBoard/DashBoard.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    box-sizing: border-box;\r\n}\r\n.adD\\+En\\+0vNkcwijPoA0JrA\\=\\= {\r\n    margin: 3% 5%;\r\n}\r\n\r\n.HpqjTljDSJ6mj-8uj-34Ew\\=\\= {\r\n    background-color: blue;\r\n    height: 50px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    margin: 0 0 4% 0;\r\n    padding: 2.4% 0 6% 0;\r\n}\r\n._6ufBhP6I7n-t0QuzmQaTuA\\=\\= {\r\n    color: white;\r\n    font-weight: bold;\r\n    font-size: 1.5rem;\r\n}\r\n\r\n.tn5kgANdcY6hK0aI\\+-Dl7w\\=\\= {\r\n    text-align: center;\r\n    font-weight: bold;\r\n}\r\n.K5RVb7knWa3m3WJ7qpNKQA\\=\\= {\r\n    color: rgb(161, 157, 157);\r\n    font-size: 1rem;\r\n}\r\n\r\n.A9zdfydg9plgBrUvW-54dg\\=\\= {\r\n    color: red;\r\n}\r\n\r\n.duTTEu6BXI\\+uxDjU0D966g\\=\\= {\r\n    color: green;\r\n}\r\n\r\n.KHdMyI4UEycpDr5glVaHXw\\=\\= {\r\n    margin-top: 5%;\r\n}\r\n\r\n.ZGqu5AD3zpiOES9i-aahNw\\=\\= {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    align-items: center;\r\n    margin: 5% 0;\r\n}\r\n", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"dashboard": "adD+En+0vNkcwijPoA0JrA==",
+	"head": "HpqjTljDSJ6mj-8uj-34Ew==",
+	"heading": "_6ufBhP6I7n-t0QuzmQaTuA==",
+	"debtSummary": "tn5kgANdcY6hK0aI+-Dl7w==",
+	"balance": "K5RVb7knWa3m3WJ7qpNKQA==",
+	"borrow": "A9zdfydg9plgBrUvW-54dg==",
+	"lend": "duTTEu6BXI+uxDjU0D966g==",
+	"chart": "KHdMyI4UEycpDr5glVaHXw==",
+	"debtManagerButton": "ZGqu5AD3zpiOES9i-aahNw=="
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DebtCategory/Individual/Head/Head.module.css":
 /*!*********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DebtCategory/Individual/Head/Head.module.css ***!
@@ -14236,7 +14581,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.L8GnRXUqqbI1Yr27ksyAyA\\=\\= {\r\n    background-color: blue;\r\n    height: 70px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin-bottom: 4%;\r\n    padding-left: 5%;\r\n    padding-right: 10%;\r\n}\r\n\r\n.SvsjAhU5Onvyx-HUAbt4VQ\\=\\= {\r\n    color: white;\r\n    font-weight: bold;\r\n    font-size: 1.1rem;\r\n}\r\n\r\n.b9AKP\\+7u9TFq9BkkhMOgTg\\=\\= {\r\n    display: flex;\r\n    align-items: center;\r\n    flex-direction: row;\r\n}\r\n\r\n.AJ8eEpBxXYLJPy4sVutKJA\\=\\= {\r\n    color: white;\r\n    font-size: 1.4rem;\r\n}\r\n\r\n.lNWv2KajrbBTojNUXaDLQw\\=\\= {\r\n    color: red;\r\n    margin: 0 30%;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.L8GnRXUqqbI1Yr27ksyAyA\\=\\= {\r\n    background-color: blue;\r\n    height: 50px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin-bottom: 4%;\r\n    padding-left: 5%;\r\n    padding-right: 10%;\r\n}\r\n\r\n.SvsjAhU5Onvyx-HUAbt4VQ\\=\\= {\r\n    color: white;\r\n    font-weight: bold;\r\n    font-size: 1.1rem;\r\n}\r\n\r\n.b9AKP\\+7u9TFq9BkkhMOgTg\\=\\= {\r\n    display: flex;\r\n    align-items: center;\r\n    flex-direction: row;\r\n}\r\n\r\n.AJ8eEpBxXYLJPy4sVutKJA\\=\\= {\r\n    color: white;\r\n    font-size: 1.4rem;\r\n}\r\n\r\n.lNWv2KajrbBTojNUXaDLQw\\=\\= {\r\n    color: red;\r\n    margin: 0 30%;\r\n}\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"head": "L8GnRXUqqbI1Yr27ksyAyA==",
@@ -14299,13 +14644,43 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "._2CGDW2uIL782BuJevEQlOw\\=\\= .ugdpryDNxeyP12Fy7D5k5w\\=\\= a.onp8zGGqan6GRCQM89Wjsw\\=\\= {\r\n    background-color: blue;\r\n}\r\n\r\n.Jh7JCj\\+kC9\\+TF-SzPKMzEA\\=\\= {\r\n    position: fixed;\r\n    bottom: 80px;\r\n    right: 0;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "._2CGDW2uIL782BuJevEQlOw\\=\\= .ugdpryDNxeyP12Fy7D5k5w\\=\\= a.onp8zGGqan6GRCQM89Wjsw\\=\\= {\r\n    background-color: blue;\r\n}\r\n\r\n.Jh7JCj\\+kC9\\+TF-SzPKMzEA\\=\\= {\r\n    position: fixed;\r\n    bottom: 80px;\r\n    right: 0;\r\n}\r\n\r\n.CqqnQ6IPD9QgPu2GSPtKZw\\=\\= {\r\n    color: white;\r\n    font-weight: bold;\r\n    font-size: 1.5rem;\r\n    text-align: center;\r\n}\r\n\r\n.xsPRMsrJUMgwo9kATqQYyA\\=\\= {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    height: 50px;\r\n}\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"nav-item": "_2CGDW2uIL782BuJevEQlOw==",
 	"nav-link": "ugdpryDNxeyP12Fy7D5k5w==",
 	"active": "onp8zGGqan6GRCQM89Wjsw==",
-	"add": "Jh7JCj+kC9+TF-SzPKMzEA=="
+	"add": "Jh7JCj+kC9+TF-SzPKMzEA==",
+	"heading": "CqqnQ6IPD9QgPu2GSPtKZw==",
+	"head": "xsPRMsrJUMgwo9kATqQYyA=="
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Expense/UI/head/Head.module.css":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Expense/UI/head/Head.module.css ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".MCToaYApEoFzCftvj5THmQ\\=\\= {\r\n    background-color: blue;\r\n    height: 50px;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    margin: 0 0 4% 0;\r\n    padding: 2.4% 0 6% 0;\r\n}\r\n\r\n.pNiAHznMDEK6BeDIAqDHrQ\\=\\= {\r\n    background-color: blue;\r\n    height: 50px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin: 0 0 4% 0;\r\n    padding: 2.4% 2% 6% 2.5%;\r\n}\r\n", ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"headMiddle": "MCToaYApEoFzCftvj5THmQ==",
+	"headSpaceBetween": "pNiAHznMDEK6BeDIAqDHrQ=="
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -33099,6 +33474,62 @@ module.exports = ReactPropTypesSecret;
 
 module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
 
+
+/***/ }),
+
+/***/ "./node_modules/react-bootstrap/esm/Button.js":
+/*!****************************************************!*\
+  !*** ./node_modules/react-bootstrap/esm/Button.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _restart_ui_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @restart/ui/Button */ "./node_modules/@restart/ui/esm/Button.js");
+/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ThemeProvider */ "./node_modules/react-bootstrap/esm/ThemeProvider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+const defaultProps = {
+  variant: 'primary',
+  active: false,
+  disabled: false
+};
+const Button = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(({
+  as,
+  bsPrefix,
+  variant,
+  size,
+  active,
+  className,
+  ...props
+}, ref) => {
+  const prefix = (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_3__.useBootstrapPrefix)(bsPrefix, 'btn');
+  const [buttonProps, {
+    tagName
+  }] = (0,_restart_ui_Button__WEBPACK_IMPORTED_MODULE_4__.useButtonProps)({
+    tagName: as,
+    ...props
+  });
+  const Component = tagName;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Component, { ...buttonProps,
+    ...props,
+    ref: ref,
+    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(className, prefix, active && 'active', variant && `${prefix}-${variant}`, size && `${prefix}-${size}`, props.href && props.disabled && 'disabled')
+  });
+});
+Button.displayName = 'Button';
+Button.defaultProps = defaultProps;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Button);
 
 /***/ }),
 
@@ -69321,6 +69752,36 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
+/***/ "./resources/js/components/Debt/DashBoard/DashBoard.module.css":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Debt/DashBoard/DashBoard.module.css ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_DashBoard_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./DashBoard.module.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Debt/DashBoard/DashBoard.module.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_DashBoard_module_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_DashBoard_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./resources/js/components/Debt/DebtCategory/Individual/Head/Head.module.css":
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/Debt/DebtCategory/Individual/Head/Head.module.css ***!
@@ -69408,6 +69869,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Expense_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/js/components/Expense/UI/head/Head.module.css":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/Expense/UI/head/Head.module.css ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Head_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./Head.module.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/js/components/Expense/UI/head/Head.module.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Head_module_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_Head_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -70370,7 +70861,7 @@ module.exports = JSON.parse('{"_from":"axios@^0.21","_id":"axios@0.21.4","_inBun
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_Debt_DebtCategory_DebtCategory_js":1,"resources_js_components_Debt_AddDebt_AddDebt_js":1,"resources_js_components_Expense_Components_DashBoard_DashBoard_js":1,"resources_js_components_Expense_Components_MakePayment_Payment_js":1,"resources_js_components_Expense_Components_MakePayment_Category_Category_js":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_Debt_DebtCategory_DebtCategory_js":1,"resources_js_components_Debt_AddDebt_AddDebt_js":1,"resources_js_components_Expense_Components_ExpenseCategory_ExpenseCategory_js":1,"resources_js_components_Expense_Components_MakePayment_Payment_js":1,"resources_js_components_Expense_Components_MakePayment_Category_Category_js":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

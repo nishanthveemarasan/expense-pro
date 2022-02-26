@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+.dashboard {
+    margin: 3% 5%;
+}
+
+.head {
+    background-color: blue;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 4% 0;
+    padding: 2.4% 0 6% 0;
+}
+.heading {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.debtSummary {
+    text-align: center;
+    font-weight: bold;
+}
+.balance {
+    color: rgb(161, 157, 157);
+    font-size: 1rem;
+}
+
+.borrow {
+    color: red;
+}
+
+.lend {
+    color: green;
+}
+
+.chart {
+    margin-top: 5%;
+}
+
+.debtManagerButton {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    margin: 5% 0;
+}

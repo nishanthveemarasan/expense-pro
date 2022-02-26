@@ -263,9 +263,11 @@ var Category = function Category(props) {
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(mapStateToProps);
 
   var onUpdatePageHandler = function onUpdatePageHandler() {
+    console.log(state.subCategoryPage);
+
     if (state.subCategoryPage == "maincategory") {
       dispatch(_Store_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.updatePage({
-        page: "payment"
+        mainPage: "payment"
       }));
     } else {
       dispatch(_Store_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.updateSubPage({
@@ -294,7 +296,12 @@ var Category = function Category(props) {
         className: "bi bi-plus-circle-dotted ".concat(_Category_module_css__WEBPACK_IMPORTED_MODULE_3__["default"].CategoryIcons),
         onClick: onAddCategoryHandler
       })]
-    }), state.subCategoryPage == "maincategory" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_MainCategory__WEBPACK_IMPORTED_MODULE_4__["default"], {}), state.subCategoryPage == "addcategory" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AddCategory__WEBPACK_IMPORTED_MODULE_5__["default"], {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      style: {
+        padding: "0% 3% 5% 3%"
+      },
+      children: [state.subCategoryPage == "maincategory" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_MainCategory__WEBPACK_IMPORTED_MODULE_4__["default"], {}), state.subCategoryPage == "addcategory" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_AddCategory__WEBPACK_IMPORTED_MODULE_5__["default"], {})]
+    })]
   });
 };
 
@@ -335,7 +342,7 @@ var MainCategory = function MainCategory(props) {
 
   var mapStateToProps = function mapStateToProps(state) {
     return {
-      data: state.expenseStore.payment.category,
+      data: state.expenseStore.payment.data.category,
       selectedCategory: state.expenseStore.selectedCategory
     };
   };
@@ -418,39 +425,6 @@ var MainCategory = function MainCategory(props) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Expense/UI/Button/Ebutton.js":
-/*!**************************************************************!*\
-  !*** ./resources/js/components/Expense/UI/Button/Ebutton.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-var Ebutton = function Ebutton(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__["default"], _objectSpread(_objectSpread({}, props), {}, {
-    children: props.name
-  }));
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Ebutton);
-
-/***/ }),
-
 /***/ "./resources/js/components/Expense/UI/Input/EInput.js":
 /*!************************************************************!*\
   !*** ./resources/js/components/Expense/UI/Input/EInput.js ***!
@@ -500,7 +474,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    box-sizing: border-box;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n.p9LExsktE\\+oitsY1wNfFoQ\\=\\=,\r\n.BFThv82lXcWFb3N6JVQr3w\\=\\= {\r\n    list-style: none;\r\n    display: block;\r\n    margin-left: 0;\r\n}\r\n\r\n.u6nGRzL5AJF5AKC0FvRxuA\\=\\= {\r\n    background-color: rgb(248, 247, 247);\r\n    border-radius: 5px;\r\n    width: 100%;\r\n    position: static;\r\n    opacity: 0;\r\n    visibility: hidden;\r\n    transition: opacity 0.5s ease;\r\n}\r\n\r\n.fUWSVfJbS5ppWMDtQkQTpA\\=\\= {\r\n    background-color: rgb(248, 247, 247);\r\n    border-radius: 5px;\r\n    width: 100%;\r\n    position: static;\r\n    opacity: 1;\r\n    visibility: visible;\r\n    display: block;\r\n    transition: opacity 0.5s ease;\r\n}\r\n\r\n._7hVycYMvrbJtqSYJ7fMdYg\\=\\= {\r\n    background-color: rgb(255, 255, 255);\r\n    width: 100%;\r\n    padding: 10px;\r\n    border-bottom: 1px solid rgb(224, 219, 219);\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n}\r\n._7hVycYMvrbJtqSYJ7fMdYg\\=\\=:hover {\r\n    background-color: rgb(243, 237, 237);\r\n}\r\n\r\n.HcdgITg0fAYRK04ZMz-jNA\\=\\= {\r\n    padding: 4px;\r\n    border-bottom: 1px solid rgb(224, 219, 219);\r\n}\r\n.HcdgITg0fAYRK04ZMz-jNA\\=\\=:hover {\r\n    background-color: white;\r\n}\r\n\r\n.adIVGuvUvWG6AfwPh-n80Q\\=\\= {\r\n    color: green;\r\n    font-weight: bold;\r\n}\r\n\r\n.Fda1vHRzjlsSB3HgEPIQqA\\=\\=,\r\n.b\\+IDKtp\\+DSj5NFpmzXhVhw\\=\\= {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-around;\r\n    align-items: center;\r\n}\r\n\r\n.-Q0GvrxufSFrfphpmz2NuA\\=\\= {\r\n    color: rgb(97, 96, 94);\r\n    font-size: 1rem;\r\n}\r\n.ABoabvNRaJEMmqjq7Zzx2A\\=\\= {\r\n    border-radius: 50%;\r\n    width: 50px;\r\n    height: 34px;\r\n    padding: 5%;\r\n    text-align: center;\r\n    font-weight: bold;\r\n    color: white;\r\n    margin-right: 10%;\r\n}\r\n.GRRbF1J9RBhvlqy9ZWuyfQ\\=\\= {\r\n    background-color: blue;\r\n    width: 100%;\r\n    height: 50px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 0 3%;\r\n}\r\n\r\n.wDyRC9-m3axoXH\\+CtpamuA\\=\\= {\r\n    color: white;\r\n    font-size: 1rem;\r\n}\r\n\r\n.Qbbh-s-9mXjUBaFPiUdGRQ\\=\\= {\r\n    margin: 5% 0;\r\n}\r\n\r\n.W97ZYwmfg8-nZ4\\+lt-sPtA\\=\\= {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    color: green;\r\n    font-size: 1.1rem;\r\n    background-color: rgb(216, 209, 209);\r\n    border-radius: 5px;\r\n}\r\n._6KND38PonSGZKVGKEkveZw\\=\\= {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    color: red;\r\n    font-size: 1.1rem;\r\n    background-color: rgb(216, 209, 209);\r\n    border-radius: 5px;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    box-sizing: border-box;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n.p9LExsktE\\+oitsY1wNfFoQ\\=\\=,\r\n.BFThv82lXcWFb3N6JVQr3w\\=\\= {\r\n    list-style: none;\r\n    display: block;\r\n    margin-left: 0;\r\n}\r\n\r\n.u6nGRzL5AJF5AKC0FvRxuA\\=\\= {\r\n    background-color: rgb(248, 247, 247);\r\n    border-radius: 5px;\r\n    width: 100%;\r\n    position: static;\r\n    opacity: 0;\r\n    visibility: hidden;\r\n    transition: opacity 0.5s ease;\r\n}\r\n\r\n.fUWSVfJbS5ppWMDtQkQTpA\\=\\= {\r\n    background-color: rgb(248, 247, 247);\r\n    border-radius: 5px;\r\n    width: 100%;\r\n    position: static;\r\n    opacity: 1;\r\n    visibility: visible;\r\n    display: block;\r\n    transition: opacity 0.5s ease;\r\n}\r\n\r\n._7hVycYMvrbJtqSYJ7fMdYg\\=\\= {\r\n    background-color: rgb(255, 255, 255);\r\n    width: 100%;\r\n    padding: 10px;\r\n    border-bottom: 1px solid rgb(224, 219, 219);\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n}\r\n._7hVycYMvrbJtqSYJ7fMdYg\\=\\=:hover {\r\n    background-color: rgb(243, 237, 237);\r\n}\r\n\r\n.HcdgITg0fAYRK04ZMz-jNA\\=\\= {\r\n    padding: 2.5% 0%;\r\n    border-bottom: 1px solid rgb(224, 219, 219);\r\n}\r\n.HcdgITg0fAYRK04ZMz-jNA\\=\\=:hover {\r\n    background-color: white;\r\n}\r\n\r\n.adIVGuvUvWG6AfwPh-n80Q\\=\\= {\r\n    color: green;\r\n    font-weight: bold;\r\n}\r\n\r\n.Fda1vHRzjlsSB3HgEPIQqA\\=\\=,\r\n.b\\+IDKtp\\+DSj5NFpmzXhVhw\\=\\= {\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-around;\r\n    align-items: center;\r\n}\r\n\r\n.-Q0GvrxufSFrfphpmz2NuA\\=\\= {\r\n    color: rgb(97, 96, 94);\r\n    font-size: 1rem;\r\n}\r\n.ABoabvNRaJEMmqjq7Zzx2A\\=\\= {\r\n    border-radius: 50%;\r\n    width: 50px;\r\n    height: 34px;\r\n    padding: 5%;\r\n    text-align: center;\r\n    font-weight: bold;\r\n    color: white;\r\n    margin-right: 10%;\r\n}\r\n.GRRbF1J9RBhvlqy9ZWuyfQ\\=\\= {\r\n    background-color: blue;\r\n    width: 100%;\r\n    height: 50px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    padding: 0 3%;\r\n}\r\n\r\n.wDyRC9-m3axoXH\\+CtpamuA\\=\\= {\r\n    color: white;\r\n    font-size: 1rem;\r\n}\r\n\r\n.Qbbh-s-9mXjUBaFPiUdGRQ\\=\\= {\r\n    margin: 5% 0;\r\n}\r\n\r\n.W97ZYwmfg8-nZ4\\+lt-sPtA\\=\\= {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    color: green;\r\n    font-size: 1.1rem;\r\n    background-color: rgb(216, 209, 209);\r\n    border-radius: 5px;\r\n}\r\n._6KND38PonSGZKVGKEkveZw\\=\\= {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\r\n    color: red;\r\n    font-size: 1.1rem;\r\n    background-color: rgb(216, 209, 209);\r\n    border-radius: 5px;\r\n}\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"NavbarItem": "p9LExsktE+oitsY1wNfFoQ==",
@@ -522,61 +496,6 @@ ___CSS_LOADER_EXPORT___.locals = {
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
-
-/***/ }),
-
-/***/ "./node_modules/react-bootstrap/esm/Button.js":
-/*!****************************************************!*\
-  !*** ./node_modules/react-bootstrap/esm/Button.js ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _restart_ui_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @restart/ui/Button */ "./node_modules/@restart/ui/esm/Button.js");
-/* harmony import */ var _ThemeProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ThemeProvider */ "./node_modules/react-bootstrap/esm/ThemeProvider.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-
-const defaultProps = {
-  variant: 'primary',
-  active: false,
-  disabled: false
-};
-const Button = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(({
-  as,
-  bsPrefix,
-  variant,
-  size,
-  active,
-  className,
-  ...props
-}, ref) => {
-  const prefix = (0,_ThemeProvider__WEBPACK_IMPORTED_MODULE_3__.useBootstrapPrefix)(bsPrefix, 'btn');
-  const [buttonProps, {
-    tagName
-  }] = (0,_restart_ui_Button__WEBPACK_IMPORTED_MODULE_4__.useButtonProps)({
-    tagName: as,
-    ...props
-  });
-  const Component = tagName;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Component, { ...buttonProps,
-    ...props,
-    ref: ref,
-    className: classnames__WEBPACK_IMPORTED_MODULE_0___default()(className, prefix, active && 'active', variant && `${prefix}-${variant}`, size && `${prefix}-${size}`, props.href && props.disabled && 'disabled')
-  });
-});
-Button.displayName = 'Button';
-Button.defaultProps = defaultProps;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Button);
 
 /***/ }),
 

@@ -7,8 +7,9 @@ import Option from "../Option/Option";
 import classes from "./AddPayment.module.css";
 const AddPayment = (props) => {
     const dispatch = useDispatch();
-    const onUpdatePageHandler = (page) => {
-        dispatch(expenseStoreAction.updatePage({ page }));
+    const onUpdatePageHandler = (mainPage) => {
+        console.log(mainPage);
+        dispatch(expenseStoreAction.updatePage({ mainPage }));
     };
     const mapStateToProps = (state) => {
         return {
@@ -26,7 +27,10 @@ const AddPayment = (props) => {
             date: state.payDate,
             category:
                 state.payType == "income" ? "Income" : state.selectedCategory,
-            amount: parseFloat(state.amount),
+            amount:
+                state.payType == "income"
+                    ? parseFloat(state.amount)
+                    : -Math.abs(parseFloat(state.amount)),
         };
         dispatch(expenseStoreAction.addTranssactionItem({ data }));
     };
@@ -43,6 +47,7 @@ const AddPayment = (props) => {
         <div className={classes.paycard}>
             <Option
                 heading="Amount"
+                type="number"
                 avatar={false}
                 icon={<i className="bi bi-calculator"></i>}
                 color="primary"
@@ -51,7 +56,8 @@ const AddPayment = (props) => {
             />
             {(state.payType == "expense" || state.payType == "") && (
                 <Option
-                    heading="Category"
+                    heading="Categorys"
+                    type="text"
                     avatar={false}
                     icon={
                         <i
@@ -71,7 +77,7 @@ const AddPayment = (props) => {
                     size="md"
                     disabled={false}
                     name="Back"
-                    onClick={onUpdatePageHandler.bind(this, "dashboard")}
+                    onClick={onUpdatePageHandler.bind(this, "expenseCategory")}
                 />
                 <Ebutton
                     variant="primary"

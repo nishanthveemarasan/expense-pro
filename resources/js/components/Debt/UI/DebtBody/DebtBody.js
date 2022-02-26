@@ -29,7 +29,7 @@ const DebtBody = (props) => {
 
     const onDateCHangeHandler = (value) => {
         const date = extractDate(value);
-        dispatch(debtStoreAction.updateFormData({ value, type: "date" }));
+        dispatch(debtStoreAction.updateFormData({ date, type: "date" }));
     };
 
     const onInputChangeHandler = (value, type) => {
@@ -57,7 +57,7 @@ const DebtBody = (props) => {
                     />
                 )}
                 <DInput
-                    type="text"
+                    type="number"
                     class={classes.textbox}
                     placeholder="Amount"
                     change={onInputChangeHandler}

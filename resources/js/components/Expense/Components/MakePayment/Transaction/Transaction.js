@@ -6,7 +6,7 @@ import TransactionItem from "./TransactionItem";
 const Transaction = () => {
     const mapStateToProps = (state) => {
         return {
-            transactionData: state.expenseStore.payment.data,
+            transactionData: state.expenseStore.payment.transData,
         };
     };
     const state = useSelector(mapStateToProps);

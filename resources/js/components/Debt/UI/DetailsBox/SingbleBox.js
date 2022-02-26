@@ -8,7 +8,8 @@ const SingbleBox = (props) => {
                 <div>{props.description ?? "No Description"}</div>
                 <div>
                     <span className={classes.date}>
-                        borrowed Date : {props.date}
+                        {props.type == "lend" ? "lent " : "borrowed "}
+                        Date : {props.date}
                     </span>
                 </div>
             </div>

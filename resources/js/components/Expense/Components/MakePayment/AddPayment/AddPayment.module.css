@@ -26,6 +26,6 @@
 .paycard {
     border: 1px solid black;
     border-radius: 5px;
-    padding: 5% 1%;
+    padding: 5% 3%;
     box-shadow: 5px 10px rgba(192, 192, 192, 0.3);
 }

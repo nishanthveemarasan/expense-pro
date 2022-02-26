@@ -8,7 +8,7 @@ const Option = (props) => {
             <div className={`col-3 ${classes.position}`}>{props.heading}</div>
             <div className={`col-7 ${classes.position}`}>
                 <input
-                    type="text"
+                    type={props.type}
                     className={classes.textbox}
                     value={props.value}
                     onChange={(e) => props.change(e)}
