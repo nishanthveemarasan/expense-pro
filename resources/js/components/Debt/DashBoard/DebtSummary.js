@@ -1,7 +1,6 @@
 import React from "react";
 
 const DebtSummary = ({ css, balance }) => {
-    console.log();
     return (
         <div className={css.debtSummary}>
             <div>OVER ALL</div>

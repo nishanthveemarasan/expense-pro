@@ -1,7 +1,6 @@
 import React from "react";
 import classes from "./ShowSingleBox.module.css";
 const ShowSingleBox = (props) => {
-    console.log(props);
     return (
         <div
             className={

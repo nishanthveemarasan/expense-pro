@@ -1,0 +1,65 @@
+.heading {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.add {
+    position: fixed;
+    bottom: 80px;
+    right: 0;
+}
+
+.switch {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5% 0;
+}
+
+.switch .today {
+    color: red;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.position {
+    color: grey;
+    font-weight: bold;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0;
+}
+
+.position .textbox {
+    background-color: #f8fafc;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: center;
+}
+.position .textbox:focus {
+    border-bottom: 1px solid green;
+    background-color: rgb(184, 230, 166);
+}
+
+.paybutton {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.paycard {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5% 1%;
+}
+
+.heading {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.main {
+    margin: 3% 1%;
+}

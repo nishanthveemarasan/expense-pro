@@ -1,6 +1,36 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getExpenseSummary } from "../../Helper/Helper";
 
 const initialState = {
+    summary: {
+        today: {
+            income: 0,
+            expense: 0,
+            balance: 0,
+            chart: {},
+        },
+        week: {
+            income: 0,
+            expense: 0,
+            balance: 0,
+            chart: {},
+        },
+        month: {
+            income: 0,
+            expense: 0,
+            balance: 0,
+            chart: {},
+        },
+        year: {
+            income: 0,
+            expense: 0,
+            balance: 0,
+            chart: {},
+        },
+        balance: 0,
+    },
+    changeSummary: true,
+    chartKey: "year",
     page: "dashboard",
     subCategoryPage: "maincategory",
     mainPage: "expenseCategory",
@@ -26,6 +56,80 @@ const initialState = {
         add: { selectedCategory: "", amount: "" },
         transData: [],
         data: {
+            expense: [
+                {
+                    type: "expense",
+                    amount: -1500,
+                    day: 26,
+                    month: 2,
+                    week: 4,
+                    year: 2022,
+                    date: "2022-02-26",
+                    category: {
+                        name: "Automobile",
+                    },
+                },
+                {
+                    type: "expense",
+                    amount: -1200,
+                    day: 26,
+                    month: 2,
+                    week: 4,
+                    year: 2022,
+                    date: "2022-02-26",
+                    category: {
+                        name: "House",
+                    },
+                },
+                {
+                    type: "expense",
+                    amount: -1500,
+                    day: 25,
+                    month: 2,
+                    week: 4,
+                    year: 2022,
+                    date: "2022-02-25",
+                    category: {
+                        name: "EnterTainment",
+                    },
+                },
+                {
+                    type: "income",
+                    amount: 1500,
+                    day: 25,
+                    month: 2,
+                    week: 4,
+                    year: 2022,
+                    date: "2022-02-25",
+                    category: {
+                        name: "income",
+                    },
+                },
+                {
+                    type: "expense",
+                    amount: -1500,
+                    day: 11,
+                    month: 2,
+                    week: 2,
+                    year: 2022,
+                    date: "2022-02-11",
+                    category: {
+                        name: "House",
+                    },
+                },
+                {
+                    type: "income",
+                    amount: 1500,
+                    day: 26,
+                    month: 1,
+                    week: 4,
+                    year: 2022,
+                    date: "2022-01-26",
+                    category: {
+                        name: "income",
+                    },
+                },
+            ],
             category: [
                 {
                     category: "Automobile",
@@ -100,6 +204,7 @@ const initialState = {
                     color: "warning",
                 },
             ],
+            total: 2500,
         },
     },
 
@@ -115,6 +220,9 @@ const expenseSlice = createSlice({
     name: "expense",
     initialState,
     reducers: {
+        chageChartFilterKey(state, action) {
+            state.chartKey = action.payload.chartKey;
+        },
         showPayment(state, action) {
             state.data.showPayment = action.payload.showPayment;
         },
@@ -148,6 +256,7 @@ const expenseSlice = createSlice({
                 ...state.payment,
                 transData: [...copyData],
             };
+
             state.payment.add = {
                 selectedCategory: "",
                 amount: "",
@@ -178,7 +287,7 @@ const expenseSlice = createSlice({
 
         updatePage(state, action) {
             state.mainPage = action.payload.mainPage;
-            console.log(state.mainPage);
+            state.page = action.payload.page;
         },
         updateSubPage(state, action) {
             state.subCategoryPage = action.payload.page;
@@ -212,13 +321,44 @@ const expenseSlice = createSlice({
             };
         },
         savePayment(state, action) {
+            const copySummary = { ...state.summary };
+            const getNewExpenseSummary = getExpenseSummary(
+                copySummary,
+                state.dateGroup,
+                action.payload.data
+            );
+            state.summary = {
+                ...state.summary,
+                ...getNewExpenseSummary,
+            };
+            state.changeSummary = false;
+            const copyArray = state.payment.data.expense.slice();
+            const newArray = action.payload.data.concat(copyArray);
+
             state.payment = {
                 ...state.payment,
                 type: "",
                 add: { selectedCategory: "", amount: "" },
                 transData: [],
+                data: {
+                    ...state.payment.data,
+                    expense: newArray,
+                },
             };
             state.mainPage = "expenseCategory";
+            state.page = "dashboard";
+        },
+        calculateSummary(state, action) {
+            const copySummary = { ...state.summary };
+            const getNewExpenseSummary = getExpenseSummary(
+                copySummary,
+                state.dateGroup,
+                state.payment.data.expense
+            );
+            state.summary = {
+                ...state.summary,
+                ...getNewExpenseSummary,
+            };
         },
     },
 });

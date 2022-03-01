@@ -27,9 +27,9 @@ const DebtBody = (props) => {
     };
     const state = useSelector(mapStateToProps);
 
-    const onDateCHangeHandler = (value) => {
-        const date = extractDate(value);
-        dispatch(debtStoreAction.updateFormData({ date, type: "date" }));
+    const onDateCHangeHandler = (date) => {
+        const value = extractDate(date);
+        dispatch(debtStoreAction.updateFormData({ value, type: "date" }));
     };
 
     const onInputChangeHandler = (value, type) => {

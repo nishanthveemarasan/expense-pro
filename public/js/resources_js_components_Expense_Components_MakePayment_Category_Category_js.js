@@ -263,8 +263,6 @@ var Category = function Category(props) {
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(mapStateToProps);
 
   var onUpdatePageHandler = function onUpdatePageHandler() {
-    console.log(state.subCategoryPage);
-
     if (state.subCategoryPage == "maincategory") {
       dispatch(_Store_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.updatePage({
         mainPage: "payment"

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
-import DatePicker from "react-datepicker";
 import { useSelector, useDispatch } from "react-redux";
 import { extractDate } from "../../../../Helper/Helper";
 import { expenseStoreAction } from "../../../Store/Store";
 import classes from "./PaymentModal.module.css";
+import Calendar from "react-calendar";
+
 const PaymentModal = (props) => {
     const dispatch = useDispatch();
     const mapStateToProps = (state) => {
@@ -23,18 +24,13 @@ const PaymentModal = (props) => {
     };
     return (
         <Modal show={state.model} backdrop="static">
-            <Modal.Header>
-                <Modal.Title>Payment Date</Modal.Title>
-            </Modal.Header>
             <Modal.Body>
-                <div style={{ textAlign: "center" }}>
-                    <DatePicker
-                        autoFocus
-                        selected={payDate}
-                        dateFormat="yyyy-MM-dd"
-                        wrapperClassName={classes.datepicker}
-                        onChange={onPayDateHandler}
-                    />
+                <div className="row">
+                    <div className="col-2"></div>
+                    <div className="col-8">
+                        <Calendar value={payDate} onChange={onPayDateHandler} />
+                    </div>
+                    <div className="col-2"></div>
                 </div>
             </Modal.Body>
         </Modal>
@@ -43,11 +39,3 @@ const PaymentModal = (props) => {
 
 export default PaymentModal;
 
-// const extractDate = (value) => {
-//     const date = new Date(value);
-//     const year = date.getFullYear();
-//     const month = (date.getMonth() + 1).toString().padStart(2, "0");
-//     const day = date.getDate().toString().padStart(2, 0);
-
-//     return `${year}-${month}-${day}`;
-// };

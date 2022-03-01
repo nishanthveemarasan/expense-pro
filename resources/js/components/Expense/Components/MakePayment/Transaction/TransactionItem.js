@@ -1,5 +1,4 @@
 import React from "react";
-import Avatar from "../../../UI/Avatar/Avatar";
 import classes from "./Transaction.module.css";
 const TransactionItem = (props) => {
     return (
@@ -12,7 +11,7 @@ const TransactionItem = (props) => {
                         : classes.incomecat
                 }
             >
-                {props.item.category}
+                {props.item.selectedCategory}
             </div>
             <div
                 className={

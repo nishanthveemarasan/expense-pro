@@ -6,11 +6,10 @@ import { expenseStoreAction } from "../../Store/Store";
 import Avatar from "../../UI/Avatar/Avatar";
 import Head from "../../UI/head/Head";
 import NavItem from "../../UI/Nav/NavItem";
-import DashBoard from "../DashBoard/DashBoard";
-import Category from "../MakePayment/Category/Category";
-import Payment from "../MakePayment/Payment";
 import classes from "./ExpenseCategory.module.css";
 
+const Dashboard = React.lazy(() => import("../DashBoard/DashBoard"));
+const Summary = React.lazy(() => import("../Summary/Summary"));
 const ExpenseCategory = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -31,33 +30,36 @@ const ExpenseCategory = (props) => {
                 <div className={classes.heading}>Expense Manager</div>
             </Head>
             <React.Suspense fallback="">
-                {state.page == "dashboard" && (
-                    <Nav justify variant="tabs" defaultActiveKey="dashboard">
-                        <NavItem
-                            path="dashboard"
-                            eventKey="dashboard"
-                            link="DashBoard"
-                        />
-                        <NavItem
-                            path="summary"
-                            eventKey="summary"
-                            link="Summary"
-                        />
-                        <NavItem
-                            path="recurring"
-                            eventKey="recurring"
-                            link="Recurring"
-                        />
-                    </Nav>
-                )}
+                <Nav justify variant="tabs" defaultActiveKey="dashboard">
+                    <NavItem
+                        page="dashboard"
+                        mainPage="expenseCategory"
+                        eventKey="dashboard"
+                        link="DashBoard"
+                    />
+                    <NavItem
+                        page="summary"
+                        mainPage="expenseCategory"
+                        eventKey="summary"
+                        link="Summary"
+                    />
+                    <NavItem
+                        page="recurring"
+                        mainPage="expenseCategory"
+                        eventKey="recurring"
+                        link="Recurring"
+                    />
+                </Nav>
 
                 <main style={{ margin: "3% 0 5% 0" }}>
-                    {state.page == "dashboard" && <DashBoard />}
+                    {state.page == "dashboard" && <Dashboard />}
+                    {state.page == "summary" && <Summary />}
                     {state.page == "dashboard" && (
                         <div className={classes.add}>
                             <Avatar size="xl" color="primary" align="5">
                                 <NavItem
                                     mainPage="payment"
+                                    page=""
                                     link="+"
                                     style={{
                                         color: "white",

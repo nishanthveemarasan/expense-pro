@@ -15,13 +15,12 @@ const DashBoard = (props) => {
         };
     };
     const state = useSelector(mapStateToProps);
-    console.log(state.debtData);
     let sum = {
         borrow: 0,
         lend: 0,
         total: 0,
     };
-    const total = state.debtData.forEach((el, i) => {
+    state.debtData.forEach((el, i) => {
         sum.borrow += el.borrowTotal;
         sum.lend += el.lendTotal;
         sum.total += el.lendTotal - el.borrowTotal;

@@ -31,3 +31,17 @@
     justify-content: space-between;
     align-items: center;
 }
+.chart {
+    display: flex;
+    justify-content: center;
+}
+
+.summaryChart {
+    margin-top: 10%;
+    border: 1px rgb(156, 156, 156) solid;
+    border-radius: 5px;
+    padding: 10% 2% 4% 2%;
+}
+.selectChart {
+    margin-bottom: 3%;
+}

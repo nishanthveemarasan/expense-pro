@@ -17,7 +17,6 @@ const Category = (props) => {
     };
     const state = useSelector(mapStateToProps);
     const onUpdatePageHandler = () => {
-        console.log(state.subCategoryPage);
         if (state.subCategoryPage == "maincategory") {
             dispatch(expenseStoreAction.updatePage({ mainPage: "payment" }));
         } else {

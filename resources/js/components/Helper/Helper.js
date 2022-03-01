@@ -1,5 +1,5 @@
-export const getDate = () => {
-    const date = new Date();
+export const getDate = (newDate = "") => {
+    const date = newDate ? new Date(newDate) : new Date();
     const year = date.getFullYear();
     const month = date.getMonth();
     const monthString = (month + 1).toString().padStart(2, "0");
@@ -9,6 +9,7 @@ export const getDate = () => {
     const LastDayOfMonth = new Date(year, month + 1, 0).getDate();
     const firstDayOfWeek = day - dayWeek + 1;
     const lastDayOfWeek = day + (7 - dayWeek);
+    const weekNumber = Math.ceil(day / 7);
 
     return {
         today: {
@@ -27,6 +28,10 @@ export const getDate = () => {
             title: "This Year",
             date: `01-01 - ${monthString}-${dayString}`,
         },
+        weekNumber,
+        monthNumber: month + 1,
+        dayNumber: day,
+        yearNumber: year,
     };
 };
 
@@ -46,6 +51,9 @@ export const getFirstLetterUpper = (string) => {
 export const getFirstLetterUpperWord = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
+export const getFirstLetterLowerWord = (string) => {
+    return string.charAt(0).toLowerCase() + string.slice(1);
+};
 export const colorArray = [
     "primary",
     "success",
@@ -62,4 +70,87 @@ export const getIndex = (max, min) => {
 
 export const uuid = () => {
     return Date.now();
+};
+
+export const expenseSummary = {
+    today: {
+        income: 0,
+        expense: 0,
+        balance: 0,
+        chart: {},
+    },
+    week: {
+        income: 0,
+        expense: 0,
+        balance: 0,
+        chart: {},
+    },
+    month: {
+        income: 0,
+        expense: 0,
+        balance: 0,
+        chart: {},
+    },
+    year: {
+        income: 0,
+        expense: 0,
+        balance: 0,
+        chart: {},
+    },
+    balance: 0,
+};
+
+export const chartFilterOption = [
+    { value: "today", label: "today" },
+    { value: "week", label: "week" },
+    { value: "month", label: "month" },
+    { value: "year", label: "year" },
+];
+export const getExpenseSummary = (expenseSummary, dateGroup, data) => {
+    const thisWeek = dateGroup.weekNumber;
+    const thisMonth = dateGroup.monthNumber;
+    const thisYear = dateGroup.yearNumber;
+    data.forEach((el, i) => {
+        if (dateGroup.today.date == el.date) {
+            const today = expenseSummary.today;
+            getExepnseSummaryOfType(today, el);
+        }
+        if (
+            thisWeek == el.week &&
+            thisMonth == el.month &&
+            thisYear == el.year
+        ) {
+            const week = expenseSummary.week;
+            getExepnseSummaryOfType(week, el);
+        }
+        if (thisMonth == el.month && thisYear == el.year) {
+            const month = expenseSummary.month;
+            getExepnseSummaryOfType(month, el);
+        }
+
+        if (thisYear == el.year) {
+            const year = expenseSummary.year;
+            getExepnseSummaryOfType(year, el);
+        }
+
+        expenseSummary.balance += el.amount;
+    });
+    // console.log(expenseSummary);
+    return expenseSummary;
+};
+
+const getExepnseSummaryOfType = (dateType, el) => {
+    dateType.income =
+        el.type == "income" ? dateType.income + el.amount : dateType.income;
+    dateType.expense =
+        el.type == "expense" ? dateType.expense + el.amount : dateType.expense;
+    dateType.balance += el.amount;
+    dateType.chart[el.category.name] = dateType.chart[el.category.name]
+        ? dateType.chart[el.category.name] + Math.abs(el.amount)
+        : Math.abs(el.amount);
+    return dateType;
+};
+
+export const getArray = (string, type) => {
+    return string.split(type);
 };

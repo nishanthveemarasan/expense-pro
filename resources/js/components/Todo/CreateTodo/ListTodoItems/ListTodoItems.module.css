@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+.listItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 3% 0%;
+}

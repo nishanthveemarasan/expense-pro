@@ -19,3 +19,7 @@ Route::get('/', function () {
 Route::get('/debt', function () {
     return view('admin.debt');
 });
+Route::get('/todo', function () {
+    return view('admin.todo
+    ');
+});

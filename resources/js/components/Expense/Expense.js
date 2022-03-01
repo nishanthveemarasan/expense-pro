@@ -1,17 +1,12 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import classes from "./Expense.module.css";
-import { Nav } from "react-bootstrap";
-import NavItem from "./UI/Nav/NavItem";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 import store, { expenseStoreAction } from "./Store/Store";
-import { getDate } from "../Helper/Helper";
-import Avatar from "./UI/Avatar/Avatar";
 import "react-datepicker/dist/react-datepicker.css";
-import Head from "./UI/head/Head";
-
+import "react-calendar/dist/Calendar.css";
 const ExpenseCategory = React.lazy(() =>
     import("./Components/ExpenseCategory/ExpenseCategory")
 );
@@ -27,6 +22,7 @@ const Expense = () => {
         };
     };
     const state = useSelector(mapStateToProps);
+    // console.log(state.mainPage);
     return (
         <>
             <React.Suspense fallback="">
@@ -34,6 +30,9 @@ const Expense = () => {
                 {state.mainPage == "payment" && <Payment />}
                 {state.mainPage == "category" && <Category />}
             </React.Suspense>
+            {/* <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div> */}
         </>
     );
 };

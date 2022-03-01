@@ -1907,10 +1907,10 @@ var DebtBody = function DebtBody(props) {
 
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_4__.useSelector)(mapStateToProps);
 
-  var onDateCHangeHandler = function onDateCHangeHandler(value) {
-    var date = (0,_Helper_Helper__WEBPACK_IMPORTED_MODULE_5__.extractDate)(value);
+  var onDateCHangeHandler = function onDateCHangeHandler(date) {
+    var value = (0,_Helper_Helper__WEBPACK_IMPORTED_MODULE_5__.extractDate)(date);
     dispatch(_Expense_Store_Store__WEBPACK_IMPORTED_MODULE_6__.debtStoreAction.updateFormData({
-      date: date,
+      value: value,
       type: "date"
     }));
   };

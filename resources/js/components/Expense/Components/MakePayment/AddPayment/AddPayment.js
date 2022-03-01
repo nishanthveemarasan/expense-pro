@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { getArray, getDate } from "../../../../Helper/Helper";
 import { expenseStoreAction } from "../../../Store/Store";
 import Ebutton from "../../../UI/Button/Ebutton";
 import Option from "../Option/Option";
@@ -8,7 +9,6 @@ import classes from "./AddPayment.module.css";
 const AddPayment = (props) => {
     const dispatch = useDispatch();
     const onUpdatePageHandler = (mainPage) => {
-        console.log(mainPage);
         dispatch(expenseStoreAction.updatePage({ mainPage }));
     };
     const mapStateToProps = (state) => {
@@ -17,16 +17,32 @@ const AddPayment = (props) => {
             payDate: state.expenseStore.payDate,
             selectedCategory: state.expenseStore.payment.add.selectedCategory,
             amount: state.expenseStore.payment.add.amount,
+            transactionData: state.expenseStore.payment.transData,
         };
     };
     const state = useSelector(mapStateToProps);
-
+    /* {
+        type: "expense",
+        +category: {
+            name: "Automobile",
+        },
+    },*/
     const onAddPaymentItem = () => {
+        const date = getDate(state.payDate);
+        const getCategory = getArray(state.selectedCategory, ":");
         const data = {
             type: state.payType,
             date: state.payDate,
-            category:
-                state.payType == "income" ? "Income" : state.selectedCategory,
+            day: date.dayNumber,
+            month: date.monthNumber,
+            selectedCategory:
+                state.payType == "income" ? "income" : state.selectedCategory,
+            week: date.weekNumber,
+            year: date.yearNumber,
+            category: {
+                name: state.payType == "income" ? "income" : getCategory[0],
+            },
+            subCategory: state.payType == "income" ? "income" : getCategory[1],
             amount:
                 state.payType == "income"
                     ? parseFloat(state.amount)
@@ -41,7 +57,9 @@ const AddPayment = (props) => {
     };
 
     const onSavePaymentHandler = () => {
-        dispatch(expenseStoreAction.savePayment());
+        dispatch(
+            expenseStoreAction.savePayment({ data: state.transactionData })
+        );
     };
     return (
         <div className={classes.paycard}>
