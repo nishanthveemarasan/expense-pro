@@ -1,0 +1,43 @@
+.outlineExpense {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3% 0;
+    padding: 0 10px;
+    height: 70px;
+    border-bottom: 1px lightgray solid;
+    border-left: 10px red solid;
+}
+.outlineIncome {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3% 0;
+    padding: 0 10px;
+    height: 70px;
+    border-bottom: 1px lightgray solid;
+    border-left: 10px rgb(196, 193, 193) solid;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+}
+
+.details .name {
+    font-weight: bold;
+}
+
+.details .date {
+    color: rgb(63, 61, 61);
+    font-size: 1.3rem;
+}
+.details .description {
+    color: rgb(168, 159, 159);
+}
+.amount {
+    font-weight: bold;
+    font-size: 15px;
+}

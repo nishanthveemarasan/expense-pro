@@ -8,6 +8,9 @@ import DatePicker from "react-datepicker";
 import PaymentModal from "./PaymentModal/PaymentModal";
 import Transaction from "./Transaction/Transaction";
 import Head from "../../UI/head/Head";
+import SModel from "../../UI/Model/SModel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Payment = (props) => {
     const { showPayment } = props;
@@ -28,20 +31,23 @@ const Payment = (props) => {
     const onPageChangeHandler = () => {
         const data = {
             mainPage: "expenseCategory",
+            page: "dashboard",
         };
         dispatch(expenseStoreAction.updatePage(data));
     };
     return (
         <div>
+            <SModel />
             <PaymentModal />
             <Head type="space">
-                <div className={classes.heading}>
-                    <i
-                        className="bi bi-arrow-left"
-                        onClick={onPageChangeHandler}
-                    ></i>
-                </div>
                 <div className={classes.heading}>Add Expense/Income</div>
+                <div className={classes.heading}>
+                    <FontAwesomeIcon
+                        icon={faTimesCircle}
+                        className={classes.icon}
+                        onClick={onPageChangeHandler}
+                    />
+                </div>
             </Head>
             <div style={{ padding: "0% 3% 5% 3%" }}>
                 <div className={classes.switch}>

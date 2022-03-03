@@ -1,0 +1,18 @@
+.summary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40%;
+}
+
+.summaryTitle {
+    color: blue;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
+
+.currency {
+    font-size: 5rem;
+    color: blue;
+}

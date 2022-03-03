@@ -1,3 +1,4 @@
+export const API_URL = "http://expenseapp.test/api";
 export const getDate = (newDate = "") => {
     const date = newDate ? new Date(newDate) : new Date();
     const year = date.getFullYear();
@@ -153,4 +154,42 @@ const getExepnseSummaryOfType = (dateType, el) => {
 
 export const getArray = (string, type) => {
     return string.split(type);
+};
+
+export const calculateProgress = (procress) => {
+    return Math.floor((procress.completed / procress.total) * 100);
+};
+
+export const showWarning = (category, type) => {
+    if (type == "current") {
+        return `No Active ${getFirstLetterUpperWord(category)} Tasks`;
+    } else {
+        return `No Completed ${getFirstLetterUpperWord(category)} Tasks`;
+    }
+};
+
+export const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+];
+
+export const today = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const monthName = monthNames[month];
+    const day = date.getDate();
+    const dayString = date.getDate().toString().padStart(2, 0);
+
+    return `${dayString} ${monthName} ${year}`;
 };

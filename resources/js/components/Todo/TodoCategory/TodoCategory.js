@@ -18,6 +18,7 @@ const TodoCategory = (props) => {
         };
     };
     const state = useSelector(mapStateToProps);
+    // console.log(state.page);
     return (
         <>
             <Head type="middle">
@@ -43,8 +44,9 @@ const TodoCategory = (props) => {
                     />
                     <NavItem
                         mainPage="todoCategory"
-                        page="completed"
+                        showTasks="completed"
                         taskType="completed"
+                        page="completed"
                         eventKey="completed"
                         link="Completed"
                     />

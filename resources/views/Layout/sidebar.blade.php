@@ -21,6 +21,12 @@
                         <span>Todo</span>
                     </a>
                 </li>
+                <li class="sidebar-item  ">
+                    <a href="/saving" class='sidebar-link'>
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        <span>Saving</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

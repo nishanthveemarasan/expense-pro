@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debtStoreAction } from "../../../../Expense/Store/Store";
 import classes from "./Head.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 const Head = (props) => {
     const dispatch = useDispatch();
 
@@ -25,15 +27,26 @@ const Head = (props) => {
 
     return (
         <>
-            <div className={classes.head}>
+            {/* <div className={classes.head}>
                 <div className={classes.heading}>{props.name}</div>
                 <div>
                     <div className={classes.action}>
-                        <i
-                            className={`bi bi-x-circle-fill ${classes.icon}`}
+                        <FontAwesomeIcon
+                            icon={faTimesCircle}
+                            className={classes.icon}
                             onClick={onCancelDebtHandler}
-                        ></i>
+                        />
                     </div>
+                </div>
+            </div> */}
+            <div className={classes.head}>
+                <div className={classes.heading}>{props.name}</div>
+                <div className={classes.heading}>
+                    <FontAwesomeIcon
+                        icon={faTimesCircle}
+                        className={classes.icon}
+                        onClick={onCancelDebtHandler}
+                    />
                 </div>
             </div>
         </>

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-import { Provider, useSelector } from "react-redux";
+import { Provider, useDispatch, useSelector } from "react-redux";
 import CreateTodo from "./CreateTodo/CreateTodo";
 import TodoCategory from "./TodoCategory/TodoCategory";
-import store from "../Expense/Store/Store";
+import store, { todoStoreAction } from "../Expense/Store/Store";
+import { initialTaskData } from "../Expense/Store/reducers/todo-reduce";
 const Todo = (props) => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const data = JSON.parse(props.data);
+        dispatch(initialTaskData(data));
+    }, []);
     const mapStateToProps = (state) => {
         return {
             mainPage: state.todoStore.mainPage,
@@ -22,11 +28,12 @@ const Todo = (props) => {
 };
 export default Todo;
 
-if (document.getElementById("todo")) {
+if (document.getElementById("Todo")) {
+    const data = document.getElementById("Todo").getAttribute("data");
     ReactDOM.render(
         <Provider store={store}>
-            <Todo />
+            <Todo data={data} />
         </Provider>,
-        document.getElementById("todo")
+        document.getElementById("Todo")
     );
 }

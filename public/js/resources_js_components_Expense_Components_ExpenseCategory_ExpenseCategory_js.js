@@ -99,7 +99,7 @@ var ExpenseCategory = function ExpenseCategory(props) {
             align: "5",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_UI_Nav_NavItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
               mainPage: "payment",
-              page: "",
+              page: "dashboard",
               link: "+",
               style: {
                 color: "white",

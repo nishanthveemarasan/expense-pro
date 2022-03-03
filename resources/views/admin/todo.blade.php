@@ -3,5 +3,6 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div id="todo"></div>
+
+<div id="Todo" data="{{ $data}}"></div>
 @endsection

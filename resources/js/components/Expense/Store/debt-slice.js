@@ -4,6 +4,7 @@ const initialState = {
     page: "giveto",
     mainPage: "debtsummary",
     action: "",
+    showModal: false,
     createDebt: "",
     formData: {
         name: "",
@@ -175,6 +176,9 @@ const debtSlice = createSlice({
                 copyArray.push(data);
                 state.debtData = [...copyArray];
             }
+        },
+        showModal(state, action) {
+            state.showModal = !state.showModal;
         },
     },
 });

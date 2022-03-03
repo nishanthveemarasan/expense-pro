@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+}
+.model {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modelCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+}

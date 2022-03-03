@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +18,8 @@ Route::get('/', function () {
     return view('admin.expense');
 });
 Route::get('/debt', function () {
+
     return view('admin.debt');
 });
-Route::get('/todo', function () {
-    return view('admin.todo
-    ');
-});
+Route::get('/todo', [PageController::class, 'todo']);
+Route::get('/saving', [PageController::class, 'saving']);

@@ -84,15 +84,15 @@ var Activity = function Activity(props) {
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: _Activity_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].activityValue,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: _Activity_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].income,
-        children: props.body.income
+        children: ["\xA3", props.body.income]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: _Activity_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].expense,
-        children: props.body.expense
+        children: "\xA3".concat(Math.abs(props.body.expense))
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: props.body.balance > 0 ? _Activity_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].income : _Activity_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].expense,
-        children: props.body.balance
+        children: props.body.balance > 0 ? "\xA3".concat(props.body.balance) : "-\xA3".concat(Math.abs(props.body.balance))
       })]
     })]
   });
@@ -128,7 +128,7 @@ var SummaryChart = function SummaryChart(_ref) {
 
   for (var key in data) {
     series.push(data[key]);
-    labels.push("".concat(key, " $").concat(data[key]));
+    labels.push("".concat(key, " \xA3").concat(data[key]));
   }
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
@@ -170,7 +170,7 @@ var TotalBalance = function TotalBalance(props) {
       style: {
         color: props.balance > 0 ? "green" : "red"
       },
-      children: props.balance
+      children: props.balance > 0 ? props.balance : "-\xA3".concat(Math.abs(props.balance))
     })]
   });
 };
@@ -200,17 +200,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UI_Select_ESelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../UI/Select/ESelect */ "./resources/js/components/Expense/UI/Select/ESelect.js");
 /* harmony import */ var _Store_Store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../Store/Store */ "./resources/js/components/Expense/Store/Store.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -225,20 +214,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
-var chartData = {
-  data: {
-    labels: ["Red", "Orange", "Blue"]
-  }
-};
 
 var DashBoard = function DashBoard(props) {
   var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
-
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      summary = _useState2[0],
-      setSummary = _useState2[1];
 
   var mapStateToProps = function mapStateToProps(state) {
     return {
@@ -257,8 +235,6 @@ var DashBoard = function DashBoard(props) {
     if (state.changeSummary) {
       dispatch(_Store_Store__WEBPACK_IMPORTED_MODULE_8__.expenseStoreAction.calculateSummary());
     }
-
-    setSummary(summary);
   }, [state.changeSummary]);
 
   var changeChartKeyHandler = function changeChartKeyHandler(chartKey) {

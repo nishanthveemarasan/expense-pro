@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+}
+
+.head {
+    background-color: blue;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4%;
+    padding: 2.4% 5% 6% 5%;
+}
+
+.heading {
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.icon {
+    color: white;
+    font-size: 2rem;
+}
+
+.span {
+    color: red;
+    margin: 0 30%;
+}
+
+.saveButton {
+    margin-top: 7%;
+    text-align: center;
+}
+.saveButton {
+    width: 100%;
+}
+
+.textbox {
+    border: 1px solid rgb(199, 197, 197);
+    padding: 1% 2%;
+    width: 100%;
+    font-size: 1.2rem;
+    margin-bottom: 7%;
+    border-radius: 4px;
+}
+
+.select {
+    padding: 2% 0;
+    font-size: 1.2rem;
+    margin-bottom: 5%;
+}
+
+.datepicker {
+    display: block;
+    width: 100%;
+}
+.name {
+    margin: 5% 0;
+    font-weight: bold;
+    font-size: 2rem;
+}

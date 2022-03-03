@@ -90,7 +90,7 @@ var ShowSingleBox = function ShowSingleBox(props) {
       style: {
         color: props.amount > 0 ? "green" : "red"
       },
-      children: props.amount
+      children: props.amount > 0 ? "\xA3".concat(props.amount) : "-\xA3".concat(Math.abs(props.amount))
     })]
   });
 };

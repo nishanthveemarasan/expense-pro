@@ -10,8 +10,10 @@ const Activity = (props) => {
                 <div>Activitys</div>
             </div>
             <div className={classes.activityValue}>
-                <div className={classes.income}>{props.body.income}</div>
-                <div className={classes.expense}>{props.body.expense}</div>
+                <div className={classes.income}>£{props.body.income}</div>
+                <div className={classes.expense}>{`£${Math.abs(
+                    props.body.expense
+                )}`}</div>
                 <div
                     className={
                         props.body.balance > 0
@@ -19,7 +21,9 @@ const Activity = (props) => {
                             : classes.expense
                     }
                 >
-                    {props.body.balance}
+                    {props.body.balance > 0
+                        ? `£${props.body.balance}`
+                        : `-£${Math.abs(props.body.balance)}`}
                 </div>
             </div>
         </div>

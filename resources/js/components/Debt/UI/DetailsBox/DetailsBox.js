@@ -8,6 +8,8 @@ import {
     getIndex,
 } from "../../../Helper/Helper";
 import classes from "./Details.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSterlingSign } from "@fortawesome/free-solid-svg-icons";
 const DetailsBox = (props) => {
     const dispatch = useDispatch();
     const balance = props.lendTotal - props.borrowTotal;
@@ -52,6 +54,7 @@ const DetailsBox = (props) => {
                     balance >= 0 ? classes.lend : classes.borrow
                 }`}
             >
+                <FontAwesomeIcon icon={faSterlingSign} />
                 {balance}
             </div>
         </div>

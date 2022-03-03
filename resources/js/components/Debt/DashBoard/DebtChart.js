@@ -6,8 +6,8 @@ const DebtChart = ({ css, total }) => {
         colors,
         data: [total.lend, total.borrow],
         categories: [
-            ["Total Owed to Me", `$${total.lend}`],
-            ["Total Owed by Me ", `$${total.borrow}`],
+            ["Total Owed to Me", `£${total.lend}`],
+            ["Total Owed by Me ", `£${total.borrow}`],
         ],
     };
     return (

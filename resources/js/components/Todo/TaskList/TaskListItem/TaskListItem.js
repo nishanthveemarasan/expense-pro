@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { updateTaskStatus } from "../../../Expense/Store/reducers/todo-reduce";
 import { todoStoreAction } from "../../../Expense/Store/Store";
 import InputCheck from "../../UI/Input/InputCheck";
 import Progress from "../../UI/Progress/Progress";
@@ -10,11 +11,18 @@ const TaskListItem = (props) => {
         total: 0,
         completed: 0,
     };
-    const onCheckChangeHandler = (id) => {
+    const onCheckChangeHandler = (id, value, uuid) => {
         const data = {
             id,
             parentId: props.parendId,
+            value: !value,
         };
+        const backend = {
+            childUuid: uuid,
+            completed: !value,
+            parentUuid: props.uuid,
+        };
+        dispatch(updateTaskStatus(backend));
         dispatch(todoStoreAction.updateToDoList(data));
     };
     return (
@@ -39,6 +47,7 @@ const TaskListItem = (props) => {
                                     <InputCheck
                                         class="form-check-input"
                                         id={i}
+                                        uuid={item.uuid}
                                         value={item.completed}
                                         change={onCheckChangeHandler}
                                     />
@@ -60,7 +69,11 @@ const TaskListItem = (props) => {
                     );
                 })}
                 <div className={classes.progressBar}>
-                    <Progress {...progress} id={props.parendId} />
+                    <Progress
+                        {...progress}
+                        id={props.parendId}
+                        uuid={props.uuid}
+                    />
                 </div>
             </div>
         </div>

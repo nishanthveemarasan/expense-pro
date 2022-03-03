@@ -13,7 +13,6 @@ const Personal = (props) => {
         };
     };
     const state = useSelector(mapStateToProps);
-    // console.log(state.showTasks, state.mainPage, state.page, state.taskType);
     return (
         <>
             <div className={classes.switch}>

@@ -4,6 +4,7 @@ const initialState = {
     mainPage: "todoCategory",
     page: "work",
     taskType: "work",
+    showModel: false,
     showTasks: "current",
     todoTask: {
         date: "",
@@ -12,94 +13,7 @@ const initialState = {
         completed: false,
         type: null,
     },
-    data: [
-        {
-            uuid: 1646047805811,
-            date: "2022-02-28",
-            title: "Sadasd",
-            items: [
-                {
-                    uuid: 1646047805810,
-                    name: "sub task 1",
-                    completed: true,
-                },
-                {
-                    uuid: 1646047805812,
-                    name: "sub task 2",
-                    completed: false,
-                },
-                {
-                    uuid: 1646047805820,
-                    name: "sub task 3",
-                    completed: false,
-                },
-                {
-                    uuid: 1646047805822,
-                    name: "sub task 4",
-                    completed: false,
-                },
-            ],
-            completed: false,
-            type: "work",
-        },
-        {
-            uuid: 1646047805830,
-            date: "2022-02-28",
-            title: "This sdasd asd ada",
-            items: [
-                {
-                    uuid: 1646047805831,
-                    name: "sub task 1",
-                    completed: false,
-                },
-                {
-                    uuid: 1646047805832,
-                    name: "sub task 2",
-                    completed: false,
-                },
-            ],
-            completed: false,
-            type: "work",
-        },
-        {
-            uuid: 1646047805830,
-            date: "2022-02-28",
-            title: "This sdasd asd ada",
-            items: [
-                {
-                    uuid: 1646047805831,
-                    name: "sub task 1",
-                    completed: false,
-                },
-                {
-                    uuid: 1646047805832,
-                    name: "sub task 2",
-                    completed: false,
-                },
-            ],
-            completed: false,
-            type: "personal",
-        },
-        {
-            uuid: 1646047805814,
-            date: "2022-02-28",
-            title: "Sadasd",
-            items: [
-                {
-                    uuid: 1646047805815,
-                    name: "sub task 1",
-                    completed: true,
-                },
-                {
-                    uuid: 1646047805816,
-                    name: "sub task 2",
-                    completed: true,
-                },
-            ],
-            completed: true,
-            type: "work",
-        },
-    ],
+    data: [],
 };
 
 const todoSlice = createSlice({
@@ -130,7 +44,7 @@ const todoSlice = createSlice({
         },
         updateTaskData(state, action) {
             const copyArray = state.data.slice();
-            copyArray.push(action.payload.data);
+            copyArray.unshift(action.payload.data);
             state.data = copyArray;
         },
         updateToDoList(state, action) {
@@ -172,9 +86,16 @@ const todoSlice = createSlice({
         },
 
         updateShowLabel(state, action) {
-            console.log(action?.payload);
             state.showCompletedLabel = action.payload.value;
-            console.log("running");
+        },
+
+        addInitialTaskData(state, action) {
+            state.data = action.payload.data;
+        },
+
+        showModel(state, action) {
+            state.showModel = !state.showModel;
+            console.log(state.showModel);
         },
     },
 });

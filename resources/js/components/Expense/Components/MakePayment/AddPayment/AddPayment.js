@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { getArray, getDate } from "../../../../Helper/Helper";
+import { addNewTransaction } from "../../../Store/reducers/expense-reducer";
 import { expenseStoreAction } from "../../../Store/Store";
 import Ebutton from "../../../UI/Button/Ebutton";
 import Option from "../Option/Option";
@@ -30,6 +31,20 @@ const AddPayment = (props) => {
     const onAddPaymentItem = () => {
         const date = getDate(state.payDate);
         const getCategory = getArray(state.selectedCategory, ":");
+        if (!state.payType) {
+            alert("Please Specify if it is either Income/Expense type");
+            return;
+        }
+        console.log(state.amount);
+        if (isNaN(state.amount) || !state.amount) {
+            alert("Please Specify the right amount!!");
+            return;
+        }
+
+        if (!state.selectedCategory && state.payType != "income") {
+            alert("Please choose the expense category!!");
+            return;
+        }
         const data = {
             type: state.payType,
             date: state.payDate,
@@ -57,62 +72,75 @@ const AddPayment = (props) => {
     };
 
     const onSavePaymentHandler = () => {
-        dispatch(
-            expenseStoreAction.savePayment({ data: state.transactionData })
-        );
+        console.log("here");
+        dispatch(expenseStoreAction.showModal());
+        dispatch(addNewTransaction(state.transactionData));
+        // dispatch(
+        //     expenseStoreAction.savePayment({ data: state.transactionData })
+        // );
     };
     return (
-        <div className={classes.paycard}>
-            <Option
-                heading="Amount"
-                type="number"
-                avatar={false}
-                icon={<i className="bi bi-calculator"></i>}
-                color="primary"
-                value={state.amount}
-                change={onAmountChangeHandler}
-            />
-            {(state.payType == "expense" || state.payType == "") && (
+        <>
+            <div className={classes.paycard}>
                 <Option
-                    heading="Categorys"
-                    type="text"
+                    heading="Amount"
+                    type="number"
                     avatar={false}
-                    icon={
-                        <i
-                            className="bi bi-list-ul"
-                            onClick={onUpdatePageHandler.bind(this, "category")}
-                        ></i>
-                    }
-                    color="success"
-                    disabled={true}
-                    value={state.selectedCategory}
-                    tColor="red"
+                    icon={<i className="bi bi-calculator"></i>}
+                    color="primary"
+                    value={state.amount}
+                    change={onAmountChangeHandler}
                 />
-            )}
-            <div className={classes.paybutton}>
-                <Ebutton
-                    variant="primary"
-                    size="md"
-                    disabled={false}
-                    name="Back"
-                    onClick={onUpdatePageHandler.bind(this, "expenseCategory")}
-                />
-                <Ebutton
-                    variant="primary"
-                    size="md"
-                    disabled={false}
-                    name="Save&New"
-                    onClick={onAddPaymentItem}
-                />
-                <Ebutton
-                    variant="primary"
-                    size="md"
-                    disabled={false}
-                    name="Save"
-                    onClick={onSavePaymentHandler}
-                />
+                {(state.payType == "expense" || state.payType == "") && (
+                    <Option
+                        heading="Categorys"
+                        type="text"
+                        avatar={false}
+                        icon={
+                            <i
+                                className="bi bi-list-ul"
+                                onClick={onUpdatePageHandler.bind(
+                                    this,
+                                    "category"
+                                )}
+                            ></i>
+                        }
+                        color="success"
+                        disabled={true}
+                        value={state.selectedCategory}
+                        tColor="red"
+                    />
+                )}
+                <div className={classes.paybutton}>
+                    <Ebutton
+                        variant="primary"
+                        size="md"
+                        disabled={false}
+                        name="Back"
+                        onClick={onUpdatePageHandler.bind(
+                            this,
+                            "expenseCategory"
+                        )}
+                    />
+                    <Ebutton
+                        variant="primary"
+                        size="md"
+                        disabled={false}
+                        name="Save&New"
+                        onClick={onAddPaymentItem}
+                    />
+                    <Ebutton
+                        variant="primary"
+                        size="md"
+                        disabled={
+                            state.transactionData.length == 0 ? true : false
+                        }
+                        name="Save"
+                        onClick={onSavePaymentHandler}
+                    />
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

@@ -23,7 +23,9 @@ const ShowSingleBox = (props) => {
                 className={classes.amount}
                 style={{ color: props.amount > 0 ? "green" : "red" }}
             >
-                {props.amount}
+                {props.amount > 0
+                    ? `£${props.amount}`
+                    : `-£${Math.abs(props.amount)}`}
             </div>
         </div>
     );

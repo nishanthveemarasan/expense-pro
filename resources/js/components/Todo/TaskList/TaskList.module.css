@@ -4,3 +4,14 @@
 .card {
     margin: 2% 2%;
 }
+
+.emptyData {
+    width: 100%;
+    border: 1px black solid;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    padding: 6%;
+    font-size: 1.2rem;
+    color: darkgray;
+}

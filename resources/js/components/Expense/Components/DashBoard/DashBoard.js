@@ -14,15 +14,8 @@ import SummaryChart from "./Components/Chart/SummaryChart";
 import ESelect from "../../UI/Select/ESelect";
 import { expenseStoreAction } from "../../Store/Store";
 
-const chartData = {
-    data: {
-        labels: ["Red", "Orange", "Blue"],
-    },
-};
-
 const DashBoard = (props) => {
     const dispatch = useDispatch();
-    const [summary, setSummary] = useState(null);
     const mapStateToProps = (state) => {
         return {
             data: state.expenseStore.data,
@@ -39,8 +32,6 @@ const DashBoard = (props) => {
         if (state.changeSummary) {
             dispatch(expenseStoreAction.calculateSummary());
         }
-
-        setSummary(summary);
     }, [state.changeSummary]);
 
     const changeChartKeyHandler = (chartKey) => {

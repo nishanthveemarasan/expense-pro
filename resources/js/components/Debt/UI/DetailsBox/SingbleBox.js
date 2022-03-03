@@ -1,5 +1,7 @@
 import React from "react";
 import classes from "./SingbleBox.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSterlingSign } from "@fortawesome/free-solid-svg-icons";
 const SingbleBox = (props) => {
     return (
         <div className={classes.outline} onClick={props.editDebt}>
@@ -13,7 +15,10 @@ const SingbleBox = (props) => {
                     </span>
                 </div>
             </div>
-            <div className={classes.amount}>{props.amount}</div>
+            <div className={classes.amount}>
+                <FontAwesomeIcon icon={faSterlingSign} />
+                {props.amount}
+            </div>
         </div>
     );
 };

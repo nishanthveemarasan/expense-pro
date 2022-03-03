@@ -59,7 +59,7 @@ const ExpenseCategory = (props) => {
                             <Avatar size="xl" color="primary" align="5">
                                 <NavItem
                                     mainPage="payment"
-                                    page=""
+                                    page="dashboard"
                                     link="+"
                                     style={{
                                         color: "white",

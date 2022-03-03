@@ -6,7 +6,9 @@ const TotalBalance = (props) => {
         <div className={classes.balancce}>
             <div>Current Balance</div>
             <div style={{ color: props.balance > 0 ? "green" : "red" }}>
-                {props.balance}
+                {props.balance > 0
+                    ? props.balance
+                    : `-£${Math.abs(props.balance)}`}
             </div>
         </div>
     );

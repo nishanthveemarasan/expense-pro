@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getExpenseSummary } from "../../Helper/Helper";
 
 const initialState = {
+    showModal: false,
     summary: {
         today: {
             income: 0,
@@ -40,14 +41,6 @@ const initialState = {
     heading: "Expense Manager",
     payDate: null,
     data: {
-        totalBalance: {
-            balance: -24000,
-        },
-        todayExpense: {
-            income: 0,
-            expense: 20,
-            balance: 22000,
-        },
         showPayment: true,
     },
     model: false,
@@ -204,7 +197,6 @@ const initialState = {
                     color: "warning",
                 },
             ],
-            total: 2500,
         },
     },
 
@@ -359,6 +351,11 @@ const expenseSlice = createSlice({
                 ...state.summary,
                 ...getNewExpenseSummary,
             };
+        },
+
+        showModal(state, action) {
+            state.showModal = !state.showModal;
+            console.log(state.showModal);
         },
     },
 });

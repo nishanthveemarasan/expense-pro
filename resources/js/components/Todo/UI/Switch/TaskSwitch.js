@@ -6,7 +6,7 @@ import SwitchItem from "./SwitchItem";
 const TaskSwitch = (props) => {
     const dispatch = useDispatch();
     const onTypeChangeHandler = (type) => {
-        console.log("type", type);
+        // console.log("type", type);
         dispatch(todoStoreAction.setShowPage({ type }));
     };
 

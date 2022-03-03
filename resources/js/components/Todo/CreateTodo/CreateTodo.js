@@ -1,13 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { addNewTask } from "../../Expense/Store/reducers/todo-reduce";
 import { todoStoreAction } from "../../Expense/Store/Store";
 import Head from "../../Expense/UI/head/Head";
 import { getDate, getFirstLetterUpperWord, uuid } from "../../Helper/Helper";
 import TButton from "../UI/Button/Button";
 import Input from "../UI/Input/Input";
+import SModel from "../UI/Model/SModel";
 import classes from "./CreateTodo.module.css";
 import ListTodoItems from "./ListTodoItems/ListTodoItems";
 import TodoItem from "./TodoItem/TodoItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 const CreateTodo = (props) => {
     const dispatch = useDispatch();
     const mapStateToProps = (state) => {
@@ -45,21 +49,37 @@ const CreateTodo = (props) => {
             date,
             uuid: uuid(),
         };
-        console.log();
-        dispatch(todoStoreAction.updateTaskData({ data }));
-        onPageChangeHandler();
+        if (data.title === "") {
+            alert("Please Add a Title to a Task");
+            return;
+        }
+        if (data.items.length == 0) {
+            alert("Please Add at least one sub task");
+            return;
+        }
+        const refresh = {
+            page: state.taskType,
+            mainPage: "todoCategory",
+            taskType: state.taskType,
+            showTasks: "current",
+        };
+        dispatch(todoStoreAction.showModel());
+        dispatch(addNewTask(data, refresh));
+        dispatch(todoStoreAction.showModel());
     };
     return (
         <>
+            <SModel />
             <Head type="space">
                 <div className={classes.heading}>
-                    <i
-                        className="bi bi-arrow-left"
-                        onClick={onPageChangeHandler}
-                    ></i>
+                    Add Task List - {state.taskType}
                 </div>
                 <div className={classes.heading}>
-                    Add Task List - {state.taskType}
+                    <FontAwesomeIcon
+                        icon={faTimesCircle}
+                        className={classes.icon}
+                        onClick={onPageChangeHandler}
+                    />
                 </div>
             </Head>
 

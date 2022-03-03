@@ -1,0 +1,11 @@
+.textArea {
+    width: 100%;
+    padding: 3% 0 3% 2%;
+}
+
+.label {
+    margin-top: 8%;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+}

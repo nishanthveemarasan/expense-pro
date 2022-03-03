@@ -6,7 +6,7 @@ const SummaryChart = ({ chartKey, data }) => {
     const labels = [];
     for (const key in data) {
         series.push(data[key]);
-        labels.push(`${key} $${data[key]}`);
+        labels.push(`${key} £${data[key]}`);
     }
     return (
         <>

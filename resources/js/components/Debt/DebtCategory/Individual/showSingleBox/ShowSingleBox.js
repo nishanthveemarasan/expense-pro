@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./ShowSingleBox.module.css";
+
 const ShowSingleBox = (props) => {
     return (
         <div
@@ -11,7 +12,7 @@ const ShowSingleBox = (props) => {
         >
             <div className={classes.details}>
                 <div className={classes.name}>
-                    {props.type == "lend" ? "Owed To Me/Paid" : "Owed By Me"}
+                    {props.type == "lend" ? "Owed To Me/Paids" : "Owed By Me"}
                 </div>
                 <div>{props.description ?? "No Description"}</div>
                 <div>
@@ -20,7 +21,10 @@ const ShowSingleBox = (props) => {
                     </span>
                 </div>
             </div>
-            <div className={classes.amount}>{props.amount}</div>
+            <div className={classes.amount}>
+                <span>£</span>
+                {props.amount}
+            </div>
         </div>
     );
 };
