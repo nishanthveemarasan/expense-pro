@@ -52,6 +52,9 @@ const savingSlice = createSlice({
             copyArray.unshift(action.payload.data);
             state.data = copyArray;
         },
+        initialSavingsData(state, action) {
+            state.data = action.payload.data;
+        },
     },
 });
 

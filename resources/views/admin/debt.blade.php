@@ -3,5 +3,5 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div id="debt"></div>
+<div id="debt" data="{{ json_encode($data)}}"></div>
 @endsection

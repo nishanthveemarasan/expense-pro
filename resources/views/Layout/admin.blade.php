@@ -8,13 +8,13 @@
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="public/assets/css/bootstrap.css">
 
-    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="stylesheet" href="css/app.css">
-    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="public/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="public/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="public/assets/css/app.css">
+    <link rel="stylesheet" href="public/css/app.css">
+    <link rel="shortcut icon" href="public/assets/images/favicon.svg" type="image/x-icon">
 </head>
 
 <body>
@@ -36,10 +36,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/react-apexcharts@1.3.6/dist/react-apexcharts.iife.min.js"></script>
-    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
-    <script src="js/app.js"></script>
-    <script src="assets/js/mazer.js"></script>
+    <script src="public/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="public/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="public/js/app.js"></script>
+    <script src="public/assets/js/mazer.js"></script>
 
 
     <script>

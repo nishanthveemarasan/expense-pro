@@ -14,7 +14,12 @@ const Lend = (props) => {
     const state = useSelector(mapStateToProps);
 
     const onEditLendMoney = (id) => {
-        let formData = { ...state.data[id], id };
+        let formData = {
+            ...state.data[id],
+            id,
+            description: state.data[id].description ?? "",
+        };
+        console.log(formData);
         dispatch(debtStoreAction.createFormData({ formData }));
 
         const data = {
@@ -44,7 +49,7 @@ const Lend = (props) => {
                     page="giveto"
                     type="mainpage"
                     action="lend"
-                    create='create'
+                    create="create"
                 />
             </div>
         </>

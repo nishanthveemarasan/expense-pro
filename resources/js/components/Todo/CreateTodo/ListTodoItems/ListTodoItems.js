@@ -21,6 +21,7 @@ const ListTodoItems = (props) => {
                     return (
                         <div
                             className="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-2"
+                            style={{ marginTop: "4%", fontSize: "0.8rem" }}
                             key={i}
                         >
                             <div className="widget-todo-title-area d-flex align-items-center">

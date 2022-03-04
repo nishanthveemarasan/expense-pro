@@ -48,7 +48,7 @@ var Summary = function Summary(props) {
       className: _Summary_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].currency,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_2__.FontAwesomeIcon, {
         icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__.faSterlingSign
-      }), totalProfit]
+      }), totalProfit == 0 ? "00.00" : totalProfit]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: _Summary_module_css__WEBPACK_IMPORTED_MODULE_1__["default"].summaryTitle,
       children: ["as at ", (0,_Helper_Helper__WEBPACK_IMPORTED_MODULE_3__.today)()]

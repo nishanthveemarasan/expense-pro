@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\TaskItem;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
@@ -27,7 +28,8 @@ class Task extends Model
     protected $hidden = [
         'id',
         'created_at',
-        'deleted_at'
+        'deleted_at',
+        'user_id'
     ];
 
     /**
@@ -37,12 +39,19 @@ class Task extends Model
     {
         parent::boot();
         static::creating(function ($model) {
-            $model->uuid = (string)Str::orderedUuid();
+            if (!$model->uuid) {
+                $model->uuid = (string)Str::orderedUuid();
+            }
         });
     }
 
     public function items()
     {
         return $this->hasMany(TaskItem::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

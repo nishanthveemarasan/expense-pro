@@ -14,6 +14,7 @@ const Borrow = (props) => {
     const state = useSelector(mapStateToProps);
     const onEditBorrowMoney = (id) => {
         let formData = { ...state.data[id], id };
+        console.log(formData);
         dispatch(debtStoreAction.createFormData({ formData }));
 
         const data = {

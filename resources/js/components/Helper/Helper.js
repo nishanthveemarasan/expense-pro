@@ -1,4 +1,4 @@
-export const API_URL = "http://expenseapp.test/api";
+export const API_URL = "https://nkitservice.com/expensetest/api";
 export const getDate = (newDate = "") => {
     const date = newDate ? new Date(newDate) : new Date();
     const year = date.getFullYear();
@@ -69,9 +69,9 @@ export const getIndex = (max, min) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-export const uuid = () => {
-    return Date.now();
-};
+// export const uuid = () => {
+//     return Date.now();
+// };
 
 export const expenseSummary = {
     today: {
@@ -146,8 +146,8 @@ const getExepnseSummaryOfType = (dateType, el) => {
     dateType.expense =
         el.type == "expense" ? dateType.expense + el.amount : dateType.expense;
     dateType.balance += el.amount;
-    dateType.chart[el.category.name] = dateType.chart[el.category.name]
-        ? dateType.chart[el.category.name] + Math.abs(el.amount)
+    dateType.chart[el.category] = dateType.chart[el.category]
+        ? dateType.chart[el.category] + Math.abs(el.amount)
         : Math.abs(el.amount);
     return dateType;
 };
@@ -192,4 +192,12 @@ export const today = () => {
     const dayString = date.getDate().toString().padStart(2, 0);
 
     return `${dayString} ${monthName} ${year}`;
+};
+export const uuid = () => {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+        (
+            c ^
+            (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+        ).toString(16)
+    );
 };

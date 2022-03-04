@@ -1839,7 +1839,7 @@ var AddDebt = function AddDebt(props) {
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("main", {
       style: {
-        padding: "0 2%"
+        padding: "0 5%"
       },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_UI_DebtBody_DebtBody__WEBPACK_IMPORTED_MODULE_1__["default"], {})
     })]
@@ -2260,29 +2260,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AddNewDebt": () => (/* binding */ AddNewDebt)
 /* harmony export */ });
-/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Store */ "./resources/js/components/Expense/Store/Store.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Helper_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Helper/Helper */ "./resources/js/components/Helper/Helper.js");
+/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Store */ "./resources/js/components/Expense/Store/Store.js");
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 var AddNewDebt = function AddNewDebt(data, page) {
-  return function (dispatch) {
-    setTimeout(function () {
-      var debtData = {
-        action: data.action,
-        formData: _objectSpread(_objectSpread({}, data.formData), {}, {
-          id: data.formData.id
-        })
-      };
-      dispatch(_Store__WEBPACK_IMPORTED_MODULE_0__.debtStoreAction.createDebt(debtData));
-      dispatch(_Store__WEBPACK_IMPORTED_MODULE_0__.debtStoreAction.createUpdateDebtData(debtData));
-      dispatch(_Store__WEBPACK_IMPORTED_MODULE_0__.debtStoreAction.updatePage(page));
-      dispatch(_Store__WEBPACK_IMPORTED_MODULE_0__.debtStoreAction.showModal());
-    }, 2000, data, page);
-  };
+  return /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(dispatch) {
+      var request, response, _error$message;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return fetch("".concat(_Helper_Helper__WEBPACK_IMPORTED_MODULE_1__.API_URL, "/debts/store"), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json"
+                },
+                body: JSON.stringify(data)
+              });
+
+            case 3:
+              request = _context.sent;
+              _context.next = 6;
+              return request.json();
+
+            case 6:
+              response = _context.sent;
+
+              if (!response.errors) {
+                _context.next = 10;
+                break;
+              }
+
+              alert("".concat(response.message, " to create/update Saving! Please give the right details"));
+              return _context.abrupt("return");
+
+            case 10:
+              if (!response.error) {
+                _context.next = 13;
+                break;
+              }
+
+              alert("".concat(response.error, " to create/update Saving! Please give the right details"));
+              return _context.abrupt("return");
+
+            case 13:
+              if (response.data) {
+                console.log(response.data);
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.debtStoreAction.createDebt(data));
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.debtStoreAction.createUpdateDebtData(data));
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.debtStoreAction.updatePage(page));
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.debtStoreAction.showModal());
+              }
+
+              _context.next = 20;
+              break;
+
+            case 16:
+              _context.prev = 16;
+              _context.t0 = _context["catch"](0);
+              alert((_error$message = _context.t0.message) !== null && _error$message !== void 0 ? _error$message : "Unknown error happened!! plese try again after page reloads!");
+              window.location.reload(false);
+
+            case 20:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 16]]);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
 };
 
 /***/ }),
@@ -2334,7 +2398,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.AvMuVhOAJEfPP32YBgHtOQ\\=\\= {\r\n    background-color: blue;\r\n    height: 50px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin-bottom: 4%;\r\n    padding: 2.4% 10% 6% 5%;\r\n}\r\n\r\n.tbvPSTTOVUyGyTo9Dm99yA\\=\\= {\r\n    color: white;\r\n    font-weight: bold;\r\n    font-size: 1.1rem;\r\n}\r\n\r\n.psgrUmg7PMFgB9Aw1XAtiQ\\=\\= {\r\n    display: flex;\r\n    align-items: center;\r\n    flex-direction: row;\r\n}\r\n\r\n.K71H-tu4fLghekomok2Wbg\\=\\= {\r\n    color: white;\r\n    font-size: 1.8rem;\r\n}\r\n\r\n.ruHYQgeLT1Fne4bHTnYDYQ\\=\\= {\r\n    color: red;\r\n    margin: 0 30%;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n.AvMuVhOAJEfPP32YBgHtOQ\\=\\= {\r\n    background-color: blue;\r\n    height: 50px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    margin-bottom: 4%;\r\n    padding: 2.4% 10% 6% 5%;\r\n    margin-bottom: 10%;\r\n}\r\n\r\n.tbvPSTTOVUyGyTo9Dm99yA\\=\\= {\r\n    color: white;\r\n    font-weight: bold;\r\n    font-size: 1.1rem;\r\n}\r\n\r\n.psgrUmg7PMFgB9Aw1XAtiQ\\=\\= {\r\n    display: flex;\r\n    align-items: center;\r\n    flex-direction: row;\r\n}\r\n\r\n.K71H-tu4fLghekomok2Wbg\\=\\= {\r\n    color: white;\r\n    font-size: 1.8rem;\r\n}\r\n\r\n.ruHYQgeLT1Fne4bHTnYDYQ\\=\\= {\r\n    color: red;\r\n    margin: 0 30%;\r\n}\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"head": "AvMuVhOAJEfPP32YBgHtOQ==",

@@ -58,9 +58,7 @@ const initialState = {
                     week: 4,
                     year: 2022,
                     date: "2022-02-26",
-                    category: {
-                        name: "Automobile",
-                    },
+                    category: "Automobile",
                 },
                 {
                     type: "expense",
@@ -70,9 +68,7 @@ const initialState = {
                     week: 4,
                     year: 2022,
                     date: "2022-02-26",
-                    category: {
-                        name: "House",
-                    },
+                    category: "House",
                 },
                 {
                     type: "expense",
@@ -82,9 +78,7 @@ const initialState = {
                     week: 4,
                     year: 2022,
                     date: "2022-02-25",
-                    category: {
-                        name: "EnterTainment",
-                    },
+                    category: "EnterTainment",
                 },
                 {
                     type: "income",
@@ -94,9 +88,7 @@ const initialState = {
                     week: 4,
                     year: 2022,
                     date: "2022-02-25",
-                    category: {
-                        name: "income",
-                    },
+                    category: "income",
                 },
                 {
                     type: "expense",
@@ -106,9 +98,7 @@ const initialState = {
                     week: 2,
                     year: 2022,
                     date: "2022-02-11",
-                    category: {
-                        name: "House",
-                    },
+                    category: "House",
                 },
                 {
                     type: "income",
@@ -118,9 +108,7 @@ const initialState = {
                     week: 4,
                     year: 2022,
                     date: "2022-01-26",
-                    category: {
-                        name: "income",
-                    },
+                    category: "income",
                 },
             ],
             category: [
@@ -285,10 +273,10 @@ const expenseSlice = createSlice({
             state.subCategoryPage = action.payload.page;
         },
         addNewCategory(state, action) {
-            const copyArray = state.payment.category.slice();
-            copyArray.push(action.payload.category);
-            state.payment = {
-                ...state.payment,
+            const copyArray = state.payment.data.category.slice();
+            copyArray.unshift(action.payload.category);
+            state.payment.data = {
+                ...state.payment.data,
                 category: [...copyArray],
             };
             state.subCategoryPage = "maincategory";
@@ -355,7 +343,10 @@ const expenseSlice = createSlice({
 
         showModal(state, action) {
             state.showModal = !state.showModal;
-            console.log(state.showModal);
+        },
+        initialExpenseData(state, action) {
+            state.payment.data.expense = action.payload.expense;
+            state.payment.data.category = action.payload.category;
         },
     },
 });

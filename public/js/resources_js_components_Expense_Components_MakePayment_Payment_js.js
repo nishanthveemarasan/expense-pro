@@ -499,6 +499,7 @@ var AddPayment = function AddPayment(props) {
     }
 
     var data = {
+      uuid: (0,_Helper_Helper__WEBPACK_IMPORTED_MODULE_2__.uuid)(),
       type: state.payType,
       date: state.payDate,
       day: date.dayNumber,
@@ -506,9 +507,7 @@ var AddPayment = function AddPayment(props) {
       selectedCategory: state.payType == "income" ? "income" : state.selectedCategory,
       week: date.weekNumber,
       year: date.yearNumber,
-      category: {
-        name: state.payType == "income" ? "income" : getCategory[0]
-      },
+      category: state.payType == "income" ? "income" : getCategory[0],
       subCategory: state.payType == "income" ? "income" : getCategory[1],
       amount: state.payType == "income" ? parseFloat(state.amount) : -Math.abs(parseFloat(state.amount))
     };
@@ -525,7 +524,7 @@ var AddPayment = function AddPayment(props) {
   };
 
   var onSavePaymentHandler = function onSavePaymentHandler() {
-    console.log("here");
+    console.log(state.transactionData);
     dispatch(_Store_Store__WEBPACK_IMPORTED_MODULE_4__.expenseStoreAction.showModal());
     dispatch((0,_Store_reducers_expense_reducer__WEBPACK_IMPORTED_MODULE_3__.addNewTransaction)(state.transactionData)); // dispatch(
     //     expenseStoreAction.savePayment({ data: state.transactionData })
@@ -546,7 +545,7 @@ var AddPayment = function AddPayment(props) {
         value: state.amount,
         change: onAmountChangeHandler
       }), (state.payType == "expense" || state.payType == "") && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Option_Option__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        heading: "Categorys",
+        heading: "Category",
         type: "text",
         avatar: false,
         icon: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("i", {
@@ -1036,32 +1035,6 @@ var TransactionItem = function TransactionItem(props) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TransactionItem);
-
-/***/ }),
-
-/***/ "./resources/js/components/Expense/Store/reducers/expense-reducer.js":
-/*!***************************************************************************!*\
-  !*** ./resources/js/components/Expense/Store/reducers/expense-reducer.js ***!
-  \***************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addNewTransaction": () => (/* binding */ addNewTransaction)
-/* harmony export */ });
-/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Store */ "./resources/js/components/Expense/Store/Store.js");
-
-var addNewTransaction = function addNewTransaction(data) {
-  return function (dispatch) {
-    setTimeout(function () {
-      dispatch(_Store__WEBPACK_IMPORTED_MODULE_0__.expenseStoreAction.savePayment({
-        data: data
-      }));
-      dispatch(_Store__WEBPACK_IMPORTED_MODULE_0__.expenseStoreAction.showModal());
-    }, 2000, data);
-  };
-};
 
 /***/ }),
 

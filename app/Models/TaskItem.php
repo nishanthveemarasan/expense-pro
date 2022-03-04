@@ -33,7 +33,9 @@ class TaskItem extends Model
     {
         parent::boot();
         static::creating(function ($model) {
-            $model->uuid = (string)Str::orderedUuid();
+            if (!$model->uuid) {
+                $model->uuid = (string)Str::orderedUuid();
+            }
         });
     }
 

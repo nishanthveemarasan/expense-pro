@@ -52,6 +52,7 @@ var Borrow = function Borrow(props) {
       id: id
     });
 
+    console.log(formData);
     dispatch(_Expense_Store_Store__WEBPACK_IMPORTED_MODULE_2__.debtStoreAction.createFormData({
       formData: formData
     }));
@@ -313,10 +314,14 @@ var Lend = function Lend(props) {
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(mapStateToProps);
 
   var onEditLendMoney = function onEditLendMoney(id) {
+    var _state$data$id$descri;
+
     var formData = _objectSpread(_objectSpread({}, state.data[id]), {}, {
-      id: id
+      id: id,
+      description: (_state$data$id$descri = state.data[id].description) !== null && _state$data$id$descri !== void 0 ? _state$data$id$descri : ""
     });
 
+    console.log(formData);
     dispatch(_Expense_Store_Store__WEBPACK_IMPORTED_MODULE_2__.debtStoreAction.createFormData({
       formData: formData
     }));
@@ -387,6 +392,7 @@ var DetailsBox = function DetailsBox(props) {
   var balance = props.lendTotal - props.borrowTotal;
 
   var onOpenIndividualData = function onOpenIndividualData() {
+    console.log(props);
     dispatch(_Expense_Store_Store__WEBPACK_IMPORTED_MODULE_2__.debtStoreAction.updateIndividualData({
       data: props
     }));

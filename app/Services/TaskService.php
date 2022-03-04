@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Task;
+use App\Models\User;
 use App\Models\TaskItem;
 use SebastianBergmann\Environment\Console;
 
@@ -11,10 +12,11 @@ class TaskService
 
     public function store($data)
     {
+        $user = User::find(1);
         $taskItems = $data['items'];
         unset($data['items']);
 
-        $task = Task::create($data);
+        $task = $user->tasks()->create($data);
 
         $task->items()->createMany($taskItems);
 
@@ -27,7 +29,8 @@ class TaskService
 
     public function index()
     {
-        return Task::all();
+        $user = User::find(1);
+        return $user->tasks()->orderBy('created_at', 'desc')->get();
     }
 
     public function updateItem($data, Task $task, TaskItem $item)
@@ -42,15 +45,14 @@ class TaskService
     {
         $completed = true;
         $data = [];
-        $task->items()->get()->map(function ($item) use (&$completed) {
-            if (!$item->completed) {
-                $completed = false;
-                return;
-            }
-        });
+        // $task->items()->get()->map(function ($item) use (&$completed) {
+        //     if (!$item->completed) {
+        //         $completed = false;
+        //     }
+        // });
         if ($completed) {
             $task->update(["completed" => true]);
-            $data =  ['data' => 'Task is updated Successfully'];
+            $data =  ['data' => 'Task is Completed Successfully'];
         } else {
             $data =  ['error' => 'Task is not updated Successfully'];
         }

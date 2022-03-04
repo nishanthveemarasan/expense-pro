@@ -38,8 +38,9 @@ const initialState = {
     ],
     debtData: [
         {
+            uuid: 12322212232,
             name: "Nishanth",
-            data: [
+            debts: [
                 {
                     uuid: 12224,
                     amount: 1520,
@@ -90,7 +91,7 @@ const debtSlice = createSlice({
                     const arrayElement = action.payload.formData;
                     copyArray[action.payload.formData.id] = arrayElement;
                 } else {
-                    copyArray.push(action.payload.formData);
+                    copyArray.unshift(action.payload.formData);
                     const copyNames = state.names.slice();
                     const exists = copyNames.find(
                         (element) =>
@@ -99,7 +100,7 @@ const debtSlice = createSlice({
                     );
                     if (!exists) {
                         const name = action.payload.formData.name;
-                        copyNames.push({ value: name, label: name });
+                        copyNames.unshift({ value: name, label: name });
                         state.names = copyNames;
                     }
                 }
@@ -110,7 +111,7 @@ const debtSlice = createSlice({
                     const arrayElement = action.payload.formData;
                     copyArray[action.payload.formData.id] = arrayElement;
                 } else {
-                    copyArray.push(action.payload.formData);
+                    copyArray.unshift(action.payload.formData);
                     const copyNames = state.names.slice();
                     const exists = copyNames.find(
                         (element) =>
@@ -119,7 +120,7 @@ const debtSlice = createSlice({
                     );
                     if (!exists) {
                         const name = action.payload.formData.name;
-                        copyNames.push({ value: name, label: name });
+                        copyNames.unshift({ value: name, label: name });
                         state.names = copyNames;
                     }
                 }
@@ -149,15 +150,15 @@ const debtSlice = createSlice({
             let index = copyArray.findIndex((el) => el.name == formData.name);
 
             if (copyArray[index]) {
-                const data = [...copyArray[index].data];
-                let subIndex = data.findIndex((el) => el.uuid == formData.uuid);
+                const data = [...copyArray[index].debts];
+                let subIndex = data.findIndex((el) => el.name == formData.name);
 
-                if (copyArray[index].data[subIndex]) {
-                    let oldAmount = copyArray[index].data[subIndex].amount;
+                if (copyArray[index].debts[subIndex]) {
+                    let oldAmount = copyArray[index].debts[subIndex].amount;
                     newAmount = formData.amount - oldAmount;
-                    copyArray[index].data[subIndex] = formData;
+                    copyArray[index].debts[subIndex] = formData;
                 } else {
-                    copyArray[index].data.push(formData);
+                    copyArray[index].debts.unshift(formData);
                 }
                 if (formData.type == "lend") {
                     copyArray[index].lendTotal += newAmount;
@@ -173,12 +174,19 @@ const debtSlice = createSlice({
                     lendTotal: formData.type == "lend" ? formData.amount : 0,
                     borrowTotal: formData.type != "lend" ? formData.amount : 0,
                 };
-                copyArray.push(data);
+                copyArray.unshift(data);
                 state.debtData = [...copyArray];
             }
         },
         showModal(state, action) {
             state.showModal = !state.showModal;
+        },
+
+        addInitialData(state, action) {
+            state.names = action.payload.names;
+            state.borrowData = action.payload.borrowData;
+            state.lendData = action.payload.lendData;
+            state.debtData = action.payload.debtData;
         },
     },
 });

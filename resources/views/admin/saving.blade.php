@@ -4,5 +4,5 @@
 
 @section('content')
 
-<div id="saving"></div>
+<div id="saving" data="{{ $data}}"></div>
 @endsection

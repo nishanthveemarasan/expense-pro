@@ -5,6 +5,8 @@ import classes from "./Category.module.css";
 import Ebutton from "../../../UI/Button/Ebutton";
 import { useDispatch } from "react-redux";
 import { expenseStoreAction } from "../../../Store/Store";
+import { addNewCategory } from "../../../Store/reducers/expense-reducer";
+import SModel from "../../../UI/Model/SModel";
 import {
     colorArray,
     getFirstLetterUpperWord,
@@ -66,10 +68,13 @@ const AddCategory = (props) => {
     };
 
     const onCreateCategoryHandler = () => {
-        dispatch(expenseStoreAction.addNewCategory({ category }));
+        dispatch(expenseStoreAction.showModal());
+        dispatch(addNewCategory(category));
+        // dispatch(expenseStoreAction.addNewCategory({ category }));
     };
     return (
         <>
+            <SModel />
             <div className={`row ${classes.AddCategoryMainInput}`}>
                 <div className="col-10">
                     <EInput

@@ -41,6 +41,7 @@ const TaskListItem = (props) => {
                         <div
                             className="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-2 mt-3"
                             key={i}
+                            style={{ marginTop: "4%", fontSize: "0.8rem" }}
                         >
                             <div className="widget-todo-title-area d-flex align-items-center">
                                 <div className="checkbox checkbox-shadow">

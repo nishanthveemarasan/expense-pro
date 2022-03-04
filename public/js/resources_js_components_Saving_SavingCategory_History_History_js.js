@@ -29,6 +29,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 var History = function History(props) {
   var mapStateToProps = function mapStateToProps(state) {
     return {
@@ -37,13 +38,16 @@ var History = function History(props) {
   };
 
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(mapStateToProps);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: _History_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].main,
-    children: state.data.length > 0 && state.data.map(function (el, i) {
+    children: [state.data.length == 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: _History_module_css__WEBPACK_IMPORTED_MODULE_2__["default"].emptyData,
+      children: "There is no Saving Yet!!"
+    }), state.data.length > 0 && state.data.map(function (el, i) {
       return /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_showSingleBox_ShowSingleBox__WEBPACK_IMPORTED_MODULE_3__["default"], _objectSpread(_objectSpread({}, el), {}, {
         key: i
       }));
-    })
+    })]
   });
 };
 
@@ -121,10 +125,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".xU63FVDo3hJaWJliyl4Yug\\=\\= {\r\n    margin: 2% 2%;\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".xU63FVDo3hJaWJliyl4Yug\\=\\= {\r\n    margin: 2% 2%;\r\n}\r\n\r\n.yjQxTxCwubA6GiWY4QfkOQ\\=\\= {\r\n    width: 100%;\r\n    border: 1px black solid;\r\n    border-radius: 5px;\r\n    display: flex;\r\n    justify-content: center;\r\n    padding: 6%;\r\n    font-size: 1.2rem;\r\n    color: darkgray;\r\n    margin-top: 40%;\r\n}\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
-	"main": "xU63FVDo3hJaWJliyl4Yug=="
+	"main": "xU63FVDo3hJaWJliyl4Yug==",
+	"emptyData": "yjQxTxCwubA6GiWY4QfkOQ=="
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

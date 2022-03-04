@@ -13,7 +13,7 @@ const ShowSingleBox = (props) => {
             <div className={classes.details}>
                 <div>{getFirstLetterUpperWord(props.type)}</div>
                 {props.type == "expense" && (
-                    <div className={classes.name}>{props.category.name}</div>
+                    <div className={classes.name}>{props.category}</div>
                 )}
             </div>
             <div>

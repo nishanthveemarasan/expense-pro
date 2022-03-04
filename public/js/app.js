@@ -22056,7 +22056,7 @@ var ShowIndividual = function ShowIndividual(props) {
       style: {
         padding: "2% 4%"
       },
-      children: state.data && state.data.data.map(function (element, id) {
+      children: state.data && state.data.debts.map(function (element, id) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_showSingleBox_showSingleBox__WEBPACK_IMPORTED_MODULE_3__["default"], _objectSpread({}, element), id);
       })
     })]
@@ -22153,7 +22153,14 @@ var AddDebt = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () {
   return __webpack_require__.e(/*! import() */ "resources_js_components_Debt_AddDebt_AddDebt_js").then(__webpack_require__.bind(__webpack_require__, /*! ./AddDebt/AddDebt */ "./resources/js/components/Debt/AddDebt/AddDebt.js"));
 });
 
-var Debt = function Debt() {
+var Debt = function Debt(props) {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var data = JSON.parse(props.data);
+    console.log(data.data);
+    dispatch(_Expense_Store_Store__WEBPACK_IMPORTED_MODULE_3__.debtStoreAction.addInitialData(data.data));
+  }, []);
+
   var mapStateToProps = function mapStateToProps(state) {
     return {
       mainPage: state.debtStore.mainPage,
@@ -22175,9 +22182,12 @@ var Debt = function Debt() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Debt);
 
 if (document.getElementById("debt")) {
+  var data = document.getElementById("debt").getAttribute("data");
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
     store: _Expense_Store_Store__WEBPACK_IMPORTED_MODULE_3__["default"],
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Debt, {})
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Debt, {
+      data: data
+    })
   }), document.getElementById("debt"));
 }
 
@@ -22246,12 +22256,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _Expense_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Expense.module.css */ "./resources/js/components/Expense/Expense.module.css");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _Store_Store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Store/Store */ "./resources/js/components/Expense/Store/Store.js");
 /* harmony import */ var react_datepicker_dist_react_datepicker_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-datepicker/dist/react-datepicker.css */ "./node_modules/react-datepicker/dist/react-datepicker.css");
 /* harmony import */ var react_calendar_dist_Calendar_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-calendar/dist/Calendar.css */ "./node_modules/react-calendar/dist/Calendar.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Store_reducers_expense_reducer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Store/reducers/expense-reducer */ "./resources/js/components/Expense/Store/reducers/expense-reducer.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -22274,7 +22286,13 @@ var Category = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function () 
   return __webpack_require__.e(/*! import() */ "resources_js_components_Expense_Components_MakePayment_Category_Category_js").then(__webpack_require__.bind(__webpack_require__, /*! ./Components/MakePayment/Category/Category */ "./resources/js/components/Expense/Components/MakePayment/Category/Category.js"));
 });
 
-var Expense = function Expense() {
+var Expense = function Expense(props) {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useDispatch)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var data = JSON.parse(props.data);
+    dispatch((0,_Store_reducers_expense_reducer__WEBPACK_IMPORTED_MODULE_7__.initialExpenseData)(data.data));
+  }, []);
+
   var mapStateToProps = function mapStateToProps(state) {
     return {
       mainPage: state.expenseStore.mainPage
@@ -22283,10 +22301,10 @@ var Expense = function Expense() {
 
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_3__.useSelector)(mapStateToProps); // console.log(state.mainPage);
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
       fallback: "",
-      children: [state.mainPage == "expenseCategory" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(ExpenseCategory, {}), state.mainPage == "payment" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Payment, {}), state.mainPage == "category" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Category, {})]
+      children: [state.mainPage == "expenseCategory" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(ExpenseCategory, {}), state.mainPage == "payment" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(Payment, {}), state.mainPage == "category" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(Category, {})]
     })
   });
 };
@@ -22294,10 +22312,13 @@ var Expense = function Expense() {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Expense);
 
 if (document.getElementById("expense")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.BrowserRouter, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_3__.Provider, {
+  var data = document.getElementById("expense").getAttribute("data");
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.BrowserRouter, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_3__.Provider, {
       store: _Store_Store__WEBPACK_IMPORTED_MODULE_4__["default"],
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(Expense, {})
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(Expense, {
+        data: data
+      })
     })
   }), document.getElementById("expense"));
 }
@@ -22412,8 +22433,9 @@ var initialState = {
     date: "2022-02-21"
   }],
   debtData: [{
+    uuid: 12322212232,
     name: "Nishanth",
-    data: [{
+    debts: [{
       uuid: 12224,
       amount: 1520,
       type: "lend",
@@ -22456,7 +22478,7 @@ var debtSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
           var arrayElement = action.payload.formData;
           copyArray[action.payload.formData.id] = arrayElement;
         } else {
-          copyArray.push(action.payload.formData);
+          copyArray.unshift(action.payload.formData);
           var copyNames = state.names.slice();
           var exists = copyNames.find(function (element) {
             return element.value.toLowerCase() == action.payload.formData.name.toLowerCase();
@@ -22464,7 +22486,7 @@ var debtSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
 
           if (!exists) {
             var name = action.payload.formData.name;
-            copyNames.push({
+            copyNames.unshift({
               value: name,
               label: name
             });
@@ -22480,7 +22502,7 @@ var debtSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
           var _arrayElement = action.payload.formData;
           _copyArray[action.payload.formData.id] = _arrayElement;
         } else {
-          _copyArray.push(action.payload.formData);
+          _copyArray.unshift(action.payload.formData);
 
           var _copyNames = state.names.slice();
 
@@ -22491,7 +22513,7 @@ var debtSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
           if (!_exists) {
             var _name = action.payload.formData.name;
 
-            _copyNames.push({
+            _copyNames.unshift({
               value: _name,
               label: _name
             });
@@ -22528,18 +22550,18 @@ var debtSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
       });
 
       if (copyArray[index]) {
-        var data = _toConsumableArray(copyArray[index].data);
+        var data = _toConsumableArray(copyArray[index].debts);
 
         var subIndex = data.findIndex(function (el) {
-          return el.uuid == formData.uuid;
+          return el.name == formData.name;
         });
 
-        if (copyArray[index].data[subIndex]) {
-          var oldAmount = copyArray[index].data[subIndex].amount;
+        if (copyArray[index].debts[subIndex]) {
+          var oldAmount = copyArray[index].debts[subIndex].amount;
           newAmount = formData.amount - oldAmount;
-          copyArray[index].data[subIndex] = formData;
+          copyArray[index].debts[subIndex] = formData;
         } else {
-          copyArray[index].data.push(formData);
+          copyArray[index].debts.unshift(formData);
         }
 
         if (formData.type == "lend") {
@@ -22557,12 +22579,18 @@ var debtSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
           lendTotal: formData.type == "lend" ? formData.amount : 0,
           borrowTotal: formData.type != "lend" ? formData.amount : 0
         };
-        copyArray.push(_data);
+        copyArray.unshift(_data);
         state.debtData = _toConsumableArray(copyArray);
       }
     },
     showModal: function showModal(state, action) {
       state.showModal = !state.showModal;
+    },
+    addInitialData: function addInitialData(state, action) {
+      state.names = action.payload.names;
+      state.borrowData = action.payload.borrowData;
+      state.lendData = action.payload.lendData;
+      state.debtData = action.payload.debtData;
     }
   }
 });
@@ -22662,9 +22690,7 @@ var initialState = {
         week: 4,
         year: 2022,
         date: "2022-02-26",
-        category: {
-          name: "Automobile"
-        }
+        category: "Automobile"
       }, {
         type: "expense",
         amount: -1200,
@@ -22673,9 +22699,7 @@ var initialState = {
         week: 4,
         year: 2022,
         date: "2022-02-26",
-        category: {
-          name: "House"
-        }
+        category: "House"
       }, {
         type: "expense",
         amount: -1500,
@@ -22684,9 +22708,7 @@ var initialState = {
         week: 4,
         year: 2022,
         date: "2022-02-25",
-        category: {
-          name: "EnterTainment"
-        }
+        category: "EnterTainment"
       }, {
         type: "income",
         amount: 1500,
@@ -22695,9 +22717,7 @@ var initialState = {
         week: 4,
         year: 2022,
         date: "2022-02-25",
-        category: {
-          name: "income"
-        }
+        category: "income"
       }, {
         type: "expense",
         amount: -1500,
@@ -22706,9 +22726,7 @@ var initialState = {
         week: 2,
         year: 2022,
         date: "2022-02-11",
-        category: {
-          name: "House"
-        }
+        category: "House"
       }, {
         type: "income",
         amount: 1500,
@@ -22717,9 +22735,7 @@ var initialState = {
         week: 4,
         year: 2022,
         date: "2022-01-26",
-        category: {
-          name: "income"
-        }
+        category: "income"
       }],
       category: [{
         category: "Automobile",
@@ -22846,9 +22862,9 @@ var expenseSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createSlice)
       state.subCategoryPage = action.payload.page;
     },
     addNewCategory: function addNewCategory(state, action) {
-      var copyArray = state.payment.category.slice();
-      copyArray.push(action.payload.category);
-      state.payment = _objectSpread(_objectSpread({}, state.payment), {}, {
+      var copyArray = state.payment.data.category.slice();
+      copyArray.unshift(action.payload.category);
+      state.payment.data = _objectSpread(_objectSpread({}, state.payment.data), {}, {
         category: _toConsumableArray(copyArray)
       });
       state.subCategoryPage = "maincategory";
@@ -22898,11 +22914,291 @@ var expenseSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createSlice)
     },
     showModal: function showModal(state, action) {
       state.showModal = !state.showModal;
-      console.log(state.showModal);
+    },
+    initialExpenseData: function initialExpenseData(state, action) {
+      state.payment.data.expense = action.payload.expense;
+      state.payment.data.category = action.payload.category;
     }
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (expenseSlice);
+
+/***/ }),
+
+/***/ "./resources/js/components/Expense/Store/reducers/expense-reducer.js":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/Expense/Store/reducers/expense-reducer.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addNewTransaction": () => (/* binding */ addNewTransaction),
+/* harmony export */   "initialExpenseData": () => (/* binding */ initialExpenseData),
+/* harmony export */   "addNewCategory": () => (/* binding */ addNewCategory)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Helper_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Helper/Helper */ "./resources/js/components/Helper/Helper.js");
+/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Store */ "./resources/js/components/Expense/Store/Store.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var addNewTransaction = function addNewTransaction(data) {
+  return /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(dispatch) {
+      var expense, request, response, _error$message;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              expense = {
+                expense: data
+              };
+              _context.next = 4;
+              return fetch("".concat(_Helper_Helper__WEBPACK_IMPORTED_MODULE_1__.API_URL, "/expenses/store"), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json"
+                },
+                body: JSON.stringify(expense)
+              });
+
+            case 4:
+              request = _context.sent;
+              _context.next = 7;
+              return request.json();
+
+            case 7:
+              response = _context.sent;
+
+              if (!response.errors) {
+                _context.next = 13;
+                break;
+              }
+
+              console.log(response.errors);
+              alert("".concat(response.message, " to create Expense! Please give the right details"));
+              dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.showModal());
+              return _context.abrupt("return");
+
+            case 13:
+              if (response.data) {
+                console.log(response.data);
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.savePayment({
+                  data: response.data
+                }));
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.showModal());
+              }
+
+              _context.next = 20;
+              break;
+
+            case 16:
+              _context.prev = 16;
+              _context.t0 = _context["catch"](0);
+              alert((_error$message = _context.t0.message) !== null && _error$message !== void 0 ? _error$message : "Unknown error happened!! plese try again after page reloads!");
+              window.location.reload(false);
+
+            case 20:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 16]]);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+};
+var initialExpenseData = function initialExpenseData(data) {
+  return function (dispatch) {
+    console.log(data);
+    dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.initialExpenseData(data));
+  };
+};
+var addNewCategory = function addNewCategory(data) {
+  return /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(dispatch) {
+      var request, response, _error$message2;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              console.log(data);
+              _context2.prev = 1;
+              _context2.next = 4;
+              return fetch("".concat(_Helper_Helper__WEBPACK_IMPORTED_MODULE_1__.API_URL, "/expenses/category/store"), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json"
+                },
+                body: JSON.stringify(data)
+              });
+
+            case 4:
+              request = _context2.sent;
+              _context2.next = 7;
+              return request.json();
+
+            case 7:
+              response = _context2.sent;
+
+              if (!response.errors) {
+                _context2.next = 13;
+                break;
+              }
+
+              console.log(response.errors);
+              alert("".concat(response.message, " to create Expense! Please give the right details"));
+              dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.showModal());
+              return _context2.abrupt("return");
+
+            case 13:
+              if (response.data) {
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.addNewCategory({
+                  category: response.data
+                }));
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.expenseStoreAction.showModal());
+              }
+
+              _context2.next = 21;
+              break;
+
+            case 16:
+              _context2.prev = 16;
+              _context2.t0 = _context2["catch"](1);
+              alert((_error$message2 = _context2.t0.message) !== null && _error$message2 !== void 0 ? _error$message2 : "Unknown error happened!! plese try again after page reloads!");
+              return _context2.abrupt("return");
+
+            case 21:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[1, 16]]);
+    }));
+
+    return function (_x2) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/Expense/Store/reducers/saving-slice.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/Expense/Store/reducers/saving-slice.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "addNewSaving": () => (/* binding */ addNewSaving),
+/* harmony export */   "initialSavingsData": () => (/* binding */ initialSavingsData)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Helper_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Helper/Helper */ "./resources/js/components/Helper/Helper.js");
+/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Store */ "./resources/js/components/Expense/Store/Store.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var addNewSaving = function addNewSaving(data, page) {
+  return /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(dispatch) {
+      var request, response, _error$message;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return fetch("".concat(_Helper_Helper__WEBPACK_IMPORTED_MODULE_1__.API_URL, "/savings/store"), {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json"
+                },
+                body: JSON.stringify(data)
+              });
+
+            case 3:
+              request = _context.sent;
+              _context.next = 6;
+              return request.json();
+
+            case 6:
+              response = _context.sent;
+
+              if (!response.errors) {
+                _context.next = 11;
+                break;
+              }
+
+              console.log(response.errors);
+              alert("".concat(response.message, " to create Saving! Please give the right details"));
+              return _context.abrupt("return");
+
+            case 11:
+              if (response.data) {
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.savingStoreAction.updateSavingData({
+                  data: response.data
+                }));
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.savingStoreAction.updatePage(page));
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.savingStoreAction.showModel());
+              }
+
+              _context.next = 18;
+              break;
+
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context["catch"](0);
+              alert((_error$message = _context.t0.message) !== null && _error$message !== void 0 ? _error$message : "Unknown error happened!! plese try again after page reloads!");
+              window.location.reload(false);
+
+            case 18:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 14]]);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+};
+var initialSavingsData = function initialSavingsData(data) {
+  return function (dispatch) {
+    dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.savingStoreAction.initialSavingsData({
+      data: data
+    }));
+  };
+};
 
 /***/ }),
 
@@ -22981,6 +23277,7 @@ var addNewTask = function addNewTask(data, refresh) {
                 }));
                 dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.todoStoreAction.updatePage(refresh));
                 dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.todoStoreAction.emptyTodoTask());
+                dispatch(_Store__WEBPACK_IMPORTED_MODULE_2__.todoStoreAction.showModel());
               }
 
               _context.next = 17;
@@ -23008,7 +23305,8 @@ var addNewTask = function addNewTask(data, refresh) {
 var updateTaskStatus = function updateTaskStatus(data) {
   return /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(dispatch) {
-      var body, request, response;
+      var body, request, response, _error$message;
+
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -23034,27 +23332,27 @@ var updateTaskStatus = function updateTaskStatus(data) {
 
             case 7:
               response = _context2.sent;
+              console.log(response);
 
               if (!response.data) {
-                alert("Unknown error happened!! plese try again after page reloads!");
-                window.location.reload(false);
+                alert("Unknown errosssr happened!! plese try again after page reloads!"); // window.location.reload(false);
               }
 
-              _context2.next = 15;
+              _context2.next = 16;
               break;
 
-            case 11:
-              _context2.prev = 11;
+            case 12:
+              _context2.prev = 12;
               _context2.t0 = _context2["catch"](1);
-              alert("Unknown error happened!! plese try again after page reloads!");
-              window.location.reload(false);
+              console.log(_context2.t0);
+              alert((_error$message = _context2.t0.message) !== null && _error$message !== void 0 ? _error$message : "Unknown error happenedssss!! plese try again after page reloads!"); // window.location.reload(false);
 
-            case 15:
+            case 16:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 11]]);
+      }, _callee2, null, [[1, 12]]);
     }));
 
     return function (_x2) {
@@ -23176,6 +23474,9 @@ var savingSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)(
       var copyArray = state.data.slice();
       copyArray.unshift(action.payload.data);
       state.data = copyArray;
+    },
+    initialSavingsData: function initialSavingsData(state, action) {
+      state.data = action.payload.data;
     }
   }
 });
@@ -23407,7 +23708,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "getFirstLetterLowerWord": () => (/* binding */ getFirstLetterLowerWord),
 /* harmony export */   "colorArray": () => (/* binding */ colorArray),
 /* harmony export */   "getIndex": () => (/* binding */ getIndex),
-/* harmony export */   "uuid": () => (/* binding */ uuid),
 /* harmony export */   "expenseSummary": () => (/* binding */ expenseSummary),
 /* harmony export */   "chartFilterOption": () => (/* binding */ chartFilterOption),
 /* harmony export */   "getExpenseSummary": () => (/* binding */ getExpenseSummary),
@@ -23415,9 +23715,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "calculateProgress": () => (/* binding */ calculateProgress),
 /* harmony export */   "showWarning": () => (/* binding */ showWarning),
 /* harmony export */   "monthNames": () => (/* binding */ monthNames),
-/* harmony export */   "today": () => (/* binding */ today)
+/* harmony export */   "today": () => (/* binding */ today),
+/* harmony export */   "uuid": () => (/* binding */ uuid)
 /* harmony export */ });
-var API_URL = "http://expenseapp.test/api";
+var API_URL = "https://nkitservice.com/expensetest/api";
 var getDate = function getDate() {
   var newDate = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
   var date = newDate ? new Date(newDate) : new Date();
@@ -23473,10 +23774,10 @@ var getFirstLetterLowerWord = function getFirstLetterLowerWord(string) {
 var colorArray = ["primary", "success", "warning", "danger", "dark", "secondary", "info"];
 var getIndex = function getIndex(max, min) {
   return Math.floor(Math.random() * (max - min + 1) + min);
-};
-var uuid = function uuid() {
-  return Date.now();
-};
+}; // export const uuid = () => {
+//     return Date.now();
+// };
+
 var expenseSummary = {
   today: {
     income: 0,
@@ -23552,7 +23853,7 @@ var getExepnseSummaryOfType = function getExepnseSummaryOfType(dateType, el) {
   dateType.income = el.type == "income" ? dateType.income + el.amount : dateType.income;
   dateType.expense = el.type == "expense" ? dateType.expense + el.amount : dateType.expense;
   dateType.balance += el.amount;
-  dateType.chart[el.category.name] = dateType.chart[el.category.name] ? dateType.chart[el.category.name] + Math.abs(el.amount) : Math.abs(el.amount);
+  dateType.chart[el.category] = dateType.chart[el.category] ? dateType.chart[el.category] + Math.abs(el.amount) : Math.abs(el.amount);
   return dateType;
 };
 
@@ -23579,6 +23880,11 @@ var today = function today() {
   var dayString = date.getDate().toString().padStart(2, 0);
   return "".concat(dayString, " ").concat(monthName, " ").concat(year);
 };
+var uuid = function uuid() {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, function (c) {
+    return (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16);
+  });
+};
 
 /***/ }),
 
@@ -23596,8 +23902,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _Expense_Store_Store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Expense/Store/Store */ "./resources/js/components/Expense/Store/Store.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _Expense_Store_reducers_saving_slice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Expense/Store/reducers/saving-slice */ "./resources/js/components/Expense/Store/reducers/saving-slice.js");
+/* harmony import */ var _Expense_Store_Store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Expense/Store/Store */ "./resources/js/components/Expense/Store/Store.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -23613,6 +23921,12 @@ var AddSaving = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.lazy(function ()
 });
 
 var Saving = function Saving(props) {
+  var dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useDispatch)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var data = JSON.parse(props.data);
+    dispatch((0,_Expense_Store_reducers_saving_slice__WEBPACK_IMPORTED_MODULE_3__.initialSavingsData)(data));
+  }, []);
+
   var mapStateToProps = function mapStateToProps(state) {
     return {
       mainPage: state.savingStore.mainPage
@@ -23620,10 +23934,10 @@ var Saving = function Saving(props) {
   };
 
   var state = (0,react_redux__WEBPACK_IMPORTED_MODULE_2__.useSelector)(mapStateToProps);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
       fallback: "",
-      children: [state.mainPage == "savingCategory" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(SavingCategory, {}), state.mainPage == "createSaving" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(AddSaving, {})]
+      children: [state.mainPage == "savingCategory" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(SavingCategory, {}), state.mainPage == "createSaving" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(AddSaving, {})]
     })
   });
 };
@@ -23631,9 +23945,12 @@ var Saving = function Saving(props) {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Saving);
 
 if (document.getElementById("saving")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
-    store: _Expense_Store_Store__WEBPACK_IMPORTED_MODULE_3__["default"],
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Saving, {})
+  var data = document.getElementById("saving").getAttribute("data");
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_redux__WEBPACK_IMPORTED_MODULE_2__.Provider, {
+    store: _Expense_Store_Store__WEBPACK_IMPORTED_MODULE_4__["default"],
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Saving, {
+      data: data
+    })
   }), document.getElementById("saving"));
 }
 
@@ -23751,7 +24068,6 @@ var CreateTodo = function CreateTodo(props) {
     };
     dispatch(_Expense_Store_Store__WEBPACK_IMPORTED_MODULE_3__.todoStoreAction.showModel());
     dispatch((0,_Expense_Store_reducers_todo_reduce__WEBPACK_IMPORTED_MODULE_2__.addNewTask)(data, refresh));
-    dispatch(_Expense_Store_Store__WEBPACK_IMPORTED_MODULE_3__.todoStoreAction.showModel());
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.Fragment, {
@@ -23844,6 +24160,10 @@ var ListTodoItems = function ListTodoItems(props) {
     children: state.lists && state.lists.map(function (el, i) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-2",
+        style: {
+          marginTop: "4%",
+          fontSize: "0.8rem"
+        },
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "widget-todo-title-area d-flex align-items-center",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -24125,6 +24445,10 @@ var TaskListItem = function TaskListItem(props) {
 
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           className: "widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-2 mt-3",
+          style: {
+            marginTop: "4%",
+            fontSize: "0.8rem"
+          },
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
             className: "widget-todo-title-area d-flex align-items-center",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
@@ -30392,7 +30716,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Anton&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".xZzBmuzOo5C9DuhFtbir4w\\=\\= {\r\n    margin: 2% 2%;\r\n    position: relative;\r\n}\r\n\r\n.mzJHEcYn4YkHtyP0TDybHA\\=\\= {\r\n    margin: 2% 0%;\r\n}\r\n\r\n._3HShP-CmtCNtZfmmHrWWFQ\\=\\= {\r\n    position: absolute;\r\n    background-color: red;\r\n    color: white;\r\n    border-radius: 5px;\r\n    padding: 5% 3%;\r\n    width: 60%;\r\n    height: 40%;\r\n    left: 50px;\r\n    bottom: 50px;\r\n    z-index: 1;\r\n    font-family: \"Anton\", sans-serif;\r\n    font-size: 2rem;\r\n    -webkit-animation-name: A-WeEmy4gTz1l4\\+uQpYNuw\\=\\=;\r\n            animation-name: A-WeEmy4gTz1l4\\+uQpYNuw\\=\\=;\r\n    -webkit-animation-duration: 2s;\r\n            animation-duration: 2s;\r\n}\r\n\r\n@-webkit-keyframes A-WeEmy4gTz1l4\\+uQpYNuw\\=\\= {\r\n    0% {\r\n        background-color: red;\r\n        width: 10%;\r\n        height: 8%;\r\n        font-size: 0.3rem;\r\n        transform-origin: center;\r\n        transform: rotate(60deg);\r\n    }\r\n    20% {\r\n        background-color: yellow;\r\n        width: 20%;\r\n        height: 16%;\r\n        font-size: 0.6rem;\r\n        transform-origin: center;\r\n        transform: rotate(120deg);\r\n    }\r\n    40% {\r\n        background-color: blue;\r\n        width: 30%;\r\n        height: 24%;\r\n        font-size: 0.9rem;\r\n        transform-origin: center;\r\n        transform: rotate(180deg);\r\n    }\r\n    60% {\r\n        background-color: green;\r\n        width: 40%;\r\n        height: 32%;\r\n        font-size: 1.2rem;\r\n        transform-origin: center;\r\n        transform: rotate(240deg);\r\n    }\r\n    80% {\r\n        background-color: yellow;\r\n        width: 50%;\r\n        height: 40%;\r\n        font-size: 1.5rem;\r\n        transform-origin: center;\r\n        transform: rotate(300deg);\r\n    }\r\n    100% {\r\n        background-color: red;\r\n        width: 60%;\r\n        height: 40%;\r\n        font-size: 2rem;\r\n        transform-origin: center;\r\n        transform: rotate(360deg);\r\n    }\r\n}\r\n\r\n@keyframes A-WeEmy4gTz1l4\\+uQpYNuw\\=\\= {\r\n    0% {\r\n        background-color: red;\r\n        width: 10%;\r\n        height: 8%;\r\n        font-size: 0.3rem;\r\n        transform-origin: center;\r\n        transform: rotate(60deg);\r\n    }\r\n    20% {\r\n        background-color: yellow;\r\n        width: 20%;\r\n        height: 16%;\r\n        font-size: 0.6rem;\r\n        transform-origin: center;\r\n        transform: rotate(120deg);\r\n    }\r\n    40% {\r\n        background-color: blue;\r\n        width: 30%;\r\n        height: 24%;\r\n        font-size: 0.9rem;\r\n        transform-origin: center;\r\n        transform: rotate(180deg);\r\n    }\r\n    60% {\r\n        background-color: green;\r\n        width: 40%;\r\n        height: 32%;\r\n        font-size: 1.2rem;\r\n        transform-origin: center;\r\n        transform: rotate(240deg);\r\n    }\r\n    80% {\r\n        background-color: yellow;\r\n        width: 50%;\r\n        height: 40%;\r\n        font-size: 1.5rem;\r\n        transform-origin: center;\r\n        transform: rotate(300deg);\r\n    }\r\n    100% {\r\n        background-color: red;\r\n        width: 60%;\r\n        height: 40%;\r\n        font-size: 2rem;\r\n        transform-origin: center;\r\n        transform: rotate(360deg);\r\n    }\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".xZzBmuzOo5C9DuhFtbir4w\\=\\= {\r\n    margin: 2% 2%;\r\n    position: relative;\r\n}\r\n\r\n.mzJHEcYn4YkHtyP0TDybHA\\=\\= {\r\n    margin: 6% 0%;\r\n}\r\n\r\n._3HShP-CmtCNtZfmmHrWWFQ\\=\\= {\r\n    position: absolute;\r\n    background-color: red;\r\n    color: white;\r\n    border-radius: 5px;\r\n    padding: 5% 3%;\r\n    width: 60%;\r\n    height: 40%;\r\n    left: 50px;\r\n    bottom: 50px;\r\n    z-index: 1;\r\n    font-family: \"Anton\", sans-serif;\r\n    font-size: 2rem;\r\n    -webkit-animation-name: A-WeEmy4gTz1l4\\+uQpYNuw\\=\\=;\r\n            animation-name: A-WeEmy4gTz1l4\\+uQpYNuw\\=\\=;\r\n    -webkit-animation-duration: 2s;\r\n            animation-duration: 2s;\r\n}\r\n\r\n@-webkit-keyframes A-WeEmy4gTz1l4\\+uQpYNuw\\=\\= {\r\n    0% {\r\n        background-color: red;\r\n        width: 10%;\r\n        height: 8%;\r\n        font-size: 0.3rem;\r\n        transform-origin: center;\r\n        transform: rotate(60deg);\r\n    }\r\n    20% {\r\n        background-color: yellow;\r\n        width: 20%;\r\n        height: 16%;\r\n        font-size: 0.6rem;\r\n        transform-origin: center;\r\n        transform: rotate(120deg);\r\n    }\r\n    40% {\r\n        background-color: blue;\r\n        width: 30%;\r\n        height: 24%;\r\n        font-size: 0.9rem;\r\n        transform-origin: center;\r\n        transform: rotate(180deg);\r\n    }\r\n    60% {\r\n        background-color: green;\r\n        width: 40%;\r\n        height: 32%;\r\n        font-size: 1.2rem;\r\n        transform-origin: center;\r\n        transform: rotate(240deg);\r\n    }\r\n    80% {\r\n        background-color: yellow;\r\n        width: 50%;\r\n        height: 40%;\r\n        font-size: 1.5rem;\r\n        transform-origin: center;\r\n        transform: rotate(300deg);\r\n    }\r\n    100% {\r\n        background-color: red;\r\n        width: 60%;\r\n        height: 40%;\r\n        font-size: 2rem;\r\n        transform-origin: center;\r\n        transform: rotate(360deg);\r\n    }\r\n}\r\n\r\n@keyframes A-WeEmy4gTz1l4\\+uQpYNuw\\=\\= {\r\n    0% {\r\n        background-color: red;\r\n        width: 10%;\r\n        height: 8%;\r\n        font-size: 0.3rem;\r\n        transform-origin: center;\r\n        transform: rotate(60deg);\r\n    }\r\n    20% {\r\n        background-color: yellow;\r\n        width: 20%;\r\n        height: 16%;\r\n        font-size: 0.6rem;\r\n        transform-origin: center;\r\n        transform: rotate(120deg);\r\n    }\r\n    40% {\r\n        background-color: blue;\r\n        width: 30%;\r\n        height: 24%;\r\n        font-size: 0.9rem;\r\n        transform-origin: center;\r\n        transform: rotate(180deg);\r\n    }\r\n    60% {\r\n        background-color: green;\r\n        width: 40%;\r\n        height: 32%;\r\n        font-size: 1.2rem;\r\n        transform-origin: center;\r\n        transform: rotate(240deg);\r\n    }\r\n    80% {\r\n        background-color: yellow;\r\n        width: 50%;\r\n        height: 40%;\r\n        font-size: 1.5rem;\r\n        transform-origin: center;\r\n        transform: rotate(300deg);\r\n    }\r\n    100% {\r\n        background-color: red;\r\n        width: 60%;\r\n        height: 40%;\r\n        font-size: 2rem;\r\n        transform-origin: center;\r\n        transform: rotate(360deg);\r\n    }\r\n}\r\n", ""]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"card": "xZzBmuzOo5C9DuhFtbir4w==",

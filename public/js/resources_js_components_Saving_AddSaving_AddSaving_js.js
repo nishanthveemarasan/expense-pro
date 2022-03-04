@@ -1,32 +1,6 @@
 "use strict";
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_components_Saving_AddSaving_AddSaving_js"],{
 
-/***/ "./resources/js/components/Expense/Store/reducers/saving-slice.js":
-/*!************************************************************************!*\
-  !*** ./resources/js/components/Expense/Store/reducers/saving-slice.js ***!
-  \************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "addNewSaving": () => (/* binding */ addNewSaving)
-/* harmony export */ });
-/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Store */ "./resources/js/components/Expense/Store/Store.js");
-
-var addNewSaving = function addNewSaving(data, page) {
-  return function (dispatch) {
-    setTimeout(function () {
-      dispatch(_Store__WEBPACK_IMPORTED_MODULE_0__.savingStoreAction.updateSavingData({
-        data: data
-      }));
-      dispatch(_Store__WEBPACK_IMPORTED_MODULE_0__.savingStoreAction.updatePage(page));
-      dispatch(_Store__WEBPACK_IMPORTED_MODULE_0__.savingStoreAction.showModel());
-    }, 1000, data, page);
-  };
-};
-
-/***/ }),
-
 /***/ "./resources/js/components/Saving/AddSaving/AddSaving.js":
 /*!***************************************************************!*\
   !*** ./resources/js/components/Saving/AddSaving/AddSaving.js ***!

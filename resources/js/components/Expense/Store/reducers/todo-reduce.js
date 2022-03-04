@@ -30,6 +30,7 @@ export const addNewTask = (data, refresh) => {
                 );
                 dispatch(todoStoreAction.updatePage(refresh));
                 dispatch(todoStoreAction.emptyTodoTask());
+                dispatch(todoStoreAction.showModel());
             }
         } catch (error) {
             alert(
@@ -58,18 +59,20 @@ export const updateTaskStatus = (data) => {
                 }
             );
             const response = await request.json();
-
+            console.log(response);
             if (!response.data) {
                 alert(
-                    "Unknown error happened!! plese try again after page reloads!"
+                    "Unknown errosssr happened!! plese try again after page reloads!"
                 );
-                window.location.reload(false);
+                // window.location.reload(false);
             }
         } catch (error) {
+            console.log(error);
             alert(
-                "Unknown error happened!! plese try again after page reloads!"
+                error.message ??
+                    "Unknown error happenedssss!! plese try again after page reloads!"
             );
-            window.location.reload(false);
+            // window.location.reload(false);
         }
     };
 };

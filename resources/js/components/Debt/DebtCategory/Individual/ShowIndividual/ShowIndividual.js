@@ -15,7 +15,7 @@ const ShowIndividual = (props) => {
             <Head name={state.data.name} />
             <main style={{ padding: "2% 4%" }}>
                 {state.data &&
-                    state.data.data.map((element, id) => {
+                    state.data.debts.map((element, id) => {
                         return <ShowSingleBox key={id} {...element} />;
                     })}
             </main>

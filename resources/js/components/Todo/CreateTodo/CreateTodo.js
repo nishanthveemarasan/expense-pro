@@ -65,7 +65,6 @@ const CreateTodo = (props) => {
         };
         dispatch(todoStoreAction.showModel());
         dispatch(addNewTask(data, refresh));
-        dispatch(todoStoreAction.showModel());
     };
     return (
         <>

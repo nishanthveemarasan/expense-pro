@@ -15,12 +15,13 @@ const Summary = (props) => {
     state.data.forEach((el, i) => {
         totalProfit += el.amount;
     });
+
     return (
         <div className={classes.summary}>
             <div className={classes.summaryTitle}>Total Saving</div>
             <div className={classes.currency}>
                 <FontAwesomeIcon icon={faSterlingSign} />
-                {totalProfit}
+                {totalProfit == 0 ? "00.00" : totalProfit}
             </div>
             <div className={classes.summaryTitle}>as at {today()}</div>
         </div>

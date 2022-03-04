@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\PageController;
+
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.expense');
+Route::get('/pdf', function () {
 });
-Route::get('/debt', function () {
 
-    return view('admin.debt');
-});
+
+Route::get('/', [PageController::class, 'expense']);
+Route::get('/debt', [PageController::class, 'debt']);
 Route::get('/todo', [PageController::class, 'todo']);
 Route::get('/saving', [PageController::class, 'saving']);

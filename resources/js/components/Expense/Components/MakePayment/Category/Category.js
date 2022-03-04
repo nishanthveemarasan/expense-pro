@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { expenseStoreAction } from "../../../Store/Store";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faArrowAltCircleLeft,
+    faPlusCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import classes from "./Category.module.css";
 import MainCategory from "./MainCategory";
 import AddCategory from "./AddCategory";
@@ -36,20 +40,26 @@ const Category = (props) => {
     return (
         <>
             <div className={classes.AddCategory}>
-                <i
+                {/* <i
                     className={`bi bi-arrow-left-circle-fill ${classes.CategoryIcons}`}
                     onClick={onUpdatePageHandler}
-                ></i>
+                ></i> */}
+                <FontAwesomeIcon
+                    icon={faArrowAltCircleLeft}
+                    className={classes.icon}
+                    onClick={onUpdatePageHandler}
+                />
                 <span className={classes.CategoryIcons}>
                     {state.subCategoryPage == "maincategory"
                         ? "Categories"
                         : "Add Main and Sub Category"}
                 </span>
                 {state.subCategoryPage == "maincategory" && (
-                    <i
-                        className={`bi bi-plus-circle-dotted ${classes.CategoryIcons}`}
+                    <FontAwesomeIcon
+                        icon={faPlusCircle}
+                        className={classes.icon}
                         onClick={onAddCategoryHandler}
-                    ></i>
+                    />
                 )}
             </div>
             <div style={{ padding: "0% 3% 5% 3%" }}>

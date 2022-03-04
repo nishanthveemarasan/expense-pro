@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { getArray, getDate } from "../../../../Helper/Helper";
+import { getArray, getDate, uuid } from "../../../../Helper/Helper";
 import { addNewTransaction } from "../../../Store/reducers/expense-reducer";
 import { expenseStoreAction } from "../../../Store/Store";
 import Ebutton from "../../../UI/Button/Ebutton";
@@ -46,6 +46,7 @@ const AddPayment = (props) => {
             return;
         }
         const data = {
+            uuid: uuid(),
             type: state.payType,
             date: state.payDate,
             day: date.dayNumber,
@@ -54,9 +55,7 @@ const AddPayment = (props) => {
                 state.payType == "income" ? "income" : state.selectedCategory,
             week: date.weekNumber,
             year: date.yearNumber,
-            category: {
-                name: state.payType == "income" ? "income" : getCategory[0],
-            },
+            category: state.payType == "income" ? "income" : getCategory[0],
             subCategory: state.payType == "income" ? "income" : getCategory[1],
             amount:
                 state.payType == "income"
@@ -72,7 +71,7 @@ const AddPayment = (props) => {
     };
 
     const onSavePaymentHandler = () => {
-        console.log("here");
+        console.log(state.transactionData);
         dispatch(expenseStoreAction.showModal());
         dispatch(addNewTransaction(state.transactionData));
         // dispatch(
@@ -93,7 +92,7 @@ const AddPayment = (props) => {
                 />
                 {(state.payType == "expense" || state.payType == "") && (
                     <Option
-                        heading="Categorys"
+                        heading="Category"
                         type="text"
                         avatar={false}
                         icon={

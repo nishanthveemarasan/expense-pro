@@ -3,26 +3,26 @@
         <div class="sidebar-menu">
             <ul class="menu">
                 <li class="sidebar-item  ">
-                    <a href="/" class='sidebar-link'>
+                    <a href="{{ url('/') }}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Expense</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="/debt" class='sidebar-link'>
+                    <a href="{{ url('/debt') }}" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Debt</span>
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="/todo" class='sidebar-link'>
+                    <a href="{{ url('/todo') }}" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Todo</span>
                     </a>
                 </li>
                 <li class="sidebar-item  ">
-                    <a href="/saving" class='sidebar-link'>
+                    <a href="{{ url('/saving') }}" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
                         <span>Saving</span>
                     </a>
