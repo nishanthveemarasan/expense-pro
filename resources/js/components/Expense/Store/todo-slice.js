@@ -97,6 +97,13 @@ const todoSlice = createSlice({
             state.showModel = !state.showModel;
             console.log(state.showModel);
         },
+
+        addTaskItemExistTask(state, action) {
+            const copyArray = state.data.slice();
+            const copyTask = copyArray[action.payload.id].items;
+            copyTask.push(action.payload.data);
+            state.data = copyArray;
+        },
     },
 });
 

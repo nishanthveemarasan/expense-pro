@@ -26,9 +26,8 @@ export const AddNewDebt = (data, page) => {
                 return;
             }
             if (response.data) {
-                console.log(response.data);
-                dispatch(debtStoreAction.createDebt(data));
                 dispatch(debtStoreAction.createUpdateDebtData(data));
+                dispatch(debtStoreAction.createDebt(data));
                 dispatch(debtStoreAction.updatePage(page));
                 dispatch(debtStoreAction.showModal());
             }
@@ -37,6 +36,8 @@ export const AddNewDebt = (data, page) => {
                 error.message ??
                     "Unknown error happened!! plese try again after page reloads!"
             );
+            dispatch(debtStoreAction.showModal());
+
             window.location.reload(false);
         }
     };

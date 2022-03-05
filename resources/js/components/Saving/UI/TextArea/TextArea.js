@@ -7,7 +7,7 @@ const TextArea = (props) => {
             <textarea
                 className={props.class}
                 id="exampleFormControlTextarea1"
-                rows="2"
+                rows="3"
                 style={{ width: "100%" }}
                 value={props.value}
                 onChange={(e) => props.change(e, props.type)}

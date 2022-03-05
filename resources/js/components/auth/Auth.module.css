@@ -1,0 +1,11 @@
+.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50%;
+    flex-direction: column;
+}
+.sginin {
+    color: rgb(12, 153, 196);
+    text-decoration: underline;
+}

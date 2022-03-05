@@ -5,9 +5,9 @@ import Avatar from "../../Expense/UI/Avatar/Avatar";
 import Head from "../../Expense/UI/head/Head";
 import NavItem from "../UI/Nav/NavItem";
 import classes from "./SavingCategory.module.css";
+import Summary from "./Summary/Summary";
+import History from "./History/History";
 
-const Summary = React.lazy(() => import("./Summary/Summary"));
-const History = React.lazy(() => import("./History/History"));
 const SavingCategory = () => {
     const mapStateToProps = (state) => {
         return {

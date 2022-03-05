@@ -29,6 +29,11 @@ class Saving extends Model
         'user_id'
     ];
 
+    protected $casts = [
+        'amount' => 'double',
+        // 'date' => 'date',
+    ];
+
     /**
      * Boot function from Laravel.
      */

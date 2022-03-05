@@ -26,6 +26,10 @@ class TaskItem extends Model
         'task_id'
     ];
 
+    protected $casts = [
+        'completed' => 'boolean',
+    ];
+
     /**
      * Boot function from Laravel.
      */

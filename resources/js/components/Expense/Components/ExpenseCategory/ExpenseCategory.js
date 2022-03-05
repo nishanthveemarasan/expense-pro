@@ -7,9 +7,9 @@ import Avatar from "../../UI/Avatar/Avatar";
 import Head from "../../UI/head/Head";
 import NavItem from "../../UI/Nav/NavItem";
 import classes from "./ExpenseCategory.module.css";
+import DashBoard from "../DashBoard/DashBoard";
+import Summary from "../Summary/Summary";
 
-const Dashboard = React.lazy(() => import("../DashBoard/DashBoard"));
-const Summary = React.lazy(() => import("../Summary/Summary"));
 const ExpenseCategory = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -52,7 +52,7 @@ const ExpenseCategory = (props) => {
                 </Nav>
 
                 <main style={{ margin: "3% 0 5% 0" }}>
-                    {state.page == "dashboard" && <Dashboard />}
+                    {state.page == "dashboard" && <DashBoard />}
                     {state.page == "summary" && <Summary />}
                     {state.page == "dashboard" && (
                         <div className={classes.add}>

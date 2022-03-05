@@ -26,6 +26,14 @@ class Debt extends Model
         'updated_at',
         'account_id'
     ];
+
+    protected $casts = [
+        'amount' => 'double',
+        // 'date' => 'date',
+    ];
+
+
+
     /**
      * Boot function from Laravel.
      */

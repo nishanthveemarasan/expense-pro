@@ -3,10 +3,9 @@ import ReactDOM from "react-dom";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { initialSavingsData } from "../Expense/Store/reducers/saving-slice";
 import store from "../Expense/Store/Store";
-const SavingCategory = React.lazy(() =>
-    import("./SavingCategory/SavingCategory")
-);
-const AddSaving = React.lazy(() => import("./AddSaving/AddSaving"));
+import SavingCategory from "./SavingCategory/SavingCategory";
+import AddSaving from "./AddSaving/AddSaving";
+
 const Saving = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {

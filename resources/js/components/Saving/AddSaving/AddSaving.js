@@ -85,7 +85,7 @@ const AddSaving = (props) => {
                     />
                 </div>
             </div>
-            <Form style={{ padding: "5% 4%" }} onSubmit={onAddSavingHandler}>
+            <Form style={{ padding: "8% 4%" }} onSubmit={onAddSavingHandler}>
                 <div>
                     <Input
                         type="number"
@@ -93,12 +93,11 @@ const AddSaving = (props) => {
                         placeholder="0.00"
                         value={form.amount}
                         onChange={(e) => onChangeHandler(e, "amount")}
-                        type="amount"
                     />
                 </div>
                 <div>
                     <ESelect
-                        className={classes.textbox}
+                        class={classes.textbox}
                         value={form.payMethod}
                         change={onChangeHandler}
                         type="payMethod"
@@ -106,7 +105,7 @@ const AddSaving = (props) => {
                 </div>
                 <div>
                     <TextArea
-                        class={classes.textbox}
+                        class={classes.textarea}
                         value={form.description}
                         change={onChangeHandler}
                         type="description"

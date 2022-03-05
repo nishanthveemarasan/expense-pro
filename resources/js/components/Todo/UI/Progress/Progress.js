@@ -13,18 +13,12 @@ const Progress = ({ total, completed, id, uuid }) => {
     };
     const state = useSelector(mapStateToProps);
     useEffect(() => {
+        console.log(total, completed);
         const percentage = Math.floor((completed / total) * 100);
         if (percentage == 100 && state.showTasks != "completed") {
-            dispatch(completeTaskStatus(uuid));
-            setTimeout(
-                () => {
-                    dispatch(
-                        todoStoreAction.completeToDoList({ id, value: true })
-                    );
-                },
-                1000,
-                id
-            );
+            console.log("its hear");
+            // dispatch(completeTaskStatus(uuid));
+            dispatch(todoStoreAction.completeToDoList({ id, value: true }));
         }
         setPercentage(percentage);
     }, [total, completed, state.showTasks]);

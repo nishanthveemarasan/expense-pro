@@ -55,10 +55,10 @@ class Account extends Model
 
     public function getLendTotalAttribute()
     {
-        return $this->debts()->where('type', 'lend')->sum('amount');
+        return (int)$this->debts()->where('type', 'lend')->sum('amount');
     }
     public function getBorrowTotalAttribute()
     {
-        return $this->debts()->where('type', 'borrow')->sum('amount');
+        return (int)$this->debts()->where('type', 'borrow')->sum('amount');
     }
 }

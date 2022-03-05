@@ -30,6 +30,14 @@ class Expense extends Model
         'deleted_at',
         'updated_at'
     ];
+    protected $casts = [
+        'amount' => 'double',
+        // 'date' => 'date',
+        "day" => 'integer',
+        "month" => 'integer',
+        "week" => 'integer',
+        "year" => 'integer',
+    ];
     /**
      * Boot function from Laravel.
      */

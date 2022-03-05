@@ -1,4 +1,4 @@
-export const API_URL = "https://nkitservice.com/expensetest/api";
+export const API_URL = "http://expenseapp.test/api";
 export const getDate = (newDate = "") => {
     const date = newDate ? new Date(newDate) : new Date();
     const year = date.getFullYear();
@@ -200,4 +200,23 @@ export const uuid = () => {
             (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
         ).toString(16)
     );
+};
+
+export const updateDebtData = (array, index, formData) => {
+    let newAmount = formData.amount;
+    const debtArray = array[index].debts;
+    let subIndex = debtArray.findIndex((el) => el.uuid == formData.uuid);
+    if (debtArray[subIndex]) {
+        let oldAmount = debtArray[subIndex].amount;
+        newAmount = formData.amount - oldAmount;
+        debtArray[subIndex] = formData;
+    } else {
+        debtArray.unshift(formData);
+    }
+    if (formData.type == "lend") {
+        array[index].lendTotal += newAmount;
+    } else {
+        array[index].borrowTotal += newAmount;
+    }
+    return array;
 };

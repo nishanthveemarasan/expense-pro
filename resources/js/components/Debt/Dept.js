@@ -7,9 +7,9 @@ import store, { debtStoreAction } from "../Expense/Store/Store";
 import { useSelector } from "react-redux";
 import ShowIndividual from "./DebtCategory/Individual/ShowIndividual/ShowIndividual";
 import DashBoard from "./DashBoard/DashBoard";
+import DebtCategory from "./DebtCategory/DebtCategory";
+import AddDebt from "./AddDebt/AddDebt";
 
-const DebtCategory = React.lazy(() => import("./DebtCategory/DebtCategory"));
-const AddDebt = React.lazy(() => import("./AddDebt/AddDebt"));
 const Debt = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {

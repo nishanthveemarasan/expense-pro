@@ -30,7 +30,7 @@ class ExpenseService
         }], ['categories' => function ($query) {
             $query->orderBy('category', 'asc');
         }]);
-        return ['data' => ['expense' => $data->expenses, 'category' => $data->category]];
+        return ['data' => ['expense' => $data->expenses, 'category' => $data->categories]];
     }
 
     public function category($data)

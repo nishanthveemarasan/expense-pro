@@ -13,7 +13,7 @@ const TaskList = ({ completed }) => {
         };
     };
     const state = useSelector(mapStateToProps);
-    // console.log(state.page);
+    console.log("here");
     return (
         <div className={classes.main}>
             {state.tasks.length == 0 && (

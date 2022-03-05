@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getExpenseSummary } from "../../Helper/Helper";
+import { getDate, getExpenseSummary } from "../../Helper/Helper";
 
 const initialState = {
     showModal: false,
@@ -37,7 +37,7 @@ const initialState = {
     mainPage: "expenseCategory",
     action: "",
     createDebt: "",
-    dateGroup: null,
+    dateGroup: getDate(),
     heading: "Expense Manager",
     payDate: null,
     data: {
@@ -49,142 +49,8 @@ const initialState = {
         add: { selectedCategory: "", amount: "" },
         transData: [],
         data: {
-            expense: [
-                {
-                    type: "expense",
-                    amount: -1500,
-                    day: 26,
-                    month: 2,
-                    week: 4,
-                    year: 2022,
-                    date: "2022-02-26",
-                    category: "Automobile",
-                },
-                {
-                    type: "expense",
-                    amount: -1200,
-                    day: 26,
-                    month: 2,
-                    week: 4,
-                    year: 2022,
-                    date: "2022-02-26",
-                    category: "House",
-                },
-                {
-                    type: "expense",
-                    amount: -1500,
-                    day: 25,
-                    month: 2,
-                    week: 4,
-                    year: 2022,
-                    date: "2022-02-25",
-                    category: "EnterTainment",
-                },
-                {
-                    type: "income",
-                    amount: 1500,
-                    day: 25,
-                    month: 2,
-                    week: 4,
-                    year: 2022,
-                    date: "2022-02-25",
-                    category: "income",
-                },
-                {
-                    type: "expense",
-                    amount: -1500,
-                    day: 11,
-                    month: 2,
-                    week: 2,
-                    year: 2022,
-                    date: "2022-02-11",
-                    category: "House",
-                },
-                {
-                    type: "income",
-                    amount: 1500,
-                    day: 26,
-                    month: 1,
-                    week: 4,
-                    year: 2022,
-                    date: "2022-01-26",
-                    category: "income",
-                },
-            ],
-            category: [
-                {
-                    category: "Automobile",
-                    items: [
-                        "Fuel",
-                        "insurance",
-                        "Lease",
-                        "Maintainance",
-                        "Registration",
-                    ],
-                    color: "primary",
-                },
-                {
-                    category: "EnterTainment",
-                    items: ["Concert", "Movies", "Party", "Sports"],
-                    color: "warning",
-                },
-                {
-                    category: "Food",
-                    items: ["Groceries", "Restaurent"],
-                    color: "danger",
-                },
-                {
-                    category: "Health",
-                    items: ["Medical", "Prescription", "Insurance"],
-                    color: "dark",
-                },
-                {
-                    category: "House",
-                    items: [
-                        "Appliance",
-                        "Home Maintenance",
-                        "Rent",
-                        "House Items",
-                    ],
-                    color: "secondary",
-                },
-                {
-                    category: "Electronices",
-                    items: [
-                        "Computer",
-                        "Electronics",
-                        "Stationary",
-                        "House Items",
-                    ],
-                    color: "danger",
-                },
-                {
-                    category: "Loans",
-                    items: ["Student", "Mortage", "Car Loans", "Other Loans"],
-                    color: "info",
-                },
-                {
-                    category: "Personal",
-                    items: ["Clothing", "Donation", "Gift", "Shopping"],
-                    color: "success",
-                },
-                {
-                    category: "Utilities",
-                    items: [
-                        "Electric",
-                        "Gas",
-                        "Internet",
-                        "Telephone",
-                        "Water",
-                    ],
-                    color: "primary",
-                },
-                {
-                    category: "Vacation",
-                    items: ["Aroplane", "Food", "Hotel", "Transport"],
-                    color: "warning",
-                },
-            ],
+            expense: [],
+            category: [],
         },
     },
 

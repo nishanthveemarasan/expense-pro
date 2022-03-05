@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateTaskStatus } from "../../../Expense/Store/reducers/todo-reduce";
+import {
+    addTaskItemExistTask,
+    updateTaskStatus,
+} from "../../../Expense/Store/reducers/todo-reduce";
 import { todoStoreAction } from "../../../Expense/Store/Store";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import InputCheck from "../../UI/Input/InputCheck";
 import Progress from "../../UI/Progress/Progress";
 import classes from "./TaskListItem.module.css";
+import TextArea from "../../UI/TextArea/TextArea";
+import TButton from "../../UI/Button/Button";
+import { uuid } from "../../../Helper/Helper";
 const TaskListItem = (props) => {
+    const [showBox, setShowBox] = useState(false);
+    const [item, setItem] = useState("");
     const dispatch = useDispatch();
     const progress = {
         total: 0,
@@ -22,9 +32,33 @@ const TaskListItem = (props) => {
             completed: !value,
             parentUuid: props.uuid,
         };
+
         dispatch(updateTaskStatus(backend));
         dispatch(todoStoreAction.updateToDoList(data));
     };
+    const onChangeBoxHandler = () => {
+        setShowBox((prevState) => !prevState);
+        setItem("");
+    };
+
+    const onItemChangeHandler = (e) => {
+        const value = e.target.value;
+        setItem(value);
+    };
+
+    const onClearItemHandler = () => {
+        setItem("");
+    };
+    const onAddItemToTaskHandler = () => {
+        const data = {
+            uuid: uuid(),
+            name: item,
+            completed: false,
+        };
+        dispatch(addTaskItemExistTask(props.uuid, props.parendId, data));
+        setItem("");
+    };
+
     return (
         <div className={`card widget-todo ${classes.card}`}>
             <div className="card-header border-bottom d-flex justify-content-between align-items-center">
@@ -32,16 +66,23 @@ const TaskListItem = (props) => {
             </div>
 
             <div className="card-body px-3 py-1">
+                <div className={classes.addIcon}>
+                    <FontAwesomeIcon
+                        icon={faPlusSquare}
+                        className={classes.icon}
+                        onClick={onChangeBoxHandler}
+                    />
+                </div>
                 {props.items.map((item, i) => {
                     progress.total += 1;
-                    if (item.completed) {
+                    if (item.completed != "0") {
                         progress.completed += 1;
                     }
                     return (
                         <div
                             className="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-2 mt-3"
                             key={i}
-                            style={{ marginTop: "4%", fontSize: "0.8rem" }}
+                            style={{ marginTop: "4%", fontSize: "1rem" }}
                         >
                             <div className="widget-todo-title-area d-flex align-items-center">
                                 <div className="checkbox checkbox-shadow">
@@ -54,8 +95,8 @@ const TaskListItem = (props) => {
                                     />
                                 </div>
                                 <span
-                                    className="widget-todo-title ml-50"
-                                    style={{ marginLeft: "5px" }}
+                                    className="widget-todo-title"
+                                    style={{ marginLeft: "8px" }}
                                 >
                                     {item.name}
                                 </span>
@@ -69,6 +110,24 @@ const TaskListItem = (props) => {
                         </div>
                     );
                 })}
+                {showBox && (
+                    <div className={classes.todoItem}>
+                        <TextArea value={item} change={onItemChangeHandler} />
+                        <div className={classes.action}>
+                            <TButton
+                                className="btn btn-primary rounded-pill"
+                                name="Add"
+                                onClick={onAddItemToTaskHandler}
+                            />
+                            <div
+                                className={classes.closeButton}
+                                onClick={onClearItemHandler}
+                            >
+                                x
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <div className={classes.progressBar}>
                     <Progress
                         {...progress}

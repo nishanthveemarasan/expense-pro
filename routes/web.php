@@ -19,7 +19,11 @@ Route::get('/pdf', function () {
 });
 
 
-Route::get('/', [PageController::class, 'expense']);
-Route::get('/debt', [PageController::class, 'debt']);
-Route::get('/todo', [PageController::class, 'todo']);
-Route::get('/saving', [PageController::class, 'saving']);
+Route::get('/auth', [PageController::class, 'login'])->name('login');
+Route::middleware('auth')->group(function () {
+
+    Route::get('/', [PageController::class, 'expense']);
+    Route::get('/debt', [PageController::class, 'debt']);
+    Route::get('/todo', [PageController::class, 'todo']);
+    Route::get('/saving', [PageController::class, 'saving']);
+});

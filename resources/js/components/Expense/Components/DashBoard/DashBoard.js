@@ -4,12 +4,6 @@ import TotalBalance from "./Components/TotalBalance/TotalBalance";
 import classes from "./Dashboard.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import Activity from "./Components/Activity/Activity";
-import Select from "react-select";
-import {
-    chartFilterOption,
-    expenseSummary,
-    getExpenseSummary,
-} from "../../../Helper/Helper";
 import SummaryChart from "./Components/Chart/SummaryChart";
 import ESelect from "../../UI/Select/ESelect";
 import { expenseStoreAction } from "../../Store/Store";
@@ -28,11 +22,6 @@ const DashBoard = (props) => {
         };
     };
     const state = useSelector(mapStateToProps);
-    useEffect(() => {
-        if (state.changeSummary) {
-            dispatch(expenseStoreAction.calculateSummary());
-        }
-    }, [state.changeSummary]);
 
     const changeChartKeyHandler = (chartKey) => {
         dispatch(expenseStoreAction.chageChartFilterKey({ chartKey }));

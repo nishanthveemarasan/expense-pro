@@ -3,6 +3,7 @@ import { todoStoreAction } from "../Store";
 
 export const initialTaskData = (data) => {
     return (dispatch) => {
+        console.log(data);
         dispatch(todoStoreAction.addInitialTaskData({ data }));
     };
 };
@@ -25,6 +26,7 @@ export const addNewTask = (data, refresh) => {
                 return;
             }
             if (response.data) {
+                console.log(response.data);
                 dispatch(
                     todoStoreAction.updateTaskData({ data: response.data })
                 );
@@ -33,10 +35,12 @@ export const addNewTask = (data, refresh) => {
                 dispatch(todoStoreAction.showModel());
             }
         } catch (error) {
+            console.log(error.message);
             alert(
                 "Unknown error happened!! plese try again after page reloads!"
             );
-            window.location.reload(false);
+            return;
+            // window.location.reload(false);
         }
     };
 };
@@ -101,5 +105,12 @@ export const completeTaskStatus = (uuid) => {
             );
             window.location.reload(false);
         }
+    };
+};
+
+export const addTaskItemExistTask = (uuid, id, data) => {
+    return (dispatch) => {
+        
+        dispatch(todoStoreAction.addTaskItemExistTask({ uuid, id, data }));
     };
 };

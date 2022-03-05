@@ -32,6 +32,13 @@ class Task extends Model
         'user_id'
     ];
 
+    protected $casts = [
+        'completed' => 'boolean',
+        // 'date' => 'date',
+    ];
+
+
+
     /**
      * Boot function from Laravel.
      */

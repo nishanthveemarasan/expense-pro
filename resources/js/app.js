@@ -17,3 +17,4 @@ require("./components/Debt/Dept");
 require("./components/Expense/Expense");
 require("./components/Todo/Todo");
 require("./components/Saving/Saving");
+require("./components/auth/Auth");
