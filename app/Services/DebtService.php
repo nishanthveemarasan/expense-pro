@@ -5,13 +5,14 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Saving;
 use App\Models\Account;
+use Illuminate\Support\Facades\Auth;
 
 class DebtService
 {
 
     public function store($data)
     {
-        $user = User::find(1);
+        $user = Auth::user();
         $account = Account::firstOrCreate(
             ['name' => $data['formData']['name']],
         );
@@ -35,7 +36,7 @@ class DebtService
 
     public function index()
     {
-        $user = User::find(1);
+        $user = Auth::user();
 
         $userData = $user->load('accounts', 'accounts.debts');
 

@@ -19,7 +19,7 @@ const Lend = (props) => {
             id,
             description: state.data[id].description ?? "",
         };
-        console.log(formData);
+        // console.log(formData);
         dispatch(debtStoreAction.createFormData({ formData }));
 
         const data = {
@@ -32,6 +32,9 @@ const Lend = (props) => {
     };
     return (
         <>
+            {state.data.length == 0 && (
+                <div className={classes.emptyData}>No Lend Data at this moment</div>
+            )}
             {state.data &&
                 state.data.map((element, i) => {
                     return (

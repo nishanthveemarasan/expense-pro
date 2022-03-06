@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\TaskItem;
+use Illuminate\Support\Facades\Auth;
 use SebastianBergmann\Environment\Console;
 
 class TaskService
@@ -12,7 +13,7 @@ class TaskService
 
     public function store($data)
     {
-        $user = User::find(1);
+        $user = Auth::user();
         $taskItems = $data['items'];
         unset($data['items']);
 
@@ -29,7 +30,7 @@ class TaskService
 
     public function index()
     {
-        $user = User::find(1);
+        $user = Auth::user();
         return $user->tasks()->orderBy('created_at', 'desc')->get();
     }
 
@@ -57,5 +58,14 @@ class TaskService
             $data =  ['error' => 'Task is not updated Successfully'];
         }
         return $data;
+    }
+
+    public function addSubTaskItem($data, Task $task)
+    {
+        $task->items()->create($data);
+
+        return [
+            'data' => 'updated successfully'
+        ];
     }
 }

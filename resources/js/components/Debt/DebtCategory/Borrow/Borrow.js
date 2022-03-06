@@ -27,6 +27,11 @@ const Borrow = (props) => {
     };
     return (
         <>
+            {state.data.length == 0 && (
+                <div className={classes.emptyData}>
+                    No Borrow Data at this moment
+                </div>
+            )}
             {state.data &&
                 state.data.map((element, i) => {
                     return (

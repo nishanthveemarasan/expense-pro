@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     addTaskItemExistTask,
     updateTaskStatus,
@@ -21,6 +21,12 @@ const TaskListItem = (props) => {
         total: 0,
         completed: 0,
     };
+    const mapStateToProps = (state) => {
+        return {
+            token: state.todoStore.appToken,
+        };
+    };
+    const state = useSelector(mapStateToProps);
     const onCheckChangeHandler = (id, value, uuid) => {
         const data = {
             id,
@@ -33,7 +39,7 @@ const TaskListItem = (props) => {
             parentUuid: props.uuid,
         };
 
-        dispatch(updateTaskStatus(backend));
+        dispatch(updateTaskStatus(backend, state.token));
         dispatch(todoStoreAction.updateToDoList(data));
     };
     const onChangeBoxHandler = () => {
@@ -48,6 +54,7 @@ const TaskListItem = (props) => {
 
     const onClearItemHandler = () => {
         setItem("");
+        setShowBox((prevState) => !prevState);
     };
     const onAddItemToTaskHandler = () => {
         const data = {
@@ -55,7 +62,10 @@ const TaskListItem = (props) => {
             name: item,
             completed: false,
         };
-        dispatch(addTaskItemExistTask(props.uuid, props.parendId, data));
+        // console.log(data, props.uuid);
+        dispatch(
+            addTaskItemExistTask(props.uuid, props.parendId, data, state.token)
+        );
         setItem("");
     };
 
@@ -66,13 +76,15 @@ const TaskListItem = (props) => {
             </div>
 
             <div className="card-body px-3 py-1">
-                <div className={classes.addIcon}>
-                    <FontAwesomeIcon
-                        icon={faPlusSquare}
-                        className={classes.icon}
-                        onClick={onChangeBoxHandler}
-                    />
-                </div>
+                {!props.completed && (
+                    <div className={classes.addIcon}>
+                        <FontAwesomeIcon
+                            icon={faPlusSquare}
+                            className={classes.icon}
+                            onClick={onChangeBoxHandler}
+                        />
+                    </div>
+                )}
                 {props.items.map((item, i) => {
                     progress.total += 1;
                     if (item.completed != "0") {

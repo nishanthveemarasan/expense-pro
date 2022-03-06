@@ -10,7 +10,7 @@ const Saving = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         const data = JSON.parse(props.data);
-        dispatch(initialSavingsData(data));
+        dispatch(initialSavingsData(data, props.token));
     }, []);
     const mapStateToProps = (state) => {
         return {
@@ -32,9 +32,10 @@ export default Saving;
 
 if (document.getElementById("saving")) {
     const data = document.getElementById("saving").getAttribute("data");
+    const token = document.getElementById("saving").getAttribute("token");
     ReactDOM.render(
         <Provider store={store}>
-            <Saving data={data} />
+            <Saving data={data} token={token} />
         </Provider>,
 
         document.getElementById("saving")

@@ -3,6 +3,7 @@ import { getDate, getExpenseSummary } from "../../Helper/Helper";
 
 const initialState = {
     showModal: false,
+    appToken: null,
     summary: {
         today: {
             income: 0,
@@ -213,6 +214,7 @@ const expenseSlice = createSlice({
         initialExpenseData(state, action) {
             state.payment.data.expense = action.payload.expense;
             state.payment.data.category = action.payload.category;
+            state.appToken = action.payload.token;
         },
     },
 });

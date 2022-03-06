@@ -14,7 +14,7 @@ const Expense = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         const data = JSON.parse(props.data);
-        dispatch(initialExpenseData(data.data));
+        dispatch(initialExpenseData(data.data, props.token));
         dispatch(expenseStoreAction.calculateSummary());
     }, []);
     const mapStateToProps = (state) => {
@@ -42,9 +42,10 @@ export default Expense;
 
 if (document.getElementById("expense")) {
     const data = document.getElementById("expense").getAttribute("data");
+    const token = document.getElementById("expense").getAttribute("token");
     ReactDOM.render(
         <Provider store={store}>
-            <Expense data={data} />
+            <Expense data={data} token={token} />
         </Provider>,
 
         document.getElementById("expense")

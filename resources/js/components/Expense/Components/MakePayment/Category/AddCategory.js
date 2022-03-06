@@ -3,7 +3,7 @@ import EInput from "../../../UI/Input/EInput";
 import AddSubCategory from "./AddSubCategory";
 import classes from "./Category.module.css";
 import Ebutton from "../../../UI/Button/Ebutton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { expenseStoreAction } from "../../../Store/Store";
 import { addNewCategory } from "../../../Store/reducers/expense-reducer";
 import SModel from "../../../UI/Model/SModel";
@@ -14,7 +14,12 @@ import {
 } from "../../../../Helper/Helper";
 const AddCategory = (props) => {
     const dispatch = useDispatch();
-
+    const mapStateToProps = (state) => {
+        return {
+            token: state.expenseStore.appToken,
+        };
+    };
+    const state = useSelector(mapStateToProps);
     const [category, setCategory] = useState({
         category: "",
         items: [],
@@ -69,7 +74,7 @@ const AddCategory = (props) => {
 
     const onCreateCategoryHandler = () => {
         dispatch(expenseStoreAction.showModal());
-        dispatch(addNewCategory(category));
+        dispatch(addNewCategory(category, state.token));
         // dispatch(expenseStoreAction.addNewCategory({ category }));
     };
     return (

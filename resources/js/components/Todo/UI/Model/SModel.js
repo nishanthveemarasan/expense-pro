@@ -9,7 +9,7 @@ const SModel = (props) => {
         };
     };
     const state = useSelector(mapStateToProps);
-    console.log(state.showModal);
+    // console.log(state.showModal);
     return (
         <Modal
             show={state.showModal}

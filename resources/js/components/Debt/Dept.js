@@ -14,8 +14,11 @@ const Debt = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         const data = JSON.parse(props.data);
-        console.log(data.data);
-        dispatch(debtStoreAction.addInitialData(data.data));
+        const initialData = {
+            ...data.data,
+            token: props.token,
+        };
+        dispatch(debtStoreAction.addInitialData(initialData));
     }, []);
     const mapStateToProps = (state) => {
         return {
@@ -42,9 +45,10 @@ export default Debt;
 
 if (document.getElementById("debt")) {
     const data = document.getElementById("debt").getAttribute("data");
+    const token = document.getElementById("debt").getAttribute("token");
     ReactDOM.render(
         <Provider store={store}>
-            <Debt data={data} />
+            <Debt data={data} token={token} />
         </Provider>,
         document.getElementById("debt")
     );

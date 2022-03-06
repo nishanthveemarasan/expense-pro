@@ -1,8 +1,10 @@
 <?php
 
-
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Mail\sendStatementMail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +17,17 @@ use App\Http\Controllers\PageController;
 |
 */
 
-Route::get('/pdf', function () {
+Route::get('/email', function () {
+    Mail::to('iamnishanthveema@gmail.com')
+        ->send(new sendStatementMail());
+    dd('email sent');
 });
 
 
 Route::get('/auth', [PageController::class, 'login'])->name('login');
+Route::get('/auth-register', [PageController::class, 'register'])->name('auth.register');
+Route::post('/login', [AuthController::class, 'auth'])->name('auth');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::middleware('auth')->group(function () {
 
     Route::get('/', [PageController::class, 'expense']);

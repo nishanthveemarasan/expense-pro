@@ -1,30 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('Layout.authen')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="public/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="public/assets/vendors/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="public/assets/css/app.css">
-    <link rel="stylesheet" href="public/assets/css/pages/auth.css">
-    <link rel="stylesheet" href="public/css/app.css">
-</head>
+@section('title', 'Login')
 
-<body>
-    <div id="auth">
+@section('content')
+<form action="{{ url('login') }}" method="POST" class="auth-form">
+    @csrf
+    @error('code')
+    <div style="color:red;">{{ $message }}</div>
+    @enderror
+    @if(session('error'))
 
-        <div class="row h-100">
-            <div class="col-lg-5 col-12">
-                <div id="login"></div>
-            </div>
-
-        </div>
-
+    <div class="alert alert-warning alert-dismissible fade show w-100 text-center" role="alert">
+        {{session('error')}}
     </div>
-    <script src="public/js/app.js"></script>
-</body>
-
-</html>
+    @endif
+    <div class="form-group position-relative has-icon-left mb-4">
+        <input type="password" name="code" class="form-control form-control-xl" placeholder="auth code...">
+        <div class="form-control-icon">
+            <i class="bi bi-shield-lock"></i>
+        </div>
+    </div>
+    <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5" type="submit">Log in</button>
+</form>
+<div class="text-center mt-5 text-lg fs-4">
+    <p class="text-gray-600">Don't have an account? <a href="{{ url('auth-register') }}" class="font-bold">Sign
+            up</a>.</p>
+    <p><a class="font-bold" href="auth-forgot-password.html">Forgot password?</a>.</p>
+</div>
+@endsection

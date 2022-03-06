@@ -23,6 +23,7 @@ const CreateTodo = (props) => {
             mainPage: state.todoStore.mainPage,
             page: state.todoStore.page,
             showTasks: state.todoStore.showTasks,
+            token: state.todoStore.appToken,
         };
     };
     const state = useSelector(mapStateToProps);
@@ -64,7 +65,7 @@ const CreateTodo = (props) => {
             showTasks: "current",
         };
         dispatch(todoStoreAction.showModel());
-        dispatch(addNewTask(data, refresh));
+        dispatch(addNewTask(data, refresh, state.token));
     };
     return (
         <>

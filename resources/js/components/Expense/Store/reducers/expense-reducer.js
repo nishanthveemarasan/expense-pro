@@ -1,7 +1,7 @@
 import { API_URL } from "../../../Helper/Helper";
 import { expenseStoreAction } from "../Store";
 
-export const addNewTransaction = (data) => {
+export const addNewTransaction = (data, token) => {
     return async (dispatch) => {
         try {
             const expense = {
@@ -12,12 +12,13 @@ export const addNewTransaction = (data) => {
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(expense),
             });
             const response = await request.json();
             if (response.errors) {
-                console.log(response.errors);
+                // console.log(response.errors);
                 alert(
                     `${response.message} to create Expense! Please give the right details`
                 );
@@ -25,7 +26,7 @@ export const addNewTransaction = (data) => {
                 return;
             }
             if (response.data) {
-                console.log(response.data);
+                // console.log(response.data);
                 dispatch(
                     expenseStoreAction.savePayment({
                         data: response.data,
@@ -43,32 +44,41 @@ export const addNewTransaction = (data) => {
     };
 };
 
-export const initialExpenseData = (data) => {
+export const initialExpenseData = (data, token) => {
     return (dispatch) => {
-        console.log(data);
-        dispatch(expenseStoreAction.initialExpenseData(data));
+        // localStorage.setItem("app_token", token);
+        const iniData = {
+            ...data,
+            token,
+        };
+        dispatch(expenseStoreAction.initialExpenseData(iniData));
     };
 };
 
-export const addNewCategory = (data) => {
+export const addNewCategory = (data, token) => {
     return async (dispatch) => {
-        console.log(data);
         try {
             const request = await fetch(`${API_URL}/expenses/category/store`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(data),
             });
             const response = await request.json();
             if (response.errors) {
-                console.log(response.errors);
+                // console.log(response.errors);
                 alert(
                     `${response.message} to create Expense! Please give the right details`
                 );
                 dispatch(expenseStoreAction.showModal());
+                return;
+            }
+            if (response.message) {
+                alert(response.message);
+                dispatch(expenseStoreAction.showModel());
                 return;
             }
             if (response.data) {
@@ -85,7 +95,6 @@ export const addNewCategory = (data) => {
                     "Unknown error happened!! plese try again after page reloads!"
             );
             return;
-            window.location.reload(false);
         }
     };
 };

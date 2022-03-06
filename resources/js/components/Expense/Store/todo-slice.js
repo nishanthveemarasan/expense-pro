@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    appToken: null,
     mainPage: "todoCategory",
     page: "work",
     taskType: "work",
@@ -91,11 +92,12 @@ const todoSlice = createSlice({
 
         addInitialTaskData(state, action) {
             state.data = action.payload.data;
+            state.appToken = action.payload.token;
         },
 
         showModel(state, action) {
             state.showModel = !state.showModel;
-            console.log(state.showModel);
+            // console.log(state.showModel);
         },
 
         addTaskItemExistTask(state, action) {

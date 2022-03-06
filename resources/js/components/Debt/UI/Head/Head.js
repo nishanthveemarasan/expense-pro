@@ -13,6 +13,7 @@ const Head = (props) => {
         return {
             formData: state.debtStore.formData,
             action: state.debtStore.action,
+            token: state.debtStore.appToken,
         };
     };
     const state = useSelector(mapStateToProps);
@@ -83,8 +84,7 @@ const Head = (props) => {
                 create: "",
             };
         }
-
-        dispatch(AddNewDebt(data, page));
+        dispatch(AddNewDebt(data, page, state.token));
 
         // dispatch(debtStoreAction.createDebt(data));
         // dispatch(debtStoreAction.createUpdateDebtData(data));

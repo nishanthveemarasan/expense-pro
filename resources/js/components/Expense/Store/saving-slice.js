@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    appToken: null,
     mainPage: "savingCategory",
     page: "summary",
     showModal: false,
@@ -54,6 +55,7 @@ const savingSlice = createSlice({
         },
         initialSavingsData(state, action) {
             state.data = action.payload.data;
+            state.appToken = action.payload.token;
         },
     },
 });

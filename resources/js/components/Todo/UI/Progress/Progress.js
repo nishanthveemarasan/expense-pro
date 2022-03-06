@@ -9,15 +9,16 @@ const Progress = ({ total, completed, id, uuid }) => {
     const mapStateToProps = (state) => {
         return {
             showTasks: state.todoStore.showTasks,
+            token: state.todoStore.appToken,
         };
     };
     const state = useSelector(mapStateToProps);
     useEffect(() => {
-        console.log(total, completed);
+        // console.log(total, completed);
         const percentage = Math.floor((completed / total) * 100);
         if (percentage == 100 && state.showTasks != "completed") {
-            console.log("its hear");
-            // dispatch(completeTaskStatus(uuid));
+            // console.log("its hear");
+            dispatch(completeTaskStatus(uuid, state.token));
             dispatch(todoStoreAction.completeToDoList({ id, value: true }));
         }
         setPercentage(percentage);

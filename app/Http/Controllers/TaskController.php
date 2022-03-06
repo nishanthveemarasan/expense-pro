@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddNewTaskItemRequest;
 use Exception;
 use Illuminate\Http\Request;
 use App\Services\TaskService;
@@ -67,6 +68,20 @@ class TaskController extends Controller
         try {
             DB::beginTransaction();
             $this->result = $this->taskService->completeTask($task);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->result['error'] = $e->getMessage();
+        }
+
+        return $this->result;
+    }
+
+    public function addSubTaskItem(AddNewTaskItemRequest $request, Task $task)
+    {
+        try {
+            DB::beginTransaction();
+            $this->result = $this->taskService->addSubTaskItem($request->validated(), $task);
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { showWarning } from "../../Helper/Helper";
 import classes from "./TaskList.module.css";
@@ -13,25 +13,36 @@ const TaskList = ({ completed }) => {
         };
     };
     const state = useSelector(mapStateToProps);
-    console.log("here");
+    let count = 0;
+    console.log(completed);
     return (
-        <div className={classes.main}>
-            {state.tasks.length == 0 && (
+        <>
+            <div className={classes.main}>
+                {state.tasks &&
+                    state.tasks.map((el, i) => {
+                        if (
+                            el.type == state.taskType &&
+                            el.completed == completed
+                        ) {
+                            count += 1;
+                            console.log(count);
+                            return (
+                                <TaskListItem
+                                    {...el}
+                                    key={i}
+                                    parendId={i}
+                                    completed={completed}
+                                />
+                            );
+                        }
+                    })}
+            </div>
+            {count == 0 && (
                 <div className={classes.emptyData}>
                     {showWarning(state.taskType, state.showTasks)}
                 </div>
             )}
-
-            {state.tasks &&
-                state.tasks.map((el, i) => {
-                    if (
-                        el.type == state.taskType &&
-                        el.completed == completed
-                    ) {
-                        return <TaskListItem {...el} key={i} parendId={i} />;
-                    }
-                })}
-        </div>
+        </>
     );
 };
 

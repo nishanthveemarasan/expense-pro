@@ -6,13 +6,14 @@ use App\Models\User;
 use App\Models\Saving;
 use App\Models\Expense;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class ExpenseService
 {
 
     public function store($data)
     {
-        $user = User::find(1);
+        $user = Auth::user();
         // $user->categories()->syncWithoutDetaching([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         $collection = collect();
         foreach ($data['expense'] as $expense) {
@@ -24,7 +25,7 @@ class ExpenseService
 
     public function index()
     {
-        $user = User::find(1);
+        $user = Auth::user();
         $data =  $user->load(['expenses' => function ($query) {
             $query->orderBy('date', 'desc');
         }], ['categories' => function ($query) {
@@ -35,7 +36,7 @@ class ExpenseService
 
     public function category($data)
     {
-        $user = User::find(1);
+        $user = Auth::user();
         $category = $user->categories()->create($data);
         $user->categories()->syncWithoutDetaching($category->id);
         return ['data' => $category];

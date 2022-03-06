@@ -14,23 +14,25 @@ const CompletedTask = (props) => {
         };
     };
     const state = useSelector(mapStateToProps);
+    let count = 0;
     return (
         <>
             <div className={classes.main}>
-                {state.tasks.length == 0 && (
-                    <div className={classes.emptyData}>
-                        {showWarning(state.taskType, state.showTasks)}
-                    </div>
-                )}
                 {state.tasks &&
                     state.tasks.map((el, i) => {
                         if (el.completed) {
+                            count += 1;
                             return (
                                 <TaskListItem {...el} key={i} parendId={i} />
                             );
                         }
                     })}
             </div>
+            {count == 0 && (
+                <div className={classes.emptyData}>
+                    {showWarning(state.taskType, state.showTasks)}
+                </div>
+            )}
         </>
     );
 };

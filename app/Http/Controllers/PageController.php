@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\DebtService;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\DebtService;
 use App\Services\TaskService;
 use App\Services\SavingService;
 use App\Services\ExpenseService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use SebastianBergmann\Environment\Console;
 
 class PageController extends Controller
@@ -26,27 +29,81 @@ class PageController extends Controller
     public function todo()
     {
         $data = $this->todoService->index();
-        return view('admin.todo')->with('data', $data);
+        $token = Cache::get('expense_token', '');
+
+        if (empty($token)) {
+            Auth::logout();
+            return redirect()->route('login');
+        }
+        $homeData = [
+            'data' => $data,
+            'token' => $token
+        ];
+
+        return view('admin.todo')->with('data', $homeData);
     }
     public function saving()
     {
         $data = $this->savingService->index();
-        return view('admin.saving')->with('data', $data);
+        $token = Cache::get('expense_token', '');
+        if (empty($token)) {
+            Auth::logout();
+            return redirect()->route('login');
+        }
+        $homeData = [
+            'data' => $data,
+            'token' => $token
+        ];
+
+        return view('admin.saving')->with('data', $homeData);
     }
     public function expense()
     {
         $data = $this->expenseService->index();
-        return view('admin.expense')->with('data', $data);
+        $token = Cache::get('expense_token', '');
+        if (empty($token)) {
+            Auth::logout();
+            return redirect()->route('login');
+        }
+        $homeData = [
+            'data' => $data,
+            'token' => $token
+        ];
+
+        return view('admin.expense')->with('data', $homeData);
     }
     public function debt()
     {
         $data = $this->debtService->index();
-        return view('admin.debt')->with('data', $data);
+        $token = Cache::get('expense_token', '');
+        if (empty($token)) {
+            Auth::logout();
+            return redirect()->route('login');
+        }
+        $homeData = [
+            'data' => $data,
+            'token' => $token
+        ];
+
+        return view('admin.debt')->with('data', $homeData);
     }
 
     public function login()
     {
 
         return view('Layout.auth');
+    }
+
+    public function register()
+    {
+
+        return view('Layout.register');
+    }
+
+    public function test()
+    {
+        $user = User::find(1);
+        $token = $user->createToken('api-application')->accessToken;
+        return ['token' => $token];
     }
 }

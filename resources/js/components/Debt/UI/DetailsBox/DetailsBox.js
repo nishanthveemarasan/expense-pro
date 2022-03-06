@@ -14,7 +14,7 @@ const DetailsBox = (props) => {
     const dispatch = useDispatch();
     const balance = props.lendTotal - props.borrowTotal;
     const onOpenIndividualData = () => {
-        console.log(props);
+        // console.log(props);
         dispatch(debtStoreAction.updateIndividualData({ data: props }));
         const data = {
             page: "individual",

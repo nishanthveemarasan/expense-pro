@@ -23,6 +23,7 @@ const AddSaving = (props) => {
         return {
             mainPage: state.savingStore.mainPage,
             page: state.savingStore.page,
+            token: state.savingStore.appToken,
         };
     };
 
@@ -40,7 +41,7 @@ const AddSaving = (props) => {
             mainPage: "savingCategory",
             page: state.page,
         };
-        console.log(data);
+        // console.log(data);
         dispatch(savingStoreAction.updatePage(data));
     };
 
@@ -60,12 +61,12 @@ const AddSaving = (props) => {
             type: form.payMethod,
             description: form.description,
         };
-        console.log(data);
+        // console.log(data);
         const pageData = {
             mainPage: "savingCategory",
             page: state.page,
         };
-        dispatch(addNewSaving(data, pageData));
+        dispatch(addNewSaving(data, pageData, state.token));
         // dispatch(savingStoreAction.updateSavingData({ data }));
         // console.log(pageData);
         // dispatch(savingStoreAction.updatePage(pageData));

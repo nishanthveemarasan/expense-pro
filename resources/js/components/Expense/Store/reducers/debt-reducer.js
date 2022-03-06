@@ -1,7 +1,7 @@
 import { API_URL } from "../../../Helper/Helper";
 import { debtStoreAction } from "../Store";
 
-export const AddNewDebt = (data, page) => {
+export const AddNewDebt = (data, page, token) => {
     return async (dispatch) => {
         try {
             const request = await fetch(`${API_URL}/debts/store`, {
@@ -9,6 +9,7 @@ export const AddNewDebt = (data, page) => {
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(data),
             });
@@ -25,7 +26,13 @@ export const AddNewDebt = (data, page) => {
                 );
                 return;
             }
+            if (response.message) {
+                alert(response.message);
+                dispatch(debtStoreAction.showModal());
+                return;
+            }
             if (response.data) {
+                // console.log(data);
                 dispatch(debtStoreAction.createUpdateDebtData(data));
                 dispatch(debtStoreAction.createDebt(data));
                 dispatch(debtStoreAction.updatePage(page));

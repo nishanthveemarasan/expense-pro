@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { updateDebtData } from "../../Helper/Helper";
 
 const initialState = {
+    appToken: null,
     page: "giveto",
     mainPage: "debtsummary",
     action: "",
@@ -17,50 +18,9 @@ const initialState = {
         id: null,
     },
     names: [{ value: "Nishanth", label: "Nishanth" }],
-    lendData: [
-        {
-            uuid: 12224,
-            name: "Nishanth",
-            amount: "1520",
-            type: "lend",
-            description: "",
-            date: "2022-02-21",
-        },
-    ],
-    borrowData: [
-        {
-            uuid: 12223,
-            name: "Nishanth",
-            amount: 5682,
-            description: "",
-            type: "borrow",
-            date: "2022-02-21",
-        },
-    ],
-    debtData: [
-        {
-            uuid: 12322212232,
-            name: "Nishanth",
-            debts: [
-                {
-                    uuid: 12224,
-                    amount: 1520,
-                    type: "lend",
-                    description: "Sample test",
-                    date: "2022-02-21",
-                },
-                {
-                    uuid: 12223,
-                    amount: 5682,
-                    description: "",
-                    type: "borrow",
-                    date: "2022-02-21",
-                },
-            ],
-            lendTotal: 1520,
-            borrowTotal: 5682,
-        },
-    ],
+    lendData: [],
+    borrowData: [],
+    debtData: [],
     currentIndividualData: null,
 };
 
@@ -146,37 +106,20 @@ const debtSlice = createSlice({
         },
         createUpdateDebtData(state, action) {
             const formData = action.payload.formData;
-            // console.log(formData);
             const copyArray = [...state.debtData];
-            // console.log(copyArray);
-            let newAmount = formData.amount;
             let index = copyArray.findIndex((el) => el.name == formData.name);
             if (copyArray[index]) {
                 const array = updateDebtData(state.debtData, index, formData);
-                // const data = [...copyArray[index].debts];
-                // let subIndex = data.findIndex((el) => el.uuid == formData.uuid);
-                // if (copyArray[index].debts[subIndex]) {
-                //     let oldAmount = copyArray[index].debts[subIndex].amount;
-                //     newAmount = formData.amount - oldAmount;
-                //     copyArray[index].debts[subIndex] = formData;
-                // } else {
-                //     copyArray[index].debts.unshift(formData);
-                // }
-                // if (formData.type == "lend") {
-                //     copyArray[index].lendTotal += newAmount;
-                // } else {
-                //     copyArray[index].borrowTotal += newAmount;
-                // }
                 state.debtData = [...array];
             } else {
                 const data = {
                     uuid: formData.uuid,
                     name: formData.name,
-                    data: [formData],
+                    debts: [formData],
                     lendTotal: formData.type == "lend" ? formData.amount : 0,
                     borrowTotal: formData.type != "lend" ? formData.amount : 0,
                 };
-                 copyArray.unshift(data);
+                copyArray.unshift(data);
                 state.debtData = [...copyArray];
             }
         },
@@ -189,6 +132,7 @@ const debtSlice = createSlice({
             state.borrowData = action.payload.borrowData;
             state.lendData = action.payload.lendData;
             state.debtData = action.payload.debtData;
+            state.appToken = action.payload.token;
         },
     },
 });

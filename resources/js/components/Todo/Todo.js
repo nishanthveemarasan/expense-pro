@@ -9,7 +9,7 @@ const Todo = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
         const data = JSON.parse(props.data);
-        dispatch(initialTaskData(data));
+        dispatch(initialTaskData(data, props.token));
     }, []);
     const mapStateToProps = (state) => {
         return {
@@ -30,9 +30,10 @@ export default Todo;
 
 if (document.getElementById("Todo")) {
     const data = document.getElementById("Todo").getAttribute("data");
+    const token = document.getElementById("Todo").getAttribute("token");
     ReactDOM.render(
         <Provider store={store}>
-            <Todo data={data} />
+            <Todo data={data} token={token} />
         </Provider>,
         document.getElementById("Todo")
     );

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     page: "login",
+    loading: false,
 };
 
 const authSlice = createSlice({
@@ -10,6 +11,9 @@ const authSlice = createSlice({
     reducers: {
         updatePage(state, action) {
             state.page = action.payload.page;
+        },
+        updateLoading(state, action) {
+            state.loading = !state.loading;
         },
     },
 });

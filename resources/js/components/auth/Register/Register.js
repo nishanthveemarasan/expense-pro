@@ -1,14 +1,22 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authStoreAction } from "../../Expense/Store/Store";
 import classes from "../Auth.module.css";
-import { Form } from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
+import { registerUser } from "../../Expense/Store/reducers/auth-reducer";
 const Register = (props) => {
     const [form, setForm] = useState({
         code: "",
-        confirmCode: "",
+        code_confirmation: "",
     });
     const dispatch = useDispatch();
+    const mapStateToProps = (state) => {
+        return {
+            //window.location.replace('https://www.google.com')
+            loading: state.authStore.loading,
+        };
+    };
+    const state = useSelector(mapStateToProps);
 
     const onPageChangeHandler = () => {
         dispatch(authStoreAction.updatePage({ page: "register" }));
@@ -30,12 +38,11 @@ const Register = (props) => {
             alert("Auth Code should have atleast 4 characters!!");
             return;
         }
-        if (form.code != form.confirmCode) {
+        if (form.code != form.code_confirmation) {
             alert("Auth Code does not match!!");
             return;
         }
-
-        
+        dispatch(registerUser(form));
     };
     return (
         <>
@@ -56,7 +63,9 @@ const Register = (props) => {
                         type="password"
                         className="form-control form-control-xl"
                         placeholder="confirm auth code"
-                        onChange={(e) => onInputChangeHandler(e, "confirmCode")}
+                        onChange={(e) =>
+                            onInputChangeHandler(e, "code_confirmation")
+                        }
                     />
                     <div className="form-control-icon">
                         <i className="bi bi-shield-lock"></i>
@@ -66,7 +75,11 @@ const Register = (props) => {
                     className="btn btn-primary btn-block btn-lg shadow-lg mt-5"
                     type="submit"
                 >
-                    Sign Up
+                    {state.loading ? (
+                        <Spinner animation="border" variant="light" size="sm" />
+                    ) : (
+                        "Sign Up"
+                    )}
                 </button>
             </Form>
             <div className="text-center mt-5 text-lg fs-4">

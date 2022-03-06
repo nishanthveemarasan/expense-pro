@@ -19,6 +19,7 @@ const AddPayment = (props) => {
             selectedCategory: state.expenseStore.payment.add.selectedCategory,
             amount: state.expenseStore.payment.add.amount,
             transactionData: state.expenseStore.payment.transData,
+            token: state.expenseStore.appToken,
         };
     };
     const state = useSelector(mapStateToProps);
@@ -35,7 +36,7 @@ const AddPayment = (props) => {
             alert("Please Specify if it is either Income/Expense type");
             return;
         }
-        console.log(state.amount);
+        // console.log(state.amount);
         if (isNaN(state.amount) || !state.amount) {
             alert("Please Specify the right amount!!");
             return;
@@ -71,9 +72,9 @@ const AddPayment = (props) => {
     };
 
     const onSavePaymentHandler = () => {
-        console.log(state.transactionData);
+        // console.log(state.transactionData);
         dispatch(expenseStoreAction.showModal());
-        dispatch(addNewTransaction(state.transactionData));
+        dispatch(addNewTransaction(state.transactionData, state.token));
         // dispatch(
         //     expenseStoreAction.savePayment({ data: state.transactionData })
         // );

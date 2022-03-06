@@ -16,7 +16,7 @@ const SavingCategory = () => {
         };
     };
     const state = useSelector(mapStateToProps);
-    console.log(state.page);
+    // console.log(state.page);
     return (
         <>
             <Head type="middle">
