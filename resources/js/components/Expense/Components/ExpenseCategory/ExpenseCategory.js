@@ -9,6 +9,7 @@ import NavItem from "../../UI/Nav/NavItem";
 import classes from "./ExpenseCategory.module.css";
 import DashBoard from "../DashBoard/DashBoard";
 import Summary from "../Summary/Summary";
+import Recurring from "../Recurring/Recurring";
 
 const ExpenseCategory = (props) => {
     const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const ExpenseCategory = (props) => {
                 <div className={classes.heading}>Expense Manager</div>
             </Head>
             <React.Suspense fallback="">
-                <Nav justify variant="tabs" defaultActiveKey="dashboard">
+                <Nav justify variant="tabs" defaultActiveKey={state.page}>
                     <NavItem
                         page="dashboard"
                         mainPage="expenseCategory"
@@ -51,9 +52,10 @@ const ExpenseCategory = (props) => {
                     />
                 </Nav>
 
-                <main style={{ margin: "3% 0 5% 0" }}>
+                <main style={{ margin: "3% 2% 5% 2%" }}>
                     {state.page == "dashboard" && <DashBoard />}
                     {state.page == "summary" && <Summary />}
+                    {state.page == "recurring" && <Recurring />}
                     {state.page == "dashboard" && (
                         <div className={classes.add}>
                             <Avatar size="xl" color="primary" align="5">

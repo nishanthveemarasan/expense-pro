@@ -9,9 +9,6 @@ import Option from "../Option/Option";
 import classes from "./AddPayment.module.css";
 const AddPayment = (props) => {
     const dispatch = useDispatch();
-    const onUpdatePageHandler = (mainPage) => {
-        dispatch(expenseStoreAction.updatePage({ mainPage }));
-    };
     const mapStateToProps = (state) => {
         return {
             payType: state.expenseStore.payment.type,
@@ -20,9 +17,21 @@ const AddPayment = (props) => {
             amount: state.expenseStore.payment.add.amount,
             transactionData: state.expenseStore.payment.transData,
             token: state.expenseStore.appToken,
+            page: state.expenseStore.page,
         };
     };
     const state = useSelector(mapStateToProps);
+    const onUpdatePageHandler = (mainPage) => {
+        const data = {
+            mainPage: mainPage,
+            page: state.page,
+        };
+        dispatch(expenseStoreAction.clearSelectedCategory());
+        dispatch(expenseStoreAction.updatePage(data));
+        dispatch(
+            expenseStoreAction.updatePrevMainPage({ prevMainPage: "payment" })
+        );
+    };
     /* {
         type: "expense",
         +category: {

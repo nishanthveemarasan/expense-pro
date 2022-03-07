@@ -17,12 +17,18 @@ const Category = (props) => {
             selectedCategory: state.expenseStore.selectedCategory,
             page: state.expenseStore.page,
             subCategoryPage: state.expenseStore.subCategoryPage,
+            prevMainPage: state.expenseStore.prevMainPage,
         };
     };
     const state = useSelector(mapStateToProps);
     const onUpdatePageHandler = () => {
         if (state.subCategoryPage == "maincategory") {
-            dispatch(expenseStoreAction.updatePage({ mainPage: "payment" }));
+            dispatch(
+                expenseStoreAction.updatePage({
+                    mainPage: state.prevMainPage,
+                    page: state.page,
+                })
+            );
         } else {
             dispatch(
                 expenseStoreAction.updateSubPage({ page: "maincategory" })

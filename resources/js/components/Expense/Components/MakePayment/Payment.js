@@ -17,6 +17,7 @@ const Payment = (props) => {
     const mapStateToProps = (state) => {
         return {
             payDate: state.expenseStore.payDate,
+            page: state.expenseStore.page,
         };
     };
     const state = useSelector(mapStateToProps);
@@ -31,8 +32,10 @@ const Payment = (props) => {
     const onPageChangeHandler = () => {
         const data = {
             mainPage: "expenseCategory",
-            page: "dashboard",
+            page: state.page,
         };
+        console.log(data);
+        dispatch(expenseStoreAction.clearSelectedCategory());
         dispatch(expenseStoreAction.updatePage(data));
     };
     return (

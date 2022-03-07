@@ -36,6 +36,7 @@ const initialState = {
     page: "dashboard",
     subCategoryPage: "maincategory",
     mainPage: "expenseCategory",
+    prevMainPage: null,
     action: "",
     createDebt: "",
     dateGroup: getDate(),
@@ -46,7 +47,7 @@ const initialState = {
     },
     model: false,
     payment: {
-        type: "",
+        type: "expense",
         add: { selectedCategory: "", amount: "" },
         transData: [],
         data: {
@@ -61,6 +62,29 @@ const initialState = {
             show: false,
         },
     ],
+    recurringPayment: {
+        name: "",
+        amount: "",
+        pay_method: "monthly",
+        num_of_payment: 1,
+    },
+    recurringData:[
+        {
+            uuid: "94619557-7fdd-4376-b2de-7801cca85eb3",
+            type: "expense",
+            name: "Mobile Payment",
+            amount: 250,
+            pay_method: "monthly",
+            num_of_payment: "12",
+            state_date: "2022-03-09",
+            last_pay_date: "2022-03-09",
+            next_pay_date:"2022-04-09",
+            categor: "Health:Prescription",
+            current_pay_num: 1,
+            status: "active"
+        }
+    ],
+    checked_payment_number: false,
 };
 
 const expenseSlice = createSlice({
@@ -136,6 +160,18 @@ const expenseSlice = createSlice({
             state.mainPage = action.payload.mainPage;
             state.page = action.payload.page;
         },
+        clearSelectedCategory(state, action) {
+            state.selectedCategory = [
+                {
+                    id: -1,
+                    show: false,
+                },
+            ];
+            state.payment.add.selectedCategory = "";
+        },
+        updatePrevMainPage(state, action) {
+            state.prevMainPage = action.payload.prevMainPage;
+        },
         updateSubPage(state, action) {
             state.subCategoryPage = action.payload.page;
         },
@@ -153,7 +189,7 @@ const expenseSlice = createSlice({
                 ...state.payment.add,
                 selectedCategory: action.payload.value,
             };
-            state.mainPage = "payment";
+            state.mainPage = action.payload.prevMainPage;
             state.selectedCategory = [
                 {
                     id: -1,
@@ -215,6 +251,14 @@ const expenseSlice = createSlice({
             state.payment.data.expense = action.payload.expense;
             state.payment.data.category = action.payload.category;
             state.appToken = action.payload.token;
+        },
+        updateRecurringFormData(state, action) {
+            state.recurringPayment[action.payload.type] = action.payload.value;
+        },
+        updateRecurringPaymentNumber(state, action) {
+            const cValue = action.payload.value;
+            state.checked_payment_number = cValue;
+            state.recurringPayment.num_of_payment = cValue ? "" : 1;
         },
     },
 });

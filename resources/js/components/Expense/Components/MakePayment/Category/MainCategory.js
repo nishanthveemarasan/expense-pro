@@ -11,6 +11,7 @@ const MainCategory = (props) => {
         return {
             data: state.expenseStore.payment.data.category,
             selectedCategory: state.expenseStore.selectedCategory,
+            prevMainPage: state.expenseStore.prevMainPage,
         };
     };
     const state = useSelector(mapStateToProps);
@@ -31,7 +32,12 @@ const MainCategory = (props) => {
 
     const onSelectedCategoryHandler = (main, sub) => {
         const value = `${main}:${sub}`;
-        dispatch(expenseStoreAction.updateChosenCategory({ value }));
+        dispatch(
+            expenseStoreAction.updateChosenCategory({
+                value,
+                prevMainPage: state.prevMainPage,
+            })
+        );
     };
     return (
         <ul style={{ color: "black" }}>

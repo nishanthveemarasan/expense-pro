@@ -1,0 +1,27 @@
+.position {
+    color: grey;
+    font-weight: bold;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0;
+}
+
+.position .textbox {
+    background-color: #f8fafc;
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: center;
+    padding: 2% 0;
+}
+.position .textbox:focus {
+    border-bottom: 1px solid green;
+    background-color: rgb(184, 230, 166);
+}
+
+.today {
+    color: red;
+    font-size: 1rem;
+}
+.icon {
+    font-size: 1rem;
+}

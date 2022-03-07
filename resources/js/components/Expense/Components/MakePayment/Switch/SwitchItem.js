@@ -10,6 +10,7 @@ const SwitchItem = (props) => {
                 id={props.id}
                 autoComplete="off"
                 onClick={props.onClick}
+                defaultChecked={props.checked}
             />
             <label className={props.labelClass} htmlFor={props.id}>
                 {props.label}
