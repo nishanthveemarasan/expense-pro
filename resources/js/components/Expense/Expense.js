@@ -10,6 +10,7 @@ import ExpenseCategory from "./Components/ExpenseCategory/ExpenseCategory";
 import Payment from "./Components/MakePayment/Payment";
 import Category from "./Components/MakePayment/Category/Category";
 import MakeRecurring from "./Components/Recurring/MakeRecurring/MakeRecurring";
+import EditRecurring from "./Components/Recurring/MakeRecurring/EditRecurring";
 
 const Expense = (props) => {
     const dispatch = useDispatch();
@@ -31,7 +32,8 @@ const Expense = (props) => {
                 {state.mainPage == "expenseCategory" && <ExpenseCategory />}
                 {state.mainPage == "payment" && <Payment />}
                 {state.mainPage == "category" && <Category />}
-                {state.mainPage == "recurring" && <MakeRecurring />}
+                {state.mainPage == "makeRecurring" && <MakeRecurring />}
+                {state.mainPage == "editRecurring" && <EditRecurring />}
             </React.Suspense>
             {/* <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>

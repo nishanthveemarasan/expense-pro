@@ -19,7 +19,7 @@ import PaymentModal from "../../MakePayment/PaymentModal/PaymentModal";
 import PaySwitch from "../../MakePayment/Switch/PaySwitch";
 import { uuid } from "../../../../Helper/Helper";
 import { addNewRecurringPayment } from "../../../Store/reducers/expense-reducer";
-const MakeRecurring = (props) => {
+const EditRecurring = (props) => {
     const mapStateToProps = (state) => {
         return {
             payDate: state.expenseStore.payDate,
@@ -27,7 +27,9 @@ const MakeRecurring = (props) => {
             payType: state.expenseStore.payment.type,
             recurringPayment: state.expenseStore.recurringPayment,
             checked_payment_number: state.expenseStore.checked_payment_number,
+            data: state.expenseStore.editRecurringFromdata,
             token: state.expenseStore.appToken,
+            dateGroup: state.expenseStore.dateGroup,
         };
     };
     const state = useSelector(mapStateToProps);
@@ -44,75 +46,78 @@ const MakeRecurring = (props) => {
         dispatch(expenseStoreAction.showModel());
     };
 
-    const onUpdatePageHandler = (mainPage) => {
-        dispatch(expenseStoreAction.updatePage({ mainPage }));
-        dispatch(
-            expenseStoreAction.updatePrevMainPage({
-                prevMainPage: "makeRecurring",
-            })
-        );
-    };
     const onInputChangeHandler = (e, type) => {
         const value = e.target.value;
-        dispatch(expenseStoreAction.updateRecurringFormData({ value, type }));
+        dispatch(
+            expenseStoreAction.editRecurringSpecificFormData({ value, type })
+        );
     };
 
     const onCheckHandler = (e) => {
-        const value = !state.checked_payment_number;
-        dispatch(expenseStoreAction.updateRecurringPaymentNumber({ value }));
+        const value = !state.data.checked_payment_number;
+        dispatch(
+            expenseStoreAction.editRecurringSpecificFormData({
+                value,
+                type: "checked_payment_number",
+            })
+        );
     };
 
     const onSaveRecurrPaymentHandler = (e) => {
         e.preventDefault();
-        if (state.recurringPayment.name.trim().length == 0) {
+        if (state.payType == "") {
+            alert("Type is required!!");
+            return;
+        }
+
+        if (state.dateGroup.today.date >= state.payDate) {
+            alert(
+                "Next pay date should be greater than " +
+                    state.dateGroup.today.date
+            );
+            return;
+        }
+        if (state.data.name.trim().length == 0) {
             alert("payment description is required!!!");
             return;
         }
-        console.log(state.recurringPayment.amount);
-        if (
-            isNaN(state.recurringPayment.amount) ||
-            state.recurringPayment.amount < 1
-        ) {
+        if (isNaN(state.data.amount) || state.data.amount < 1) {
             alert(
                 "Please enter a valid number in Amount Field and Payment should be greater than 1"
             );
             return;
         }
         if (
-            !state.checked_payment_number &&
-            (isNaN(state.recurringPayment.num_of_payment) ||
-                state.recurringPayment.num_of_payment < 2)
+            !state.data.checked_payment_number &&
+            (isNaN(state.data.num_of_pay) ||
+                state.data.num_of_pay <= state.data.current_pay_num)
         ) {
-            alert("Please enter number(>= 2) in No of Payment field");
-        }
-        if (
-            state.selectedCategory.trim().length == 0 &&
-            state.payType != "income"
-        ) {
-            alert("Choose the category for this payment!!!");
+            alert(
+                "You have already paid " +
+                    state.data.current_pay_num +
+                    ". So, your payment number should be greater than ".state
+                        .data.current_pay_num
+            );
             return;
         }
+
         const data = {
-            uuid: uuid(),
+            uuid: state.data.uuid,
             type: state.payType,
-            name: state.recurringPayment.name,
-            amount: parseFloat(state.recurringPayment.amount),
-            pay_method: state.recurringPayment.pay_method,
+            name: state.data.name,
+            amount: parseFloat(state.data.amount),
+            pay_method: state.data.pay_method,
             num_of_pay: state.checked_payment_number
                 ? 0
-                : state.recurringPayment.num_of_payment,
-            start_date: state.payDate,
-            last_pay_date: state.payDate,
-            category:
-                state.payType == "expense" ? state.selectedCategory : "income",
-            current_pay_num: 1,
+                : state.data.num_of_pay,
+            next_pay_date: state.payDate,
             status: "active",
             susbscription_type: state.checked_payment_number
                 ? "unlimited"
                 : "limited",
         };
         console.log(data);
-        dispatch(addNewRecurringPayment(data, state.token));
+        // dispatch(addNewRecurringPayment(data, state.token));
     };
     return (
         <>
@@ -136,7 +141,7 @@ const MakeRecurring = (props) => {
                         <EInput
                             label="Payment Description"
                             type="text"
-                            value={state.recurringPayment.name}
+                            value={state.data.name}
                             eType="name"
                             onChange={onInputChangeHandler}
                         />
@@ -145,7 +150,7 @@ const MakeRecurring = (props) => {
                         <EInput
                             label="Amount"
                             type="number"
-                            value={state.recurringPayment.amount}
+                            value={state.data.amount}
                             eType="amount"
                             onChange={onInputChangeHandler}
                         />
@@ -153,7 +158,7 @@ const MakeRecurring = (props) => {
                     <div style={{ marginBottom: "2%" }}>
                         <ESelect
                             label="Frequently"
-                            value={state.recurringPayment.pay_method}
+                            value={state.data.pay_method}
                             type="pay_method"
                             change={onInputChangeHandler}
                         />
@@ -162,23 +167,23 @@ const MakeRecurring = (props) => {
                         <EInput
                             label="Number of Payment"
                             type="number"
-                            value={state.recurringPayment.num_of_payment}
-                            eType="num_of_payment"
+                            value={state.data.num_of_pay}
+                            eType="num_of_pay"
                             onChange={onInputChangeHandler}
-                            disabled={state.checked_payment_number}
+                            disabled={state.data.checked_payment_number}
                         />
                         <div style={{ marginTop: "1%" }}>
                             <InputCheck
                                 label="chose if this transaction happens continuously!! "
                                 checkColor="success"
-                                checked={state.checked_payment_number}
+                                checked={state.data.checked_payment_number}
                                 change={onCheckHandler}
                             />
                         </div>
                     </div>
                     <div style={{ marginBottom: "2%" }}>
                         <Option
-                            heading="First Payment"
+                            heading="Next Payment"
                             value={state.payDate}
                             color="primary"
                             faIcon={faCalendarAlt}
@@ -194,11 +199,7 @@ const MakeRecurring = (props) => {
                                 faIcon={faListAlt}
                                 input={false}
                                 disabled={true}
-                                onPage={onUpdatePageHandler.bind(
-                                    this,
-                                    "category"
-                                )}
-                                value={state.selectedCategory}
+                                value={state.data.category}
                                 tColor="red"
                             />
                         </div>
@@ -217,4 +218,4 @@ const MakeRecurring = (props) => {
         </>
     );
 };
-export default MakeRecurring;
+export default EditRecurring;

@@ -31,8 +31,6 @@ class CreateRecurringPaymentRequest extends FormRequest
             "pay_method" => ['required', 'string'],
             "num_of_pay" => ['required', 'numeric'],
             "start_date" => ['required', 'date'],
-            "last_pay_date" => ['required', 'date'],
-            "next_pay_date" => ['required', 'date'],
             "category" => ['required', 'string'],
             "current_pay_num" => ['required', 'numeric'],
             "status" => ['required', 'string'],

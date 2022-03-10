@@ -8,7 +8,7 @@ const TotalBalance = (props) => {
             <div style={{ color: props.balance > 0 ? "green" : "red" }}>
                 {props.balance > 0
                     ? props.balance
-                    : `-£${Math.abs(props.balance)}`}
+                    : `-£${Math.abs(props.balance.toFixed(2))}`}
             </div>
         </div>
     );

@@ -45,6 +45,7 @@ const initialState = {
     createDebt: "",
     dateGroup: getDate(),
     heading: "Expense Manager",
+    editRecurringFromdata: {},
     payDate: null,
     data: {
         showPayment: true,
@@ -257,6 +258,55 @@ const expenseSlice = createSlice({
         updateRecurringPage(state, action) {
             state.recurringPage.page = action.payload.page;
             state.recurringPage.data = action.payload.data;
+        },
+        updateRecurringData(state, action) {
+            
+            const copyArray = state.recurringData.slice();
+            copyArray.unshift(action.payload.recurring_payment);
+            state.recurringData = copyArray;
+
+            const copyExpense = state.payment.data.expense.slice();
+            if (action.payload.expense_data) {
+                const copySummary = { ...state.summary };
+                const getNewExpenseSummary = getExpenseSummary(
+                    copySummary,
+                    state.dateGroup,
+                    [action.payload.expense_data]
+                );
+                state.summary = {
+                    ...state.summary,
+                    ...getNewExpenseSummary,
+                };
+                state.changeSummary = false;
+
+                copyExpense.unshift(action.payload.expense_data);
+                state.payment.data.expense = copyExpense;
+            }
+            state.mainPage = "expenseCategory";
+            state.page = "recurring";
+        },
+
+        updateRecurringSpecificData(state, action) {
+            const data = action.payload.formdata;
+            state.payment.type = data.type;
+            state.payDate = data.next_pay_date;
+            state.editRecurringFromdata = {
+                uuid: data.uuid,
+                type: data.type,
+                name: data.name,
+                amount: data.amount,
+                pay_method: data.pay_method,
+                num_of_pay: data.num_of_pay,
+                current_pay_num: data.current_pay_num,
+                checked_payment_number:
+                    data.susbscription_type == "limited" ? false : true,
+                next_pay_date: data.next_pay_date,
+                category: data.category,
+            };
+        },
+        editRecurringSpecificFormData(state, action) {
+            state.editRecurringFromdata[action.payload.type] =
+                action.payload.value;
         },
     },
 });

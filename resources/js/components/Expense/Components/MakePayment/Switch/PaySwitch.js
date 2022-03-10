@@ -14,7 +14,6 @@ const PaySwitch = (props) => {
     const onTypeChangeHandler = (type) => {
         dispatch(expenseStoreAction.setPaymentType({ type }));
     };
-    console.log(state.payType);
     return (
         <div>
             <SwitchItem

@@ -8,13 +8,24 @@ import ListItemSummary from "./ListItemSummary";
 import ListSubItem from "./ListSubItem";
 const ListItemDetails = (props) => {
     const dispatch = useDispatch();
-    const onPageChangeHandler = (props) => {
+    const onPageChangeHandler = () => {
         dispatch(
             expenseStoreAction.updateRecurringPage({
                 page: "main",
                 data: null,
             })
         );
+    };
+    const onEditPageChangeHandler = () => {
+        const data = {
+            mainPage: "editRecurring",
+            page: "recurring",
+        };
+        const formdata = {
+            ...props,
+        };
+        dispatch(expenseStoreAction.updateRecurringSpecificData({ formdata }));
+        dispatch(expenseStoreAction.updatePage(data));
     };
     return (
         <>
@@ -26,7 +37,7 @@ const ListItemDetails = (props) => {
                 {props.status == "active" && (
                     <FontAwesomeIcon
                         icon={faEdit}
-                        onClick={onPageChangeHandler}
+                        onClick={onEditPageChangeHandler}
                     />
                 )}
             </div>

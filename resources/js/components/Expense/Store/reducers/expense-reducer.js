@@ -1,4 +1,4 @@
-import { API_URL } from "../../../Helper/Helper";
+import { API_URL, errors } from "../../../Helper/Helper";
 import { expenseStoreAction } from "../Store";
 
 export const addNewTransaction = (data, token) => {
@@ -19,9 +19,7 @@ export const addNewTransaction = (data, token) => {
             const response = await request.json();
             if (response.errors) {
                 // console.log(response.errors);
-                alert(
-                    `${response.message} to create Expense! Please give the right details`
-                );
+                alert(errors(response.errors));
                 dispatch(expenseStoreAction.showModal());
                 return;
             }
@@ -70,9 +68,7 @@ export const addNewCategory = (data, token) => {
             const response = await request.json();
             if (response.errors) {
                 // console.log(response.errors);
-                alert(
-                    `${response.message} to create Expense! Please give the right details`
-                );
+                alert(errors(response.errors));
                 dispatch(expenseStoreAction.showModal());
                 return;
             }
@@ -94,6 +90,40 @@ export const addNewCategory = (data, token) => {
                 error.message ??
                     "Unknown error happened!! plese try again after page reloads!"
             );
+            return;
+        }
+    };
+};
+
+export const addNewRecurringPayment = (data, token) => {
+    return async (dispatch) => {
+        try {
+            dispatch(expenseStoreAction.showModal());
+            const request = await fetch(`${API_URL}/recurring/store`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(data),
+            });
+            const response = await request.json();
+            if (response.errors) {
+                alert(errors(response.errors));
+                dispatch(expenseStoreAction.showModal());
+                return;
+            }
+            if (response.data) {
+                dispatch(expenseStoreAction.updateRecurringData(response.data));
+                dispatch(expenseStoreAction.showModal());
+            }
+        } catch (error) {
+            alert(
+                error.message ??
+                    "Unknown error happened!! plese try again after page reloads!"
+            );
+            // window.location.reload(false);
             return;
         }
     };

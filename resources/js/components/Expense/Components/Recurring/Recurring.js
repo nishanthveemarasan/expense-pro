@@ -39,7 +39,7 @@ const Recurring = (props) => {
             <div className={classes.add}>
                 <Avatar size="xl" color="primary" align="5">
                     <NavItem
-                        mainPage="recurring"
+                        mainPage="makeRecurring"
                         page="recurring"
                         link="+"
                         style={{
