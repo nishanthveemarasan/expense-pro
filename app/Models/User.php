@@ -7,6 +7,7 @@ use App\Models\Saving;
 use App\Models\Account;
 use App\Models\Expense;
 use App\Models\Category;
+use App\Models\RecurringPayment;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -80,5 +81,10 @@ class User extends Authenticatable
     public function expenses()
     {
         return $this->hasMany(Expense::class);
+    }
+
+    public function recurringPayments()
+    {
+        return $this->hasMany(RecurringPayment::class);
     }
 }

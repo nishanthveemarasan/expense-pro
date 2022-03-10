@@ -48,9 +48,9 @@ class Account extends Model
         return $this->belongsToMany(User::class, 'user_account');
     }
 
-    public function debts()
+    public function user()
     {
-        return $this->hasMany(Debt::class);
+        return $this->belongsTo(User::class);
     }
 
     public function getLendTotalAttribute()

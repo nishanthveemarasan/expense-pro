@@ -34,7 +34,7 @@ class Task extends Model
 
     protected $casts = [
         'completed' => 'boolean',
-        // 'date' => 'date',
+        'date' => 'date:Y-m-d',
     ];
 
 

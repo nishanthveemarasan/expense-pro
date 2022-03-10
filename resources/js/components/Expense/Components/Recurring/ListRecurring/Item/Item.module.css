@@ -1,0 +1,57 @@
+.activityHeading {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 3% 0;
+    padding: 0 10px;
+    border: 2px rgb(119, 118, 118) solid;
+    border-radius: 5px;
+    height: 70px;
+}
+.activityHeading .activityItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 60px;
+    align-items: center;
+}
+.activityBody {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: darkslategray;
+    margin-top: 0.5%;
+}
+.activityReverse {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    color: darkslategray;
+    margin-top: 0.5%;
+}
+
+.activityValue {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: darkslategray;
+    margin-bottom: 0.5%;
+}
+.income {
+    color: green;
+    font-weight: bold;
+}
+
+.expense {
+    color: red;
+    font-weight: bold;
+}
+.incomeCategory {
+    color: green;
+    /* font-size: 11px; */
+}
+.expenseCategory {
+    color: blue;
+    /* font-size: 11px; */
+}

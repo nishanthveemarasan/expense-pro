@@ -17,7 +17,7 @@ import Option from "../UI/Option/Option";
 import Ebutton from "../../../../../UI/Button/Ebutton";
 import PaymentModal from "../../MakePayment/PaymentModal/PaymentModal";
 import PaySwitch from "../../MakePayment/Switch/PaySwitch";
-import { getNextRecurringPaymentDate, uuid } from "../../../../Helper/Helper";
+import { uuid } from "../../../../Helper/Helper";
 const MakeRecurring = (props) => {
     const mapStateToProps = (state) => {
         return {
@@ -60,6 +60,35 @@ const MakeRecurring = (props) => {
 
     const onSaveRecurrPaymentHandler = (e) => {
         e.preventDefault();
+        if (state.recurringPayment.name.trim().length == 0) {
+            alert("payment description is required!!!");
+            return;
+        }
+        console.log(state.recurringPayment.amount);
+        if (
+            isNaN(state.recurringPayment.amount) ||
+            state.recurringPayment.amount < 1
+        ) {
+            alert(
+                "Please enter a valid number in Amount Field and Payment should be greater than 1"
+            );
+            return;
+        }
+        console.log(state.checked_payment_number);
+        if (
+            !state.checked_payment_number &&
+            (isNaN(state.recurringPayment.num_of_payment) ||
+                state.recurringPayment.num_of_payment < 2)
+        ) {
+            alert("Please enter number(>= 2) in No of Payment field");
+        }
+        if (
+            state.selectedCategory.trim().length == 0 &&
+            state.payType != "income"
+        ) {
+            alert("Choose the category for this payment!!!");
+            return;
+        }
         const data = {
             uuid: uuid(),
             type: state.payType,
@@ -71,9 +100,13 @@ const MakeRecurring = (props) => {
                 : state.recurringPayment.num_of_payment,
             state_date: state.payDate,
             last_pay_date: state.payDate,
-            category: state.selectedCategory,
+            category:
+                state.payType == "expense" ? state.selectedCategory : "income",
             current_pay_num: 1,
             status: "active",
+            susbscription_type: state.checked_payment_number
+                ? "unlimited"
+                : "limited",
         };
         console.log(data);
     };

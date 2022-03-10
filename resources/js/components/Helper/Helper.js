@@ -1,4 +1,5 @@
-export const API_URL = "https://nkitservice.com/expense/api";
+export const API_URL = "http://expenseapp.test/api";
+// export const API_URL = "https://nkitservice.com/expensetest/api";
 export const getDate = (newDate = "") => {
     const date = newDate ? new Date(newDate) : new Date();
     const year = date.getFullYear();
@@ -220,5 +221,3 @@ export const updateDebtData = (array, index, formData) => {
     }
     return array;
 };
-
-

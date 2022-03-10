@@ -32,7 +32,7 @@ class Expense extends Model
     ];
     protected $casts = [
         'amount' => 'double',
-        // 'date' => 'date',
+        'date' => 'date:Y-m-d',
         "day" => 'integer',
         "month" => 'integer',
         "week" => 'integer',

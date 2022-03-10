@@ -31,7 +31,7 @@ class Saving extends Model
 
     protected $casts = [
         'amount' => 'double',
-        // 'date' => 'date',
+        'date' => 'date:Y-m-d',
     ];
 
     /**

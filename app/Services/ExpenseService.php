@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ExpenseService
 {
-
     public function store($data)
     {
         $user = Auth::user();
@@ -30,8 +29,10 @@ class ExpenseService
             $query->orderBy('date', 'desc');
         }], ['categories' => function ($query) {
             $query->orderBy('category', 'asc');
+        }], ['recurringPayments' => function ($query) {
+            $query->orderBy('created_at', 'desc');
         }]);
-        return ['data' => ['expense' => $data->expenses, 'category' => $data->categories]];
+        return ['data' => ['expense' => $data->expenses, 'category' => $data->categories, 'recurring' => $data->recurringPayments]];
     }
 
     public function category($data)

@@ -1,13 +1,15 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DebtController;
-use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\SavingController;
 use App\Http\Controllers\TaskController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SavingController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\RecurringPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('/auth', function (Request $request) {
+    if (Auth::attempt([
+        'email' => $request['email'],
+        'password' => $request['password'],
+    ])) {
+        $user  = Auth::user();
+        $token = $user->createToken('api-application')->accessToken;
+        return ['token' => $token];
+    }
+});
 
 Route::get('/test', [PageController::class, 'test']);
 Route::middleware(['auth:api'])->group(function () {
@@ -43,5 +56,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::prefix('debts')->group(function () {
         Route::get('/', [DebtController::class, 'index']);
         Route::post('/store', [DebtController::class, 'store']);
+    });
+    Route::prefix('recurring')->group(function () {
+        Route::post('/store', [RecurringPaymentController::class, 'store']);
     });
 });

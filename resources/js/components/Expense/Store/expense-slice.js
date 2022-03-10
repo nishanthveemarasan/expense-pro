@@ -35,6 +35,10 @@ const initialState = {
     chartKey: "year",
     page: "dashboard",
     subCategoryPage: "maincategory",
+    recurringPage: {
+        page: "main",
+        data: {},
+    },
     mainPage: "expenseCategory",
     prevMainPage: null,
     action: "",
@@ -64,26 +68,11 @@ const initialState = {
     ],
     recurringPayment: {
         name: "",
-        amount: "",
+        amount: 1.0,
         pay_method: "monthly",
-        num_of_payment: 1,
+        num_of_payment: 2,
     },
-    recurringData:[
-        {
-            uuid: "94619557-7fdd-4376-b2de-7801cca85eb3",
-            type: "expense",
-            name: "Mobile Payment",
-            amount: 250,
-            pay_method: "monthly",
-            num_of_payment: "12",
-            state_date: "2022-03-09",
-            last_pay_date: "2022-03-09",
-            next_pay_date:"2022-04-09",
-            categor: "Health:Prescription",
-            current_pay_num: 1,
-            status: "active"
-        }
-    ],
+    recurringData: [],
     checked_payment_number: false,
 };
 
@@ -159,6 +148,10 @@ const expenseSlice = createSlice({
         updatePage(state, action) {
             state.mainPage = action.payload.mainPage;
             state.page = action.payload.page;
+            state.recurringPage = {
+                page: "main",
+                data: {},
+            };
         },
         clearSelectedCategory(state, action) {
             state.selectedCategory = [
@@ -250,6 +243,7 @@ const expenseSlice = createSlice({
         initialExpenseData(state, action) {
             state.payment.data.expense = action.payload.expense;
             state.payment.data.category = action.payload.category;
+            state.recurringData = action.payload.recurring;
             state.appToken = action.payload.token;
         },
         updateRecurringFormData(state, action) {
@@ -259,6 +253,10 @@ const expenseSlice = createSlice({
             const cValue = action.payload.value;
             state.checked_payment_number = cValue;
             state.recurringPayment.num_of_payment = cValue ? "" : 1;
+        },
+        updateRecurringPage(state, action) {
+            state.recurringPage.page = action.payload.page;
+            state.recurringPage.data = action.payload.data;
         },
     },
 });
