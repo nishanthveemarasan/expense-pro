@@ -58,6 +58,7 @@ Route::middleware(['auth:api'])->group(function () {
         Route::post('/store', [DebtController::class, 'store']);
     });
     Route::prefix('recurring')->group(function () {
+        Route::patch('/{recurringPayment:uuid}', [RecurringPaymentController::class, 'edit']);
         Route::post('/store', [RecurringPaymentController::class, 'store']);
     });
 });

@@ -13,6 +13,9 @@ import classes from "./TaskListItem.module.css";
 import TextArea from "../../UI/TextArea/TextArea";
 import TButton from "../../UI/Button/Button";
 import { uuid } from "../../../Helper/Helper";
+import "./Transition.css";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 const TaskListItem = (props) => {
     const [showBox, setShowBox] = useState(false);
     const [item, setItem] = useState("");
@@ -85,43 +88,53 @@ const TaskListItem = (props) => {
                         />
                     </div>
                 )}
-                {props.items.map((item, i) => {
-                    progress.total += 1;
-                    if (item.completed != "0") {
-                        progress.completed += 1;
-                    }
-                    return (
-                        <div
-                            className="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-2 mt-3"
-                            key={i}
-                            style={{ marginTop: "4%", fontSize: "1rem" }}
-                        >
-                            <div className="widget-todo-title-area d-flex align-items-center">
-                                <div className="checkbox checkbox-shadow">
-                                    <InputCheck
-                                        class="form-check-input"
-                                        id={i}
-                                        uuid={item.uuid}
-                                        value={item.completed}
-                                        change={onCheckChangeHandler}
-                                    />
-                                </div>
-                                <span
-                                    className="widget-todo-title"
-                                    style={{ marginLeft: "8px" }}
+                <TransitionGroup>
+                    {props.items.map((item, i) => {
+                        progress.total += 1;
+                        if (item.completed != "0") {
+                            progress.completed += 1;
+                        }
+                        return (
+                            <CSSTransition
+                                key={i}
+                                timeout={500}
+                                classNames="item"
+                            >
+                                <div
+                                    className="widget-todo-title-wrapper d-flex justify-content-between align-items-center mb-2 mt-3"
+                                    style={{
+                                        marginTop: "4%",
+                                        fontSize: "1rem",
+                                    }}
                                 >
-                                    {item.name}
-                                </span>
-                            </div>
-                            {/* <div className="widget-todo-item-action d-flex align-items-center">
+                                    <div className="widget-todo-title-area d-flex align-items-center">
+                                        <div className="checkbox checkbox-shadow">
+                                            <InputCheck
+                                                class="form-check-input"
+                                                id={i}
+                                                uuid={item.uuid}
+                                                value={item.completed}
+                                                change={onCheckChangeHandler}
+                                            />
+                                        </div>
+                                        <span
+                                            className="widget-todo-title"
+                                            style={{ marginLeft: "8px" }}
+                                        >
+                                            {item.name}
+                                        </span>
+                                    </div>
+                                    {/* <div className="widget-todo-item-action d-flex align-items-center">
                                 <i
                                     className="bi bi-x-circle"
                                     style={{ color: "red" }}
                                 ></i>
                             </div> */}
-                        </div>
-                    );
-                })}
+                                </div>
+                            </CSSTransition>
+                        );
+                    })}
+                </TransitionGroup>
                 {showBox && (
                     <div className={classes.todoItem}>
                         <TextArea value={item} change={onItemChangeHandler} />

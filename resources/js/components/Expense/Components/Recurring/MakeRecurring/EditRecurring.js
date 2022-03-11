@@ -18,7 +18,10 @@ import Ebutton from "../../../../../UI/Button/Ebutton";
 import PaymentModal from "../../MakePayment/PaymentModal/PaymentModal";
 import PaySwitch from "../../MakePayment/Switch/PaySwitch";
 import { uuid } from "../../../../Helper/Helper";
-import { addNewRecurringPayment } from "../../../Store/reducers/expense-reducer";
+import {
+    addNewRecurringPayment,
+    editExistingRecurringPayment,
+} from "../../../Store/reducers/expense-reducer";
 const EditRecurring = (props) => {
     const mapStateToProps = (state) => {
         return {
@@ -72,7 +75,7 @@ const EditRecurring = (props) => {
 
         if (state.dateGroup.today.date >= state.payDate) {
             alert(
-                "Next pay date should be greater than " +
+                "Next pay date should be greater than  " +
                     state.dateGroup.today.date
             );
             return;
@@ -107,17 +110,16 @@ const EditRecurring = (props) => {
             name: state.data.name,
             amount: parseFloat(state.data.amount),
             pay_method: state.data.pay_method,
-            num_of_pay: state.checked_payment_number
+            num_of_pay: state.data.checked_payment_number
                 ? 0
                 : state.data.num_of_pay,
             next_pay_date: state.payDate,
             status: "active",
-            susbscription_type: state.checked_payment_number
+            susbscription_type: state.data.checked_payment_number
                 ? "unlimited"
                 : "limited",
         };
-        console.log(data);
-        // dispatch(addNewRecurringPayment(data, state.token));
+        dispatch(editExistingRecurringPayment(data, state.token));
     };
     return (
         <>
@@ -132,11 +134,8 @@ const EditRecurring = (props) => {
                     />
                 </div>
             </Head>
-            <div style={{ margin: "3% 3% 3% 3%" }}>
+            <div style={{ margin: "1% 3% 3% 3%" }}>
                 <Form onSubmit={onSaveRecurrPaymentHandler}>
-                    <div style={{ marginBottom: "2%" }}>
-                        <PaySwitch />
-                    </div>
                     <div style={{ marginBottom: "2%" }}>
                         <EInput
                             label="Payment Description"
@@ -191,19 +190,19 @@ const EditRecurring = (props) => {
                             onPage={onShowDateModelHandler}
                         />
                     </div>
-                    {(state.payType == "expense" || state.payType == "") && (
-                        <div style={{ marginBottom: "2%" }}>
-                            <Option
-                                heading="Category"
-                                color="danger"
-                                faIcon={faListAlt}
-                                input={false}
-                                disabled={true}
-                                value={state.data.category}
-                                tColor="red"
-                            />
-                        </div>
-                    )}
+
+                    <div style={{ marginBottom: "2%" }}>
+                        <Option
+                            heading="Category"
+                            color="danger"
+                            faIcon={faListAlt}
+                            input={false}
+                            disabled={true}
+                            value={state.data.category}
+                            tColor="red"
+                        />
+                    </div>
+
                     <div style={{ marginBottom: "2%" }}>
                         <Ebutton
                             name="Save Payment"

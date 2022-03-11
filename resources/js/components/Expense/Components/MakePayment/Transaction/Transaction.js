@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { expenseStoreAction } from "../../../Store/Store";
 import TransactionItem from "./TransactionItem";
-
+import "./Transition.css";
 const Transaction = () => {
     const mapStateToProps = (state) => {
         return {
@@ -16,16 +17,19 @@ const Transaction = () => {
     };
     return (
         <>
-            {state.transactionData.map((transaction, i) => {
-                return (
-                    <TransactionItem
-                        item={transaction}
-                        key={i}
-                        handler={onRemoveHandler}
-                        id={i}
-                    />
-                );
-            })}
+            <TransitionGroup>
+                {state.transactionData.map((transaction, i) => {
+                    return (
+                        <CSSTransition id={i} classNames="item" timeout={500}>
+                            <TransactionItem
+                                item={transaction}
+                                key={i}
+                                handler={onRemoveHandler}
+                            />
+                        </CSSTransition>
+                    );
+                })}
+            </TransitionGroup>
         </>
     );
 };

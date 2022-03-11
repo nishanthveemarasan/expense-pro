@@ -12,22 +12,23 @@ import {
     getFirstLetterUpperWord,
     getIndex,
 } from "../../../../Helper/Helper";
+import DSelect from "../../../../Debt/UI/Select/DSelect";
 const AddCategory = (props) => {
     const dispatch = useDispatch();
     const mapStateToProps = (state) => {
         return {
             token: state.expenseStore.appToken,
+            categoryNames: state.expenseStore.payment.categoryNames,
         };
     };
     const state = useSelector(mapStateToProps);
+
     const [category, setCategory] = useState({
         category: "",
         items: [],
         color: colorArray[getIndex(6, 0)],
     });
-    const onChangeHandler = (event) => {
-        const value = event.target.value.trim();
-
+    const onChangeHandler = (value, type) => {
         setCategory((preState) => {
             return {
                 ...preState,
@@ -75,16 +76,21 @@ const AddCategory = (props) => {
     const onCreateCategoryHandler = () => {
         dispatch(expenseStoreAction.showModal());
         dispatch(addNewCategory(category, state.token));
-        // dispatch(expenseStoreAction.addNewCategory({ category }));
     };
     return (
         <>
             <SModel />
             <div className={`row ${classes.AddCategoryMainInput}`}>
                 <div className="col-10">
-                    <EInput
+                    {/* <EInput
                         onChange={(e) => onChangeHandler(e)}
                         value={category.category}
+                    /> */}
+                    <DSelect
+                        options={state.categoryNames}
+                        placeholder="Main Category Name.."
+                        type="category"
+                        change={onChangeHandler}
                     />
                 </div>
                 <div className={`col-2 ${classes.adMainCategoryIcon}`}>

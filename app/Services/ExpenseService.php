@@ -7,6 +7,7 @@ use App\Models\Saving;
 use App\Models\Expense;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\Environment\Console;
 
 class ExpenseService
 {
@@ -38,8 +39,19 @@ class ExpenseService
     public function category($data)
     {
         $user = Auth::user();
-        $category = $user->categories()->create($data);
-        $user->categories()->syncWithoutDetaching($category->id);
-        return ['data' => $category];
+        $category = null;
+        $checkCategory = Category::where('category', 'like', '%' . $data['category'] . '%')->first();
+        if ($checkCategory) {
+            $category = $checkCategory->toArray();
+            $categoryArray = $category['items'];
+            $categoryArray = array_merge($categoryArray, $data['items']);
+            $checkCategory->update(['items' => $categoryArray]);
+            $checkCategory->refresh();
+            return ['data' => $checkCategory];
+        } else {
+            $category = $user->categories()->create($data);
+            $user->categories()->syncWithoutDetaching($category->id);
+            return ['data' => $category];
+        }
     }
 }

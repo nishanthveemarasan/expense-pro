@@ -14,7 +14,6 @@ const TaskList = ({ completed }) => {
     };
     const state = useSelector(mapStateToProps);
     let count = 0;
-    console.log(completed);
     return (
         <>
             <div className={classes.main}>
@@ -25,7 +24,6 @@ const TaskList = ({ completed }) => {
                             el.completed == completed
                         ) {
                             count += 1;
-                            console.log(count);
                             return (
                                 <TaskListItem
                                     {...el}

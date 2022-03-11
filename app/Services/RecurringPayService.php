@@ -64,6 +64,13 @@ class RecurringPayService
         ]];
     }
 
+    public function edit(RecurringPayment $recurringPayment, $data)
+    {
+        $recurringPayment->update($data);
+        $recurringPayment->refresh();
+        return ['data' => $recurringPayment];
+    }
+
     private function getNextPayDate($payMethod, $today)
     {
         $nextPaymentDate = null;

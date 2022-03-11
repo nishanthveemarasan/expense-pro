@@ -68,7 +68,7 @@ const Category = (props) => {
                     />
                 )}
             </div>
-            <div style={{ padding: "0% 3% 5% 3%" }}>
+            <div style={{ padding: "2% 3%" }}>
                 {state.subCategoryPage == "maincategory" && <MainCategory />}
                 {state.subCategoryPage == "addcategory" && <AddCategory />}
             </div>

@@ -128,3 +128,39 @@ export const addNewRecurringPayment = (data, token) => {
         }
     };
 };
+
+export const editExistingRecurringPayment = (data, token) => {
+    return async (dispatch) => {
+        try {
+            dispatch(expenseStoreAction.showModal());
+            const request = await fetch(`${API_URL}/recurring/${data.uuid}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(data),
+            });
+            const response = await request.json();
+            if (response.errors) {
+                alert(errors(response.errors));
+                dispatch(expenseStoreAction.showModal());
+                return;
+            }
+            if (response.data) {
+               dispatch(
+                    expenseStoreAction.updateExistingRecurringData(response)
+                );
+                dispatch(expenseStoreAction.showModal());
+            }
+        } catch (error) {
+            alert(
+                error.message ??
+                    "Unknown error happened!! plese try again after page reloads!"
+            );
+            return;
+            // window.location.reload(false);
+        }
+    };
+};

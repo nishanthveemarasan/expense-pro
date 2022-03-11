@@ -230,3 +230,11 @@ export const errors = (errors) => {
     }
     return error;
 };
+
+export const getCategoryNameArray = (array) => {
+    const newArray = [];
+    array.forEach((element) => {
+        newArray.push({ value: element.category, label: element.category });
+    });
+    return newArray;
+};

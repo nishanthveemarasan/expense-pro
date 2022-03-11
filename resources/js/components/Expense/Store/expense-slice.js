@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getDate, getExpenseSummary } from "../../Helper/Helper";
+import {
+    getCategoryNameArray,
+    getDate,
+    getExpenseSummary,
+} from "../../Helper/Helper";
 
 const initialState = {
     showModal: false,
@@ -53,6 +57,7 @@ const initialState = {
     model: false,
     payment: {
         type: "expense",
+        categoryNames: [],
         add: { selectedCategory: "", amount: "" },
         transData: [],
         data: {
@@ -171,7 +176,24 @@ const expenseSlice = createSlice({
         },
         addNewCategory(state, action) {
             const copyArray = state.payment.data.category.slice();
-            copyArray.unshift(action.payload.category);
+            const findIndex = copyArray.findIndex(
+                (el, i) =>
+                    el.category.trim().toLowerCase() ==
+                    action.payload.category.category.trim().toLowerCase()
+            );
+
+            if (copyArray[findIndex]) {
+                copyArray[findIndex].items = action.payload.category.items;
+            } else {
+                copyArray.unshift(action.payload.category);
+                const nameArray = state.payment.categoryNames.slice();
+                nameArray.unshift({
+                    value: action.payload.category.category,
+                    label: action.payload.category.category,
+                });
+                state.payment.categoryNames = nameArray;
+            }
+
             state.payment.data = {
                 ...state.payment.data,
                 category: [...copyArray],
@@ -246,6 +268,9 @@ const expenseSlice = createSlice({
             state.payment.data.category = action.payload.category;
             state.recurringData = action.payload.recurring;
             state.appToken = action.payload.token;
+            state.payment.categoryNames = getCategoryNameArray(
+                action.payload.category
+            );
         },
         updateRecurringFormData(state, action) {
             state.recurringPayment[action.payload.type] = action.payload.value;
@@ -260,7 +285,6 @@ const expenseSlice = createSlice({
             state.recurringPage.data = action.payload.data;
         },
         updateRecurringData(state, action) {
-            
             const copyArray = state.recurringData.slice();
             copyArray.unshift(action.payload.recurring_payment);
             state.recurringData = copyArray;
@@ -307,6 +331,15 @@ const expenseSlice = createSlice({
         editRecurringSpecificFormData(state, action) {
             state.editRecurringFromdata[action.payload.type] =
                 action.payload.value;
+        },
+        updateExistingRecurringData(state, action) {
+            const data = action.payload.data;
+            const copyArray = state.recurringData.slice();
+            const findIndex = copyArray.findIndex((el) => el.uuid == data.uuid);
+            copyArray[findIndex] = data;
+            state.recurringData = copyArray;
+            state.mainPage = "expenseCategory";
+            state.page = "recurring";
         },
     },
 });

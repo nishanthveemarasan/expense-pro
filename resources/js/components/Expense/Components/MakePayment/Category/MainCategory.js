@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { expenseStoreAction } from "../../../Store/Store";
 import { getFirstLetterUpper } from "../../../../Helper/Helper";
 import Avatar from "../../../UI/Avatar/Avatar";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "./Transaction.css";
 const MainCategory = (props) => {
     const dispatch = useDispatch();
 
@@ -40,68 +42,79 @@ const MainCategory = (props) => {
         );
     };
     return (
-        <ul style={{ color: "black" }}>
-            {state.data.map((element, i) => {
-                return (
-                    <li className={classes.NavbarItem} key={i}>
-                        <div
-                            className={classes.HomeButton}
-                            onClick={onChangeNavHandler.bind(this, i)}
-                        >
-                            <div className={classes.headingGroup}>
-                                <Avatar
-                                    size="lg"
-                                    color={element.color}
-                                    align="3"
-                                >
-                                    {getFirstLetterUpper(element.category)}
-                                </Avatar>
-                                <div className={classes.Heading}>
-                                    {element.category}
+        <TransitionGroup>
+            <div style={{ color: "black" }}>
+                {state.data.map((element, i) => {
+                    return (
+                        <div className={classes.NavbarItem}>
+                            <div
+                                className={classes.HomeButton}
+                                onClick={onChangeNavHandler.bind(this, i)}
+                            >
+                                <div className={classes.headingGroup}>
+                                    <Avatar
+                                        size="lg"
+                                        color={element.color}
+                                        align="3"
+                                    >
+                                        {getFirstLetterUpper(element.category)}
+                                    </Avatar>
+                                    <div className={classes.Heading}>
+                                        {element.category}
+                                    </div>
+                                </div>
+                                <div className={classes.HeadingArrow}>
+                                    <div>
+                                        <i
+                                            className={`bi bi-caret-${
+                                                showNavItem(i) ? "down" : "up"
+                                            }-square ${
+                                                classes.HeadingArrayIcon
+                                            }`}
+                                        ></i>
+                                    </div>
                                 </div>
                             </div>
-                            <div className={classes.HeadingArrow}>
-                                <div>
-                                    <i
-                                        className={`bi bi-caret-${
-                                            showNavItem(i) ? "down" : "up"
-                                        }-square ${classes.HeadingArrayIcon}`}
-                                    ></i>
-                                </div>
+                            <div
+                                className={
+                                    showNavItem(i)
+                                        ? classes.DropMenuClicked
+                                        : classes.DropMenuNotClicked
+                                }
+                            >
+                                {showNavItem(i) &&
+                                    element.items.map((el, i) => {
+                                        return (
+                                            <CSSTransition
+                                                id={i}
+                                                classNames="item"
+                                                timeout={700}
+                                            >
+                                                <div
+                                                    className={classes.subItems}
+                                                >
+                                                    <div
+                                                        className={
+                                                            classes.subItem
+                                                        }
+                                                        onClick={onSelectedCategoryHandler.bind(
+                                                            this,
+                                                            element.category,
+                                                            el
+                                                        )}
+                                                    >
+                                                        {el}
+                                                    </div>
+                                                </div>
+                                            </CSSTransition>
+                                        );
+                                    })}
                             </div>
                         </div>
-                        <ul
-                            className={
-                                showNavItem(i)
-                                    ? classes.DropMenuClicked
-                                    : classes.DropMenuNotClicked
-                            }
-                        >
-                            {showNavItem(i) &&
-                                element.items.map((el, i) => {
-                                    return (
-                                        <li
-                                            key={i}
-                                            className={classes.subItems}
-                                        >
-                                            <div
-                                                className={classes.subItem}
-                                                onClick={onSelectedCategoryHandler.bind(
-                                                    this,
-                                                    element.category,
-                                                    el
-                                                )}
-                                            >
-                                                {el}
-                                            </div>
-                                        </li>
-                                    );
-                                })}
-                        </ul>
-                    </li>
-                );
-            })}
-        </ul>
+                    );
+                })}
+            </div>
+        </TransitionGroup>
     );
 };
 export default MainCategory;

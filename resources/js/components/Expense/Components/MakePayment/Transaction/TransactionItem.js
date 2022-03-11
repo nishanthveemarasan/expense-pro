@@ -1,5 +1,7 @@
 import React from "react";
+
 import classes from "./Transaction.module.css";
+
 const TransactionItem = (props) => {
     return (
         <div className={classes.activityHeading}>
