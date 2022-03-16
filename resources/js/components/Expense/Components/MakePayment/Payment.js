@@ -52,6 +52,7 @@ const Payment = (props) => {
                     />
                 </div>
             </Head>
+
             <div style={{ padding: "0% 3% 5% 3%" }}>
                 <div className={classes.switch}>
                     <PaySwitch />

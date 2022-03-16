@@ -42,11 +42,11 @@ const MainCategory = (props) => {
         );
     };
     return (
-        <TransitionGroup>
+        <>
             <div style={{ color: "black" }}>
                 {state.data.map((element, i) => {
                     return (
-                        <div className={classes.NavbarItem}>
+                        <div className={classes.NavbarItem} key={i}>
                             <div
                                 className={classes.HomeButton}
                                 onClick={onChangeNavHandler.bind(this, i)}
@@ -85,28 +85,30 @@ const MainCategory = (props) => {
                                 {showNavItem(i) &&
                                     element.items.map((el, i) => {
                                         return (
-                                            <CSSTransition
-                                                id={i}
-                                                classNames="item"
-                                                timeout={700}
+                                            // <CSSTransition
+                                            //     key={i}
+                                            //     classNames="item"
+                                            //     timeout={700}
+                                            //     onExited={() => {
+                                            //         alert("exited");
+                                            //     }}
+                                            // >
+                                            <div
+                                                className={classes.subItems}
+                                                key={i}
                                             >
                                                 <div
-                                                    className={classes.subItems}
+                                                    className={classes.subItem}
+                                                    onClick={onSelectedCategoryHandler.bind(
+                                                        this,
+                                                        element.category,
+                                                        el
+                                                    )}
                                                 >
-                                                    <div
-                                                        className={
-                                                            classes.subItem
-                                                        }
-                                                        onClick={onSelectedCategoryHandler.bind(
-                                                            this,
-                                                            element.category,
-                                                            el
-                                                        )}
-                                                    >
-                                                        {el}
-                                                    </div>
+                                                    {el}
                                                 </div>
-                                            </CSSTransition>
+                                            </div>
+                                            // </CSSTransition>
                                         );
                                     })}
                             </div>
@@ -114,7 +116,7 @@ const MainCategory = (props) => {
                     );
                 })}
             </div>
-        </TransitionGroup>
+        </>
     );
 };
 export default MainCategory;

@@ -9,6 +9,8 @@ import {
 import classes from "./Category.module.css";
 import MainCategory from "./MainCategory";
 import AddCategory from "./AddCategory";
+import { SwitchTransition, Transition } from "react-transition-group";
+import { defaultStyle, duration, findStyles } from "../../style";
 const Category = (props) => {
     const dispatch = useDispatch();
     const mapStateToProps = (state) => {
@@ -20,13 +22,13 @@ const Category = (props) => {
             prevMainPage: state.expenseStore.prevMainPage,
         };
     };
-    const state = useSelector(mapStateToProps);
+    const states = useSelector(mapStateToProps);
     const onUpdatePageHandler = () => {
-        if (state.subCategoryPage == "maincategory") {
+        if (states.subCategoryPage == "maincategory") {
             dispatch(
                 expenseStoreAction.updatePage({
-                    mainPage: state.prevMainPage,
-                    page: state.page,
+                    mainPage: states.prevMainPage,
+                    page: states.page,
                 })
             );
         } else {
@@ -56,11 +58,11 @@ const Category = (props) => {
                     onClick={onUpdatePageHandler}
                 />
                 <span className={classes.CategoryIcons}>
-                    {state.subCategoryPage == "maincategory"
+                    {states.subCategoryPage == "maincategory"
                         ? "Categories"
                         : "Add Main and Sub Category"}
                 </span>
-                {state.subCategoryPage == "maincategory" && (
+                {states.subCategoryPage == "maincategory" && (
                     <FontAwesomeIcon
                         icon={faPlusCircle}
                         className={classes.icon}
@@ -69,8 +71,29 @@ const Category = (props) => {
                 )}
             </div>
             <div style={{ padding: "2% 3%" }}>
-                {state.subCategoryPage == "maincategory" && <MainCategory />}
-                {state.subCategoryPage == "addcategory" && <AddCategory />}
+                <SwitchTransition>
+                    <Transition key={states.subCategoryPage} timeout={duration}>
+                        {(state) => (
+                            <div
+                                style={{
+                                    ...defaultStyle,
+                                    ...findStyles(
+                                        state,
+                                        states.subCategoryPage
+                                    ),
+                                }}
+                            >
+                                {states.subCategoryPage == "maincategory" ? (
+                                    <MainCategory />
+                                ) : states.subCategoryPage == "addcategory" ? (
+                                    <AddCategory />
+                                ) : null}
+                            </div>
+                        )}
+                    </Transition>
+                </SwitchTransition>
+                {/* {state.subCategoryPage == "maincategory" && <MainCategory />}
+                {state.subCategoryPage == "addcategory" && <AddCategory />} */}
             </div>
         </>
     );

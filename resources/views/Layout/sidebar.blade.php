@@ -4,26 +4,26 @@
             <ul class="menu">
                 <li class="sidebar-item  ">
                     <a href="{{ url('/') }}" class='sidebar-link'>
-                        <i class="bi bi-grid-fill"></i>
+                        <i class="bi bi-pie-chart-fill"></i>
                         <span>Expense</span>
                     </a>
                 </li>
 
                 <li class="sidebar-item  ">
                     <a href="{{ url('/debt') }}" class='sidebar-link'>
-                        <i class="bi bi-grid-1x2-fill"></i>
+                        <i class="bi bi-stack"></i>
                         <span>Debt</span>
                     </a>
                 </li>
                 <li class="sidebar-item  ">
                     <a href="{{ url('/todo') }}" class='sidebar-link'>
-                        <i class="bi bi-grid-1x2-fill"></i>
+                        <i class="bi bi-chat-right-dots-fill"></i>
                         <span>Todo</span>
                     </a>
                 </li>
                 <li class="sidebar-item  ">
                     <a href="{{ url('/saving') }}" class='sidebar-link'>
-                        <i class="bi bi-grid-1x2-fill"></i>
+                        <i class="bi bi-wallet-fill"></i>
                         <span>Saving</span>
                     </a>
                 </li>

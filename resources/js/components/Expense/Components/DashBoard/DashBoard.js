@@ -22,7 +22,7 @@ const DashBoard = (props) => {
         };
     };
     const state = useSelector(mapStateToProps);
-
+    // console.log(state.date);
     const changeChartKeyHandler = (chartKey) => {
         dispatch(expenseStoreAction.chageChartFilterKey({ chartKey }));
     };

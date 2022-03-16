@@ -53,6 +53,11 @@ class Account extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function debts()
+    {
+        return $this->hasMany(Debt::class);
+    }
+
     public function getLendTotalAttribute()
     {
         return (int)$this->debts()->where('type', 'lend')->sum('amount');

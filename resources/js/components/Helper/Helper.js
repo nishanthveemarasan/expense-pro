@@ -1,5 +1,5 @@
-export const API_URL = "https://nkitservice.com/expensetest/api";
-// export const API_URL = "http://expenseapp.test/api";
+// export const API_URL = "https://nkitservice.com/expensetest/api";
+export const API_URL = "http://expenseapp.test/api";
 // export const API_URL = "https://nkitservice.com/expense/api";
 export const getDate = (newDate = "") => {
     const date = newDate ? new Date(newDate) : new Date();
@@ -8,12 +8,11 @@ export const getDate = (newDate = "") => {
     const monthString = (month + 1).toString().padStart(2, "0");
     const day = date.getDate();
     const dayString = date.getDate().toString().padStart(2, 0);
-    const dayWeek = date.getDay();
+    const dayWeek = date.getDay() == 0 ? 7 : date.getDay();
     const LastDayOfMonth = new Date(year, month + 1, 0).getDate();
     const firstDayOfWeek = day - dayWeek + 1;
     const lastDayOfWeek = day + (7 - dayWeek);
     const weekNumber = Math.ceil(day / 7);
-
     return {
         today: {
             title: "Today",
@@ -21,7 +20,11 @@ export const getDate = (newDate = "") => {
         },
         thisWeek: {
             title: "This Week",
-            date: `${monthString}-${firstDayOfWeek} - ${monthString}-${lastDayOfWeek}`,
+            date: `${monthString}-${firstDayOfWeek
+                .toString()
+                .padStart(2, 0)} - ${monthString}-${lastDayOfWeek
+                .toString()
+                .padStart(2, 0)}`,
         },
         thisMonth: {
             title: "This Month",

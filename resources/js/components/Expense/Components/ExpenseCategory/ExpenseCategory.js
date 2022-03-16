@@ -10,6 +10,8 @@ import classes from "./ExpenseCategory.module.css";
 import DashBoard from "../DashBoard/DashBoard";
 import Summary from "../Summary/Summary";
 import Recurring from "../Recurring/Recurring";
+import { SwitchTransition, Transition } from "react-transition-group";
+import { defaultStyle, duration, opacityStyle } from "../style";
 
 const ExpenseCategory = (props) => {
     const dispatch = useDispatch();
@@ -24,14 +26,14 @@ const ExpenseCategory = (props) => {
             page: state.expenseStore.page,
         };
     };
-    const state = useSelector(mapStateToProps);
+    const states = useSelector(mapStateToProps);
     return (
         <>
             <Head type="middle">
                 <div className={classes.heading}>Expense Manager</div>
             </Head>
             <React.Suspense fallback="">
-                <Nav justify variant="tabs" defaultActiveKey={state.page}>
+                <Nav justify variant="tabs" defaultActiveKey={states.page}>
                     <NavItem
                         page="dashboard"
                         mainPage="expenseCategory"
@@ -53,10 +55,32 @@ const ExpenseCategory = (props) => {
                 </Nav>
 
                 <main style={{ margin: "3% 2% 5% 2%" }}>
-                    {state.page == "dashboard" && <DashBoard />}
-                    {state.page == "summary" && <Summary />}
-                    {state.page == "recurring" && <Recurring />}
-                    {state.page == "dashboard" && (
+                    <SwitchTransition>
+                        <Transition key={states.page} timeout={duration}>
+                            {(state) => (
+                                <div
+                                    style={{
+                                        ...defaultStyle,
+                                        ...opacityStyle[state],
+                                    }}
+                                >
+                                    {states.page == "dashboard" ? (
+                                        <DashBoard />
+                                    ) : states.page == "summary" ? (
+                                        <Summary />
+                                    ) : states.page == "recurring" ? (
+                                        <Recurring />
+                                    ) : null}
+                                </div>
+                            )}
+                        </Transition>
+                    </SwitchTransition>
+                    {/* {states.page == "dashboard" && <DashBoard />} */}
+                    {/* {states.page == "summary" && (
+                        <Summary show={state.page == "summary"} />
+                    )} */}
+                    {/* {states.page == "recurring" && <Recurring />} */}
+                    {states.page == "dashboard" && (
                         <div className={classes.add}>
                             <Avatar size="xl" color="primary" align="5">
                                 <NavItem

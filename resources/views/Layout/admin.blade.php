@@ -18,6 +18,12 @@
     <link rel="stylesheet" href="public/assets/css/app.css">
     <link rel="stylesheet" href="public/css/app.css">
     <link rel="shortcut icon" href="public/assets/images/favicon.svg" type="image/x-icon">
+    <style>
+        .iconStyle {
+            color: blue;
+            transform: scale(3, 3);
+        }
+    </style>
 </head>
 
 <body>

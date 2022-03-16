@@ -23,7 +23,7 @@ const PaymentModal = (props) => {
         dispatch(expenseStoreAction.setPayDate({ date }));
     };
     return (
-        <Modal show={state.model} backdrop="static">
+        <Modal show={state.model}>
             <Modal.Body>
                 <div className="row">
                     <div className="col-2"></div>
@@ -38,4 +38,3 @@ const PaymentModal = (props) => {
 };
 
 export default PaymentModal;
-
