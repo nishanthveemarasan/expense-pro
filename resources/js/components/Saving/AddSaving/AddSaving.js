@@ -3,7 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import classes from "./AddSaving.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { savingStoreAction } from "../../Expense/Store/Store";
+import {
+    expenseStoreAction,
+    savingStoreAction,
+} from "../../Expense/Store/Store";
 import Input from "../UI/Input/Input";
 import ESelect from "../UI/Select/ESelect";
 import Ebutton from "../UI/Button/Ebutton";
@@ -12,6 +15,7 @@ import { getDate } from "../../Helper/Helper";
 import TextArea from "../UI/TextArea/TextArea";
 import SModel from "../UI/Model/SModel";
 import { addNewSaving } from "../../Expense/Store/reducers/saving-slice";
+import Modal from "../../Modal/Modal";
 const AddSaving = (props) => {
     const dispatch = useDispatch();
     const [form, setForm] = useState({
@@ -48,7 +52,11 @@ const AddSaving = (props) => {
     const onAddSavingHandler = (e) => {
         e.preventDefault();
         if (form.amount == "" || isNaN(form.amount)) {
-            alert("Please Enter the valid amount!!!");
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Please Enter the valid amount!!!",
+                })
+            );
             return;
         }
         dispatch(savingStoreAction.showModel());
@@ -74,6 +82,7 @@ const AddSaving = (props) => {
     };
     return (
         <div>
+            <Modal />
             <SModel />
             <div className={classes.head}>
                 <div className={classes.heading}>Add New Savings</div>

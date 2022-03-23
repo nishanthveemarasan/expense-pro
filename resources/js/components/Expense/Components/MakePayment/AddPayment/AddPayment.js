@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { getArray, getDate, uuid } from "../../../../Helper/Helper";
+import Modal from "../../../../Modal/Modal";
 import { addNewTransaction } from "../../../Store/reducers/expense-reducer";
 import { expenseStoreAction } from "../../../Store/Store";
 import Ebutton from "../../../UI/Button/Ebutton";
@@ -42,17 +43,29 @@ const AddPayment = (props) => {
         const date = getDate(state.payDate);
         const getCategory = getArray(state.selectedCategory, ":");
         if (!state.payType) {
-            alert("Please Specify if it is either Income/Expense type");
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Please Specify if it is either Income/Expense type",
+                })
+            );
             return;
         }
         // console.log(state.amount);
         if (isNaN(state.amount) || !state.amount) {
-            alert("Please Specify the right amount!!");
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Please Specify the right amount!!",
+                })
+            );
             return;
         }
 
         if (!state.selectedCategory && state.payType != "income") {
-            alert("Please choose the expense category!!");
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Please choose the expense category!!",
+                })
+            );
             return;
         }
         const data = {
@@ -90,6 +103,7 @@ const AddPayment = (props) => {
     };
     return (
         <>
+            <Modal />
             <div className={classes.paycard}>
                 <Option
                     heading="Amount"

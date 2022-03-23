@@ -1,6 +1,6 @@
 @extends('Layout.admin')
 
-@section('title', 'Dashboard')
+@section('title', 'Saving Manager')
 
 @section('content')
 

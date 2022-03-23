@@ -22,6 +22,10 @@ const initialState = {
     borrowData: [],
     debtData: [],
     currentIndividualData: null,
+    errorModal: {
+        open: false,
+        error: "",
+    },
 };
 
 const debtSlice = createSlice({
@@ -133,6 +137,20 @@ const debtSlice = createSlice({
             state.lendData = action.payload.lendData;
             state.debtData = action.payload.debtData;
             state.appToken = action.payload.token;
+        },
+        onCloseErrorModal(state, action) {
+            state.errorModal = {
+                open: false,
+                error: "",
+                showHeading: false,
+                showButton: false,
+            };
+        },
+        onOpenErrorModal(state, action) {
+            state.errorModal = {
+                open: true,
+                error: action.payload.error,
+            };
         },
     },
 });

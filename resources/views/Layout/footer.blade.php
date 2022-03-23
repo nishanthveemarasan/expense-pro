@@ -1,5 +1,5 @@
 <footer>
-    <div class="footer clearfix mb-0 mx-2 text-muted" style="position:fixed;bottom:0;left:0">
+    <div class="footer clearfix mb-0 mx-2 text-muted">
         <div class="float-start">
             <p>2022 &copy; Nishanth</p>
         </div>

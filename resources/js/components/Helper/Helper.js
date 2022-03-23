@@ -1,5 +1,5 @@
-// export const API_URL = "https://nkitservice.com/expensetest/api";
-export const API_URL = "http://expenseapp.test/api";
+export const API_URL = "https://nkitservice.com/expensetest/api";
+// export const API_URL = "http://expenseapp.test/api";
 // export const API_URL = "https://nkitservice.com/expense/api";
 export const getDate = (newDate = "") => {
     const date = newDate ? new Date(newDate) : new Date();
@@ -25,10 +25,19 @@ export const getDate = (newDate = "") => {
                 .padStart(2, 0)} - ${monthString}-${lastDayOfWeek
                 .toString()
                 .padStart(2, 0)}`,
+            month: month + 1,
+            fDay: firstDayOfWeek,
+            lDay: lastDayOfWeek,
+            year: year,
+            week: weekNumber,
         },
         thisMonth: {
             title: "This Month",
             date: `${monthString}-01 - ${monthString}-${LastDayOfMonth}`,
+            fDay: 1,
+            lDay: LastDayOfMonth,
+            year: year,
+            month: month + 1,
         },
         thisYear: {
             title: "This Year",
@@ -240,4 +249,170 @@ export const getCategoryNameArray = (array) => {
         newArray.push({ value: element.category, label: element.category });
     });
     return newArray;
+};
+
+export const getWeekDetails = (firstDayOfWeek, lastDayOfWeek) => {
+    const dayWeek = firstDayOfWeek.getDay() == 0 ? 7 : firstDayOfWeek.getDay();
+    firstDayOfWeek.setDate(firstDayOfWeek.getDate() - (dayWeek - 1));
+    lastDayOfWeek.setDate(lastDayOfWeek.getDate() + (7 - dayWeek));
+
+    return {
+        dateStart: `${firstDayOfWeek.getFullYear()}-${(
+            firstDayOfWeek.getMonth() + 1
+        )
+            .toString()
+            .padStart(2, "0")}-${firstDayOfWeek
+            .getDate()
+            .toString()
+            .padStart(2, "0")}`,
+        dateEnd: `${lastDayOfWeek.getFullYear()}-${(
+            lastDayOfWeek.getMonth() + 1
+        )
+            .toString()
+            .padStart(2, "0")}-${lastDayOfWeek
+            .getDate()
+            .toString()
+            .padStart(2, "0")}`,
+        dayStart: firstDayOfWeek.getDate(),
+        dayStartYear: firstDayOfWeek.getFullYear(),
+        dayStartMonth: firstDayOfWeek.getMonth() + 1,
+        dayEnd: lastDayOfWeek.getDate(),
+        dayEndYear: lastDayOfWeek.getFullYear(),
+        dayEndMonth: lastDayOfWeek.getMonth() + 1,
+    };
+};
+
+export const getWeeklyArrayDetails = (firstpayDate) => {
+    const firstDate = new Date(firstpayDate);
+    let firstDayOfWeek = new Date();
+    let lastDayOfWeek = new Date();
+    let details;
+    let week = [];
+
+    while (lastDayOfWeek.getTime() >= firstDate.getTime()) {
+        details = getWeekDetails(firstDayOfWeek, lastDayOfWeek);
+        week.push({
+            dateStart: details.dateStart,
+            dateEnd: details.dateEnd,
+            dayStart: details.dayStart,
+            dayEnd: details.dayEnd,
+            dayStartMonth: details.dayStartMonth,
+            dayEndMonth: details.dayEndMonth,
+            dayStartYear: details.dayStartYear,
+            dayEndYear: details.dayEndYear,
+        });
+
+        const lastfirstDayOfWeek = new Date(firstDayOfWeek);
+        lastfirstDayOfWeek.setDate(lastfirstDayOfWeek.getDate() - 1);
+        firstDayOfWeek = new Date(lastfirstDayOfWeek);
+        lastDayOfWeek = new Date(lastfirstDayOfWeek);
+    }
+    return week;
+};
+
+export const filterDataByDateGroup = (dataArray, dateGroup) => {
+    let data = [];
+    let total = 0;
+    dataArray.forEach((el, i) => {
+        if (
+            new Date(el.date).getTime() >=
+                new Date(dateGroup.dateStart).getTime() &&
+            new Date(el.date).getTime() <= new Date(dateGroup.dateEnd).getTime()
+        ) {
+            data.push(el);
+            total += el.amount;
+        }
+    });
+
+    return { data, total: total.toFixed(2) };
+};
+
+export const filterDataByType = (dataArray, type) => {
+    let data = [];
+    let total = 0;
+    dataArray.forEach((el, i) => {
+        if (el.type == type) {
+            data.push(el);
+            total += el.amount;
+        }
+    });
+
+    return { data, total: total.toFixed(2) };
+};
+
+export const getTtotalExpenseIncome = (dataArray) => {
+    let summary = {
+        expense: 0,
+        income: 0,
+    };
+    dataArray.forEach((el, i) => {
+        if (el.type == "expense") {
+            summary.expense += el.amount;
+        } else {
+            summary.income += el.amount;
+        }
+    });
+
+    return summary;
+};
+
+export const getMonthDetails = (currentMonth) => {
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+    const LastDayOfMonth = new Date(year, month + 1, 0).getDate();
+
+    return {
+        monthStart: `${year}-${(month + 1).toString().padStart(2, "0")}-01`,
+        monthEnd: `${year}-${(month + 1)
+            .toString()
+            .padStart(2, "0")}-${LastDayOfMonth}`,
+        monthYear: year,
+        month: month,
+    };
+};
+
+export const getMonthlyArrayDetails = (firstpayDate) => {
+    const firstDate = new Date(firstpayDate);
+    let currentMonth = new Date();
+    let month = [];
+    while (currentMonth.getTime() >= firstDate.getTime()) {
+        let details = getMonthDetails(currentMonth);
+        currentMonth = new Date(details.monthStart);
+        currentMonth.setDate(currentMonth.getDate() - 1);
+        month.push({
+            dateStart: details.monthStart,
+            dateEnd: details.monthEnd,
+            monthYear: details.monthYear,
+            month: details.month,
+        });
+    }
+    return month;
+};
+
+export const getYearDetails = (currentYear) => {
+    const year = currentYear.getFullYear();
+
+    return {
+        dateStart: `${year}-01-01`,
+        dateEnd: `${year}-12-31`,
+        year,
+    };
+};
+
+export const getYearlyArrayDetails = (firstpayDate) => {
+    const firstDate = new Date(firstpayDate);
+    let currentYear = new Date();
+    let year = [];
+
+    while (currentYear.getTime() >= firstDate.getTime()) {
+        let details = getYearDetails(currentYear);
+        year.push({
+            dateStart: details.dateStart,
+            dateEnd: details.dateEnd,
+            year: details.year,
+        });
+        currentYear = new Date(details.dateStart);
+        currentYear.setDate(currentYear.getDate() - 1);
+    }
+    return year;
 };

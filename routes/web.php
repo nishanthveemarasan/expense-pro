@@ -35,3 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/todo', [PageController::class, 'todo']);
     Route::get('/saving', [PageController::class, 'saving']);
 });
+
+Route::get('/test', function () {
+    return view('test');
+});

@@ -1,11 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { debtStoreAction } from "../../../Expense/Store/Store";
+import {
+    debtStoreAction,
+    expenseStoreAction,
+} from "../../../Expense/Store/Store";
 import { extractDate, uuid } from "../../../Helper/Helper";
 import classes from "./Head.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle, faSave } from "@fortawesome/free-solid-svg-icons";
 import { AddNewDebt } from "../../../Expense/Store/reducers/debt-reducer";
+import Modal from "../../../Modal/Modal";
 const Head = (props) => {
     const dispatch = useDispatch();
 
@@ -56,12 +60,20 @@ const Head = (props) => {
         };
 
         if (data.formData.name == "") {
-            alert("Name is Required!!");
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Name is Required!!",
+                })
+            );
             return;
         }
 
         if (data.formData.amount == "" || isNaN(data.formData.amount)) {
-            alert("Amount is Required!!");
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Amount is Required!!",
+                })
+            );
             return;
         }
 
@@ -91,22 +103,24 @@ const Head = (props) => {
         // onCancelDebtHandler();
     };
     return (
-        <div className={classes.head}>
-            <div className={classes.heading}>{props.heading}</div>
-            <div>
-                <div className={classes.action}>
-                    <FontAwesomeIcon
-                        icon={faTimesCircle}
-                        className={classes.icon}
-                        onClick={onCancelDebtHandler}
-                    />
-                    <span className={classes.span}> </span>
-                    <FontAwesomeIcon
-                        icon={faSave}
-                        className={classes.icon}
-                        onClick={onCreateDebtHandler}
-                    />
-                    {/* <i
+        <>
+            <Modal />
+            <div className={classes.head}>
+                <div className={classes.heading}>{props.heading}</div>
+                <div>
+                    <div className={classes.action}>
+                        <FontAwesomeIcon
+                            icon={faTimesCircle}
+                            className={classes.icon}
+                            onClick={onCancelDebtHandler}
+                        />
+                        <span className={classes.span}> </span>
+                        <FontAwesomeIcon
+                            icon={faSave}
+                            className={classes.icon}
+                            onClick={onCreateDebtHandler}
+                        />
+                        {/* <i
                         className={`bi bi-x-circle-fill ${classes.icon}`}
                         onClick={onCancelDebtHandler}
                     ></i>
@@ -115,9 +129,10 @@ const Head = (props) => {
                         className={`bi bi-check-circle-fill ${classes.icon}`}
                         onClick={onCreateDebtHandler}
                     ></i> */}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 export default Head;

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,9 +13,12 @@ import MakeRecurring from "./Components/Recurring/MakeRecurring/MakeRecurring";
 import EditRecurring from "./Components/Recurring/MakeRecurring/EditRecurring";
 import { SwitchTransition, Transition } from "react-transition-group";
 import { defaultStyle, duration, findStyles } from "./Components/style";
+import Backdrop from "../Backdrop/Backdrop";
+import Modal from "../Modal/Modal";
 
 const Expense = (props) => {
     const dispatch = useDispatch();
+    const [modalOpen, setModalOpen] = useState(true);
     useEffect(() => {
         const data = JSON.parse(props.data);
         dispatch(initialExpenseData(data.data, props.token));
@@ -27,7 +30,6 @@ const Expense = (props) => {
         };
     };
     const states = useSelector(mapStateToProps);
-    // console.log(state.mainPage);
     return (
         <>
             <React.Suspense fallback="">

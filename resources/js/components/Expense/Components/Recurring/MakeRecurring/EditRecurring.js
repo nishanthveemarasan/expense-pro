@@ -69,24 +69,37 @@ const EditRecurring = (props) => {
     const onSaveRecurrPaymentHandler = (e) => {
         e.preventDefault();
         if (state.payType == "") {
-            alert("Type is required!!");
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Type is required!!",
+                })
+            );
             return;
         }
 
         if (state.dateGroup.today.date >= state.payDate) {
-            alert(
-                "Next pay date should be greater than  " +
-                    state.dateGroup.today.date
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error:
+                        "Next pay date should be greater than  " +
+                        state.dateGroup.today.date,
+                })
             );
             return;
         }
         if (state.data.name.trim().length == 0) {
-            alert("payment description is required!!!");
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "payment description is required!!!",
+                })
+            );
             return;
         }
         if (isNaN(state.data.amount) || state.data.amount < 1) {
-            alert(
-                "Please enter a valid number in Amount Field and Payment should be greater than 1"
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Please enter a valid number in Amount Field and Payment should be greater than 1",
+                })
             );
             return;
         }
@@ -95,11 +108,14 @@ const EditRecurring = (props) => {
             (isNaN(state.data.num_of_pay) ||
                 state.data.num_of_pay <= state.data.current_pay_num)
         ) {
-            alert(
-                "You have already paid " +
-                    state.data.current_pay_num +
-                    ". So, your payment number should be greater than ".state
-                        .data.current_pay_num
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error:
+                        "You have already paid " +
+                        state.data.current_pay_num +
+                        ". So, your payment number should be greater than "
+                            .state.data.current_pay_num,
+                })
             );
             return;
         }

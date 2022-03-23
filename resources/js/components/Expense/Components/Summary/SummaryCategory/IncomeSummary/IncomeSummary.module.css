@@ -1,0 +1,55 @@
+.emptyData {
+    width: 100%;
+    border: 1px black solid;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    padding: 6%;
+    font-size: 1.2rem;
+    color: darkgray;
+    margin-top: 20%;
+}
+
+.heading {
+    color: blue;
+    font-weight: bold;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5% 0;
+}
+
+.category {
+    color: blue;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 5% 0;
+}
+
+.category .boxOne {
+    padding: 2% 3%;
+    border: 1px solid blue;
+    border-radius: 10px 0 0 10px;
+}
+
+.category .boxTwo {
+    padding: 2% 3%;
+    border: 1px solid blue;
+}
+.category .boxThree {
+    padding: 2% 3%;
+    border: 1px solid blue;
+    border-left: 0px;
+}
+.category .boxFour {
+    padding: 2% 3%;
+    border: 1px solid blue;
+    border-left: 0px;
+    border-radius: 0 10px 10px 0;
+}

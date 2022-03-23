@@ -1,0 +1,49 @@
+.category {
+    color: blue;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 5% 0;
+}
+
+.category .boxOne {
+    padding: 2% 3%;
+    border: 1px solid blue;
+    border-radius: 10px 0 0 10px;
+}
+
+.category .boxTwo {
+    padding: 2% 3%;
+    border: 1px solid blue;
+}
+.category .boxThree {
+    padding: 2% 3%;
+    border: 1px solid blue;
+    border-left: 0px;
+}
+.category .boxFour {
+    padding: 2% 3%;
+    border: 1px solid blue;
+    border-left: 0px;
+    border-radius: 0 10px 10px 0;
+}
+
+.dateRange {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 5% 2% 5% 2%;
+    overflow-x: scroll;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.dateRange .dateItem {
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1rem;
+    color: blue;
+}

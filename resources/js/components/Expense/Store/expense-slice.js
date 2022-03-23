@@ -55,6 +55,12 @@ const initialState = {
         showPayment: true,
     },
     model: false,
+    errorModal: {
+        open: false,
+        error: "",
+        showHeading: false,
+        showButton: false,
+    },
     payment: {
         type: "expense",
         categoryNames: [],
@@ -340,6 +346,20 @@ const expenseSlice = createSlice({
             state.recurringData = copyArray;
             state.mainPage = "expenseCategory";
             state.page = "recurring";
+        },
+        onCloseErrorModal(state, action) {
+            state.errorModal = {
+                open: false,
+                error: "",
+                showHeading: false,
+                showButton: false,
+            };
+        },
+        onOpenErrorModal(state, action) {
+            state.errorModal = {
+                open: true,
+                error: action.payload.error,
+            };
         },
     },
 });
