@@ -1,5 +1,5 @@
 import { API_URL } from "../../../Helper/Helper";
-import { todoStoreAction } from "../Store";
+import { expenseStoreAction, todoStoreAction } from "../Store";
 
 export const initialTaskData = (data, token) => {
     return (dispatch) => {
@@ -146,6 +146,160 @@ export const addTaskItemExistTask = (uuid, id, data, token) => {
             );
 
             window.location.reload(false);
+        }
+    };
+};
+
+export const updateTaskItemsOrder = (data) => {
+    return async (dispatch) => {
+        const url = `${API_URL}/tasks/${data.uuid}/update`;
+        const requestData = {
+            data: data.data,
+        };
+
+        try {
+            const request = await fetch(url, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${data.token}`,
+                },
+                body: JSON.stringify(requestData),
+            });
+            const response = await request.json();
+            if (response.errors) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} to create Saving! Please give the right details`,
+                    })
+                );
+                setTimeout(() => {
+                    window.location.reload(false);
+                }, 500);
+            }
+            if (response.message) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: response.message,
+                    })
+                );
+                setTimeout(() => {
+                    window.location.reload(false);
+                }, 500);
+            }
+            if (response.data) {
+            }
+        } catch (error) {
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Unknown error happened!! plese try again after page reloads!",
+                })
+            );
+            setTimeout(() => {
+                window.location.reload(false);
+            }, 500);
+        }
+    };
+};
+
+export const deleteTaskItemFromTask = (data) => {
+    return async (dispatch) => {
+        const url = `${API_URL}/tasks/${data.pUuid}/delete/${data.cUuid}`;
+
+        try {
+            const request = await fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${data.token}`,
+                },
+            });
+            const response = await request.json();
+            if (response.errors) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} to create Saving! Please give the right details`,
+                    })
+                );
+                setTimeout(() => {
+                    window.location.reload(false);
+                }, 500);
+            }
+            if (response.message) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: response.message,
+                    })
+                );
+                setTimeout(() => {
+                    window.location.reload(false);
+                }, 500);
+            }
+            if (response.data) {
+            }
+        } catch (error) {
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Unknown error happened!! plese try again after page reloads!",
+                })
+            );
+            setTimeout(() => {
+                window.location.reload(false);
+            }, 500);
+        }
+    };
+};
+
+export const UpdateTaskItemContent = (data) => {
+    return async (dispatch) => {
+        const url = `${API_URL}/tasks/${data.pUuid}/update/${data.cUuid}/content`;
+        const requestData = {
+            content: data.content,
+        };
+        try {
+            const request = await fetch(url, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${data.token}`,
+                },
+                body: JSON.stringify(requestData),
+            });
+            const response = await request.json();
+            if (response.errors) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} to create Saving! Please give the right details`,
+                    })
+                );
+                setTimeout(() => {
+                    window.location.reload(false);
+                }, 500);
+            }
+            if (response.message) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: response.message,
+                    })
+                );
+                setTimeout(() => {
+                    window.location.reload(false);
+                }, 500);
+            }
+            if (response.data) {
+            }
+        } catch (error) {
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Unknown error happened!! plese try again after page reloads!",
+                })
+            );
+            setTimeout(() => {
+                window.location.reload(false);
+            }, 500);
         }
     };
 };

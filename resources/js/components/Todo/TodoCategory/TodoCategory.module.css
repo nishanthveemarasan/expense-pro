@@ -5,6 +5,7 @@
 }
 .add {
     position: fixed;
+    z-index: 101;
     bottom: 80px;
     right: 0;
 }

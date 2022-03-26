@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Services\TaskService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateTaskRequest;
+use App\Http\Requests\UpdateItemsRequest;
+use App\Http\Requests\UpdateTaskItemContent;
 use App\Http\Requests\UpdateTaskItemRequest;
 use App\Models\Task;
 use App\Models\TaskItem;
@@ -63,6 +65,36 @@ class TaskController extends Controller
 
         return $this->result;
     }
+
+    public function updateItems(UpdateItemsRequest $request, Task $task)
+    {
+        try {
+            DB::beginTransaction();
+            $this->result = $this->taskService->updateItems($request->validated(), $task);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->result['error'] = $e->getMessage();
+        }
+
+        return $this->result;
+    }
+
+    public function deleteTaskItem(Task $task, TaskItem $item)
+    {
+        try {
+            DB::beginTransaction();
+            $this->result = $this->taskService->deleteTaskItem($task, $item);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->result['error'] = $e->getMessage();
+        }
+
+        return $this->result;
+    }
+
+
     public function completeTask(Task $task)
     {
         try {
@@ -82,6 +114,20 @@ class TaskController extends Controller
         try {
             DB::beginTransaction();
             $this->result = $this->taskService->addSubTaskItem($request->validated(), $task);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->result['error'] = $e->getMessage();
+        }
+
+        return $this->result;
+    }
+
+    public function updateItemContent(UpdateTaskItemContent $request, Task $task, TaskItem $item)
+    {
+        try {
+            DB::beginTransaction();
+            $this->result = $this->taskService->updateItemContent($request->validated(), $task, $item);
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();

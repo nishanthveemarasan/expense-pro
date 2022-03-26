@@ -29,6 +29,7 @@ const TaskList = ({ completed }) => {
                                     {...el}
                                     key={i}
                                     parendId={i}
+                                    parentUuid={el.uuid}
                                     completed={completed}
                                 />
                             );

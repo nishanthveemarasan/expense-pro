@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewTask } from "../../Expense/Store/reducers/todo-reduce";
-import { todoStoreAction } from "../../Expense/Store/Store";
+import { expenseStoreAction, todoStoreAction } from "../../Expense/Store/Store";
 import Head from "../../Expense/UI/head/Head";
 import { getDate, getFirstLetterUpperWord, uuid } from "../../Helper/Helper";
 import TButton from "../UI/Button/Button";
@@ -12,6 +12,7 @@ import ListTodoItems from "./ListTodoItems/ListTodoItems";
 import TodoItem from "./TodoItem/TodoItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import Modal from "../../Modal/Modal";
 const CreateTodo = (props) => {
     const dispatch = useDispatch();
     const mapStateToProps = (state) => {
@@ -51,11 +52,19 @@ const CreateTodo = (props) => {
             uuid: uuid(),
         };
         if (data.title === "") {
-            alert("Please Add a Title to a Task");
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Please Add a Title to a Task",
+                })
+            );
             return;
         }
         if (data.items.length == 0) {
-            alert("Please Add at least one sub task");
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Please Add at least one sub task",
+                })
+            );
             return;
         }
         const refresh = {
@@ -69,6 +78,7 @@ const CreateTodo = (props) => {
     };
     return (
         <>
+            <Modal />
             <SModel />
             <Head type="space">
                 <div className={classes.heading}>

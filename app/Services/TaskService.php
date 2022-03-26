@@ -31,7 +31,9 @@ class TaskService
     public function index()
     {
         $user = Auth::user();
-        return $user->tasks()->orderBy('created_at', 'desc')->get();
+        return $user->tasks()->with(['items' => function ($query) {
+            $query->orderBy('order', 'asc');
+        }])->orderBy('created_at', 'desc')->get();
     }
 
     public function updateItem($data, Task $task, TaskItem $item)
@@ -41,6 +43,37 @@ class TaskService
 
         return ['data' => 'Task is updated Successfully'];
     }
+
+    public function updateItemContent($data, Task $task, TaskItem $item)
+    {
+        $item->update(['name' => $data['content']]);
+
+        return ['data' => 'Task is updated Successfully'];
+    }
+
+    public function deleteTaskItem(Task $task, TaskItem $item)
+    {
+        $item->delete();
+        $item->refresh();
+
+        $currentTaskItems = $task->items()->count();
+        if ($currentTaskItems == 0) {
+            $task->delete();
+        }
+
+        return ['data' => 'Task is updated Successfully'];
+    }
+
+    public function updateItems($data, Task $task)
+    {
+        foreach ($data['data'] as $item) {
+            $task->items()->where('uuid', $item['uuid'])->update(['order' => $item['order']]);
+        }
+
+        return ['data' => 'Task is updated Successfully'];
+    }
+
+
 
     public function completeTask(Task $task)
     {

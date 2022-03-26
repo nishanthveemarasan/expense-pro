@@ -106,6 +106,24 @@ const todoSlice = createSlice({
             copyTask.push(action.payload.data);
             state.data = copyArray;
         },
+        updateTaskItemsArray(state, action) {
+            const copyArray = state.data.slice();
+            const length = action.payload.items.length;
+
+            if (length > 0) {
+                copyArray[action.payload.id].items = action.payload.items;
+                state.data = copyArray;
+            } else {
+                copyArray.splice(action.payload.id, 1);
+                state.data = copyArray;
+            }
+        },
+        updateTaskArray(state, action) {
+            const copyArray = state.data.slice();
+            copyArray.splice(action.payload.id, 1);
+
+            state.data = copyArray;
+        },
     },
 });
 

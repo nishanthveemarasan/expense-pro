@@ -1,125 +1,126 @@
 import React, { useState, useEffect } from "react";
 import { Pending } from "./Pending";
-import "./App.css";
+import classes from "./App.module.css";
 
 export const Items = () => {
-    // const [items, setItems] = useState([
-    //   {
-    //     id: 1,
-    //     title: "Manage ORM for client XYZ",
-    //     status: "Pending"
-    //   },
-    //   {
-    //     id: 2,
-    //     title: "Review Summer Intern project report",
-    //     status: "Pending"
-    //   },
-    //   {
-    //     id: 3,
-    //     title: "Host Landing Page for Gerry Pizza Shop",
-    //     status: "Pending"
-    //   },
-    //   {
-    //     id: 4,
-    //     title: "Release Junior Developer payment",
-    //     status: "Pending"
-    //   },
-    //   {
-    //     id: 5,
-    //     title: "Discuss Digital Marketing requirements ",
-    //     status: "Pending"
-    //   },
-    //   {
-    //     id: 6,
-    //     title: "Discuss technology budget with CTO",
-    //     status: "Pending"
-    //   }
-    // ]);
+    const [cIndex, setCIndex] = useState(-1);
     const [items, setItems] = useState([
         {
-            newIndex: 1,
-            color: "red",
+            uuid: 1,
+            name: "Manage ORM for client XYZ",
+            order: 1,
+            completed: "0",
         },
-
         {
-            newIndex: 2,
-            color: "green",
+            uuid: 2,
+            name: "Review Summer Intern project report",
+            order: 2,
+            completed: "0",
         },
-
         {
-            newIndex: 3,
-            color: "blue",
+            uuid: 3,
+            name: "Host Landing Page for Gerry Pizza Shop",
+            order: 3,
+            completed: "0",
         },
-
         {
-            newIndex: 4,
-            color: "yellow",
+            uuid: 4,
+            name: "Release Junior Developer payment",
+            order: 4,
+            completed: "0",
         },
-
         {
-            newIndex: 5,
-            color: "orange",
+            uuid: 5,
+            name: "Discuss Digital Marketing requirements ",
+            order: 5,
+            completed: "0",
         },
-
         {
-            newIndex: 6,
-            color: "black",
+            id: 6,
+            name: "Discuss technology budget with CTO",
+            order: 6,
+            completed: "0",
         },
     ]);
-    const [dragged, setDragged] = useState("");
-    const [over, setOver] = useState("");
-    const onDragStart = (e) => {
-        setDragged(e.currentTarget);
+
+    const onMoveItemHandler = (index, type) => {
+        let copyArray = items.slice();
+        if (type === "up") {
+            [copyArray[index - 1], copyArray[index]] = [
+                copyArray[index],
+                copyArray[index - 1],
+            ];
+            copyArray[index - 1] = {
+                ...copyArray[index - 1],
+                order: copyArray[index - 1].order - 1,
+            };
+            copyArray[index] = {
+                ...copyArray[index],
+                order: copyArray[index].order + 1,
+            };
+
+            const obj = [
+                {
+                    uuid: copyArray[index - 1].uuid,
+                    order: copyArray[index - 1].order,
+                },
+                {
+                    uuid: copyArray[index].uuid,
+                    order: copyArray[index].order,
+                },
+            ];
+            console.log(obj); //new first 2-1
+
+            setCIndex(index - 1);
+            setItems(copyArray);
+        }
+
+        if (type === "down") {
+            [copyArray[index + 1], copyArray[index]] = [
+                copyArray[index],
+                copyArray[index + 1],
+            ];
+            copyArray[index + 1] = {
+                ...copyArray[index + 1],
+                order: copyArray[index + 1].order + 1,
+            };
+            copyArray[index] = {
+                ...copyArray[index],
+                order: copyArray[index].order - 1,
+            };
+
+            const obj = [
+                {
+                    uuid: copyArray[index + 1].uuid,
+                    order: copyArray[index + 1].order,
+                },
+                {
+                    uuid: copyArray[index].uuid,
+                    order: copyArray[index].order,
+                },
+            ];
+            console.log(obj); //new first 2-1
+
+            setCIndex(index + 1);
+            setItems(copyArray);
+        }
     };
 
-    const onDragEnd = (e) => {
-        dragged.style.display = "block";
-
-        e.target.classList.remove("drag-up");
-        over.classList.remove("drag-up");
-
-        e.target.classList.remove("drag-down");
-        over.classList.remove("drag-down");
-
-        let data = items.slice();
-        let from = Number(dragged.dataset.id);
-        let to = Number(over.dataset.id);
-        data.splice(to, 0, data.splice(from, 1)[0]);
-        //set newIndex to judge direction of drag and drop
-        data = data.map((doc, index) => {
-            doc.newIndex = index + 1;
-            return doc;
-        });
-        setItems(data);
-    };
-
-    const onDragOver = (e) => {
-        e.preventDefault();
-        dragged.style.display = "none";
-        if (e.target.tagName !== "DIV") {
-            return;
-        }
-        const dgIndex = JSON.parse(dragged.dataset.item).newIndex;
-        const taIndex = JSON.parse(e.target.dataset.item).newIndex;
-        const animateName = dgIndex > taIndex ? "drag-up" : "drag-down";
-
-        if (over && e.target.dataset.item !== over.dataset.item) {
-            over.classList.remove("drag-up", "drag-down");
-        }
-
-        if (!e.target.classList.contains(animateName)) {
-            e.target.classList.add(animateName);
-            setOver(e.target);
-        }
+    const onShowIconHandler = (index) => {
+        setCIndex(index == cIndex ? -1 : index);
     };
 
     return (
-        <div className="items">
+        <div className={`card widget-todo ${classes.card}`}>
+            <div className="card-header border-bottom d-flex justify-content-between align-items-center">
+                <h3>{`dsfs sdf sdf sdf s fs df sd fsd f`}</h3>
+            </div>
             <Pending
+                cIndex={cIndex}
                 items={items}
-                dragEnd={onDragEnd}
-                dragStart={onDragStart}
-                dragOver={onDragOver}
+                setItems={setItems}
+                moveItem={onMoveItemHandler}
+                showIcon={onShowIconHandler}
             />
         </div>
     );

@@ -16,6 +16,7 @@ class TaskItem extends Model
         'task_id',
         'name',
         'completed',
+        'order'
     ];
 
     protected $hidden = [

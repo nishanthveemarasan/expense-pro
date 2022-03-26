@@ -41,6 +41,9 @@ Route::middleware(['auth:api'])->group(function () {
         Route::get('/{task:uuid}', [TaskController::class, 'completeTask']);
         Route::post('/{task:uuid}/add', [TaskController::class, 'addSubTaskItem']);
         Route::patch('/{task:uuid}/item/{item:uuid}', [TaskController::class, 'updateItem']);
+        Route::patch('/{task:uuid}/update', [TaskController::class, 'updateItems']);
+        Route::delete('/{task:uuid}/delete/{item:uuid}', [TaskController::class, 'deleteTaskItem']);
+        Route::patch('/{task:uuid}/update/{item:uuid}/content', [TaskController::class, 'updateItemContent']);
     });
     Route::prefix('savings')->group(function () {
         Route::get('/', [SavingController::class, 'index']);

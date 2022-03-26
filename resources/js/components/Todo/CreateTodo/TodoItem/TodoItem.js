@@ -8,6 +8,7 @@ import { todoStoreAction } from "../../../Expense/Store/Store";
 const TodoItem = (props) => {
     const dispatch = useDispatch();
     const [item, setItem] = useState("");
+    const [count, setCount] = useState(1);
     const mapStateToProps = (state) => {
         return {
             item: state.todoStore.todoTask,
@@ -27,9 +28,11 @@ const TodoItem = (props) => {
         const data = {
             uuid: uuid(),
             name: item,
+            order: count,
             completed: false,
         };
         dispatch(todoStoreAction.addItemToTask({ data }));
+        setCount((prevState) => prevState + 1);
         setItem("");
     };
     return (

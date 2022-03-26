@@ -30,6 +30,7 @@ class CreateTaskRequest extends FormRequest
             'date'  => ['required', 'date'],
             'type' => ['required', 'string'],
             'items.*.name' => ['required'],
+            'items.*.order' => ['required'],
             'items.*.completed' => ['required', 'boolean'],
         ];
     }

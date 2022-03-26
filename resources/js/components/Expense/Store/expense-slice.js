@@ -8,6 +8,12 @@ import {
 const initialState = {
     showModal: false,
     appToken: null,
+    deleteModal: {
+        open: false,
+        heading: "",
+        body: "",
+        data: {},
+    },
     summary: {
         today: {
             income: 0,
@@ -359,6 +365,14 @@ const expenseSlice = createSlice({
             state.errorModal = {
                 open: true,
                 error: action.payload.error,
+            };
+        },
+        onDeleteModal(state, action) {
+            state.deleteModal = {
+                open: action.payload.open,
+                heading: action.payload.heading,
+                body: action.payload.body,
+                data: action.payload.data,
             };
         },
     },

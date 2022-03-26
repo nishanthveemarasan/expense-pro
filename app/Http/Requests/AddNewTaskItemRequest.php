@@ -27,6 +27,7 @@ class AddNewTaskItemRequest extends FormRequest
         return [
             'uuid' => ['required'],
             'name' => ['required', 'string'],
+            'order' => ['required', 'numeric'],
             'completed' => ['required', 'boolean'],
         ];
     }
