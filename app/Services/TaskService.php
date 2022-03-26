@@ -63,6 +63,13 @@ class TaskService
 
         return ['data' => 'Task is updated Successfully'];
     }
+    public function deleteTask(Task $task)
+    {
+        $task->delete();
+        $task->refresh();
+
+        return ['data' => 'Task is updated Successfully'];
+    }
 
     public function updateItems($data, Task $task)
     {

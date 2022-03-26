@@ -43,6 +43,7 @@ Route::middleware(['auth:api'])->group(function () {
         Route::patch('/{task:uuid}/item/{item:uuid}', [TaskController::class, 'updateItem']);
         Route::patch('/{task:uuid}/update', [TaskController::class, 'updateItems']);
         Route::delete('/{task:uuid}/delete/{item:uuid}', [TaskController::class, 'deleteTaskItem']);
+        Route::delete('/{task:uuid}/delete', [TaskController::class, 'deleteTask']);
         Route::patch('/{task:uuid}/update/{item:uuid}/content', [TaskController::class, 'updateItemContent']);
     });
     Route::prefix('savings')->group(function () {

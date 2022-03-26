@@ -66,6 +66,7 @@ const initialState = {
         error: "",
         showHeading: false,
         showButton: false,
+        reload: false,
     },
     payment: {
         type: "expense",
@@ -365,6 +366,7 @@ const expenseSlice = createSlice({
             state.errorModal = {
                 open: true,
                 error: action.payload.error,
+                reload: action.payload.reload ? action.payload.reload : false,
             };
         },
         onDeleteModal(state, action) {

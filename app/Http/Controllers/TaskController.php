@@ -93,6 +93,19 @@ class TaskController extends Controller
 
         return $this->result;
     }
+    public function deleteTask(Task $task)
+    {
+        try {
+            DB::beginTransaction();
+            $this->result = $this->taskService->deleteTask($task);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->result['error'] = $e->getMessage();
+        }
+
+        return $this->result;
+    }
 
 
     public function completeTask(Task $task)

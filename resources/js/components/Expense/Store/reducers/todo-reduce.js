@@ -23,8 +23,22 @@ export const addNewTask = (data, refresh, token) => {
             const response = await request.json();
 
             if (response.errors) {
-                alert(response.message);
-                return;
+                dispatch(todoStoreAction.showModel());
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message}! please give the right input values`,
+                        reload: false,
+                    })
+                );
+            }
+            if (response.message) {
+                dispatch(todoStoreAction.showModel());
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: false,
+                    })
+                );
             }
             if (response.data) {
                 // console.log(response.data);
@@ -36,12 +50,13 @@ export const addNewTask = (data, refresh, token) => {
                 dispatch(todoStoreAction.showModel());
             }
         } catch (error) {
-            // console.log(error.message);
-            alert(
-                "Unknown error happened!! plese try again after page reloads!"
+            dispatch(todoStoreAction.showModel());
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Unknown error happened!! plese try again after page reloads!",
+                    reload: false,
+                })
             );
-            return;
-            // window.location.reload(false);
         }
     };
 };
@@ -65,20 +80,22 @@ export const updateTaskStatus = (data, token) => {
                 }
             );
             const response = await request.json();
-            // console.log(response);
+
             if (!response.data) {
-                alert(
-                    "Unknown errosssr happened!! plese try again after page reloads!"
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: true,
+                    })
                 );
-                // window.location.reload(false);
             }
         } catch (error) {
-            // console.log(error);
-            alert(
-                error.message ??
-                    "Unknown error happenedssss!! plese try again after page reloads!"
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: `${error.message} ! We are unable to process your request please try again`,
+                    reload: true,
+                })
             );
-            // window.location.reload(false);
         }
     };
 };
@@ -97,16 +114,22 @@ export const completeTaskStatus = (uuid, token) => {
             const response = await request.json();
 
             if (!response.data) {
-                alert(
-                    "Unknown error happened!! plese try again after page reloads!"
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${
+                            response.message ? response.message : ""
+                        } ! We are unable to process your request please try again`,
+                        reload: true,
+                    })
                 );
-                window.location.reload(false);
             }
         } catch (error) {
-            alert(
-                "Unknown error happened!! plese try again after page reloads!"
-            );
-            window.location.reload(false);
+            expenseStoreAction.onOpenErrorModal({
+                error: `${
+                    error.message ? error.message : ""
+                } ! We are unable to process your request please try again`,
+                reload: true,
+            });
         }
     };
 };
@@ -126,26 +149,30 @@ export const addTaskItemExistTask = (uuid, id, data, token) => {
             });
             const response = await request.json();
             if (response.errors) {
-                alert(
-                    `${response.message} to create Saving! Please give the right details`
-                );
                 dispatch(savingStoreAction.showModel());
-                return;
-            }
-            if (response.message) {
-                alert(response.message);
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! Please give the right data to add`,
+                        reload: false,
+                    })
+                );
+            } else if (response.message) {
                 dispatch(todoStoreAction.showModel());
-                return;
-            }
-            if (response.data) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! Please try again`,
+                        reload: false,
+                    })
+                );
             }
         } catch (error) {
-            alert(
-                error.message ??
-                    "Unknown error happened!! plese try again after page reloads!"
-            );
-
-            window.location.reload(false);
+            dispatch(todoStoreAction.showModel());
+            expenseStoreAction.onOpenErrorModal({
+                error: `${
+                    error.message ? error.message : ""
+                } ! We are unable to process your request please try again`,
+                reload: true,
+            });
         }
     };
 };
@@ -171,34 +198,27 @@ export const updateTaskItemsOrder = (data) => {
             if (response.errors) {
                 dispatch(
                     expenseStoreAction.onOpenErrorModal({
-                        error: `${response.message} to create Saving! Please give the right details`,
+                        error: `${response.message} ! Please give the right data to update order`,
+                        reload: true,
                     })
                 );
-                setTimeout(() => {
-                    window.location.reload(false);
-                }, 500);
-            }
-            if (response.message) {
+            } else if (response.message) {
                 dispatch(
                     expenseStoreAction.onOpenErrorModal({
-                        error: response.message,
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: true,
                     })
                 );
-                setTimeout(() => {
-                    window.location.reload(false);
-                }, 500);
             }
             if (response.data) {
             }
         } catch (error) {
-            dispatch(
-                expenseStoreAction.onOpenErrorModal({
-                    error: "Unknown error happened!! plese try again after page reloads!",
-                })
-            );
-            setTimeout(() => {
-                window.location.reload(false);
-            }, 500);
+            expenseStoreAction.onOpenErrorModal({
+                error: `${
+                    error.message ? error.message : ""
+                } ! We are unable to process your request please try again`,
+                reload: true,
+            });
         }
     };
 };
@@ -220,34 +240,27 @@ export const deleteTaskItemFromTask = (data) => {
             if (response.errors) {
                 dispatch(
                     expenseStoreAction.onOpenErrorModal({
-                        error: `${response.message} to create Saving! Please give the right details`,
+                        error: `${response.message} ! Please give the right data to delete`,
+                        reload: true,
                     })
                 );
-                setTimeout(() => {
-                    window.location.reload(false);
-                }, 500);
-            }
-            if (response.message) {
+            } else if (response.message) {
                 dispatch(
                     expenseStoreAction.onOpenErrorModal({
-                        error: response.message,
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: true,
                     })
                 );
-                setTimeout(() => {
-                    window.location.reload(false);
-                }, 500);
             }
             if (response.data) {
             }
         } catch (error) {
-            dispatch(
-                expenseStoreAction.onOpenErrorModal({
-                    error: "Unknown error happened!! plese try again after page reloads!",
-                })
-            );
-            setTimeout(() => {
-                window.location.reload(false);
-            }, 500);
+            expenseStoreAction.onOpenErrorModal({
+                error: `${
+                    error.message ? error.message : ""
+                } ! We are unable to process your request please try again`,
+                reload: true,
+            });
         }
     };
 };
@@ -272,22 +285,60 @@ export const UpdateTaskItemContent = (data) => {
             if (response.errors) {
                 dispatch(
                     expenseStoreAction.onOpenErrorModal({
-                        error: `${response.message} to create Saving! Please give the right details`,
+                        error: `${response.message} ! Please give the right data to update`,
+                        reload: true,
                     })
                 );
-                setTimeout(() => {
-                    window.location.reload(false);
-                }, 500);
+            } else if (response.message) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: true,
+                    })
+                );
+            }
+            if (response.data) {
+            }
+        } catch (error) {
+            expenseStoreAction.onOpenErrorModal({
+                error: `${
+                    error.message ? error.message : ""
+                } ! We are unable to process your request please try again`,
+                reload: true,
+            });
+        }
+    };
+};
+
+export const deleteTaskFromList = (data) => {
+    return async (dispatch) => {
+        const url = `${API_URL}/tasks/${data.uuid}/delete/`;
+
+        try {
+            const request = await fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${data.token}`,
+                },
+            });
+            const response = await request.json();
+            if (response.errors) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} to create Saving! Please give the right details`,
+                        reload: false,
+                    })
+                );
             }
             if (response.message) {
                 dispatch(
                     expenseStoreAction.onOpenErrorModal({
-                        error: response.message,
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: true,
                     })
                 );
-                setTimeout(() => {
-                    window.location.reload(false);
-                }, 500);
             }
             if (response.data) {
             }
@@ -295,11 +346,9 @@ export const UpdateTaskItemContent = (data) => {
             dispatch(
                 expenseStoreAction.onOpenErrorModal({
                     error: "Unknown error happened!! plese try again after page reloads!",
+                    reload: true,
                 })
             );
-            setTimeout(() => {
-                window.location.reload(false);
-            }, 500);
         }
     };
 };

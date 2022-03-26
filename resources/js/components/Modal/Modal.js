@@ -13,6 +13,7 @@ const Modal = (props) => {
         return {
             open: state.expenseStore.errorModal.open,
             error: state.expenseStore.errorModal.error,
+            reload: state.expenseStore.errorModal.reload,
         };
     };
 
@@ -25,6 +26,9 @@ const Modal = (props) => {
     };
 
     const onCloseModal = () => {
+        if (states.reload) {
+            window.location.reload(false);
+        }
         dispatch(expenseStoreAction.onCloseErrorModal());
     };
     return (

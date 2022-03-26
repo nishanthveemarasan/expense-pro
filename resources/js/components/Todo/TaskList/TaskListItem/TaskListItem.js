@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     addTaskItemExistTask,
+    deleteTaskFromList,
     deleteTaskItemFromTask,
     UpdateTaskItemContent,
     updateTaskItemsOrder,
@@ -239,6 +240,7 @@ const TaskListItem = (props) => {
     };
 
     const onOpenDeleteModal = () => {
+        setCIndex(-1);
         const data = {
             id: props.parendId,
             uuid: props.parentUuid,
@@ -254,21 +256,17 @@ const TaskListItem = (props) => {
     };
 
     const onDeleteActionHandler = () => {
-        // console.log(state.deleteModalData);
-
         dispatch(
             todoStoreAction.updateTaskArray({
                 id: state.deleteModalData.id,
             })
         );
-        dispatch(
-            expenseStoreAction.onDeleteModal({
-                heading: " ",
-                body: "",
-                open: false,
-                data: {},
-            })
-        );
+        const data = {
+            uuid: state.deleteModalData.uuid,
+            token: state.token,
+        };
+
+        dispatch(deleteTaskFromList(data));
     };
 
     return (

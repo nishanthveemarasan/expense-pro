@@ -55,6 +55,10 @@
     }
 }
 
+.confirm {
+    margin-right: 10px;
+}
+
 @keyframes closeModal {
     0% {
         opacity: 1;

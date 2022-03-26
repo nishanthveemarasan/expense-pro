@@ -7,7 +7,7 @@ import { expenseStoreAction } from "../Expense/Store/Store";
 
 import "./DeleteModal.css";
 
-const DeleteModal = ({ confirm, cancel }) => {
+const DeleteModal = ({ confirm }) => {
     const dispatch = useDispatch();
     const mapStateToProps = (state) => {
         return {
@@ -31,6 +31,19 @@ const DeleteModal = ({ confirm, cancel }) => {
                 heading: " ",
                 body: " ",
                 open: false,
+                data: {},
+            })
+        );
+    };
+
+    const onConfirmDeleteHandler = () => {
+        confirm();
+        dispatch(
+            expenseStoreAction.onDeleteModal({
+                heading: " ",
+                body: " ",
+                open: false,
+                data: {},
             })
         );
     };
@@ -50,7 +63,12 @@ const DeleteModal = ({ confirm, cancel }) => {
                                 <div>{states.heading} </div>
                             </div>
                             <div className="body">{states.body}</div>
-                            <Button variant="danger" onClick={confirm}>
+
+                            <Button
+                                variant="danger"
+                                onClick={onConfirmDeleteHandler}
+                                className="confirm"
+                            >
                                 Confirm
                             </Button>
                             <Button variant="primary" onClick={onCloseModal}>
