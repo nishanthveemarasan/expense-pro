@@ -29,6 +29,7 @@ class TaskItem extends Model
 
     protected $casts = [
         'completed' => 'boolean',
+        "order" => 'integer',
     ];
 
     /**

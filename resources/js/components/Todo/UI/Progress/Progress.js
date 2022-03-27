@@ -6,6 +6,7 @@ import { todoStoreAction } from "../../../Expense/Store/Store";
 const Progress = ({ total, completed, id, uuid }) => {
     const dispatch = useDispatch();
     const [percentage, setPercentage] = useState("");
+    const [color, setColor] = useState("primary");
     const mapStateToProps = (state) => {
         return {
             showTasks: state.todoStore.showTasks,
@@ -17,12 +18,23 @@ const Progress = ({ total, completed, id, uuid }) => {
         // console.log(total, completed);
         const percentage = Math.floor((completed / total) * 100);
         if (percentage == 100 && state.showTasks != "completed") {
-            // console.log("its hear");
+            setColor("success");
             dispatch(completeTaskStatus(uuid, state.token));
             dispatch(todoStoreAction.completeToDoList({ id, value: true }));
         }
+
+        if (percentage == 100) {
+            setColor("success");
+        }
         setPercentage(percentage);
     }, [total, completed, state.showTasks]);
-    return <ProgressBar animated now={percentage} label={`${percentage}%`} />;
+    return (
+        <ProgressBar
+            animated
+            variant={color}
+            now={percentage}
+            label={`${percentage}%`}
+        />
+    );
 };
 export default Progress;

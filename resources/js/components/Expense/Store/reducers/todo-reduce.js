@@ -312,7 +312,7 @@ export const UpdateTaskItemContent = (data) => {
 
 export const deleteTaskFromList = (data) => {
     return async (dispatch) => {
-        const url = `${API_URL}/tasks/${data.uuid}/delete/`;
+        const url = `${API_URL}/tasks/${data.uuid}/delete`;
 
         try {
             const request = await fetch(url, {

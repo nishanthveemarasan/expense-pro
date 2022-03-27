@@ -121,6 +121,7 @@ const TaskListItem = (props) => {
                 id: props.parendId,
                 items: copyArray,
             };
+            console.log(copyArray);
             dispatch(todoStoreAction.updateTaskItemsArray(update));
             setCIndex(index - 1);
 
