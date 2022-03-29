@@ -124,7 +124,6 @@ const AllSummary = ({ data }) => {
         setCurrentIndex(currentIndex == index ? -1 : index);
     };
     const removeItemFromFilteredData = (singleData, updatedAmount) => {
-        console.log(singleData);
         setMainData((prevState) => {
             const copyArray = prevState.slice();
             const findDataIndex = copyArray.findIndex(

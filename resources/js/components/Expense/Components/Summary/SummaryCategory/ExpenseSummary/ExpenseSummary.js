@@ -20,6 +20,8 @@ let expense;
 const ExpenseSummary = ({ data, change }) => {
     const [currentIndex, setCurrentIndex] = useState(-1);
     const [content, setContent] = useState("datewise");
+    const [showCategory, setShowCategory] = useState(false);
+    const [categoryKey, setCategoryKey] = useState("");
     const [filteredData, setFilteredData] = useState({
         data: [],
         total: 0,
