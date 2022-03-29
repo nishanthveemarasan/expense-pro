@@ -1,4 +1,4 @@
-.totalSummary {
+.totalExpenseSummary {
     position: sticky;
     top: 0;
     display: flex;
@@ -8,6 +8,23 @@
     margin: 3% 0;
     padding: 0 20px;
     height: 70px;
+    color: white;
+    width: 100%;
+    z-index: 110;
+    font-size: 1.5rem;
+}
+
+.totalIncomeSummary {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3% 0;
+    padding: 0 20px;
+    height: 70px;
+    z-index: 110;
     background-color: rgb(1, 49, 1);
     color: white;
     width: 100%;

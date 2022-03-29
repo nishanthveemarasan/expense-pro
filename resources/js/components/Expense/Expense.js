@@ -15,6 +15,7 @@ import { SwitchTransition, Transition } from "react-transition-group";
 import { defaultStyle, duration, findStyles } from "./Components/style";
 import Backdrop from "../Backdrop/Backdrop";
 import Modal from "../Modal/Modal";
+import SummaryContent from "./Components/Summary/SummaryContent/SummaryContent";
 
 const Expense = (props) => {
     const dispatch = useDispatch();
@@ -48,6 +49,8 @@ const Expense = (props) => {
                                     <Payment />
                                 ) : states.mainPage == "category" ? (
                                     <Category />
+                                ) : states.mainPage == "summary" ? (
+                                    <SummaryContent />
                                 ) : states.mainPage == "makeRecurring" ? (
                                     <MakeRecurring />
                                 ) : states.mainPage == "editRecurring" ? (

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use PDF;
-use App\Http\Requests\CreateCategoryRequest;
-use App\Http\Requests\CreateExpenseRequest;
 use Exception;
+use App\Models\Expense;
 use Illuminate\Http\Request;
 use App\Services\ExpenseService;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\CreateExpenseRequest;
+use App\Http\Requests\CreateCategoryRequest;
 
 class ExpenseController extends Controller
 {
@@ -52,6 +53,19 @@ class ExpenseController extends Controller
         try {
             DB::beginTransaction();
             $this->result = $this->expenseService->category($request->validated());
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->result['error'] = $e->getMessage();
+        }
+
+        return $this->result;
+    }
+    public function delete(Expense $expense)
+    {
+        try {
+            DB::beginTransaction();
+            $this->result = $this->expenseService->delete($expense);
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();

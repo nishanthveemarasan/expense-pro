@@ -3,6 +3,8 @@ import {
     getCategoryNameArray,
     getDate,
     getExpenseSummary,
+    removeItemFromExpenseArray,
+    updateExpenseSummary,
 } from "../../Helper/Helper";
 
 const initialState = {
@@ -51,6 +53,10 @@ const initialState = {
     },
     mainPage: "expenseCategory",
     prevMainPage: null,
+    summaryContent: {
+        page: "",
+        heading: "",
+    },
     action: "",
     createDebt: "",
     dateGroup: getDate(),
@@ -170,6 +176,13 @@ const expenseSlice = createSlice({
             state.recurringPage = {
                 page: "main",
                 data: {},
+            };
+        },
+        UpdateSummaryContentPage(state, action) {
+            state.mainPage = action.payload.mainPage;
+            state.summaryContent = {
+                page: action.payload.page,
+                heading: action.payload.heading,
             };
         },
         clearSelectedCategory(state, action) {
@@ -376,6 +389,24 @@ const expenseSlice = createSlice({
                 body: action.payload.body,
                 data: action.payload.data,
             };
+        },
+
+        removeExpenseSummaryAndData(state, action) {
+            const copySummary = { ...state.summary };
+            const copyExpenseData = state.payment.data.expense.slice();
+
+            const latestExpenseData = removeItemFromExpenseArray(
+                copyExpenseData,
+                action.payload.data
+            );
+            state.payment.data.expense = latestExpenseData;
+            const newSummary = updateExpenseSummary(
+                copySummary,
+                state.dateGroup,
+                action.payload.data,
+                action.payload.updatedAmount
+            );
+            state.summary = newSummary;
         },
     },
 });

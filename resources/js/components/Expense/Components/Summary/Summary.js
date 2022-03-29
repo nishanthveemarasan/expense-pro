@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { expenseStoreAction } from "../../Store/Store";
 import ShowSingleBox from "./showSingleBox/ShowSingleBox";
 import classes from "./Summary.module.css";
 import AllSummary from "./SummaryCategory/AllSummary/AllSummary";
@@ -7,7 +8,7 @@ import ExpenseSummary from "./SummaryCategory/ExpenseSummary/ExpenseSummary";
 import IncomeSummary from "./SummaryCategory/IncomeSummary/IncomeSummary";
 import SummaryCategory from "./SummaryCategory/SummaryCategory";
 const Summary = (props) => {
-    const [content, setContent] = useState("summary");
+    const dispatch = useDispatch();
     const mapStateToProps = (state) => {
         return {
             data: state.expenseStore.payment.data.expense,
@@ -15,33 +16,45 @@ const Summary = (props) => {
     };
     const state = useSelector(mapStateToProps);
 
-    const onPageChangeHandler = (page) => {
-        setContent(page);
+    const onPageChangeHandler = (page, heading) => {
+        dispatch(
+            expenseStoreAction.UpdateSummaryContentPage({
+                mainPage: "summary",
+                page,
+                heading,
+            })
+        );
     };
 
     return (
         <>
-            {content == "summary" && (
-                <>
-                    <SummaryCategory
-                        category="All Exepense & Income"
-                        click={onPageChangeHandler.bind(this, "all_summary")}
-                    />
-                    <SummaryCategory
-                        category="Expense Summary"
-                        click={onPageChangeHandler.bind(
-                            this,
-                            "expense_summary"
-                        )}
-                    />
-                    <SummaryCategory
-                        category="Income Summary"
-                        click={onPageChangeHandler.bind(this, "income_summary")}
-                    />
-                </>
-            )}
+            <SummaryCategory
+                category="All Exepense & Income"
+                click={onPageChangeHandler.bind(
+                    this,
+                    "all_summary",
+                    "All Exepense & Income"
+                )}
+            />
+            <SummaryCategory
+                category="Expense Summary"
+                click={onPageChangeHandler.bind(
+                    this,
+                    "expense_summary",
+                    "Expense Summary"
+                )}
+            />
+            <SummaryCategory
+                category="Income Summary"
+                click={onPageChangeHandler.bind(
+                    this,
+                    "income_summary",
+                    "Income Summary"
+                )}
+            />
+        </>
 
-            {content == "all_summary" && (
+        /* {content == "all_summary" && (
                 <>
                     <AllSummary
                         data={state.data}
@@ -64,8 +77,7 @@ const Summary = (props) => {
                         change={onPageChangeHandler}
                     />
                 </>
-            )}
-        </>
+            )} */
     );
 };
 

@@ -149,7 +149,7 @@ export const editExistingRecurringPayment = (data, token) => {
                 return;
             }
             if (response.data) {
-               dispatch(
+                dispatch(
                     expenseStoreAction.updateExistingRecurringData(response)
                 );
                 dispatch(expenseStoreAction.showModal());
@@ -162,5 +162,11 @@ export const editExistingRecurringPayment = (data, token) => {
             return;
             // window.location.reload(false);
         }
+    };
+};
+
+export const removeExpenseSummaryAndData = (data) => {
+    return (dispatch) => {
+        dispatch(expenseStoreAction.removeExpenseSummaryAndData(data));
     };
 };

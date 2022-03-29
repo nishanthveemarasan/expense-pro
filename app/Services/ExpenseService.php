@@ -54,4 +54,10 @@ class ExpenseService
             return ['data' => $category];
         }
     }
+
+    public function delete(Expense $expense)
+    {
+        $expense->delete();
+        return ['data' => 'Expense is updated Successfully'];
+    }
 }

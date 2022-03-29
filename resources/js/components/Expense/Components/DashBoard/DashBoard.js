@@ -22,10 +22,11 @@ const DashBoard = (props) => {
         };
     };
     const state = useSelector(mapStateToProps);
-    // console.log(state.date);
+    // console.log(state.expenseData);
     const changeChartKeyHandler = (chartKey) => {
         dispatch(expenseStoreAction.chageChartFilterKey({ chartKey }));
     };
+    // console.log(state.expense, state.date);
     return (
         <>
             {Object.keys(state.expense).length > 0 && (
