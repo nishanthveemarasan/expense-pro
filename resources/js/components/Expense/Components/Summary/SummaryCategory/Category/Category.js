@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import classes from "./Category.module.css";
 
-const Category = (props) => {
-    const [style, setStyle] = useState(1);
+const Category = ({ styleNum, change }) => {
     const changeStyleNumber = (num, dateType) => {
-        setStyle(num);
-        props.change(dateType);
+        change(dateType, num);
     };
 
     return (
@@ -13,8 +11,8 @@ const Category = (props) => {
             <span
                 className={classes.boxOne}
                 style={{
-                    color: style == 1 ? "white" : "",
-                    backgroundColor: style == 1 ? "blue" : "",
+                    color: styleNum == 1 ? "white" : "",
+                    backgroundColor: styleNum == 1 ? "blue" : "",
                 }}
                 onClick={changeStyleNumber.bind(this, 1, "All")}
             >
@@ -23,8 +21,8 @@ const Category = (props) => {
             <span
                 className={classes.boxTwo}
                 style={{
-                    color: style == 2 ? "white" : "",
-                    backgroundColor: style == 2 ? "blue" : "",
+                    color: styleNum == 2 ? "white" : "",
+                    backgroundColor: styleNum == 2 ? "blue" : "",
                 }}
                 onClick={changeStyleNumber.bind(this, 2, "thisWeek")}
             >
@@ -33,8 +31,8 @@ const Category = (props) => {
             <span
                 className={classes.boxThree}
                 style={{
-                    color: style == 3 ? "white" : "",
-                    backgroundColor: style == 3 ? "blue" : "",
+                    color: styleNum == 3 ? "white" : "",
+                    backgroundColor: styleNum == 3 ? "blue" : "",
                 }}
                 onClick={changeStyleNumber.bind(this, 3, "thisMonth")}
             >
@@ -43,8 +41,8 @@ const Category = (props) => {
             <span
                 className={classes.boxFour}
                 style={{
-                    color: style == 4 ? "white" : "",
-                    backgroundColor: style == 4 ? "blue" : "",
+                    color: styleNum == 4 ? "white" : "",
+                    backgroundColor: styleNum == 4 ? "blue" : "",
                 }}
                 onClick={changeStyleNumber.bind(this, 4, "thisYear")}
             >

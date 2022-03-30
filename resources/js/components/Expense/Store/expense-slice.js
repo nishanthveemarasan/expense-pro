@@ -5,9 +5,12 @@ import {
     getExpenseSummary,
     removeItemFromExpenseArray,
     updateExpenseSummary,
+    updateExpenseSummaryData,
+    updateItemInExpenseArray,
 } from "../../Helper/Helper";
 
 const initialState = {
+    sendEditExpenseRequest: true,
     showModal: false,
     appToken: null,
     deleteModal: {
@@ -405,6 +408,23 @@ const expenseSlice = createSlice({
                 state.dateGroup,
                 action.payload.data,
                 action.payload.updatedAmount
+            );
+            state.summary = newSummary;
+        },
+        updateExpenseSummaryAndData(state, action) {
+            const copySummary = { ...state.summary };
+            const copyExpenseData = state.payment.data.expense.slice();
+
+            const latestExpenseData = updateItemInExpenseArray(
+                copyExpenseData,
+                action.payload.data
+            );
+
+            state.payment.data.expense = latestExpenseData;
+            const newSummary = updateExpenseSummaryData(
+                copySummary,
+                state.dateGroup,
+                action.payload.data
             );
             state.summary = newSummary;
         },

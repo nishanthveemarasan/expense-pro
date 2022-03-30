@@ -19,11 +19,12 @@ import ShowCategoryWiseBox from "../../showCategoryWiseBox/showCategoryWiseBox";
 import MainNav from "../ContentNav/MainNav";
 import ShowCategorySummary from "../../ShowCategorySummary/ShowCategorySummary";
 import ShowCategoryContent from "./ShowCategoryContent";
+import SModel from "../../../../UI/Model/SModel";
 
 let summary;
 const AllSummary = ({ data }) => {
-    // console.log(data);
     const [content, setContent] = useState("datewise");
+    const [categoryStyleNo, setCategoryStyleNo] = useState(1);
     const [showCategory, setShowCategory] = useState(false);
     const [categoryKey, setCategoryKey] = useState("");
     const [currentIndex, setCurrentIndex] = useState(-1);
@@ -46,15 +47,16 @@ const AllSummary = ({ data }) => {
         summary = getTtotalExpenseIncome(data);
         setFilteredData({
             data,
-            expense: summary.expense,
-            income: summary.income,
-            balance: summary.expense + summary.income,
+            expense: parseFloat(summary.expense, 2),
+            income: parseFloat(summary.income, 2),
+            balance: parseFloat(summary.expense + summary.income, 2),
             category: summary.category,
         });
     }, []);
     // console.log(filteredData);
-    const onCategoryChange = (type) => {
+    const onCategoryChange = (type, num) => {
         setType(type);
+        setCategoryStyleNo(num);
         setIndex(0);
 
         if (mainData.length == 0) {
@@ -109,7 +111,7 @@ const AllSummary = ({ data }) => {
     const onDateCategoryChange = (i) => {
         setSelectedDate(selectedDateGroup[i]);
         const filter = filterAllSummaryDataByDateGroup(
-            data,
+            mainData,
             selectedDateGroup[i]
         );
         setIndex(i);
@@ -123,6 +125,7 @@ const AllSummary = ({ data }) => {
     const onChangeIndexHandler = (index) => {
         setCurrentIndex(currentIndex == index ? -1 : index);
     };
+
     const removeItemFromFilteredData = (singleData, updatedAmount) => {
         setMainData((prevState) => {
             const copyArray = prevState.slice();
@@ -154,6 +157,7 @@ const AllSummary = ({ data }) => {
         if (copyCategoryObject[singleData.category].data.length == 0) {
             setShowCategory(false);
             setCategoryKey("");
+            setCurrentIndex(-1);
         }
 
         copyCategoryObject[singleData.category].total += updatedAmount;
@@ -163,31 +167,27 @@ const AllSummary = ({ data }) => {
 
         const newExpense =
             singleData.type == "expense"
-                ? parseFloat(copyFilterData.expense, 2) +
-                  parseFloat(updatedAmount, 2)
+                ? copyFilterData.expense + updatedAmount
                 : copyFilterData.expense;
         const newIncome =
             singleData.type == "income"
-                ? parseFloat(copyFilterData.income, 2) +
-                  parseFloat(updatedAmount, 2)
+                ? copyFilterData.income + updatedAmount
                 : copyFilterData.income;
-        const newBalance =
-            parseFloat(copyFilterData.balance, 2) +
-            parseFloat(updatedAmount, 2);
+        const newBalance = copyFilterData.balance + updatedAmount;
 
         setFilteredData({
             data: copyFilterDataArray,
-            expense: newExpense,
-            income: newIncome,
-            balance: newBalance,
+            expense: parseFloat(newExpense, 2),
+            income: parseFloat(newIncome, 2),
+            balance: parseFloat(newBalance, 2),
             category: copyCategoryObject,
         });
     };
 
     const showCategoryContent = (key) => {
         setShowCategory(true);
+        setCurrentIndex(-1);
         setCategoryKey(key);
-        // console.log(filteredData.category[key]);
     };
 
     const onGoBackCategoryHandler = () => {
@@ -195,11 +195,79 @@ const AllSummary = ({ data }) => {
         setCurrentIndex(-1);
     };
 
+    const onUpdateExpenseHandler = (requestData) => {
+        setMainData((prevState) => {
+            const copyArray = prevState.slice();
+            const findDataIndex = copyArray.findIndex(
+                (el) => el.uuid == requestData.data.uuid
+            );
+            copyArray[findDataIndex] = {
+                ...copyArray[findDataIndex],
+                amount: requestData.newValue,
+            };
+            return [...copyArray];
+        });
+
+        const copyFilterData = { ...filteredData };
+        const copyFilterDataArray = copyFilterData.data.slice();
+        const findFilterDataIndex = copyFilterDataArray.findIndex(
+            (el) => el.uuid == requestData.data.uuid
+        );
+        copyFilterDataArray[findFilterDataIndex] = {
+            ...copyFilterDataArray[findFilterDataIndex],
+            amount: requestData.newValue,
+        };
+
+        const copyCategoryObject = copyFilterData.category;
+
+        const findCategoryIndex = copyCategoryObject[
+            requestData.data.category
+        ].data.findIndex((el) => el.uuid == requestData.data.uuid);
+
+        copyCategoryObject[requestData.data.category].data[findCategoryIndex] =
+            {
+                ...copyCategoryObject[requestData.data.category].data[
+                    findCategoryIndex
+                ],
+                amount: requestData.newValue,
+            };
+
+        let updatedAmount =
+            requestData.data.type == "expense"
+                ? Math.abs(requestData.data.amount) + requestData.newValue
+                : requestData.newValue - requestData.data.amount;
+
+        copyCategoryObject[requestData.data.category].total += updatedAmount;
+
+        const newExpense =
+            requestData.data.type == "expense"
+                ? parseFloat(copyFilterData.expense, 2) + updatedAmount
+                : copyFilterData.expense;
+
+        const newIncome =
+            requestData.data.type == "income"
+                ? parseFloat(copyFilterData.income, 2) + updatedAmount
+                : copyFilterData.income;
+        const newBalance = copyFilterData.balance + updatedAmount;
+
+        setFilteredData({
+            data: copyFilterDataArray,
+            expense: parseFloat(newExpense, 2),
+            income: parseFloat(newIncome, 2),
+            balance: parseFloat(newBalance, 2),
+            category: copyCategoryObject,
+        });
+    };
+
     return (
         <>
+            <SModel />
             {!showCategory && (
                 <>
-                    <Category change={onCategoryChange} />
+                    <Category
+                        change={onCategoryChange}
+                        styleNum={categoryStyleNo}
+                    />
 
                     {selectedDateGroup.length > 0 && (
                         <DateCategory
@@ -229,7 +297,7 @@ const AllSummary = ({ data }) => {
                         </div>
                     )}
                     {content == "datewise" && (
-                        <>
+                        <div style={{ marginTop: "20px" }}>
                             {filteredData.data.map((el, i) => {
                                 return (
                                     <ShowSingleBox
@@ -239,10 +307,11 @@ const AllSummary = ({ data }) => {
                                         currentIndex={currentIndex}
                                         changeIndex={onChangeIndexHandler}
                                         removeItem={removeItemFromFilteredData}
+                                        update={onUpdateExpenseHandler}
                                     />
                                 );
                             })}
-                        </>
+                        </div>
                     )}
                     {content == "categorywise" && (
                         <ShowCategoryWiseBox
@@ -263,6 +332,7 @@ const AllSummary = ({ data }) => {
                         currentIndex={currentIndex}
                         changeIndex={onChangeIndexHandler}
                         removeItem={removeItemFromFilteredData}
+                        update={onUpdateExpenseHandler}
                     />
                 </>
             )}

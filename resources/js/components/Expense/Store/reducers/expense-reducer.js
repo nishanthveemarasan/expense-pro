@@ -166,7 +166,114 @@ export const editExistingRecurringPayment = (data, token) => {
 };
 
 export const removeExpenseSummaryAndData = (data) => {
-    return (dispatch) => {
-        dispatch(expenseStoreAction.removeExpenseSummaryAndData(data));
+    return async (dispatch) => {
+        const url = `${API_URL}/expenses/${data.data.uuid}/delete`;
+
+        try {
+            dispatch(expenseStoreAction.showModal());
+            dispatch(expenseStoreAction.removeExpenseSummaryAndData(data));
+
+            const request = await fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${data.token}`,
+                },
+            });
+            const response = await request.json();
+
+            if (response.errors) {
+                dispatch(expenseStoreAction.showModal());
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: true,
+                    })
+                );
+            }
+            if (response.message) {
+                dispatch(expenseStoreAction.showModal());
+                console.log("asdasd");
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: true,
+                    })
+                );
+            }
+            if (response.data) {
+                dispatch(expenseStoreAction.showModal());
+            }
+        } catch (error) {
+            dispatch(expenseStoreAction.showModal());
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: "Unknown error happened!! plese try again after page reloads!",
+                    reload: true,
+                })
+            );
+        }
     };
+};
+
+export const updateExpenseSummaryAndData = (data) => {
+    return (dispatch) => {
+        dispatch(expenseStoreAction.updateExpenseSummaryAndData(data));
+        const url = `${API_URL}/expenses/${data.data.data.uuid}/update`;
+        const requestData = {
+            amount: data.data.newValue,
+        };
+        console.log(url, requestData, data.token);
+    };
+    // dispatch(expenseStoreAction.updateExpenseSummaryAndData(data));
+    // return async (dispatch) => {
+    //     // const url = `${API_URL}/expenses/${data.data.uuid}/delete`;
+
+    //     try {
+    //         dispatch(expenseStoreAction.showModal());
+    //         dispatch(expenseStoreAction.updateExpenseSummaryAndData(data));
+
+    //         const request = await fetch(url, {
+    //             method: "DELETE",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //                 Accept: "application/json",
+    //                 Authorization: `Bearer ${data.token}`,
+    //             },
+    //         });
+    //         const response = await request.json();
+
+    //         if (response.errors) {
+    //             dispatch(expenseStoreAction.showModal());
+    //             dispatch(
+    //                 expenseStoreAction.onOpenErrorModal({
+    //                     error: `${response.message} ! We are unable to process your request please try again`,
+    //                     reload: true,
+    //                 })
+    //             );
+    //         }
+    //         if (response.message) {
+    //             dispatch(expenseStoreAction.showModal());
+    //             console.log("asdasd");
+    //             dispatch(
+    //                 expenseStoreAction.onOpenErrorModal({
+    //                     error: `${response.message} ! We are unable to process your request please try again`,
+    //                     reload: true,
+    //                 })
+    //             );
+    //         }
+    //         if (response.data) {
+    //             dispatch(expenseStoreAction.showModal());
+    //         }
+    //     } catch (error) {
+    //         dispatch(expenseStoreAction.showModal());
+    //         dispatch(
+    //             expenseStoreAction.onOpenErrorModal({
+    //                 error: "Unknown error happened!! plese try again after page reloads!",
+    //                 reload: true,
+    //             })
+    //         );
+    //     }
+    // };
 };

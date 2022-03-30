@@ -4,10 +4,12 @@ const EInput = (props) => {
     return (
         <>
             <input
-                type="text"
+                type={props.type ? props.type : "text"}
                 id="roundText"
                 className="form-control round"
-                placeholder="Enter New Main Category"
+                placeholder={
+                    props.place ? props.place : "Enter New Main Category"
+                }
                 onChange={props.onChange}
                 value={props.value}
             ></input>

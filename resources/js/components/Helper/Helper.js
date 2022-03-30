@@ -1,5 +1,5 @@
-export const API_URL = "https://nkitservice.com/expensetest/api";
-// export const API_URL = "http://expenseapp.test/api";
+// export const API_URL = "https://nkitservice.com/expensetest/api";
+export const API_URL = "http://expenseapp.test/api";
 // export const API_URL = "https://nkitservice.com/expense/api";
 export const getDate = (newDate = "") => {
     const date = newDate ? new Date(newDate) : new Date();
@@ -444,9 +444,9 @@ export const filterAllSummaryDataByDateGroup = (dataArray, dateGroup) => {
 
     return {
         data: summary.data,
-        expense: summary.expense,
-        income: summary.income,
-        balance: summary.expense + summary.income,
+        expense: parseFloat(summary.expense, 2),
+        income: parseFloat(summary.income, 2),
+        balance: parseFloat(summary.expense + summary.income, 2),
         category: summary.category,
     };
 };
@@ -602,4 +602,86 @@ export const removeItemFromExpenseArray = (expenseData, singleData) => {
     expenseData.splice(findIndex, 1);
 
     return expenseData;
+};
+
+export const updateItemInExpenseArray = (expenseData, requestData) => {
+    const findIndex = expenseData.findIndex(
+        (el) => el.uuid == requestData.data.uuid
+    );
+    expenseData[findIndex] = {
+        ...expenseData[findIndex],
+        amount: requestData.newValue,
+    };
+    return expenseData;
+};
+
+export const updateExpenseSummaryData = (summary, dateGroup, requestData) => {
+    const date = requestData.data.date;
+    let updatedAmount = 0;
+    let chartAmount = 0;
+
+    if (requestData.data.type == "expense") {
+        updatedAmount =
+            Math.abs(requestData.data.amount) + requestData.newValue;
+        chartAmount =
+            updatedAmount > 0 ? -updatedAmount : Math.abs(updatedAmount);
+    } else {
+        updatedAmount = requestData.newValue - requestData.data.amount;
+    }
+
+    if (new Date(dateGroup.today.date).getTime() == new Date(date).getTime()) {
+        if (data.type == "expense") {
+            summary.today.expense += updatedAmount;
+            summary.today.balance += updatedAmount;
+            summary.today.chart[requestData.data.category] += chartAmount;
+        } else {
+            summary.today.income += updatedAmount;
+            summary.today.balance += updatedAmount;
+            summary.today.chart[requestData.data.category] += updatedAmount;
+        }
+    }
+    if (
+        new Date(date).getTime() >=
+            new Date(dateGroup.thisWeek.fWdate).getTime() &&
+        new Date(date).getTime() <=
+            new Date(dateGroup.thisWeek.lWdate).getTime()
+    ) {
+        if (requestData.data.type == "expense") {
+            summary.week.expense += updatedAmount;
+            summary.week.balance += updatedAmount;
+            summary.week.chart[requestData.data.category] += chartAmount;
+        } else {
+            summary.week.income += updatedAmount;
+            summary.week.balance += updatedAmount;
+            summary.week.chart[requestData.data.category] += updatedAmount;
+        }
+    }
+    if (
+        dateGroup.thisMonth.month == requestData.data.month &&
+        dateGroup.thisMonth.year == requestData.data.year
+    ) {
+        if (requestData.data.type == "expense") {
+            summary.month.expense += updatedAmount;
+            summary.month.balance += updatedAmount;
+            summary.month.chart[requestData.data.category] += chartAmount;
+        } else {
+            summary.month.income += updatedAmount;
+            summary.month.balance += updatedAmount;
+            summary.month.chart[requestData.data.category] += updatedAmount;
+        }
+    }
+    if (dateGroup.yearNumber == requestData.data.year) {
+        if (requestData.data.type == "expense") {
+            summary.year.expense += updatedAmount;
+            summary.year.balance += updatedAmount;
+            summary.year.chart[requestData.data.category] += chartAmount;
+        } else {
+            summary.year.income += updatedAmount;
+            summary.year.balance += updatedAmount;
+            summary.year.chart[requestData.data.category] += updatedAmount;
+        }
+    }
+
+    summary.balance += updatedAmount;
+    return summary;
 };

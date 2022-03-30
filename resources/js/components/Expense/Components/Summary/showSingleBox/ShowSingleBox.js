@@ -5,72 +5,121 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faFileSignature } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { removeExpenseSummaryAndData } from "../../../Store/reducers/expense-reducer";
+import { Transition } from "react-transition-group";
+import "./Transition.css";
+import Modal from "../../../../Modal/Modal";
+import EditExpenseItemModal from "../SummaryCategory/EditExpenseItemModal/EditExpenseItemModal";
 const ShowSingleBox = ({
     data,
     index,
     currentIndex,
     changeIndex,
     removeItem,
+    update,
 }) => {
-    const [clicked, setClicked] = useState(false);
+    const [EditModal, SetEditModal] = useState({
+        show: false,
+        value: "",
+    });
     const dispatch = useDispatch();
     const mapStateToProps = (state) => {
         return {
             token: state.expenseStore.appToken,
+            date: state.expenseStore.dateGroup,
         };
     };
+    const transitionStyles = {
+        entering: "actionIcons",
+        entered: "actionIcons actionIconsShow",
+        exiting: "actionIcons actionIconsHide",
+    };
+
     const state = useSelector(mapStateToProps);
+    // console.log(state.date);
     const onDeleteHandler = () => {
         const prepareData = {
             data,
             updatedAmount:
                 data.type == "expense" ? Math.abs(data.amount) : -data.amount,
+            token: state.token,
         };
         dispatch(removeExpenseSummaryAndData(prepareData));
         removeItem(prepareData.data, prepareData.updatedAmount);
     };
 
+    const onHideEditModalHandler = () => {
+        SetEditModal({
+            show: false,
+            value: "",
+        });
+    };
+
+    const onOpenEditModalHandler = () => {
+        SetEditModal({
+            show: true,
+            value: "",
+        });
+    };
     return (
-        <div
-            className={
-                data.type == "expense"
-                    ? `${classes.outlineExpense} ${
-                          clicked ? classes.showactions : ""
-                      }`
-                    : `${classes.outlineIncome} ${
-                          clicked ? classes.showactions : ""
-                      }`
-            }
-            onClick={() => changeIndex(index)}
-        >
-            <div className={classes.details}>
-                <div>{getFirstLetterUpperWord(data.subCategory)}</div>
-            </div>
-            <div>
-                <span className={classes.date}>{data.date}</span>
-            </div>
+        <>
+            <Modal />
+            <EditExpenseItemModal
+                {...EditModal}
+                data={data}
+                modelClose={onHideEditModalHandler}
+                index={index}
+                update={update}
+                token={state.token}
+            />
             <div
-                className={classes.amount}
-                style={{ color: data.amount > 0 ? "green" : "red" }}
+                className={
+                    data.type == "expense"
+                        ? classes.outlineExpense
+                        : classes.outlineIncome
+                }
+                onClick={() => changeIndex(index)}
             >
-                {data.amount > 0
-                    ? `£${data.amount}`
-                    : `-£${Math.abs(data.amount)}`}
-            </div>
-            {index == currentIndex && (
-                <div className={classes.actionIconsShow}>
-                    <FontAwesomeIcon
-                        icon={faFileSignature}
-                        className={classes.edit}
-                    />
-                    <FontAwesomeIcon
-                        icon={faTrashAlt}
-                        className={classes.delete}
-                        onClick={onDeleteHandler}
-                    />
+                <div className={classes.details}>
+                    <div>{getFirstLetterUpperWord(data.subCategory)}</div>
                 </div>
-            )}
-        </div>
+                <div>
+                    <span className={classes.date}>{data.date}</span>
+                </div>
+                <div
+                    className={classes.amount}
+                    style={{ color: data.amount > 0 ? "green" : "red" }}
+                >
+                    {data.amount > 0
+                        ? `£${data.amount}`
+                        : `-£${Math.abs(data.amount)}`}
+                </div>
+                {
+                    <Transition
+                        in={index == currentIndex}
+                        timeout={300}
+                        mountOnEnter
+                        unmountOnExit
+                    >
+                        {(state) => {
+                            return (
+                                <div className={transitionStyles[state]}>
+                                    <FontAwesomeIcon
+                                        icon={faFileSignature}
+                                        className={classes.edit}
+                                        onClick={onOpenEditModalHandler}
+                                    />
+                                    <FontAwesomeIcon
+                                        icon={faTrashAlt}
+                                        className={classes.delete}
+                                        onClick={onDeleteHandler}
+                                    />
+                                </div>
+                            );
+                        }}
+                    </Transition>
+                }
+            </div>
+        </>
     );
 };
 export default ShowSingleBox;

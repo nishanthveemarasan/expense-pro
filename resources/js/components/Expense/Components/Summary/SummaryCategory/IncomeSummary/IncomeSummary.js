@@ -16,11 +16,16 @@ import DateCategory from "../Category/DateCategory";
 import ShowSummary from "../../showSummary/showSummary";
 import MainNav from "../ContentNav/MainNav";
 import ShowCategoryWiseBox from "../../showCategoryWiseBox/showCategoryWiseBox";
+import ShowCategoryContent from "../AllSummary/ShowCategoryContent";
 let income;
 
 const IncomeSummary = ({ data }) => {
     const [currentIndex, setCurrentIndex] = useState(-1);
+    const [categoryStyleNo, setCategoryStyleNo] = useState(1);
     const [content, setContent] = useState("datewise");
+    const [showCategory, setShowCategory] = useState(false);
+    const [categoryKey, setCategoryKey] = useState("");
+    const [mainData, setMainData] = useState(-1);
     const [filteredData, setFilteredData] = useState({
         data: [],
         total: 0,
@@ -32,57 +37,59 @@ const IncomeSummary = ({ data }) => {
     const [index, setIndex] = useState(0);
     useEffect(() => {
         income = filterDataByType(data, "income");
+        setMainData(income.data);
         setFilteredData({
             data: income.data,
-            total: income.total,
+            total: parseFloat(income.total, 2),
             category: income.category,
         });
-    }, [data]);
-    const mapStateToProps = (state) => {
-        return {
-            date: state.expenseStore.dateGroup,
-        };
-    };
+    }, []);
+    // const mapStateToProps = (state) => {
+    //     return {
+    //         date: state.expenseStore.dateGroup,
+    //     };
+    // };
 
-    const state = useSelector(mapStateToProps);
+    // const state = useSelector(mapStateToProps);
 
-    const onCategoryChange = (type) => {
+    const onCategoryChange = (type, num) => {
         setType(type);
         setIndex(0);
+        setCategoryStyleNo(num);
         let filterData = {};
-        if (income.data.length == 0) {
+        if (mainData.length == 0) {
             return;
         }
         if (type == "thisWeek") {
             const dateArray = getWeeklyArrayDetails(
-                income.data[income.data.length - 1].date
+                mainData[mainData.length - 1].date
             );
 
             setSelectedDateGroup(dateArray);
             setSelectedDate(dateArray[0]);
-            filterData = filterDataByDateGroup(income.data, dateArray[0]);
+            filterData = filterDataByDateGroup(mainData, dateArray[0]);
         } else if (type == "thisMonth") {
             const dateArray = getMonthlyArrayDetails(
-                income.data[income.data.length - 1].date
+                mainData[mainData.length - 1].date
             );
             setSelectedDateGroup(dateArray);
             setSelectedDate(dateArray[0]);
-            filterData = filterDataByDateGroup(income.data, dateArray[0]);
+            filterData = filterDataByDateGroup(mainData, dateArray[0]);
         } else if (type == "thisYear") {
             const dateArray = getYearlyArrayDetails(
-                income.data[income.data.length - 1].date
+                mainData[mainData.length - 1].date
             );
             setSelectedDateGroup(dateArray);
             setSelectedDate(dateArray[0]);
-            filterData = filterDataByDateGroup(income.data, dateArray[0]);
+            filterData = filterDataByDateGroup(mainData, dateArray[0]);
         } else {
             setSelectedDateGroup([]);
-            filterData = income;
+            filterData = filterDataByType(mainData, "income");
         }
 
         setFilteredData({
             data: filterData.data,
-            total: filterData.total,
+            total: parseFloat(filterData.total, 2),
             category: filterData.category,
         });
     };
@@ -90,10 +97,10 @@ const IncomeSummary = ({ data }) => {
         setSelectedDate(selectedDateGroup[i]);
         setIndex(i);
 
-        const data = filterDataByDateGroup(income.data, selectedDateGroup[i]);
+        const data = filterDataByDateGroup(mainData, selectedDateGroup[i]);
         setFilteredData({
             data: data.data,
-            total: data.total,
+            total: parseFloat(data.total, 2),
             category: data.category,
         });
     };
@@ -106,54 +113,192 @@ const IncomeSummary = ({ data }) => {
         setCurrentIndex(currentIndex == index ? -1 : index);
     };
 
+    const showCategoryContent = (key) => {
+        setShowCategory(true);
+        setCurrentIndex(-1);
+        setCategoryKey(key);
+        // console.log(filteredData.category[key]);
+    };
+
+    const onGoBackCategoryHandler = () => {
+        setShowCategory(false);
+        setCurrentIndex(-1);
+    };
+
+    const removeItemFromFilteredData = (singleData, updatedAmount) => {
+        setMainData((prevState) => {
+            const copyArray = prevState.slice();
+            const findDataIndex = copyArray.findIndex(
+                (el) => el.uuid == singleData.uuid
+            );
+            copyArray.splice(findDataIndex, 1);
+            return [...copyArray];
+        });
+
+        const copyFilterData = { ...filteredData };
+        const copyFilterDataArray = copyFilterData.data.slice();
+        const findFilterDataIndex = copyFilterDataArray.findIndex(
+            (el) => el.uuid == singleData.uuid
+        );
+        copyFilterDataArray.splice(findFilterDataIndex, 1);
+
+        const copyCategoryObject = copyFilterData.category;
+
+        const findCategoryIndex = copyCategoryObject[
+            singleData.category
+        ].data.findIndex((el) => el.uuid == singleData.uuid);
+
+        copyCategoryObject[singleData.category].data.splice(
+            findCategoryIndex,
+            1
+        );
+
+        if (copyCategoryObject[singleData.category].data.length == 0) {
+            setShowCategory(false);
+            setCategoryKey("");
+        }
+
+        copyCategoryObject[singleData.category].total += updatedAmount;
+        if (copyCategoryObject[singleData.category].data.length == 0) {
+            delete copyCategoryObject[singleData.category];
+        }
+
+        const newTotal = copyFilterData.total + updatedAmount;
+
+        setFilteredData({
+            data: copyFilterDataArray,
+            total: parseFloat(newTotal, 2),
+            category: copyCategoryObject,
+        });
+    };
+
+    const onUpdateExpenseHandler = (requestData) => {
+        setMainData((prevState) => {
+            const copyArray = prevState.slice();
+            const findDataIndex = copyArray.findIndex(
+                (el) => el.uuid == requestData.data.uuid
+            );
+            copyArray[findDataIndex] = {
+                ...copyArray[findDataIndex],
+                amount: requestData.newValue,
+            };
+            return [...copyArray];
+        });
+
+        const copyFilterData = { ...filteredData };
+        const copyFilterDataArray = copyFilterData.data.slice();
+        const findFilterDataIndex = copyFilterDataArray.findIndex(
+            (el) => el.uuid == requestData.data.uuid
+        );
+        copyFilterDataArray[findFilterDataIndex] = {
+            ...copyFilterDataArray[findFilterDataIndex],
+            amount: requestData.newValue,
+        };
+
+        const copyCategoryObject = copyFilterData.category;
+
+        const findCategoryIndex = copyCategoryObject[
+            requestData.data.category
+        ].data.findIndex((el) => el.uuid == requestData.data.uuid);
+
+        copyCategoryObject[requestData.data.category].data[findCategoryIndex] =
+            {
+                ...copyCategoryObject[requestData.data.category].data[
+                    findCategoryIndex
+                ],
+                amount: requestData.newValue,
+            };
+        let updatedAmount =
+            parseFloat(requestData.newValue, 2) -
+            parseFloat(requestData.data.amount, 2);
+
+        copyCategoryObject[requestData.data.category].total += updatedAmount;
+
+        const newTotal = copyFilterData.total + updatedAmount;
+        
+        setFilteredData({
+            data: copyFilterDataArray,
+            total: parseFloat(newTotal, 2),
+            category: copyCategoryObject,
+        });
+    };
+
     return (
         <>
-            <Category change={onCategoryChange} />
-            {selectedDateGroup.length > 0 && (
-                <DateCategory
-                    data={selectedDateGroup}
-                    change={onDateCategoryChange}
-                    index={index}
-                />
-            )}
-            {filteredData.data.length > 0 && (
-                <ShowSummary
-                    type="Total Income"
-                    amount={filteredData.total}
-                    viewType="income"
-                />
-            )}
-            <MainNav content={content} change={onContentChangeHandler} />
-
-            {filteredData.data.length == 0 && (
-                <div className={classes.emptyData}>
-                    {"No Income made "}
-                    {selectedDate?.dateStart &&
-                        `between ${selectedDate.dateStart} - ${selectedDate.dateEnd}`}
-                </div>
-            )}
-            {content == "datewise" && filteredData.data.length > 0 && (
+            {!showCategory && (
                 <>
-                    {filteredData.data.map((el, i) => {
-                        return (
-                            <ShowSingleBox
-                                data={el}
-                                key={i}
-                                index={i}
-                                currentIndex={currentIndex}
-                                changeIndex={onChangeIndexHandler}
+                    <Category
+                        change={onCategoryChange}
+                        styleNum={categoryStyleNo}
+                    />
+                    {selectedDateGroup.length > 0 && (
+                        <DateCategory
+                            data={selectedDateGroup}
+                            change={onDateCategoryChange}
+                            index={index}
+                        />
+                    )}
+                    {filteredData.data.length > 0 && (
+                        <ShowSummary
+                            type="Total Income"
+                            amount={filteredData.total}
+                            viewType="income"
+                        />
+                    )}
+                    <MainNav
+                        content={content}
+                        change={onContentChangeHandler}
+                    />
+
+                    {filteredData.data.length == 0 && (
+                        <div className={classes.emptyData}>
+                            {"No Income made "}
+                            {selectedDate?.dateStart &&
+                                `between ${selectedDate.dateStart} - ${selectedDate.dateEnd}`}
+                        </div>
+                    )}
+                    {content == "datewise" && filteredData.data.length > 0 && (
+                        <div style={{ marginTop: "20px" }}>
+                            {filteredData.data.map((el, i) => {
+                                return (
+                                    <ShowSingleBox
+                                        data={el}
+                                        key={i}
+                                        index={i}
+                                        currentIndex={currentIndex}
+                                        changeIndex={onChangeIndexHandler}
+                                        removeItem={removeItemFromFilteredData}
+                                        update={onUpdateExpenseHandler}
+                                    />
+                                );
+                            })}
+                        </div>
+                    )}
+
+                    {content == "categorywise" && filteredData.data.length > 0 && (
+                        <div style={{ marginTop: "20px" }}>
+                            <ShowCategoryWiseBox
+                                data={filteredData.category}
+                                balance={0}
+                                income={filteredData.total}
+                                showCategoryContent={showCategoryContent}
                             />
-                        );
-                    })}
+                        </div>
+                    )}
                 </>
             )}
-
-            {content == "categorywise" && filteredData.data.length > 0 && (
-                <ShowCategoryWiseBox
-                    data={filteredData.category}
-                    balance={0}
-                    income={filteredData.total}
-                />
+            {showCategory && (
+                <>
+                    <ShowCategoryContent
+                        goBack={onGoBackCategoryHandler}
+                        categoryData={filteredData.category[categoryKey]}
+                        categoryKey={categoryKey}
+                        currentIndex={currentIndex}
+                        changeIndex={onChangeIndexHandler}
+                        removeItem={removeItemFromFilteredData}
+                        update={onUpdateExpenseHandler}
+                    />
+                </>
             )}
         </>
     );

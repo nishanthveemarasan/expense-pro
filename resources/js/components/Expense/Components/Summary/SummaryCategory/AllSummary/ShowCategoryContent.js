@@ -11,6 +11,7 @@ const ShowCategoryContent = ({
     currentIndex,
     changeIndex,
     removeItem,
+    update,
 }) => {
     return (
         <>
@@ -27,14 +28,17 @@ const ShowCategoryContent = ({
             />
             {categoryData.data.map((el, i) => {
                 return (
-                    <ShowSingleBox
-                        data={el}
-                        key={i}
-                        index={i}
-                        currentIndex={currentIndex}
-                        changeIndex={changeIndex}
-                        removeItem={removeItem}
-                    />
+                    <div style={{ marginTop: "20px" }} key={i}>
+                        <ShowSingleBox
+                            data={el}
+                            key={i}
+                            index={i}
+                            currentIndex={currentIndex}
+                            changeIndex={changeIndex}
+                            removeItem={removeItem}
+                            update={update}
+                        />
+                    </div>
                 );
             })}
         </>
