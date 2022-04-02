@@ -13,6 +13,7 @@ const EditExpenseItemModal = ({
     token,
 }) => {
     const [amount, setAmount] = useState(0);
+    const [error, setError] = useState(false);
     const dispatch = useDispatch();
     useEffect(() => {
         const oldValue = Math.abs(data.amount);
@@ -21,10 +22,21 @@ const EditExpenseItemModal = ({
 
     const onChangeHandler = (e) => {
         const value = e.target.value;
+        if (value > 0 && error) {
+            setError(false);
+        }
         setAmount(value);
     };
 
     const onUpdateHandler = () => {
+        if (Math.abs(data.amount) == amount) {
+            modelClose();
+            return;
+        }
+        if (amount == 0) {
+            setError(true);
+            return;
+        }
         const newAmount =
             data.type == "income" ? Math.abs(amount) : -Math.abs(amount);
         const request = {
@@ -68,7 +80,9 @@ const EditExpenseItemModal = ({
                         <span style={{ color: "red" }}>{data.date}</span>
                     </div>
                     <div style={{ margin: "0 0 5px 0" }}>
-                        <span>Amount</span>
+                        <span style={{ color: error ? "red" : "black" }}>
+                            Amount
+                        </span>
                         <EInput
                             type="number"
                             place="Enter a Amount"

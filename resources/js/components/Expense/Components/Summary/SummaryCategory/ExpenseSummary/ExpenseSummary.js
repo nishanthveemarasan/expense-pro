@@ -52,6 +52,7 @@ const ExpenseSummary = ({ data, change }) => {
     // const state = useSelector(mapStateToProps);
 
     const onCategoryChange = (type, num) => {
+        setContent("datewise");
         if (mainData.length == 0) {
             return;
         }
@@ -59,7 +60,6 @@ const ExpenseSummary = ({ data, change }) => {
         let filterData = {};
         setCategoryStyleNo(num);
         setIndex(0);
-        // setSelectedDate(date);
 
         if (type == "thisWeek") {
             const dateArray = getWeeklyArrayDetails(

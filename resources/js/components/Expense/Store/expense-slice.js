@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+    addNewDataToExpenseData,
     getCategoryNameArray,
     getDate,
     getExpenseSummary,
@@ -10,6 +11,7 @@ import {
 } from "../../Helper/Helper";
 
 const initialState = {
+    expenseYearArray: [],
     sendEditExpenseRequest: true,
     showModal: false,
     appToken: null,
@@ -250,22 +252,30 @@ const expenseSlice = createSlice({
         },
         savePayment(state, action) {
             const copySummary = { ...state.summary };
+            const copyYearArray = state.expenseYearArray.slice();
+
             const getNewExpenseSummary = getExpenseSummary(
                 copySummary,
                 state.dateGroup,
-                action.payload.data
+                action.payload.data,
+                copyYearArray
             );
+            state.expenseYearArray = [...getNewExpenseSummary.yearArray];
+            // console.log(state.expenseYearArray);
             state.summary = {
                 ...state.summary,
-                ...getNewExpenseSummary,
+                ...getNewExpenseSummary.expenseSummary,
             };
             state.changeSummary = false;
             const copyArray = state.payment.data.expense.slice();
-            const newArray = action.payload.data.concat(copyArray);
-
+            const newArray = addNewDataToExpenseData(
+                copyArray,
+                action.payload.data
+            );
+            // const newArray = action.payload.data.concat(copyArray);
             state.payment = {
                 ...state.payment,
-                type: "",
+                type: "expense",
                 add: { selectedCategory: "", amount: "" },
                 transData: [],
                 data: {
@@ -278,20 +288,26 @@ const expenseSlice = createSlice({
         },
         calculateSummary(state, action) {
             const copySummary = { ...state.summary };
+            const copyYearArray = state.expenseYearArray.slice();
+            // console.log(copyYearArray);
             const getNewExpenseSummary = getExpenseSummary(
                 copySummary,
                 state.dateGroup,
-                state.payment.data.expense
+                state.payment.data.expense,
+                copyYearArray
             );
+            state.expenseYearArray = [...getNewExpenseSummary.yearArray];
+            // console.log(state.expenseYearArray);
             state.summary = {
                 ...state.summary,
-                ...getNewExpenseSummary,
+                ...getNewExpenseSummary.expenseSummary,
             };
         },
 
         showModal(state, action) {
             state.showModal = !state.showModal;
         },
+
         initialExpenseData(state, action) {
             state.payment.data.expense = action.payload.expense;
             state.payment.data.category = action.payload.category;
@@ -321,14 +337,19 @@ const expenseSlice = createSlice({
             const copyExpense = state.payment.data.expense.slice();
             if (action.payload.expense_data) {
                 const copySummary = { ...state.summary };
+                const copyYearArray = state.expenseYearArray.slice();
+                // console.log(copyYearArray);
                 const getNewExpenseSummary = getExpenseSummary(
                     copySummary,
                     state.dateGroup,
-                    [action.payload.expense_data]
+                    [action.payload.expense_data],
+                    copyYearArray
                 );
+                state.expenseYearArray = [...getNewExpenseSummary.yearArray];
+                // console.log(state.expenseYearArray);
                 state.summary = {
                     ...state.summary,
-                    ...getNewExpenseSummary,
+                    ...getNewExpenseSummary.expenseSummary,
                 };
                 state.changeSummary = false;
 

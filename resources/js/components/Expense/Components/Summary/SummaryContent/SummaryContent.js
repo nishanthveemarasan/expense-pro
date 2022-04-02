@@ -8,6 +8,8 @@ import { expenseStoreAction } from "../../../Store/Store";
 import AllSummary from "../SummaryCategory/AllSummary/AllSummary";
 import IncomeSummary from "../SummaryCategory/IncomeSummary/IncomeSummary";
 import ExpenseSummary from "../SummaryCategory/ExpenseSummary/ExpenseSummary";
+import MonthlyExpenseGraph from "../SummaryCategory/MonthlyExpenseGraph/MonthlyExpenseGraph";
+import WeeklyExpenseGraph from "../SummaryCategory/WeeklyExpenseGraph/WeeklyExpenseGraph";
 const SummaryContent = (props) => {
     const dispatch = useDispatch();
     const mapStateToProps = (state) => {
@@ -15,6 +17,7 @@ const SummaryContent = (props) => {
             summaryPage: state.expenseStore.summaryContent.page,
             summaryHeading: state.expenseStore.summaryContent.heading,
             data: state.expenseStore.payment.data.expense,
+            yearArray: state.expenseStore.expenseYearArray,
         };
     };
     const states = useSelector(mapStateToProps);
@@ -53,6 +56,22 @@ const SummaryContent = (props) => {
                 {states.summaryPage == "expense_summary" && (
                     <>
                         <ExpenseSummary data={states.data} />
+                    </>
+                )}
+                {states.summaryPage == "income_expense_monthly_graph" && (
+                    <>
+                        <MonthlyExpenseGraph
+                            data={states.data}
+                            yearArray={states.yearArray}
+                        />
+                    </>
+                )}
+                {states.summaryPage == "income_expense_weekly_graph" && (
+                    <>
+                        <WeeklyExpenseGraph
+                            data={states.data}
+                            yearArray={states.yearArray}
+                        />
                     </>
                 )}
             </div>

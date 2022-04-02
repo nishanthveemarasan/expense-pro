@@ -10,6 +10,7 @@ use App\Services\ExpenseService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateExpenseRequest;
 use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\UpdateExpenseRequest;
 
 class ExpenseController extends Controller
 {
@@ -66,6 +67,20 @@ class ExpenseController extends Controller
         try {
             DB::beginTransaction();
             $this->result = $this->expenseService->delete($expense);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->result['error'] = $e->getMessage();
+        }
+
+        return $this->result;
+    }
+
+    public function update(UpdateExpenseRequest $request, Expense $expense)
+    {
+        try {
+            DB::beginTransaction();
+            $this->result = $this->expenseService->update($request->validated(), $expense);
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();

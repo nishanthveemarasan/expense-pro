@@ -60,4 +60,9 @@ class ExpenseService
         $expense->delete();
         return ['data' => 'Expense is updated Successfully'];
     }
+    public function update($data, Expense $expense)
+    {
+        $expense->update($data);
+        return ['data' => 'Expense is updated Successfully'];
+    }
 }

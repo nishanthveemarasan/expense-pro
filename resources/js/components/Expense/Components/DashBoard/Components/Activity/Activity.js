@@ -1,4 +1,5 @@
 import React from "react";
+import { limitDemialPlaces } from "../../../../../Helper/Helper";
 import classes from "./Activity.module.css";
 const Activity = (props) => {
     // console.log(props.body);
@@ -11,10 +12,10 @@ const Activity = (props) => {
             </div>
             <div className={classes.activityValue}>
                 <div className={classes.income}>
-                    £{props.body.income.toFixed(2)}
+                    £{limitDemialPlaces(props.body.income)}
                 </div>
-                <div className={classes.expense}>{`£${Math.abs(
-                    props.body.expense.toFixed(2)
+                <div className={classes.expense}>{`£${limitDemialPlaces(
+                    Math.abs(props.body.expense)
                 )}`}</div>
                 <div
                     className={
@@ -24,8 +25,10 @@ const Activity = (props) => {
                     }
                 >
                     {props.body.balance > 0
-                        ? `£${props.body.balance.toFixed(2)}`
-                        : `-£${Math.abs(props.body.balance.toFixed(2))}`}
+                        ? `£${limitDemialPlaces(props.body.balance)}`
+                        : `-£${limitDemialPlaces(
+                              Math.abs(props.body.balance)
+                          )}`}
                 </div>
             </div>
         </div>

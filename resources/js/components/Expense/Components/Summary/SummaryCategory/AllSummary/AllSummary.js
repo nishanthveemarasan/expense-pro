@@ -23,6 +23,7 @@ import SModel from "../../../../UI/Model/SModel";
 
 let summary;
 const AllSummary = ({ data }) => {
+    // console.log(data);
     const [content, setContent] = useState("datewise");
     const [categoryStyleNo, setCategoryStyleNo] = useState(1);
     const [showCategory, setShowCategory] = useState(false);
@@ -55,6 +56,7 @@ const AllSummary = ({ data }) => {
     }, []);
     // console.log(filteredData);
     const onCategoryChange = (type, num) => {
+        setContent("datewise");
         setType(type);
         setCategoryStyleNo(num);
         setIndex(0);
@@ -258,7 +260,7 @@ const AllSummary = ({ data }) => {
             category: copyCategoryObject,
         });
     };
-
+    // console.log(filteredData.category);
     return (
         <>
             <SModel />

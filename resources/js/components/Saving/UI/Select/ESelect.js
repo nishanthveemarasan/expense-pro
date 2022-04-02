@@ -10,8 +10,8 @@ const ESelect = (props) => {
                 onChange={(e) => props.change(e, props.type)}
                 className={props.class}
             >
-                <option value="add">Saving</option>
-                <option value="pay">Remove from Saving</option>
+                <option value="add">Deposits</option>
+                <option value="pay">Withdrawals</option>
             </Form.Select>
         </>
     );

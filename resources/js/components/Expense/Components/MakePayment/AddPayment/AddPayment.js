@@ -149,7 +149,7 @@ const AddPayment = (props) => {
                         variant="primary"
                         size="md"
                         disabled={false}
-                        name="Save&New"
+                        name="Add New"
                         onClick={onAddPaymentItem}
                     />
                     <Ebutton

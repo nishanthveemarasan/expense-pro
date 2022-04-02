@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import SimplePieChart from "../../../../../Chart/PieChart/SimplePieChart";
 import {
     colorArray,
     getFirstLetterUpper,
     getIndex,
+    limitDemialPlaces,
     toLower,
 } from "../../../../Helper/Helper";
 import Avatar from "../../../UI/Avatar/Avatar";
 import ShowSingleBox from "../showSingleBox/ShowSingleBox";
+import Chart from "../SummaryCategory/AllSummary/Chart";
 import classes from "./ShowCategoryWiseBox.module.css";
 const ShowCategoryWiseBox = ({
     data,
@@ -14,6 +17,8 @@ const ShowCategoryWiseBox = ({
     income,
     showCategoryContent,
 }) => {
+    // console.log(data);
+    // console.log("dfsdf");
     const [cIndex, setCIndex] = useState(-1);
     const getPercentage = (total, key) => {
         if (toLower(key) == "income") {
@@ -21,13 +26,13 @@ const ShowCategoryWiseBox = ({
                 (Math.abs(total) / Math.abs(income)) *
                 100
             ).toFixed(2);
-            return `£${Math.abs(total)} / ${persentage}%`;
+            return `£${limitDemialPlaces(Math.abs(total))} / ${persentage}%`;
         } else {
             const persentage = (
                 (Math.abs(total) / Math.abs(balance)) *
                 100
             ).toFixed(2);
-            return `-£${Math.abs(total)} / ${persentage}%`;
+            return `-£${limitDemialPlaces(Math.abs(total))} / ${persentage}%`;
         }
     };
 
@@ -82,6 +87,9 @@ const ShowCategoryWiseBox = ({
                     </div>
                 );
             })}
+            <div className={classes.chart}>
+                <Chart data={data} />
+            </div>
         </>
     );
 };

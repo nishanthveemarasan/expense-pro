@@ -54,6 +54,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::prefix('expenses')->group(function () {
         Route::get('/', [ExpenseController::class, 'index']);
         Route::delete('/{expense:uuid}/delete', [ExpenseController::class, 'delete']);
+        Route::patch('/{expense:uuid}/update', [ExpenseController::class, 'update']);
         Route::post('/store', [ExpenseController::class, 'store']);
         Route::post('/category/store', [ExpenseController::class, 'category']);
     });

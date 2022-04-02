@@ -53,6 +53,7 @@ const IncomeSummary = ({ data }) => {
     // const state = useSelector(mapStateToProps);
 
     const onCategoryChange = (type, num) => {
+        setContent("datewise");
         setType(type);
         setIndex(0);
         setCategoryStyleNo(num);
@@ -215,7 +216,7 @@ const IncomeSummary = ({ data }) => {
         copyCategoryObject[requestData.data.category].total += updatedAmount;
 
         const newTotal = copyFilterData.total + updatedAmount;
-        
+
         setFilteredData({
             data: copyFilterDataArray,
             total: parseFloat(newTotal, 2),

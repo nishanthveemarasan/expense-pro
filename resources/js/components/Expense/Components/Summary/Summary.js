@@ -52,6 +52,22 @@ const Summary = (props) => {
                     "Income Summary"
                 )}
             />
+            <SummaryCategory
+                category="Expense&Income Monthly Graph"
+                click={onPageChangeHandler.bind(
+                    this,
+                    "income_expense_monthly_graph",
+                    "Monthly Graph"
+                )}
+            />
+            <SummaryCategory
+                category="Expense&Income Weekly Graph"
+                click={onPageChangeHandler.bind(
+                    this,
+                    "income_expense_weekly_graph",
+                    "Weekly Graph"
+                )}
+            />
         </>
 
         /* {content == "all_summary" && (

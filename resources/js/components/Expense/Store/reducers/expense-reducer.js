@@ -19,11 +19,23 @@ export const addNewTransaction = (data, token) => {
             const response = await request.json();
             if (response.errors) {
                 // console.log(response.errors);
-                alert(errors(response.errors));
+                // alert(errors(response.errors));
                 dispatch(expenseStoreAction.showModal());
-                return;
-            }
-            if (response.data) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! Please give the correct input to create expense`,
+                        reload: false,
+                    })
+                );
+            } else if (response.message) {
+                dispatch(expenseStoreAction.showModal());
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: false,
+                    })
+                );
+            } else if (response.data) {
                 // console.log(response.data);
                 dispatch(
                     expenseStoreAction.savePayment({
@@ -37,7 +49,12 @@ export const addNewTransaction = (data, token) => {
                 error.message ??
                     "Unknown error happened!! plese try again after page reloads!"
             );
-            window.location.reload(false);
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: `${error.message} ! Unknown error happened!! plese try again after page reloads!`,
+                    reload: true,
+                })
+            );
         }
     };
 };
@@ -194,7 +211,6 @@ export const removeExpenseSummaryAndData = (data) => {
             }
             if (response.message) {
                 dispatch(expenseStoreAction.showModal());
-                console.log("asdasd");
                 dispatch(
                     expenseStoreAction.onOpenErrorModal({
                         error: `${response.message} ! We are unable to process your request please try again`,
@@ -218,62 +234,47 @@ export const removeExpenseSummaryAndData = (data) => {
 };
 
 export const updateExpenseSummaryAndData = (data) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(expenseStoreAction.updateExpenseSummaryAndData(data));
         const url = `${API_URL}/expenses/${data.data.data.uuid}/update`;
         const requestData = {
             amount: data.data.newValue,
         };
-        console.log(url, requestData, data.token);
+        // console.log(url, requestData, data.token);
+        try {
+            const request = await fetch(url, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${data.token}`,
+                },
+                body: JSON.stringify(requestData),
+            });
+            const response = await request.json();
+            if (response.errors) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: true,
+                    })
+                );
+            }
+            if (response.message) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: true,
+                    })
+                );
+            }
+        } catch (error) {
+            dispatch(
+                expenseStoreAction.onOpenErrorModal({
+                    error: `${response.message} ! We are unable to process your request please try again`,
+                    reload: true,
+                })
+            );
+        }
     };
-    // dispatch(expenseStoreAction.updateExpenseSummaryAndData(data));
-    // return async (dispatch) => {
-    //     // const url = `${API_URL}/expenses/${data.data.uuid}/delete`;
-
-    //     try {
-    //         dispatch(expenseStoreAction.showModal());
-    //         dispatch(expenseStoreAction.updateExpenseSummaryAndData(data));
-
-    //         const request = await fetch(url, {
-    //             method: "DELETE",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 Accept: "application/json",
-    //                 Authorization: `Bearer ${data.token}`,
-    //             },
-    //         });
-    //         const response = await request.json();
-
-    //         if (response.errors) {
-    //             dispatch(expenseStoreAction.showModal());
-    //             dispatch(
-    //                 expenseStoreAction.onOpenErrorModal({
-    //                     error: `${response.message} ! We are unable to process your request please try again`,
-    //                     reload: true,
-    //                 })
-    //             );
-    //         }
-    //         if (response.message) {
-    //             dispatch(expenseStoreAction.showModal());
-    //             console.log("asdasd");
-    //             dispatch(
-    //                 expenseStoreAction.onOpenErrorModal({
-    //                     error: `${response.message} ! We are unable to process your request please try again`,
-    //                     reload: true,
-    //                 })
-    //             );
-    //         }
-    //         if (response.data) {
-    //             dispatch(expenseStoreAction.showModal());
-    //         }
-    //     } catch (error) {
-    //         dispatch(expenseStoreAction.showModal());
-    //         dispatch(
-    //             expenseStoreAction.onOpenErrorModal({
-    //                 error: "Unknown error happened!! plese try again after page reloads!",
-    //                 reload: true,
-    //             })
-    //         );
-    //     }
-    // };
 };

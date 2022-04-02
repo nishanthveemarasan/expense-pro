@@ -20,7 +20,12 @@ const Transaction = () => {
             <TransitionGroup>
                 {state.transactionData.map((transaction, i) => {
                     return (
-                        <CSSTransition id={i} classNames="item" timeout={500}>
+                        <CSSTransition
+                            id={i}
+                            classNames="item"
+                            timeout={500}
+                            key={i}
+                        >
                             <TransactionItem
                                 item={transaction}
                                 key={i}

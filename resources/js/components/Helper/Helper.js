@@ -1,5 +1,5 @@
-// export const API_URL = "https://nkitservice.com/expensetest/api";
-export const API_URL = "http://expenseapp.test/api";
+export const API_URL = "https://nkitservice.com/expensetest/api";
+// export const API_URL = "http://expenseapp.test/api";
 // export const API_URL = "https://nkitservice.com/expense/api";
 export const getDate = (newDate = "") => {
     const date = newDate ? new Date(newDate) : new Date();
@@ -81,6 +81,10 @@ export const toLower = (str) => {
     return str.toLowerCase();
 };
 
+export const limitDemialPlaces = (amount) => {
+    return Math.round(amount * 100) / 100;
+};
+
 export const getFirstLetterUpper = (string) => {
     return string[0].toUpperCase();
 };
@@ -143,7 +147,12 @@ export const chartFilterOption = [
     { value: "month", label: "month" },
     { value: "year", label: "year" },
 ];
-export const getExpenseSummary = (expenseSummary, dateGroup, data) => {
+export const getExpenseSummary = (
+    expenseSummary,
+    dateGroup,
+    data,
+    yearArray
+) => {
     const thisWeek = dateGroup.weekNumber;
     const thisMonth = dateGroup.monthNumber;
     const thisYear = dateGroup.yearNumber;
@@ -151,6 +160,9 @@ export const getExpenseSummary = (expenseSummary, dateGroup, data) => {
     const weekEnd = dateGroup.thisWeek.lWdate;
 
     data.forEach((el, i) => {
+        if (!yearArray.includes(el.year)) {
+            yearArray.push(el.year);
+        }
         if (
             new Date(dateGroup.today.date).getTime() ==
             new Date(el.date).getTime()
@@ -178,7 +190,7 @@ export const getExpenseSummary = (expenseSummary, dateGroup, data) => {
         expenseSummary.balance += el.amount;
     });
     // console.log(expenseSummary);
-    return expenseSummary;
+    return { expenseSummary, yearArray };
 };
 
 const getExepnseSummaryOfType = (dateType, el) => {
@@ -302,6 +314,18 @@ export const getWeekDetails = (firstDayOfWeek, lastDayOfWeek) => {
             .padStart(2, "0")}`,
         dayStart: firstDayOfWeek.getDate(),
         dayStartYear: firstDayOfWeek.getFullYear(),
+        dayWeekStart: `${(firstDayOfWeek.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${firstDayOfWeek
+            .getDate()
+            .toString()
+            .padStart(2, "0")}`,
+        dayWeekEnd: `${(lastDayOfWeek.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${lastDayOfWeek
+            .getDate()
+            .toString()
+            .padStart(2, "0")}`,
         dayStartMonth: firstDayOfWeek.getMonth() + 1,
         dayEnd: lastDayOfWeek.getDate(),
         dayEndYear: lastDayOfWeek.getFullYear(),
@@ -685,3 +709,108 @@ export const updateExpenseSummaryData = (summary, dateGroup, requestData) => {
     summary.balance += updatedAmount;
     return summary;
 };
+
+export const addNewDataToExpenseData = (data, newData) => {
+    let previousFirstPayDate = new Date(data[data.length - 1].date);
+    newData.forEach((item) => {
+        const currentPayDate = new Date(item.date);
+
+        if (previousFirstPayDate.getTime() >= currentPayDate.getTime()) {
+            previousFirstPayDate = currentPayDate;
+            data.push(item);
+        } else {
+            data.unshift(item);
+        }
+    });
+    return data;
+};
+
+/*
+const getWeekDetails = (firstDayOfWeek) => {
+    const lastDayOfWeek = new Date(firstDayOfWeek);
+    const dayWeek = firstDayOfWeek.getDay() == 0 ? 7 : firstDayOfWeek.getDay();
+    firstDayOfWeek.setDate(firstDayOfWeek.getDate() - (dayWeek - 1));
+    lastDayOfWeek.setDate(lastDayOfWeek.getDate() + (7 - dayWeek));
+   
+    return {
+        dateStart: `${firstDayOfWeek.getFullYear()}-${(
+            firstDayOfWeek.getMonth() + 1
+        )
+            .toString()
+            .padStart(2, "0")}-${firstDayOfWeek
+            .getDate()
+            .toString()
+            .padStart(2, "0")}`,
+        dateEnd: `${lastDayOfWeek.getFullYear()}-${(
+            lastDayOfWeek.getMonth() + 1
+        )
+            .toString()
+            .padStart(2, "0")}-${lastDayOfWeek
+            .getDate()
+            .toString()
+            .padStart(2, "0")}`,
+        dayStart: firstDayOfWeek.getDate(),
+        dayStartYear: firstDayOfWeek.getFullYear(),
+        dayWeekStart: `${(firstDayOfWeek.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${firstDayOfWeek
+            .getDate()
+            .toString()
+            .padStart(2, "0")}`,
+        dayWeekEnd: `${(lastDayOfWeek.getMonth() + 1)
+            .toString()
+            .padStart(2, "0")}-${lastDayOfWeek
+            .getDate()
+            .toString()
+            .padStart(2, "0")}`,
+        dayStartMonth: firstDayOfWeek.getMonth() + 1,
+        dayEnd: lastDayOfWeek.getDate(),
+        dayEndYear: lastDayOfWeek.getFullYear(),
+        dayEndMonth: lastDayOfWeek.getMonth() + 1,
+    };
+};
+
+
+
+const getWeeklyArrayChartDetails = (firstpayDate, lastPayDate) => {
+    const firstDate = new Date(firstpayDate);
+    let firstDayOfWeek = new Date(firstpayDate);
+    let lastDayOfWeek = new Date(lastPayDate);
+    let details;
+    let week = [];
+  console.log(lastDayOfWeek , firstDate);
+    let i = 1;
+    while (lastDayOfWeek.getTime() >= firstDate.getTime()) {
+      console.log(firstDayOfWeek,firstDayOfWeek);
+        details = getWeekDetails(firstDayOfWeek);
+        console.log(details);
+        week.push({
+            dateStart: details.dateStart,
+            dateEnd: details.dateEnd,
+            dayStart: details.dayStart,
+            dayEnd: details.dayEnd,
+            weekRange: `${details.dayWeekStart} - ${details.dayWeekEnd}`,
+            week: `week${i}`,
+            dayStartMonth: details.dayStartMonth,
+            dayEndMonth: details.dayEndMonth,
+            dayStartYear: details.dayStartYear,
+            dayEndYear: details.dayEndYear,
+        });
+        
+        const lastfirstDayOfWeek = new Date(details.dateEnd);
+        
+        lastfirstDayOfWeek.setDate(lastfirstDayOfWeek.getDate() + 1);
+        lastDayOfWeek = new Date(lastfirstDayOfWeek);
+        console.log(lastDayOfWeek);
+        i++;
+    }
+    return week;
+};
+
+// const data = getWeekDetails(new Date('2022-04-01'));
+const data = getWeeklyArrayChartDetails('2022-04-01','2022-04-30');
+console.log(data);
+
+
+
+*/

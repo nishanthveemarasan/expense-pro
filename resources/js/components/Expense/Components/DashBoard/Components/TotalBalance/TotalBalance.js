@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { limitDemialPlaces } from "../../../../../Helper/Helper";
 import classes from "./TotalBalance.module.css";
 
 const TotalBalance = (props) => {
@@ -7,8 +8,8 @@ const TotalBalance = (props) => {
             <div>Current Balance</div>
             <div style={{ color: props.balance > 0 ? "green" : "red" }}>
                 {props.balance > 0
-                    ? props.balance
-                    : `-£${Math.abs(props.balance.toFixed(2))}`}
+                    ? `£${limitDemialPlaces(props.balance)}`
+                    : `-£${limitDemialPlaces(Math.abs(props.balance))}`}
             </div>
         </div>
     );
