@@ -24,6 +24,7 @@ class ExpenseController extends Controller
 
     public function index()
     {
+        $this->authorize('viewAny', Expense::class);
         try {
             DB::beginTransaction();
             $this->result = $this->expenseService->index();
@@ -64,6 +65,7 @@ class ExpenseController extends Controller
     }
     public function delete(Expense $expense)
     {
+        $this->authorize('delete', $expense);
         try {
             DB::beginTransaction();
             $this->result = $this->expenseService->delete($expense);

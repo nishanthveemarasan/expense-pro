@@ -6,9 +6,11 @@ use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthRequest;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
+use SebastianBergmann\Environment\Console;
 
 class AuthController extends Controller
 {
@@ -19,21 +21,26 @@ class AuthController extends Controller
 
         $user = User::create([
             'email' => $data['email'],
-            'password' => Hash::make($data['email'])
+            'password' => Hash::make($data['password'])
         ]);
         $user->categories()->syncWithoutDetaching([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-
+        $role = Role::firstOrCreate([
+            'name' => 'user',
+            'guard_name' => 'api'
+        ]);
+        $user->assignRole($role);
         if (Auth::attempt([
             'email' => $data['email'],
-            'password' => $data['email']
+            'password' => $data['password']
         ])) {
             $user  = Auth::user();
             $token = $user->createToken('api-application')->accessToken;
-            Cache::put('expense_token', $token, now()->addMinutes(180));
-            return redirect()->intended('/');
+            return ['token' => $token];
         } else {
-            session()->flash('error', ' Authentication Failed!! try again with correct details');
-            return redirect()->back();
+
+            return [
+                'error' => 'Authentication Failed!! try again with correct details'
+            ];
         }
     }
 
@@ -41,20 +48,21 @@ class AuthController extends Controller
     {
 
         $request->validate([
-            'code' => 'required',
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
 
         if (Auth::attempt([
-            'email' => $request['code'],
-            'password' => $request['code']
+            'email' => $request['email'],
+            'password' => $request['password']
         ])) {
             $user  = Auth::user();
             $token = $user->createToken('api-application')->accessToken;
-            Cache::put('expense_token', $token, now()->addMinutes(180));
-            return redirect()->intended('/');
+            return ['token' => $token];
         } else {
-            session()->flash('error', ' Authentication Failed!! try again with correct details');
-            return redirect()->back();
+            return [
+                'error' => 'Authentication Failed!! try again with correct details'
+            ];
         }
     }
 }

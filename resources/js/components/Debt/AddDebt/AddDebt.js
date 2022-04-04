@@ -12,7 +12,7 @@ const AddDebt = (props) => {
                     heading={
                         props.action == "lend"
                             ? "Lend Money/Reduce Debt"
-                            : "Borrow Money"
+                            : "Borrow Money/get lent money"
                     }
                     action={props.action}
                 />

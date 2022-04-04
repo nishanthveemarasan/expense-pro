@@ -13,6 +13,7 @@ import {
 const initialState = {
     expenseYearArray: [],
     sendEditExpenseRequest: true,
+    loadingPage: false,
     showModal: false,
     appToken: null,
     deleteModal: {
@@ -110,6 +111,9 @@ const expenseSlice = createSlice({
     name: "expense",
     initialState,
     reducers: {
+        updateLoadingPage(state, action) {
+            state.loadingPage = true;
+        },
         chageChartFilterKey(state, action) {
             state.chartKey = action.payload.chartKey;
         },

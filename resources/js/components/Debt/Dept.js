@@ -9,34 +9,43 @@ import ShowIndividual from "./DebtCategory/Individual/ShowIndividual/ShowIndivid
 import DashBoard from "./DashBoard/DashBoard";
 import DebtCategory from "./DebtCategory/DebtCategory";
 import AddDebt from "./AddDebt/AddDebt";
+import { getInitialDebtData } from "../Expense/Store/reducers/debt-reducer";
+import Loading from "../Loading/Loading";
+import { WEB_URL } from "../Helper/Helper";
 
 const Debt = (props) => {
     const dispatch = useDispatch();
     useEffect(() => {
-        const data = JSON.parse(props.data);
-        const initialData = {
-            ...data.data,
-            token: props.token,
-        };
-        dispatch(debtStoreAction.addInitialData(initialData));
+        const token = localStorage.getItem("token");
+        if (token) {
+            dispatch(getInitialDebtData(token));
+        } else {
+            window.location.replace(`${WEB_URL}/auth`);
+        }
+        // dispatch(debtStoreAction.addInitialData(initialData));
     }, []);
     const mapStateToProps = (state) => {
         return {
             mainPage: state.debtStore.mainPage,
             action: state.debtStore.action,
+            loadingPage: state.expenseStore.loadingPage,
         };
     };
     const state = useSelector(mapStateToProps);
     return (
         <>
-            <React.Suspense fallback="">
-                {state.mainPage == "debtsummary" && <DashBoard />}
-                {state.mainPage == "debtcategory" && <DebtCategory />}
-                {state.mainPage == "adddebt" && (
-                    <AddDebt action={state.action} />
-                )}
-                {state.mainPage == "showindividual" && <ShowIndividual />}
-            </React.Suspense>
+            {state.loadingPage ? (
+                <React.Suspense fallback="">
+                    {state.mainPage == "debtsummary" && <DashBoard />}
+                    {state.mainPage == "debtcategory" && <DebtCategory />}
+                    {state.mainPage == "adddebt" && (
+                        <AddDebt action={state.action} />
+                    )}
+                    {state.mainPage == "showindividual" && <ShowIndividual />}
+                </React.Suspense>
+            ) : (
+                <Loading />
+            )}
         </>
     );
 };
@@ -44,11 +53,9 @@ const Debt = (props) => {
 export default Debt;
 
 if (document.getElementById("debt")) {
-    const data = document.getElementById("debt").getAttribute("data");
-    const token = document.getElementById("debt").getAttribute("token");
     ReactDOM.render(
         <Provider store={store}>
-            <Debt data={data} token={token} />
+            <Debt />
         </Provider>,
         document.getElementById("debt")
     );

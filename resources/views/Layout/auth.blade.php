@@ -3,7 +3,8 @@
 @section('title', 'Login')
 
 @section('content')
-<form action="{{ url('login') }}" method="POST" class="auth-form">
+<div id="login"></div>
+<!-- <form action="{{ url('login') }}" method="POST" class="auth-form" id="submit-auth-form">
     @csrf
     @error('code')
     <div style="color:red;">{{ $message }}</div>
@@ -26,5 +27,5 @@
     <p class="text-gray-600">Don't have an account? <a href="{{ url('auth-register') }}" class="font-bold">Sign
             up</a>.</p>
     <p><a class="font-bold" href="auth-forgot-password.html">Forgot password?</a>.</p>
-</div>
+</div> -->
 @endsection

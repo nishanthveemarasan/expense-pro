@@ -14,7 +14,7 @@ class CreateExpenseRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return auth()->user()->can('create-expense');
     }
 
     /**

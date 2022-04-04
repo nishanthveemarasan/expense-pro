@@ -28,64 +28,19 @@ class PageController extends Controller
     }
     public function todo()
     {
-        $data = $this->todoService->index();
-        $token = Cache::get('expense_token', '');
-
-        if (empty($token)) {
-            Auth::logout();
-            return redirect()->route('login');
-        }
-        $homeData = [
-            'data' => $data,
-            'token' => $token
-        ];
-
-        return view('admin.todo')->with('data', $homeData);
+        return view('admin.todo');
     }
     public function saving()
     {
-        $data = $this->savingService->index();
-        $token = Cache::get('expense_token', '');
-        if (empty($token)) {
-            Auth::logout();
-            return redirect()->route('login');
-        }
-        $homeData = [
-            'data' => $data,
-            'token' => $token
-        ];
-
-        return view('admin.saving')->with('data', $homeData);
+        return view('admin.saving');
     }
     public function expense()
     {
-        $data = $this->expenseService->index();
-        $token = Cache::get('expense_token', '');
-        if (empty($token)) {
-            Auth::logout();
-            return redirect()->route('login');
-        }
-        $homeData = [
-            'data' => $data,
-            'token' => $token
-        ];
-
-        return view('admin.expense')->with('data', $homeData);
+        return view('admin.expense');
     }
     public function debt()
     {
-        $data = $this->debtService->index();
-        $token = Cache::get('expense_token', '');
-        if (empty($token)) {
-            Auth::logout();
-            return redirect()->route('login');
-        }
-        $homeData = [
-            'data' => $data,
-            'token' => $token
-        ];
-
-        return view('admin.debt')->with('data', $homeData);
+        return view('admin.debt');
     }
 
     public function login()

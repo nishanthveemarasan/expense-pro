@@ -26,15 +26,15 @@ Route::get('/email', function () {
 
 Route::get('/auth', [PageController::class, 'login'])->name('login');
 Route::get('/auth-register', [PageController::class, 'register'])->name('auth.register');
-Route::post('/login', [AuthController::class, 'auth'])->name('auth');
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::middleware('auth')->group(function () {
+// Route::post('/login', [AuthController::class, 'auth'])->name('auth');
+// Route::post('/register', [AuthController::class, 'register'])->name('register');
+// Route::middleware('auth')->group(function () {
 
-    Route::get('/', [PageController::class, 'expense']);
-    Route::get('/debt', [PageController::class, 'debt']);
-    Route::get('/todo', [PageController::class, 'todo']);
-    Route::get('/saving', [PageController::class, 'saving']);
-});
+Route::get('/', [PageController::class, 'expense']);
+Route::get('/debt', [PageController::class, 'debt']);
+Route::get('/todo', [PageController::class, 'todo']);
+Route::get('/saving', [PageController::class, 'saving']);
+// });
 
 Route::get('/test', function () {
     return view('test');

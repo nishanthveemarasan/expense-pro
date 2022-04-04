@@ -1,4 +1,4 @@
-import { API_URL } from "../../../Helper/Helper";
+import { API_URL, WEB_URL } from "../../../Helper/Helper";
 import { expenseStoreAction, todoStoreAction } from "../Store";
 
 export const initialTaskData = (data, token) => {
@@ -349,6 +349,32 @@ export const deleteTaskFromList = (data) => {
                     reload: true,
                 })
             );
+        }
+    };
+};
+
+export const getInitialTodoData = (token) => {
+    return async (dispatch) => {
+        try {
+            const request = await fetch(`${API_URL}/tasks`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const response = await request.json();
+            if (response.data) {
+                dispatch(initialTaskData(response.data, token));
+                dispatch(expenseStoreAction.updateLoadingPage());
+            } else {
+                localStorage.removeItem("token");
+                window.location.replace(`${WEB_URL}/auth`);
+            }
+        } catch (error) {
+            localStorage.removeItem("token");
+            window.location.replace(`${WEB_URL}/auth`);
         }
     };
 };

@@ -19,7 +19,7 @@ const Lend = (props) => {
             id,
             description: state.data[id].description ?? "",
         };
-        // console.log(formData);
+        
         dispatch(debtStoreAction.createFormData({ formData }));
 
         const data = {

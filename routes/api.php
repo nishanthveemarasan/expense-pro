@@ -32,6 +32,8 @@ Route::post('/auth', function (Request $request) {
         return ['token' => $token];
     }
 });
+Route::post('/login', [AuthController::class, 'auth'])->name('auth');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 Route::get('/test', [PageController::class, 'test']);
 Route::middleware(['auth:api'])->group(function () {
@@ -45,6 +47,11 @@ Route::middleware(['auth:api'])->group(function () {
         Route::delete('/{task:uuid}/delete/{item:uuid}', [TaskController::class, 'deleteTaskItem']);
         Route::delete('/{task:uuid}/delete', [TaskController::class, 'deleteTask']);
         Route::patch('/{task:uuid}/update/{item:uuid}/content', [TaskController::class, 'updateItemContent']);
+    });
+    Route::get('/test', function () {
+        $user = auth()->user();
+        dump('view');
+        dd($user->can('view-expense', 'webasazxs'));
     });
     Route::prefix('savings')->group(function () {
         Route::get('/', [SavingController::class, 'index']);

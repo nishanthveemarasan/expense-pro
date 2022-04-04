@@ -35,6 +35,7 @@
 
     </div>
     <script src="public/js/app.js"></script>
+    @yield('scripts')
 </body>
 
 </html>

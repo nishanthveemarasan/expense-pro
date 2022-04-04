@@ -31,9 +31,9 @@ class TaskService
     public function index()
     {
         $user = Auth::user();
-        return $user->tasks()->with(['items' => function ($query) {
+        return ['data' => $user->tasks()->with(['items' => function ($query) {
             $query->orderBy('order', 'asc');
-        }])->orderBy('created_at', 'desc')->get();
+        }])->orderBy('created_at', 'desc')->get()];
     }
 
     public function updateItem($data, Task $task, TaskItem $item)

@@ -1,5 +1,5 @@
-import { API_URL } from "../../../Helper/Helper";
-import { savingStoreAction } from "../Store";
+import { API_URL, WEB_URL } from "../../../Helper/Helper";
+import { expenseStoreAction, savingStoreAction } from "../Store";
 
 export const addNewSaving = (data, page, token) => {
     return async (dispatch) => {
@@ -41,12 +41,38 @@ export const addNewSaving = (data, page, token) => {
 
             window.location.reload(false);
         }
-       
     };
 };
 
 export const initialSavingsData = (data, token) => {
     return (dispatch) => {
         dispatch(savingStoreAction.initialSavingsData({ data, token }));
+    };
+};
+
+export const getInitialSavingData = (token) => {
+    return async (dispatch) => {
+        try {
+            const request = await fetch(`${API_URL}/savings`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const response = await request.json();
+
+            if (response.data) {
+                dispatch(initialSavingsData(response.data, token));
+                dispatch(expenseStoreAction.updateLoadingPage());
+            } else {
+                localStorage.removeItem("token");
+                window.location.replace(`${WEB_URL}/auth`);
+            }
+        } catch (error) {
+            localStorage.removeItem("token");
+            window.location.replace(`${WEB_URL}/auth`);
+        }
     };
 };

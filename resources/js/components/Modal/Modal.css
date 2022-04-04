@@ -39,9 +39,10 @@
 }
 
 .body {
-    height: 70px;
+    /* height: 70px; */
+    text-align: left;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 @keyframes openModal {

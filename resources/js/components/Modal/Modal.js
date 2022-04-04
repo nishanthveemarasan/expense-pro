@@ -46,7 +46,26 @@ const Modal = (props) => {
                             <div className="heading">
                                 <div>Error</div>
                             </div>
-                            <div className="body">{states.error}</div>
+                            <div className="body">
+                                {Array.isArray(states.error) ? (
+                                    <ul>
+                                        {states.error.map((row, i) => {
+                                            return (
+                                                <li
+                                                    key={i}
+                                                    style={{
+                                                        marginBottom: "10px",
+                                                    }}
+                                                >
+                                                    {row}
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                ) : (
+                                    states.error
+                                )}
+                            </div>
                             <Button variant="primary" onClick={onCloseModal}>
                                 Close
                             </Button>

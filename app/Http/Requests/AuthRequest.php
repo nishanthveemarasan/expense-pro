@@ -25,7 +25,8 @@ class AuthRequest extends FormRequest
     {
         return [
 
-            'email' => ['required', 'confirmed', 'string', 'unique:users,email', 'min:4'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'confirmed', 'string', 'min:6'],
 
         ];
     }
@@ -33,7 +34,8 @@ class AuthRequest extends FormRequest
     public function attributes()
     {
         return [
-            'email' => 'auth code'
+            'email' => 'Email Address',
+            'password' => 'Password'
         ];
     }
 }

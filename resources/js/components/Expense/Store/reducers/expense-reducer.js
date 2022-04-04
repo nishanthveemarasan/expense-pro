@@ -1,4 +1,4 @@
-import { API_URL, errors } from "../../../Helper/Helper";
+import { API_URL, errors, WEB_URL } from "../../../Helper/Helper";
 import { expenseStoreAction } from "../Store";
 
 export const addNewTransaction = (data, token) => {
@@ -18,8 +18,6 @@ export const addNewTransaction = (data, token) => {
             });
             const response = await request.json();
             if (response.errors) {
-                // console.log(response.errors);
-                // alert(errors(response.errors));
                 dispatch(expenseStoreAction.showModal());
                 dispatch(
                     expenseStoreAction.onOpenErrorModal({
@@ -275,6 +273,34 @@ export const updateExpenseSummaryAndData = (data) => {
                     reload: true,
                 })
             );
+        }
+    };
+};
+
+export const getInitialExpenseData = (token) => {
+    return async (dispatch) => {
+        try {
+            const request = await fetch(`${API_URL}/expenses`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const response = await request.json();
+
+            if (response.data) {
+                dispatch(initialExpenseData(response.data, token));
+                dispatch(expenseStoreAction.calculateSummary());
+                dispatch(expenseStoreAction.updateLoadingPage());
+            } else {
+                localStorage.removeItem("token");
+                window.location.replace(`${WEB_URL}/auth`);
+            }
+        } catch (error) {
+            localStorage.removeItem("token");
+            window.location.replace(`${WEB_URL}/auth`);
         }
     };
 };

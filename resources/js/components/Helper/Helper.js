@@ -1,6 +1,19 @@
-export const API_URL = "https://nkitservice.com/expensetest/api";
-// export const API_URL = "http://expenseapp.test/api";
+// export const API_URL = "https://nkitservice.com/expensetest/api";
+// export const WEB_URL = "https://nkitservice.com/expensetest";
+export const API_URL = "http://expenseapp.test/api";
+export const WEB_URL = "http://expenseapp.test";
 // export const API_URL = "https://nkitservice.com/expense/api";
+// export const WEB_URL = "https://nkitservice.com/expense";
+
+export const errorArray = (data) => {
+    let array = [];
+
+    for (let key in data) {
+        array.push(data[key][0]);
+    }
+    return array;
+};
+
 export const getDate = (newDate = "") => {
     const date = newDate ? new Date(newDate) : new Date();
     const firstDOfWeek = new Date(date);

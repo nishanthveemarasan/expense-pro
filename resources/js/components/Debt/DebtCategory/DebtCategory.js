@@ -23,14 +23,14 @@ const DebtCategory = (props) => {
                     type="subpage"
                     mainPage="debtcategory"
                     eventKey="giveto"
-                    link="LEND"
+                    link="GIVE TO"
                 />
                 <NavItem
                     page="borrowfrom"
                     type="subpage"
                     mainPage="debtcategory"
                     eventKey="borrowfrom"
-                    link="BORROW"
+                    link="GET FROM"
                 />
                 <NavItem
                     page="individual"

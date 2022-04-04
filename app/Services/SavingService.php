@@ -19,6 +19,6 @@ class SavingService
     public function index()
     {
         $user = Auth::user();
-        return $user->savings()->orderBy('date', 'desc')->get();
+        return ['data' => $user->savings()->orderBy('date', 'desc')->get()];
     }
 }
