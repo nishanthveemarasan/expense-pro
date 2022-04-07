@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\SavingsResource;
 use App\Models\User;
 use App\Models\Saving;
 use Illuminate\Support\Facades\Auth;
@@ -13,12 +14,13 @@ class SavingService
     {
         $user = Auth::user();
         $saving = $user->savings()->create($data);
-        return ['data' => $saving];
+        return ['data' =>  new SavingsResource($saving)];
     }
 
     public function index()
     {
         $user = Auth::user();
-        return ['data' => $user->savings()->orderBy('date', 'desc')->get()];
+        $savings = $user->savings()->orderBy('date', 'desc')->get();
+        return ['data' => SavingsResource::collection($savings)];
     }
 }

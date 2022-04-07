@@ -21,13 +21,13 @@ class Saving extends Model
         'user_id'
     ];
 
-    protected $hidden = [
-        'id',
-        'created_at',
-        'deleted_at',
-        'updated_at',
-        'user_id'
-    ];
+    // protected $hidden = [
+    //     'id',
+    //     'created_at',
+    //     'deleted_at',
+    //     'updated_at',
+    //     'user_id'
+    // ];
 
     protected $casts = [
         'amount' => 'double',
