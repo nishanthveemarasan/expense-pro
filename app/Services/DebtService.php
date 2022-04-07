@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\AccountNameResource;
 use App\Http\Resources\AccountResource;
 use App\Models\User;
 use App\Models\Saving;
@@ -68,7 +69,7 @@ class DebtService
                 'debtData' => AccountResource::collection($userData->accounts),
                 'lendData' => $lend,
                 'borrowData' => $borrow,
-                'names' => $userData->names
+                'names' => AccountNameResource::collection($userData->names)
             ]
         ];
     }
