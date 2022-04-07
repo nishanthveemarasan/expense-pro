@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\TaskItem;
@@ -23,17 +24,17 @@ class TaskService
 
         $task->refresh();
 
-
-
-        return ['data' => $task->load('items')];
+        return ['data' => new TaskResource($task->load('items'))];
     }
 
     public function index()
     {
         $user = Auth::user();
-        return ['data' => $user->tasks()->with(['items' => function ($query) {
+        $tasks = $user->tasks()->with(['items' => function ($query) {
             $query->orderBy('order', 'asc');
-        }])->orderBy('created_at', 'desc')->get()];
+        }])->orderBy('created_at', 'desc')->get();
+
+        return ['data' => TaskResource::collection($tasks)];
     }
 
     public function updateItem($data, Task $task, TaskItem $item)

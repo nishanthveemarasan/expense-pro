@@ -19,13 +19,13 @@ class TaskItem extends Model
         'order'
     ];
 
-    protected $hidden = [
-        'id',
-        'created_at',
-        'updated_at',
-        'deleted_at',
-        'task_id'
-    ];
+    // protected $hidden = [
+    //     'id',
+    //     'created_at',
+    //     'updated_at',
+    //     'deleted_at',
+    //     'task_id'
+    // ];
 
     protected $casts = [
         'completed' => 'boolean',

@@ -25,12 +25,12 @@ class Task extends Model
         'items'
     ];
 
-    protected $hidden = [
-        'id',
-        'created_at',
-        'deleted_at',
-        'user_id'
-    ];
+    // protected $hidden = [
+    //     'id',
+    //     'created_at',
+    //     'deleted_at',
+    //     'user_id'
+    // ];
 
     protected $casts = [
         'completed' => 'boolean',
