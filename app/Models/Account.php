@@ -20,13 +20,13 @@ class Account extends Model
         'debts'
     ];
 
-    protected $hidden = [
-        'id',
-        'created_at',
-        'deleted_at',
-        'pivot',
-        'updated_at'
-    ];
+    // protected $hidden = [
+    //     'id',
+    //     'created_at',
+    //     'deleted_at',
+    //     'pivot',
+    //     'updated_at'
+    // ];
 
     protected $appends = ['lendTotal', 'borrowTotal'];
 

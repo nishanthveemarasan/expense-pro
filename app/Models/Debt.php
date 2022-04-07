@@ -19,13 +19,13 @@ class Debt extends Model
     ];
 
 
-    protected $hidden = [
-        'id',
-        'created_at',
-        'deleted_at',
-        'updated_at',
-        'account_id'
-    ];
+    // protected $hidden = [
+    //     'id',
+    //     'created_at',
+    //     'deleted_at',
+    //     'updated_at',
+    //     'account_id'
+    // ];
 
     protected $casts = [
         'amount' => 'double',
