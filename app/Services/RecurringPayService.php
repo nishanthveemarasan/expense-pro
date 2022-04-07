@@ -7,7 +7,9 @@ use App\Models\Saving;
 use App\Models\Account;
 use App\Models\RecurringPayment;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ExepenseResource;
 use SebastianBergmann\Environment\Console;
+use App\Http\Resources\RecurringPaymentResource;
 
 class RecurringPayService
 {
@@ -59,8 +61,8 @@ class RecurringPayService
             ]);
         }
         return ['data' => [
-            'recurring_payment' => $recurringPayment->load('repeatPayments'),
-            'expense_data' => $expense
+            'recurring_payment' => new RecurringPaymentResource($recurringPayment->load('repeatPayments')),
+            'expense_data' => new ExepenseResource($expense)
         ]];
     }
 
@@ -68,7 +70,7 @@ class RecurringPayService
     {
         $recurringPayment->update($data);
         $recurringPayment->refresh();
-        return ['data' => $recurringPayment];
+        return ['data' => new RecurringPaymentResource($recurringPayment->load('repeatPayments'))];
     }
 
     private function getNextPayDate($payMethod, $today)
