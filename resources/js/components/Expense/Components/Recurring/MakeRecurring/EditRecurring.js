@@ -141,7 +141,7 @@ const EditRecurring = (props) => {
         <>
             <PaymentModal />
             <Head type="space">
-                <div className={classes.heading}>Make Recurring Payment</div>
+                <div className={classes.heading}>Edit Recurring Payment</div>
                 <div className={classes.heading}>
                     <FontAwesomeIcon
                         icon={faTimesCircle}

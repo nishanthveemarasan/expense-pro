@@ -18,12 +18,12 @@ class RepeatPayment extends Model
         'pay_date',
     ];
 
-    protected $hidden = [
-        'id',
-        'created_at',
-        'deleted_at',
-        'recurring_payment_id'
-    ];
+    // protected $hidden = [
+    //     'id',
+    //     'created_at',
+    //     'deleted_at',
+    //     'recurring_payment_id'
+    // ];
     protected $casts = [
         'amount' => 'double',
         'pay_date' => 'date:Y-m-d',

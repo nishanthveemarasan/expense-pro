@@ -25,12 +25,12 @@ class Expense extends Model
         "amount"
     ];
 
-    protected $hidden = [
-        'id',
-        'created_at',
-        'deleted_at',
-        'updated_at'
-    ];
+    // protected $hidden = [
+    //     'id',
+    //     'created_at',
+    //     'deleted_at',
+    //     'updated_at'
+    // ];
     protected $casts = [
         'amount' => 'double',
         'date' => 'date:Y-m-d',

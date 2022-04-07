@@ -42,13 +42,13 @@ class RecurringPayment extends Model
     protected $with = [
         'repeatPayments'
     ];
-    protected $hidden = [
-        'id',
-        'created_at',
-        'deleted_at',
-        'updated_at',
-        'user_id'
-    ];
+    // protected $hidden = [
+    //     'id',
+    //     'created_at',
+    //     'deleted_at',
+    //     'updated_at',
+    //     'user_id'
+    // ];
 
 
     /**

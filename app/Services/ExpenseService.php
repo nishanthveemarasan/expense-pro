@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Models\User;
-use App\Models\Saving;
 use App\Models\Expense;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
-use SebastianBergmann\Environment\Console;
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\ExepenseResource;
+use App\Http\Resources\RecurringPaymentResource;
 
 class ExpenseService
 {
@@ -18,7 +18,7 @@ class ExpenseService
         $collection = collect();
         foreach ($data['expense'] as $expense) {
             $item = $user->expenses()->create($expense);
-            $collection->push($item);
+            $collection->push(new ExepenseResource($item));
         }
         return ['data' => $collection];
     }
@@ -33,7 +33,11 @@ class ExpenseService
         }], ['recurringPayments' => function ($query) {
             $query->orderBy('created_at', 'desc');
         }]);
-        return ['data' => ['expense' => $data->expenses, 'category' => $data->categories, 'recurring' => $data->recurringPayments]];
+        return ['data' => [
+            'expense' => ExepenseResource::collection($data->expenses),
+            'category' => CategoryResource::collection($data->categories),
+            'recurring' => RecurringPaymentResource::collection($data->recurringPayments)
+        ]];
     }
 
     public function category($data)
@@ -47,11 +51,11 @@ class ExpenseService
             $categoryArray = array_merge($categoryArray, $data['items']);
             $checkCategory->update(['items' => $categoryArray]);
             $checkCategory->refresh();
-            return ['data' => $checkCategory];
+            return ['data' => new CategoryResource($checkCategory)];
         } else {
             $category = $user->categories()->create($data);
             $user->categories()->syncWithoutDetaching($category->id);
-            return ['data' => $category];
+            return ['data' => new CategoryResource($category)];
         }
     }
 

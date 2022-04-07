@@ -19,12 +19,12 @@ class Category extends Model
         'color'
     ];
 
-    protected $hidden = [
-        'id',
-        'created_at',
-        'deleted_at',
-        'updated_at'
-    ];
+    // protected $hidden = [
+    //     'id',
+    //     'created_at',
+    //     'deleted_at',
+    //     'updated_at'
+    // ];
 
     /**
      * The attributes that should be cast.
