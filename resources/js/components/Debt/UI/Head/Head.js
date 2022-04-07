@@ -8,7 +8,10 @@ import { extractDate, uuid } from "../../../Helper/Helper";
 import classes from "./Head.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle, faSave } from "@fortawesome/free-solid-svg-icons";
-import { AddNewDebt } from "../../../Expense/Store/reducers/debt-reducer";
+import {
+    AddNewDebt,
+    UpdateDebt,
+} from "../../../Expense/Store/reducers/debt-reducer";
 import Modal from "../../../Modal/Modal";
 const Head = (props) => {
     const dispatch = useDispatch();
@@ -17,6 +20,7 @@ const Head = (props) => {
         return {
             formData: state.debtStore.formData,
             action: state.debtStore.action,
+            postAction: state.debtStore.createDebt,
             token: state.debtStore.appToken,
         };
     };
@@ -96,11 +100,11 @@ const Head = (props) => {
                 create: "",
             };
         }
-        dispatch(AddNewDebt(data, page, state.token));
-
-        // dispatch(debtStoreAction.createDebt(data));
-        // dispatch(debtStoreAction.createUpdateDebtData(data));
-        // onCancelDebtHandler();
+        if (state.postAction == "create") {
+            dispatch(AddNewDebt(data, page, state.token));
+        } else {
+            dispatch(UpdateDebt(data, page, state.token));
+        }
     };
     return (
         <>

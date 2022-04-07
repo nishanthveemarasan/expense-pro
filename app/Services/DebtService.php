@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Saving;
 use App\Models\Account;
+use App\Models\Debt;
 use Illuminate\Support\Facades\Auth;
 
 class DebtService
@@ -17,9 +18,9 @@ class DebtService
             ['name' => $data['formData']['name']],
         );
 
-        $account->debts()->updateOrCreate(
-            ['uuid' => $data['formData']['uuid']],
+        $debt = $account->debts()->create(
             [
+                'uuid' => $data['formData']['uuid'],
                 'type' => $data['formData']['type'],
                 'amount' => $data['formData']['amount'],
                 'description' => $data['formData']['description'],
@@ -31,7 +32,7 @@ class DebtService
 
         $user->accounts()->syncWithoutDetaching($account->id);
 
-        return ['data' => 'Debt created/updated successfully!!'];
+        return ['data' => $debt->uuid];
     }
 
     public function index()
@@ -69,5 +70,18 @@ class DebtService
                 'names' => $userData->names
             ]
         ];
+    }
+
+    public function update($data, Debt $debt)
+    {
+
+        $debt->update([
+            'type' => $data['formData']['type'],
+            'amount' => $data['formData']['amount'],
+            'description' => $data['formData']['description'],
+            'date' => $data['formData']['date'],
+        ]);
+
+        return ['data' => 'Debt created/updated successfully!!'];
     }
 }

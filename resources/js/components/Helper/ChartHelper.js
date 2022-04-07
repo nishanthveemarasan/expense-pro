@@ -51,7 +51,13 @@ export const getMOnthlyExpenses = (data, year) => {
 
     return { monthsData, category };
 };
-
+const getCurrentMonthWithYear = () => {
+    const date = new Date();
+    return {
+        month: date.getMonth(),
+        year: date.getFullYear(),
+    };
+};
 export const getMonthlySummaryChartData = (data, year) => {
     const summaryData = [];
     const getData = getMOnthlyExpenses(data, year);
@@ -85,9 +91,14 @@ export const todayDetails = (currentDate = "") => {
     const date = currentDate ? new Date(currentDate) : new Date();
     const year = date.getFullYear();
     const month = date.getMonth();
+    const day = date.getDate();
     const monthString = (month + 1).toString().padStart(2, "0");
+    const dateString = day.toString().padStart(2, "0");
+
+    const today = `${year}-${monthString}-${dateString}`;
     const LastDayOfMonth = new Date(year, month + 1, 0).getDate();
     return {
+        today,
         year,
         month: month,
         monthFirstDay: `${year}-${monthString}-01`,
@@ -144,9 +155,20 @@ const getWeeklyArrayChartDetails = (firstpayDate, lastPayDate) => {
     let lastDayWeek = new Date(lastPayDate);
     let details;
     let week = [];
+    let currentWeek = "";
+    const today = new Date(todayDetails().today).getTime();
+
     let i = 1;
     while (firstDayOfWeek.getTime() <= lastDayWeek.getTime()) {
         details = getWeekStartEndDetails(firstDayOfWeek);
+        if (
+            today >= new Date(details.dateStart).getTime() &&
+            today <= new Date(details.dateEnd).getTime() &&
+            !currentWeek
+        ) {
+            currentWeek = `week${i}`;
+        }
+
         week.push({
             dateStart: details.dateStart,
             dateEnd: details.dateEnd,
@@ -165,14 +187,14 @@ const getWeeklyArrayChartDetails = (firstpayDate, lastPayDate) => {
         firstDayOfWeek = new Date(lastfirstDayOfWeek);
         i++;
     }
-    return week;
+
+    return { week, currentWeek };
 };
 
 export const weeklyChartData = (data, firstpayDate, lastPayDate) => {
-    const weeklyArrayDetails = getWeeklyArrayChartDetails(
-        firstpayDate,
-        lastPayDate
-    );
+    const weeklyDetails = getWeeklyArrayChartDetails(firstpayDate, lastPayDate);
+    const weeklyArrayDetails = weeklyDetails.week;
+    const currentWeek = weeklyDetails.currentWeek;
 
     const weeklyChartData = [];
     const category = [];
@@ -187,27 +209,26 @@ export const weeklyChartData = (data, firstpayDate, lastPayDate) => {
                     category: [],
                 };
             }
-
+            const dayStart = new Date(week.dateStart).getTime();
+            const dateEnd = new Date(week.dateEnd).getTime();
             if (
-                new Date(item.date).getTime() >=
-                    new Date(week.dateStart).getTime() &&
-                new Date(item.date).getTime() <=
-                    new Date(week.dateEnd).getTime()
+                new Date(item.date).getTime() >= dayStart &&
+                new Date(item.date).getTime() <= dateEnd
             ) {
-                if (Math.abs(item.amount) > limit) {
-                    limit = Math.abs(item.amount);
+                const amount = Math.abs(item.amount);
+
+                if (amount > limit) {
+                    limit = amount;
                 }
                 if (!weeklyChartData[week.week].category[item.category]) {
                     weeklyChartData[week.week].category[item.category] = 0;
                 }
                 if (item.type.toLowerCase() == "expense") {
-                    weeklyChartData[week.week].expense += Math.abs(item.amount);
+                    weeklyChartData[week.week].expense += amount;
                 } else {
-                    weeklyChartData[week.week].income += Math.abs(item.amount);
+                    weeklyChartData[week.week].income += amount;
                 }
-                weeklyChartData[week.week].category[item.category] += Math.abs(
-                    item.amount
-                );
+                weeklyChartData[week.week].category[item.category] += amount;
 
                 if (!category.includes(item.category)) {
                     category.push(item.category);
@@ -217,7 +238,11 @@ export const weeklyChartData = (data, firstpayDate, lastPayDate) => {
         });
     });
 
-    return { weeklyChartData, category, limit };
+    return { weeklyChartData, category, limit, currentWeek };
+};
+const getLabelsForTotal = (array) => {
+    array.unshift("");
+    return array;
 };
 
 export const generateWeeklyExpenseAndIncomeChartColumnData = (data) => {
@@ -225,21 +250,60 @@ export const generateWeeklyExpenseAndIncomeChartColumnData = (data) => {
     let expense = [];
     let income = [];
     let categoryWise = [];
-    let limit = 0;
-    const weeklyChartData = data.weeklyChartData;
-    const weeklyChartCategory = data.category;
-    for (let key in weeklyChartData) {
-        const chartKey = weeklyChartData[key];
 
+    let totalIncome = 0;
+    let totalExpense = 0;
+    let NoOfWeeksSpended = 0;
+
+    let chartYIncomeAxis = [];
+    let chartYExpenseAxis = [];
+
+    const weeklyChartData = data.weeklyChartData;
+    const currentWeek = data.currentWeek;
+    const currentWeekLastIndex = currentWeek.slice(-1);
+    const currentWeekIndex = currentWeekLastIndex ? currentWeekLastIndex : 0;
+
+    const weeklyChartCategory = data.category;
+    let i = 1;
+    for (let weekly in weeklyChartData) {
+        let key = `week${i}`;
+        // console.log(currentWeekIndex, i);
+        const chartKey = weeklyChartData[key];
+        let chartKeyExpense = limitDemialPlaces(chartKey.expense);
+        let chartKeyIncome = limitDemialPlaces(chartKey.income);
+        totalIncome += chartKeyIncome;
+        totalExpense += chartKeyExpense;
+        if (i == 1) {
+            chartYIncomeAxis.push(null);
+            chartYExpenseAxis.push(null);
+        }
+        if (currentWeekIndex == 0) {
+            chartYIncomeAxis.push(limitDemialPlaces(totalIncome));
+            chartYExpenseAxis.push(limitDemialPlaces(totalExpense));
+            if (chartKeyExpense > 0) {
+                NoOfWeeksSpended += 1;
+            }
+        } else {
+            if (i <= currentWeekIndex) {
+                chartYIncomeAxis.push(limitDemialPlaces(totalIncome));
+                chartYExpenseAxis.push(limitDemialPlaces(totalExpense));
+                if (chartKeyExpense > 0) {
+                    NoOfWeeksSpended += 1;
+                }
+            } else {
+                chartYIncomeAxis.push(null);
+                chartYExpenseAxis.push(null);
+            }
+        }
+
+        // if (chartKeyExpense > 0) {
+        //     NoOfWeeksSpended += 1;
+        // }
         labels.push(chartKey.weekRange);
-        if (chartKey.expense > limit) {
-            limit = limitDemialPlaces(chartKey.expense);
-        }
-        if (chartKey.income > limit) {
-            limit = limitDemialPlaces(chartKey.income);
-        }
-        expense.push(limitDemialPlaces(chartKey.expense));
-        income.push(limitDemialPlaces(chartKey.income));
+
+        expense.push(chartKeyExpense);
+        income.push(chartKeyIncome);
+
         weeklyChartCategory.forEach((category) => {
             if (!categoryWise[category]) {
                 categoryWise[category] = [];
@@ -248,11 +312,9 @@ export const generateWeeklyExpenseAndIncomeChartColumnData = (data) => {
                 ? limitDemialPlaces(chartKey.category[category])
                 : 0;
 
-            if (value > limit) {
-                limit = value;
-            }
             categoryWise[category].push(value);
         });
+        i++;
     }
 
     const series = [
@@ -265,7 +327,37 @@ export const generateWeeklyExpenseAndIncomeChartColumnData = (data) => {
             data: income,
         },
     ];
-    return { series, labels, categoryWise, limit };
+
+    const seriesForTotal = [
+        {
+            name: "Expense",
+            data: chartYExpenseAxis,
+        },
+        {
+            name: "Income",
+            data: chartYIncomeAxis,
+        },
+    ];
+
+    const summary = {
+        totalIncome: limitDemialPlaces(totalIncome),
+        totalExpense: limitDemialPlaces(totalIncome),
+        averageWeeklySpending: limitDemialPlaces(
+            totalExpense / NoOfWeeksSpended
+        ),
+    };
+
+    const summaryChartInTotal = {
+        seriesForTotal,
+        labels: getLabelsForTotal([...labels]),
+    };
+    return {
+        series,
+        labels,
+        categoryWise,
+        summary,
+        summaryChartInTotal,
+    };
 };
 
 export const constructWeeklyExpenseWiseData = (data) => {
@@ -281,21 +373,62 @@ export const constructWeeklyExpenseWiseData = (data) => {
     return categoryWiseSeries;
 };
 
-export const extractMonthlyExpenseIncomeDataValues = (data) => {
+export const extractMonthlyExpenseIncomeDataValues = (data, selectedYear) => {
+    const currentDate = getCurrentMonthWithYear();
+
     const expense = [];
     const income = [];
-    let highNumber = 0;
-    monthNames.forEach((month) => {
-        expense.push(limitDemialPlaces(data[month].expense));
-        if (data[month].expense > highNumber) {
-            highNumber = data[month].expense;
-        }
-        income.push(limitDemialPlaces(data[month].income));
-        if (data[month].income > highNumber) {
-            highNumber = data[month].income;
-        }
-    });
+    let chartYIncomeAxis = [];
+    let chartYExpenseAxis = [];
 
+    let totalIncome = 0;
+    let totalExpense = 0;
+    let NoOfMonthsSpended = 0;
+
+    monthNames.forEach((month, i) => {
+        let currentMonthExpense = limitDemialPlaces(data[month].expense);
+        let currentMonthIncome = limitDemialPlaces(data[month].income);
+        totalIncome += currentMonthIncome;
+        totalExpense += currentMonthExpense;
+        if (i == 0) {
+            chartYIncomeAxis.push(null);
+            chartYExpenseAxis.push(null);
+        }
+        if (selectedYear == currentDate.year) {
+            if (i <= currentDate.month) {
+                chartYIncomeAxis.push(limitDemialPlaces(totalIncome));
+                chartYExpenseAxis.push(limitDemialPlaces(totalExpense));
+                if (currentMonthExpense > 0) NoOfMonthsSpended += 1;
+            } else {
+                chartYIncomeAxis.push(null);
+                chartYExpenseAxis.push(null);
+            }
+        } else {
+            if (currentMonthExpense > 0) NoOfMonthsSpended += 1;
+            chartYIncomeAxis.push(limitDemialPlaces(totalIncome));
+            chartYExpenseAxis.push(limitDemialPlaces(totalExpense));
+        }
+
+        expense.push(limitDemialPlaces(data[month].expense));
+
+        income.push(limitDemialPlaces(data[month].income));
+    });
+    const summaryChartInTotal = {
+        series: [
+            {
+                name: "Expense",
+                data: chartYExpenseAxis,
+            },
+            {
+                name: "Income",
+                data: chartYIncomeAxis,
+            },
+        ],
+        totalIncome: limitDemialPlaces(totalIncome),
+        totalExpense: limitDemialPlaces(totalExpense),
+        avgSpending: limitDemialPlaces(totalExpense / NoOfMonthsSpended),
+        labels: getLabelsForTotal([...monthNames]),
+    };
     return {
         series: [
             {
@@ -307,6 +440,7 @@ export const extractMonthlyExpenseIncomeDataValues = (data) => {
                 data: income,
             },
         ],
-        highNumber,
+
+        summaryChartInTotal,
     };
 };

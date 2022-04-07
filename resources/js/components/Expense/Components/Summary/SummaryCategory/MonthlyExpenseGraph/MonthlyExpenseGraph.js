@@ -10,13 +10,23 @@ import MonthlyColumnGraph from "./MonthlyColumnGraph";
 
 import classes from "./MonthlyExpenseGraph.module.css";
 import MonthlyLineGraph from "./MonthlyLineGraph";
+import ShowTotalSummary from "./ShowTotalSummary/ShowTotalSummary";
 
 const MonthlyExpenseGraph = ({ data, yearArray }) => {
     const [loading, setLoading] = useState();
     const [series, setSeries] = useState([]);
-    const [limit, setLimit] = useState(1500);
     const [categoryWiseSeries, setCategoryWiseSeries] = useState([]);
     const [selectedYear, setSelectedYear] = useState("");
+    const [summary, setSummary] = useState({
+        income: 0,
+        expense: 0,
+        avg: 0,
+    });
+    const [monthlyExpenseAndIncomeInTotal, setMonthlyExpenseAndIncomeInTotal] =
+        useState({
+            labels: [],
+            series: [],
+        });
     useEffect(() => {
         setLoading(true);
         const date = new Date();
@@ -25,13 +35,21 @@ const MonthlyExpenseGraph = ({ data, yearArray }) => {
             data,
             date.getFullYear()
         );
-
         const result = extractMonthlyExpenseIncomeDataValues(
-            allGraphData.summaryData
+            allGraphData.summaryData,
+            date.getFullYear()
         );
 
         setSeries(result.series);
-        setLimit(result.highNumber);
+        setSummary({
+            expense: result.summaryChartInTotal.totalExpense,
+            income: result.summaryChartInTotal.totalIncome,
+            avg: result.summaryChartInTotal.avgSpending,
+        });
+        setMonthlyExpenseAndIncomeInTotal({
+            series: result.summaryChartInTotal.series,
+            labels: result.summaryChartInTotal.labels,
+        });
 
         const categoryMonthlyData = allGraphData.categoryChartData;
         let categoryWise = [];
@@ -54,11 +72,20 @@ const MonthlyExpenseGraph = ({ data, yearArray }) => {
         const allGraphData = getMonthlySummaryChartData(data, year);
 
         const result = extractMonthlyExpenseIncomeDataValues(
-            allGraphData.summaryData
+            allGraphData.summaryData,
+            year
         );
-
+        // console.log(result);
+        setSummary({
+            expense: result.summaryChartInTotal.totalExpense,
+            income: result.summaryChartInTotal.totalIncome,
+            avg: result.summaryChartInTotal.avgSpending,
+        });
         setSeries(result.series);
-        setLimit(result.highNumber);
+        setMonthlyExpenseAndIncomeInTotal({
+            series: result.summaryChartInTotal.series,
+            labels: result.summaryChartInTotal.labels,
+        });
 
         const categoryMonthlyData = allGraphData.categoryChartData;
         let categoryWise = [];
@@ -76,41 +103,52 @@ const MonthlyExpenseGraph = ({ data, yearArray }) => {
 
     return (
         <>
+            <div style={{ margin: "20px 0" }}>
+                <div style={{ fontWeight: "bold" }}>Selected Year</div>
+                <Form.Select
+                    value={selectedYear}
+                    onChange={onSelectedYearChangeHandler}
+                >
+                    {yearArray.map((year, i) => {
+                        return (
+                            <option value={year} key={i}>
+                                {year}
+                            </option>
+                        );
+                    })}
+                </Form.Select>
+            </div>
             {loading ? (
                 <div className={classes.spinner}>
                     <Spinner animation="grow" size="xl" variant="danger" />
                 </div>
             ) : (
                 <>
-                    <div style={{ margin: "20px 0" }}>
-                        <div style={{ fontWeight: "bold" }}>Selected Year</div>
-                        <Form.Select
-                            value={selectedYear}
-                            onChange={onSelectedYearChangeHandler}
-                        >
-                            {yearArray.map((year, i) => {
-                                return (
-                                    <option value={year} key={i}>
-                                        {year}
-                                    </option>
-                                );
-                            })}
-                        </Form.Select>
-                    </div>
+                    <ShowTotalSummary
+                        income={summary.income}
+                        expense={summary.expense}
+                        balance={summary.avg}
+                        type="Monthly"
+                    />
 
                     <MonthlyColumnGraph
                         categories={monthNames}
                         data={series}
                         rotate={-45}
-                        title="Expense Vs Income in Column Chart"
+                        title="Expense Vs Income in Column Chart(Monthly Wise)"
                     />
 
                     <MonthlyLineGraph
                         data={series}
-                        limit={limit}
                         rotate={-45}
                         categories={monthNames}
-                        title="Expense Vs Income in Line Chart"
+                        title="Expense Vs Income in Line Chart(Monthly Wise)"
+                    />
+                    <MonthlyLineGraph
+                        data={monthlyExpenseAndIncomeInTotal.series}
+                        categories={monthlyExpenseAndIncomeInTotal.labels}
+                        rotate={-45}
+                        title="Expense Vs Income in Line Chart( IN Total)"
                     />
 
                     <MonthlyCategoryWiseGraph
@@ -121,7 +159,7 @@ const MonthlyExpenseGraph = ({ data, yearArray }) => {
                         rotate={-45}
                         chartType="bar"
                         title={
-                            "Monthly Expense Data BY Category wise In Column Chart"
+                            "Monthly Expense Data BY Category wise In Column Chart(Monthly Wise)"
                         }
                     />
 
@@ -133,7 +171,7 @@ const MonthlyExpenseGraph = ({ data, yearArray }) => {
                         rotate={-45}
                         stack={false}
                         title={
-                            "Monthly Expense Data BY Category wise In Line Chart"
+                            "Monthly Expense Data BY Category wise In Line Chart(Monthly Wise)"
                         }
                         limit={500}
                     />

@@ -1,0 +1,36 @@
+.activityHeading {
+    position: sticky;
+    z-index: 102;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 3% 0;
+    padding: 0 10px;
+    height: 70px;
+    background-color: rgb(177, 175, 175);
+}
+.activityBody {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: darkslategray;
+    margin-top: 0.5%;
+}
+
+.activityValue {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: darkslategray;
+    margin-bottom: 0.5%;
+}
+.income {
+    color: green;
+    font-weight: bold;
+}
+
+.expense {
+    color: red;
+    font-weight: bold;
+}

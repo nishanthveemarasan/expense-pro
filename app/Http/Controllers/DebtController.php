@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Services\DebtService;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreateDebtgRequest;
+use App\Models\Debt;
 
 class DebtController extends Controller
 {
@@ -39,6 +40,19 @@ class DebtController extends Controller
         try {
             DB::beginTransaction();
             $this->result = $this->debtService->store($request->validated());
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            $this->result['error'] = $e->getMessage();
+        }
+
+        return $this->result;
+    }
+    public function update(CreateDebtgRequest $request, Debt $debt)
+    {
+        try {
+            DB::beginTransaction();
+            $this->result = $this->debtService->update($request->validated(), $debt);
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();

@@ -10,19 +10,28 @@ import { monthNames } from "../../../../../Helper/Helper";
 import MonthlyCategoryWiseGraph from "../MonthlyExpenseGraph/MonthlyCategoryWiseGraph";
 import MonthlyColumnGraph from "../MonthlyExpenseGraph/MonthlyColumnGraph";
 import MonthlyLineGraph from "../MonthlyExpenseGraph/MonthlyLineGraph";
+import ShowTotalSummary from "../MonthlyExpenseGraph/ShowTotalSummary/ShowTotalSummary";
 import classes from "./MonthlyExpenseGraph.module.css";
 
 const WeeklyExpenseGraph = ({ data, yearArray }) => {
-    // console.log(data);
     const [loading, setLoading] = useState();
     const [dataExists, setDataExists] = useState(true);
     const [selectedYear, setSelectedYear] = useState(0);
-    const [graphLimit, setGraphLimit] = useState(500);
     const [selectedMonth, setSelectedMonth] = useState(0);
     const [weeklyExpenseAndIncome, setWeeklyExpenseAndIncome] = useState({
         labels: [],
         series: [],
     });
+    const [summary, setSummary] = useState({
+        income: 0,
+        expense: 0,
+        avg: 0,
+    });
+    const [weeklyExpenseAndIncomeInTotal, setWeeklyExpenseAndIncomeInTotal] =
+        useState({
+            labels: [],
+            series: [],
+        });
     const [weeklyExpenseCategoryWise, setWeeklyExpenseCategoryWise] = useState({
         labels: [],
         series: [],
@@ -38,19 +47,27 @@ const WeeklyExpenseGraph = ({ data, yearArray }) => {
             date.monthFirstDay,
             date.lastMonthDay
         );
-        // console.log(chartData.limit);
-        // setLimit(chartData.limit);
 
         if (chartData.category.length == 0) {
             setDataExists(false);
         } else {
             const columnChartDataAll =
                 generateWeeklyExpenseAndIncomeChartColumnData(chartData);
+
+            setSummary({
+                income: columnChartDataAll.summary.totalIncome,
+                expense: columnChartDataAll.summary.totalExpense,
+                avg: columnChartDataAll.summary.averageWeeklySpending,
+            });
+            setWeeklyExpenseAndIncomeInTotal({
+                labels: columnChartDataAll.summaryChartInTotal.labels,
+                series: columnChartDataAll.summaryChartInTotal.seriesForTotal,
+            });
             setWeeklyExpenseAndIncome({
                 labels: columnChartDataAll.labels,
                 series: columnChartDataAll.series,
             });
-            setGraphLimit(columnChartDataAll.limit);
+
             const categoryWiseSeries = constructWeeklyExpenseWiseData(
                 columnChartDataAll.categoryWise
             );
@@ -85,12 +102,19 @@ const WeeklyExpenseGraph = ({ data, yearArray }) => {
         } else {
             const columnChartDataAll =
                 generateWeeklyExpenseAndIncomeChartColumnData(chartData);
-
+            setSummary({
+                income: columnChartDataAll.summary.totalIncome,
+                expense: columnChartDataAll.summary.totalExpense,
+                avg: columnChartDataAll.summary.averageWeeklySpending,
+            });
+            setWeeklyExpenseAndIncomeInTotal({
+                labels: columnChartDataAll.summaryChartInTotal.labels,
+                series: columnChartDataAll.summaryChartInTotal.seriesForTotal,
+            });
             setWeeklyExpenseAndIncome({
                 labels: columnChartDataAll.labels,
                 series: columnChartDataAll.series,
             });
-            setGraphLimit(columnChartDataAll.limit);
             const categoryWiseSeries = constructWeeklyExpenseWiseData(
                 columnChartDataAll.categoryWise
             );
@@ -114,21 +138,33 @@ const WeeklyExpenseGraph = ({ data, yearArray }) => {
         setLoading(true);
         setDataExists(true);
         const date = todayDetails(getDate);
+
         const chartData = weeklyChartData(
             data,
             date.monthFirstDay,
             date.lastMonthDay
         );
+
         if (chartData.category.length == 0) {
             setDataExists(false);
         } else {
             const columnChartDataAll =
                 generateWeeklyExpenseAndIncomeChartColumnData(chartData);
+
+            setSummary({
+                income: columnChartDataAll.summary.totalIncome,
+                expense: columnChartDataAll.summary.totalExpense,
+                avg: columnChartDataAll.summary.averageWeeklySpending,
+            });
             setWeeklyExpenseAndIncome({
                 labels: columnChartDataAll.labels,
                 series: columnChartDataAll.series,
             });
-            setGraphLimit(columnChartDataAll.limit);
+            setWeeklyExpenseAndIncomeInTotal({
+                labels: columnChartDataAll.summaryChartInTotal.labels,
+                series: columnChartDataAll.summaryChartInTotal.seriesForTotal,
+            });
+
             const categoryWiseSeries = constructWeeklyExpenseWiseData(
                 columnChartDataAll.categoryWise
             );
@@ -185,19 +221,32 @@ const WeeklyExpenseGraph = ({ data, yearArray }) => {
                 </div>
             ) : dataExists ? (
                 <>
+                    <ShowTotalSummary
+                        income={summary.income}
+                        expense={summary.expense}
+                        balance={summary.avg}
+                        type="Weekly"
+                    />
                     <MonthlyColumnGraph
                         categories={weeklyExpenseAndIncome.labels}
                         data={weeklyExpenseAndIncome.series}
-                        title="Expense Vs Income in Column Chart"
+                        title="Expense Vs Income in Column Chart(Weekly wise)"
                         rotate={-45}
                     />
+
                     <MonthlyLineGraph
                         data={weeklyExpenseAndIncome.series}
-                        limit={graphLimit}
                         categories={weeklyExpenseAndIncome.labels}
                         rotate={-45}
-                        title="Expense Vs Income in Line Chart"
+                        title="Expense Vs Income in Line Chart(Weekly wise)"
                     />
+                    <MonthlyLineGraph
+                        data={weeklyExpenseAndIncomeInTotal.series}
+                        categories={weeklyExpenseAndIncomeInTotal.labels}
+                        rotate={-45}
+                        title="Expense Vs Income in Line Chart( IN Total)"
+                    />
+
                     <MonthlyCategoryWiseGraph
                         categories={weeklyExpenseCategoryWise.labels}
                         data={weeklyExpenseCategoryWise.series}
@@ -206,7 +255,7 @@ const WeeklyExpenseGraph = ({ data, yearArray }) => {
                         rotate={-45}
                         chartType="bar"
                         title={
-                            "Weekly Expense Data BY Category wise In Column Chart"
+                            "Weekly Expense Data BY Category wise In Column Chart(Weekly wise)"
                         }
                     />
 
@@ -218,7 +267,7 @@ const WeeklyExpenseGraph = ({ data, yearArray }) => {
                         rotate={-45}
                         chartType="line"
                         title={
-                            "Monthly Expense Data BY Category wise In Line Chart"
+                            "Monthly Expense Data BY Category wise In Line Chart(Weekly wise)"
                         }
                     />
                 </>

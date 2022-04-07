@@ -21,6 +21,7 @@ const Borrow = (props) => {
             mainPage: "adddebt",
             action: "borrow",
             type: "mainpage",
+            create:"edit"
         };
         dispatch(debtStoreAction.updatePage(data));
     };

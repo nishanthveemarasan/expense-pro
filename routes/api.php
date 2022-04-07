@@ -10,6 +10,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\RecurringPaymentController;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,9 +70,15 @@ Route::middleware(['auth:api'])->group(function () {
     Route::prefix('debts')->group(function () {
         Route::get('/', [DebtController::class, 'index']);
         Route::post('/store', [DebtController::class, 'store']);
+        Route::patch('/{debt:uuid}/update', [DebtController::class, 'update']);
     });
     Route::prefix('recurring')->group(function () {
         Route::patch('/{recurringPayment:uuid}', [RecurringPaymentController::class, 'edit']);
         Route::post('/store', [RecurringPaymentController::class, 'store']);
     });
+});
+
+Route::get('test', function () {
+    Cache::put('key', 'value');
+    dd(Cache::get('key'));
 });

@@ -65,8 +65,6 @@ const MonthlyLineGraph = (props) => {
                 title: {
                     text: "£ ( Sterling Pounds )",
                 },
-                min: 1,
-                max: props.limit,
             },
             legend: {
                 position: "bottom",
