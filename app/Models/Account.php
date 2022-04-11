@@ -43,9 +43,9 @@ class Account extends Model
         });
     }
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class, 'user_account');
+        return $this->belongsTo(User::class);
     }
 
     public function debts()

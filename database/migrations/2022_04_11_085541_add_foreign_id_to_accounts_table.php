@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccountsTable extends Migration
+class AddForeignIdToAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('uuid');
-            $table->string('name')->unique(false);
-            $table->timestamps();
+        Schema::table('accounts', function (Blueprint $table) {
+            $table->foreignId('user_id')->nullable()->after('name')->constrained();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accounts');
+        Schema::table('accounts', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('user_id');
+        });
     }
 }

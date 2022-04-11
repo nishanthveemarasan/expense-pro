@@ -54,7 +54,7 @@ class User extends Authenticatable
 
     public function accounts()
     {
-        return $this->belongsToMany(Account::class, 'user_account');
+        return $this->hasMany(Account::class);
     }
 
 

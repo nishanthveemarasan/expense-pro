@@ -16,7 +16,7 @@ class DebtService
     public function store($data)
     {
         $user = Auth::user();
-        $account = Account::firstOrCreate(
+        $account = $user->accounts()->firstOrCreate(
             ['name' => $data['formData']['name']],
         );
 
@@ -32,8 +32,6 @@ class DebtService
 
         $account->refresh();
 
-        $user->accounts()->syncWithoutDetaching($account->id);
-
         return ['data' => $debt->uuid];
     }
 
@@ -42,7 +40,6 @@ class DebtService
         $user = Auth::user();
 
         $userData = $user->load('accounts', 'accounts.debts');
-
         $lend = collect();
         $borrow = collect();
 
