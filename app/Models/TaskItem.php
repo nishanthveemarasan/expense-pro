@@ -45,7 +45,7 @@ class TaskItem extends Model
         });
     }
 
-    protected function task()
+    public function task()
     {
         return $this->belongsTo(Task::class);
     }

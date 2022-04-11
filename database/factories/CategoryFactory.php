@@ -2,14 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Account;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AccountFactory extends Factory
+class CategoryFactory extends Factory
 {
-    protected $model = Account::class;
-
     /**
      * Define the model's default state.
      *
@@ -18,9 +14,9 @@ class AccountFactory extends Factory
     public function definition()
     {
         return [
-            'uuid' => $this->faker->uuid(),
-            'name' => $this->faker->name(),
-            'user_id' => User::factory()
+            'category' => $this->faker->text(6),
+            'items' => array('a', 'd', 'e'),
+            'color' => $this->faker->hexColor()
         ];
     }
 }

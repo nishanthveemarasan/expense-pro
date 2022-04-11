@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Account;
-use App\Models\User;
+use App\Models\RecurringPayment;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AccountFactory extends Factory
+class RepeatPaymentFactory extends Factory
 {
-    protected $model = Account::class;
-
     /**
      * Define the model's default state.
      *
@@ -19,8 +17,9 @@ class AccountFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid(),
-            'name' => $this->faker->name(),
-            'user_id' => User::factory()
+            'recurring_payment_id' => RecurringPayment::factory(),
+            'amount' => 250,
+            'pay_date' => Carbon::now()->format('Y-m-d'),
         ];
     }
 }

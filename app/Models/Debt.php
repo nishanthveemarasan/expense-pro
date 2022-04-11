@@ -47,7 +47,7 @@ class Debt extends Model
         });
     }
 
-    protected function account()
+    public function account()
     {
         return $this->belongsTo(Account::class);
     }

@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Account;
-use App\Models\User;
+use Carbon\Carbon;
+use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AccountFactory extends Factory
+class TaskItemFactory extends Factory
 {
-    protected $model = Account::class;
-
     /**
      * Define the model's default state.
      *
@@ -19,8 +17,10 @@ class AccountFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid(),
-            'name' => $this->faker->name(),
-            'user_id' => User::factory()
+            'task_id' => Task::factory(),
+            'name' => $this->faker->word(30),
+            'completed' => 0,
+            'order' => 1,
         ];
     }
 }

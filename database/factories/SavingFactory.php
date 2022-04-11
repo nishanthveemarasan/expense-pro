@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Account;
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AccountFactory extends Factory
+class SavingFactory extends Factory
 {
-    protected $model = Account::class;
-
     /**
      * Define the model's default state.
      *
@@ -19,8 +17,11 @@ class AccountFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid(),
-            'name' => $this->faker->name(),
-            'user_id' => User::factory()
+            'description' => $this->faker->word(10),
+            'type' => 'add',
+            'date' => Carbon::now()->format('Y-m-d'),
+            'amount' => 250,
+            'user_id' => User::factory(),
         ];
     }
 }

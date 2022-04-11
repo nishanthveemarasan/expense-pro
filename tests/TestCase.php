@@ -5,6 +5,7 @@ namespace Tests;
 use App\Models\User;
 use Laravel\Passport\Client;
 use Laravel\Passport\Passport;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -37,17 +38,22 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * @param User|null $user
-     * @param array     $accountPermissions
+     * @param array     $userPermissions
      * @return User|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed
      */
-    protected function actingAsPassport(User $user, $accountPermissions = [])
+    protected function actingAsPassport(User $user, $userPermissions = [])
     {
 
         $this->actingAsPassportClient($user);
 
-        foreach ($accountPermissions as $permission) {
-
-            $user->account->givePermissionTo($permission);
+        if (count($userPermissions) > 0) {
+            foreach ($userPermissions as $permission) {
+                $permission = Permission::firstOrCreate([
+                    'name' => $permission,
+                    'guard_name' => 'api'
+                ]);
+                $user->givePermissionTo($permission);
+            }
         }
 
         Passport::actingAs($user);

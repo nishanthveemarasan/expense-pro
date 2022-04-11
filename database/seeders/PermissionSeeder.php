@@ -16,7 +16,10 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         $permissions = $this->permissions();
-        $role = Role::where('name', 'user')->first();
+        $role = Role::firstOrCreate([
+            'name' => 'user',
+            'guard_name' => 'api'
+        ]);
 
         foreach ($permissions as $permission) {
             $permission = Permission::firstOrCreate([

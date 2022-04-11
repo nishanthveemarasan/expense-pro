@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Account;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DebtFactory extends Factory
+class ExpenseFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,18 +16,28 @@ class DebtFactory extends Factory
     public function definition()
     {
         $index = random_int(0, 1);
+        $date = Carbon::now();
+
         return [
             'uuid' => $this->faker->uuid(),
             'type' => $this->type($index),
             'amount' => $this->amount($index),
-            'date' => Carbon::now()->format('Y-m-d'),
-            'account_id' => Account::factory()
+            'date' => $date->format('Y-m-d'),
+            'day' => $date->day,
+            'month' => $date->month,
+            'year' => $date->year,
+            'week' => 1,
+            'selectedCategory' => $this->faker->word(6),
+            'category' => $this->faker->word(6),
+            'subCategory' => $this->faker->word(6),
+            'amount' => $this->amount($index),
+            'user_id' => User::factory()
         ];
     }
 
     private function type($index)
     {
-        return ['lend', 'borrow'][$index];
+        return ['income', 'expense'][$index];
     }
 
     private function amount($index)

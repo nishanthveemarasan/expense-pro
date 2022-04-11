@@ -10,6 +10,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\RecurringPaymentController;
+use FontLib\Table\Type\name;
 use Illuminate\Support\Facades\Cache;
 
 /*
@@ -37,9 +38,12 @@ Route::post('/login', [AuthController::class, 'auth'])->name('auth');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 Route::get('/test', [PageController::class, 'test']);
-Route::middleware(['auth:api'])->group(function () {
-    Route::prefix('tasks')->group(function () {
-        Route::get('/', [TaskController::class, 'index']);
+Route::middleware(['auth:api'])->name('api.')->group(function () {
+    Route::get('/test', function () {
+        return ['status' => true];
+    })->name('test');
+    Route::prefix('tasks')->name('tasks.')->group(function () {
+        Route::get('/', [TaskController::class, 'index'])->name('index');
         Route::post('/store', [TaskController::class, 'store']);
         Route::get('/{task:uuid}', [TaskController::class, 'completeTask']);
         Route::post('/{task:uuid}/add', [TaskController::class, 'addSubTaskItem']);
@@ -48,11 +52,6 @@ Route::middleware(['auth:api'])->group(function () {
         Route::delete('/{task:uuid}/delete/{item:uuid}', [TaskController::class, 'deleteTaskItem']);
         Route::delete('/{task:uuid}/delete', [TaskController::class, 'deleteTask']);
         Route::patch('/{task:uuid}/update/{item:uuid}/content', [TaskController::class, 'updateItemContent']);
-    });
-    Route::get('/test', function () {
-        $user = auth()->user();
-        dump('view');
-        dd($user->can('view-expense', 'webasazxs'));
     });
     Route::prefix('savings')->group(function () {
         Route::get('/', [SavingController::class, 'index']);
@@ -79,6 +78,5 @@ Route::middleware(['auth:api'])->group(function () {
 });
 
 Route::get('test', function () {
-    Cache::put('key', 'value');
-    dd(Cache::get('key'));
-});
+    return ['status' => true];
+})->name('test');
