@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CreateRecurringPaymentRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class CreateRecurringPaymentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::user()->can('create-expense');
     }
 
     /**

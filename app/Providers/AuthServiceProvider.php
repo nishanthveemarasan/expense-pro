@@ -2,10 +2,16 @@
 
 namespace App\Providers;
 
-use App\Models\Expense;
+use App\Models\Debt;
 use App\Models\User;
-use App\Policies\ExpensePolicy;
+use App\Models\Expense;
+use App\Models\Saving;
+use App\Models\Task;
+use App\Policies\DebtPolicy;
 use Laravel\Passport\Passport;
+use App\Policies\ExpensePolicy;
+use App\Policies\SavingPolicy;
+use App\Policies\TaskPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -19,6 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Expense::class => ExpensePolicy::class,
+        Debt::class => DebtPolicy::class,
+        Saving::class => SavingPolicy::class,
+        Task::class => TaskPolicy::class
     ];
 
     /**

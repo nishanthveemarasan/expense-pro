@@ -48,11 +48,6 @@ class Account extends Model
         return $this->belongsToMany(User::class, 'user_account');
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
     public function debts()
     {
         return $this->hasMany(Debt::class);

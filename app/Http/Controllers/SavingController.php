@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateSavingRequest;
+use App\Models\Saving;
 use Illuminate\Http\Request;
 use App\Services\SavingService;
 use Exception;
@@ -20,6 +21,7 @@ class SavingController extends Controller
 
     public function index()
     {
+        $this->authorize('viewAny', Saving::class);
         try {
             DB::beginTransaction();
             $this->result = $this->savingService->index();

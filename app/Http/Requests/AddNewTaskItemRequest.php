@@ -14,7 +14,9 @@ class AddNewTaskItemRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        $user = Auth::user();
+
+        return $user->can('update-todo') && $user->id == $this->task->user->id;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateExpenseRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateExpenseRequest extends FormRequest
      */
     public function authorize()
     {
-        $user = auth()->user();
+        $user = Auth::user();
         return $user->can('update-expense') && $user->id == $this->expense->user->id;
     }
 

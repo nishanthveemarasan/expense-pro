@@ -26,6 +26,7 @@ class TaskController extends Controller
 
     public function index()
     {
+        $this->authorize('viewAny', Task::class);
         try {
             DB::beginTransaction();
             $this->result = $this->taskService->index();
@@ -40,6 +41,7 @@ class TaskController extends Controller
 
     public function store(CreateTaskRequest $request)
     {
+        $this->authorize('create', Task::class);
         try {
             DB::beginTransaction();
             $this->result = $this->taskService->store($request->validated());
@@ -54,6 +56,7 @@ class TaskController extends Controller
 
     public function updateItem(UpdateTaskItemRequest $request, Task $task, TaskItem $item)
     {
+        $this->authorize('update', $task);
         try {
             DB::beginTransaction();
             $this->result = $this->taskService->updateItem($request->validated(), $task, $item);
@@ -68,6 +71,7 @@ class TaskController extends Controller
 
     public function updateItems(UpdateItemsRequest $request, Task $task)
     {
+        $this->authorize('update', $task);
         try {
             DB::beginTransaction();
             $this->result = $this->taskService->updateItems($request->validated(), $task);
@@ -82,6 +86,7 @@ class TaskController extends Controller
 
     public function deleteTaskItem(Task $task, TaskItem $item)
     {
+        $this->authorize('delete', $task);
         try {
             DB::beginTransaction();
             $this->result = $this->taskService->deleteTaskItem($task, $item);
@@ -95,6 +100,7 @@ class TaskController extends Controller
     }
     public function deleteTask(Task $task)
     {
+        $this->authorize('delete', $task);
         try {
             DB::beginTransaction();
             $this->result = $this->taskService->deleteTask($task);
@@ -110,6 +116,7 @@ class TaskController extends Controller
 
     public function completeTask(Task $task)
     {
+        $this->authorize('update', $task);
         try {
             DB::beginTransaction();
             $this->result = $this->taskService->completeTask($task);

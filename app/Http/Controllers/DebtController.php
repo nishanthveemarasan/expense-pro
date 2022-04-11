@@ -22,7 +22,7 @@ class DebtController extends Controller
 
     public function index()
     {
-
+        $this->authorize('viewAny', Debt::class);
         try {
             DB::beginTransaction();
             $this->result = $this->debtService->index();
@@ -50,6 +50,7 @@ class DebtController extends Controller
     }
     public function update(CreateDebtgRequest $request, Debt $debt)
     {
+        $this->authorize('update', $debt);
         try {
             DB::beginTransaction();
             $this->result = $this->debtService->update($request->validated(), $debt);

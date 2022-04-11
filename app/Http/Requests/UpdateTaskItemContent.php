@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateTaskItemContent extends FormRequest
 {
@@ -13,7 +14,9 @@ class UpdateTaskItemContent extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $user = Auth::user();
+
+        return $user->can('update-todo') && $user->id == $this->task->user->id;
     }
 
     /**

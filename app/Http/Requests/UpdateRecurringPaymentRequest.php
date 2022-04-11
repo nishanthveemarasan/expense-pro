@@ -14,7 +14,8 @@ class UpdateRecurringPaymentRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        $user = Auth::user();
+        return $user->can('update-expense') && $user->id == $this->recurringPayment->user->id;
     }
 
     /**

@@ -14,6 +14,7 @@ class UpdateTaskItemRequest extends FormRequest
      */
     public function authorize()
     {
+        $user = Auth::user();
         return Auth::check();
     }
 
