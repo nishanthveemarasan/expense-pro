@@ -44,7 +44,7 @@ Route::middleware(['auth:api'])->name('api.')->group(function () {
     })->name('test');
     Route::prefix('tasks')->name('tasks.')->group(function () {
         Route::get('/', [TaskController::class, 'index'])->name('index');
-        Route::post('/store', [TaskController::class, 'store']);
+        Route::post('/store', [TaskController::class, 'store'])->name('store');
         Route::get('/{task:uuid}', [TaskController::class, 'completeTask']);
         Route::post('/{task:uuid}/add', [TaskController::class, 'addSubTaskItem']);
         Route::patch('/{task:uuid}/item/{item:uuid}', [TaskController::class, 'updateItem']);

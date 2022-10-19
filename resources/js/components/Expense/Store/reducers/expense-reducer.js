@@ -124,14 +124,22 @@ export const addNewRecurringPayment = (data, token) => {
                 body: JSON.stringify(data),
             });
             const response = await request.json();
+            dispatch(expenseStoreAction.showModal());
             if (response.errors) {
                 alert(errors(response.errors));
-                dispatch(expenseStoreAction.showModal());
+                return;
+            }
+            if (response.message) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: true,
+                    })
+                );
                 return;
             }
             if (response.data) {
                 dispatch(expenseStoreAction.updateRecurringData(response.data));
-                dispatch(expenseStoreAction.showModal());
             }
         } catch (error) {
             alert(
@@ -162,6 +170,14 @@ export const editExistingRecurringPayment = (data, token) => {
                 alert(errors(response.errors));
                 dispatch(expenseStoreAction.showModal());
                 return;
+            }
+            if (response.message) {
+                dispatch(
+                    expenseStoreAction.onOpenErrorModal({
+                        error: `${response.message} ! We are unable to process your request please try again`,
+                        reload: true,
+                    })
+                );
             }
             if (response.data) {
                 dispatch(

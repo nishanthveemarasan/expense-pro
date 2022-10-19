@@ -59,11 +59,16 @@ class RecurringPayService
                 'amount' => $data['amount'],
                 'pay_date' => $data['start_date']
             ]);
+            return ['data' => [
+                'recurring_payment' => new RecurringPaymentResource($recurringPayment->load('repeatPayments')),
+                'expense_data' => new ExepenseResource($expense)
+            ]];
+        } else {
+            return ['data' => [
+                'recurring_payment' => new RecurringPaymentResource($recurringPayment->load('repeatPayments')),
+                'expense_data' => null
+            ]];
         }
-        return ['data' => [
-            'recurring_payment' => new RecurringPaymentResource($recurringPayment->load('repeatPayments')),
-            'expense_data' => new ExepenseResource($expense)
-        ]];
     }
 
     public function edit(RecurringPayment $recurringPayment, $data)

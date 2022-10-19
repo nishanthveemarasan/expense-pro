@@ -14,6 +14,7 @@ class RepeatPaymentResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             "uuid" => $this->uuid,
             "amount" => $this->amount,
