@@ -1,7 +1,9 @@
 <?php
 
+use FontLib\Table\Type\name;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DebtController;
@@ -9,9 +11,11 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\Mobile\ExpenseController as MobileExpenseController;
+use App\Http\Controllers\Mobile\MobileDebtController;
 use App\Http\Controllers\RecurringPaymentController;
-use FontLib\Table\Type\name;
-use Illuminate\Support\Facades\Cache;
+use App\Http\Controllers\Mobile\SavingController as MobileSavingController;
+use App\Http\Controllers\MobileRecurringPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,3 +84,30 @@ Route::middleware(['auth:api'])->name('api.')->group(function () {
 Route::get('test', function () {
     return ['status' => true];
 })->name('test');
+Route::prefix('mobile')->group(function () {
+    Route::prefix('expenses')->group(function () {
+        Route::get('/', [MobileExpenseController::class, 'index']);
+        Route::delete('/{expense:uuid}/delete', [MobileExpenseController::class, 'delete']);
+        Route::patch('/{expense:uuid}/update', [MobileExpenseController::class, 'update']);
+        Route::post('/store', [MobileExpenseController::class, 'store']);
+        Route::post('/category/store', [MobileExpenseController::class, 'category']);
+    });
+    Route::prefix('savings')->group(function () {
+        Route::get('/', [MobileSavingController::class, 'index']);
+        Route::post('/store', [MobileSavingController::class, 'store']);
+        Route::patch('/{mobileSaving:uuid}/update', [MobileSavingController::class, 'update']);
+        Route::delete('/{mobileSaving:uuid}/delete', [MobileSavingController::class, 'delete']);
+    });
+
+    Route::prefix('debts')->group(function () {
+        Route::get('/', [MobileDebtController::class, 'index']);
+        Route::post('/store', [MobileDebtController::class, 'store']);
+        Route::patch('/{mobileDebt:uuid}/update', [MobileDebtController::class, 'update']);
+        Route::delete('/{mobileDebt:uuid}/delete', [MobileDebtController::class, 'delete']);
+    });
+    Route::prefix('recurring')->group(function () {
+        Route::patch('/{recurringPayment:uuid}', [MobileRecurringPaymentController::class, 'edit']);
+        Route::patch('/{recurringPayment:uuid}/stop', [MobileRecurringPaymentController::class, 'stop']);
+        Route::post('/store', [MobileRecurringPaymentController::class, 'store']);
+    });
+});

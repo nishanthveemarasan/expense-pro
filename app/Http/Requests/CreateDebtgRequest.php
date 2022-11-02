@@ -14,7 +14,8 @@ class CreateDebtgRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->can('create-debt');
+        return true;
+        // return Auth::user()->can('create-debt');
     }
 
     /**

@@ -3,31 +3,31 @@
 namespace App\Http\Controllers\Mobile;
 
 use Exception;
-use App\Models\Saving;
+use App\Models\MobileDebt;
 use Illuminate\Http\Request;
-use App\Services\Mobile\SavingService;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests\Mobile\CreateSavingRequest;
-use App\Http\Requests\Mobile\DeleteSavingRequest;
-use App\Models\MobileSaving;
 
-class SavingController extends Controller
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Services\Mobile\DebtService;
+use App\Http\Requests\CreateDebtgRequest;
+use App\Http\Requests\Mobile\DeleteDebtRequest;
+
+class MobileDebtController extends Controller
 {
-    protected $savingService;
+    protected $debtService;
     protected $result;
 
-    public function __construct(SavingService $savingService)
+    public function __construct(DebtService $debtService)
     {
-        $this->savingService = $savingService;
+        $this->debtService = $debtService;
     }
 
     public function index()
     {
-        // $this->authorize('viewAny', Saving::class);
+        // $this->authorize('viewAny', Debt::class);
         try {
             DB::beginTransaction();
-            $this->result = $this->savingService->index();
+            $this->result = $this->debtService->index();
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
@@ -37,11 +37,11 @@ class SavingController extends Controller
         return $this->result;
     }
 
-    public function store(CreateSavingRequest $request)
+    public function store(CreateDebtgRequest $request)
     {
         try {
             DB::beginTransaction();
-            $this->result = $this->savingService->store($request->validated());
+            $this->result = $this->debtService->store($request->validated());
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
@@ -50,13 +50,12 @@ class SavingController extends Controller
 
         return $this->result;
     }
-
-    public function update(CreateSavingRequest $request, MobileSaving $mobileSaving)
+    public function update(CreateDebtgRequest $request, MobileDebt $mobileDebt)
     {
-        // dd($request->validated(), $mobileSaving);
+        // $this->authorize('update', $debt);
         try {
             DB::beginTransaction();
-            $this->result = $this->savingService->update($request->validated(), $mobileSaving);
+            $this->result = $this->debtService->update($request->validated(), $mobileDebt);
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
@@ -65,12 +64,12 @@ class SavingController extends Controller
 
         return $this->result;
     }
-
-    public function delete(DeleteSavingRequest $request, MobileSaving $mobileSaving)
+    public function delete(DeleteDebtRequest $request, MobileDebt $mobileDebt)
     {
+        // $this->authorize('update', $debt);
         try {
             DB::beginTransaction();
-            $this->result = $this->savingService->delete($mobileSaving);
+            $this->result = $this->debtService->delete($mobileDebt);
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();

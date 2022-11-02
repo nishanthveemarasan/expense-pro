@@ -29,6 +29,10 @@ class CreateSavingRequest extends FormRequest
             'date'  => ['required', 'date'],
             'type' => ['required', 'string'],
             'amount' => ['required', 'numeric'],
+            "day" => ['required', 'numeric'],
+            "month" => ['required', 'numeric'],
+            "week" => ['required', 'numeric'],
+            "year" => ['required', 'numeric'],
         ];
     }
 }

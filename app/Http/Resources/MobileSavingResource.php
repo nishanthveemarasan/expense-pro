@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\DebtResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AccountResource extends JsonResource
+class MobileSavingResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,13 +14,16 @@ class AccountResource extends JsonResource
      */
     public function toArray($request)
     {
-
         return [
             "uuid" =>  $this->uuid,
-            "name" =>  $this->name,
-            "lendTotal" =>  $this->lendTotal,
-            "borrowTotal" =>  $this->borrowTotal,
-            "debts" => DebtResource::collection($this->mobileDebts)
+            "description" =>  $this->description,
+            "type" =>  $this->type,
+            "date" =>  $this->date->format('Y-m-d'),
+            "amount" =>  $this->amount,
+            "day" =>  $this->day,
+            "month" =>  $this->month,
+            "week" =>  $this->week,
+            "year" =>  $this->year,
         ];
     }
 }

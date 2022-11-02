@@ -5,7 +5,7 @@ namespace App\Http\Requests\Mobile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCategoryRequest extends FormRequest
+class UpdateRecurringPaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,6 @@ class CreateCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        // return auth()->user()->can('create-expense');
         return true;
     }
 
@@ -26,8 +25,13 @@ class CreateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            "items" => ['required', 'array'],
-            "category" => ['required', 'string'],
+            "name" => ['required', 'string'],
+            "amount" => ['required', 'numeric'],
+            "pay_method" => ['required', 'string'],
+            "num_of_pay" => ['required', 'numeric'],
+            "next_pay_date" => ['required', 'date'],
+            "status" => ['required', 'string'],
+            "susbscription_type" => ['required', 'string'],
         ];
     }
 }

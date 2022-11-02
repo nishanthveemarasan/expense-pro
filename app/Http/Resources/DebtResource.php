@@ -19,7 +19,7 @@ class DebtResource extends JsonResource
             "type" =>  $this->type,
             "amount" =>  $this->amount,
             "description" =>  $this->description,
-            "date" =>  $this->date,
+            "date" =>  $this->date->format('Y-m-d'),
         ];
     }
 }

@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\Mobile;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCategoryRequest extends FormRequest
+class DeleteSavingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,6 @@ class CreateCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        // return auth()->user()->can('create-expense');
         return true;
     }
 
@@ -26,8 +24,7 @@ class CreateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            "items" => ['required', 'array'],
-            "category" => ['required', 'string'],
+            //
         ];
     }
 }

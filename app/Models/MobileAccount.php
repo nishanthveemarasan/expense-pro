@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Debt;
-use App\Models\MobileDebt;
-use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Account extends Model
+class MobileAccount extends Model
 {
     use HasFactory;
 
@@ -18,7 +15,7 @@ class Account extends Model
     ];
 
     protected $with = [
-        'debts'
+        'mobileDebts'
     ];
 
     // protected $hidden = [
@@ -49,11 +46,6 @@ class Account extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function debts()
-    {
-        return $this->hasMany(Debt::class);
-    }
-
     public function mobileDebts()
     {
         return $this->hasMany(MobileDebt::class);
@@ -61,10 +53,10 @@ class Account extends Model
 
     public function getLendTotalAttribute()
     {
-        return (int)$this->debts()->where('type', 'lend')->sum('amount');
+        return (int)$this->mobileDebts()->where('type', 'lend')->sum('amount');
     }
     public function getBorrowTotalAttribute()
     {
-        return (int)$this->debts()->where('type', 'borrow')->sum('amount');
+        return (int)$this->mobileDebts()->where('type', 'borrow')->sum('amount');
     }
 }
