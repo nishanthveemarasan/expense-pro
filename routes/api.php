@@ -36,6 +36,8 @@ Route::post('/auth', function (Request $request) {
         $user  = Auth::user();
         $token = $user->createToken('api-application')->accessToken;
         return ['token' => $token];
+    } else {
+        throw new Exception('Incorrect Login Details');
     }
 });
 Route::post('/login', [AuthController::class, 'auth'])->name('auth');
@@ -79,35 +81,36 @@ Route::middleware(['auth:api'])->name('api.')->group(function () {
         Route::patch('/{recurringPayment:uuid}', [RecurringPaymentController::class, 'edit']);
         Route::post('/store', [RecurringPaymentController::class, 'store']);
     });
+    //mobile
+    Route::prefix('mobile')->group(function () {
+        Route::prefix('expenses')->group(function () {
+            Route::get('/', [MobileExpenseController::class, 'index']);
+            Route::delete('/{expense:uuid}/delete', [MobileExpenseController::class, 'delete']);
+            Route::patch('/{expense:uuid}/update', [MobileExpenseController::class, 'update']);
+            Route::post('/store', [MobileExpenseController::class, 'store']);
+            Route::post('/category/store', [MobileExpenseController::class, 'category']);
+        });
+        Route::prefix('savings')->group(function () {
+            Route::get('/', [MobileSavingController::class, 'index']);
+            Route::post('/store', [MobileSavingController::class, 'store']);
+            Route::patch('/{mobileSaving:uuid}/update', [MobileSavingController::class, 'update']);
+            Route::delete('/{mobileSaving:uuid}/delete', [MobileSavingController::class, 'delete']);
+        });
+
+        Route::prefix('debts')->group(function () {
+            Route::get('/', [MobileDebtController::class, 'index']);
+            Route::post('/store', [MobileDebtController::class, 'store']);
+            Route::patch('/{mobileDebt:uuid}/update', [MobileDebtController::class, 'update']);
+            Route::delete('/{mobileDebt:uuid}/delete', [MobileDebtController::class, 'delete']);
+        });
+        Route::prefix('recurring')->group(function () {
+            Route::patch('/{recurringPayment:uuid}', [MobileRecurringPaymentController::class, 'edit']);
+            Route::patch('/{recurringPayment:uuid}/stop', [MobileRecurringPaymentController::class, 'stop']);
+            Route::post('/store', [MobileRecurringPaymentController::class, 'store']);
+        });
+    });
 });
 
 Route::get('test', function () {
     return ['status' => true];
 })->name('test');
-Route::prefix('mobile')->group(function () {
-    Route::prefix('expenses')->group(function () {
-        Route::get('/', [MobileExpenseController::class, 'index']);
-        Route::delete('/{expense:uuid}/delete', [MobileExpenseController::class, 'delete']);
-        Route::patch('/{expense:uuid}/update', [MobileExpenseController::class, 'update']);
-        Route::post('/store', [MobileExpenseController::class, 'store']);
-        Route::post('/category/store', [MobileExpenseController::class, 'category']);
-    });
-    Route::prefix('savings')->group(function () {
-        Route::get('/', [MobileSavingController::class, 'index']);
-        Route::post('/store', [MobileSavingController::class, 'store']);
-        Route::patch('/{mobileSaving:uuid}/update', [MobileSavingController::class, 'update']);
-        Route::delete('/{mobileSaving:uuid}/delete', [MobileSavingController::class, 'delete']);
-    });
-
-    Route::prefix('debts')->group(function () {
-        Route::get('/', [MobileDebtController::class, 'index']);
-        Route::post('/store', [MobileDebtController::class, 'store']);
-        Route::patch('/{mobileDebt:uuid}/update', [MobileDebtController::class, 'update']);
-        Route::delete('/{mobileDebt:uuid}/delete', [MobileDebtController::class, 'delete']);
-    });
-    Route::prefix('recurring')->group(function () {
-        Route::patch('/{recurringPayment:uuid}', [MobileRecurringPaymentController::class, 'edit']);
-        Route::patch('/{recurringPayment:uuid}/stop', [MobileRecurringPaymentController::class, 'stop']);
-        Route::post('/store', [MobileRecurringPaymentController::class, 'store']);
-    });
-});

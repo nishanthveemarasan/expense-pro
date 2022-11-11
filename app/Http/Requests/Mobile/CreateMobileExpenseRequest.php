@@ -14,8 +14,8 @@ class CreateMobileExpenseRequest extends FormRequest
      */
     public function authorize()
     {
-        // return Auth::user()->can('create-expense');
-        return true;
+        return Auth::user()->can('create-expense');
+        // return true;
     }
 
     /**

@@ -398,7 +398,6 @@ export const filterDataByDateGroup = (dataArray, dateGroup) => {
         }
     });
     return { data, total: total.toFixed(2), category };
-};
 
 export const filterDataByType = (dataArray, type) => {
     let data = [];

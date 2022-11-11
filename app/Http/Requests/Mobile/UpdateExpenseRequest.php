@@ -14,9 +14,9 @@ class UpdateExpenseRequest extends FormRequest
      */
     public function authorize()
     {
-        // $user = Auth::user();
-        // return $user->can('update-expense') && $user->id == $this->expense->user->id;
-        return true;
+        $user = Auth::user();
+        return $user->can('update-expense') && $user->id == $this->expense->user->id;
+        // return true;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Mobile;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StopRecurringPaymentRequest extends FormRequest
@@ -13,7 +14,8 @@ class StopRecurringPaymentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $user = Auth::user();
+        return $user->can('update-expense') && $user->id == $this->recurringPayment->user->id;
     }
 
     /**
@@ -24,7 +26,8 @@ class StopRecurringPaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "num_of_pay" => ['required', 'numeric'],
+            "status" => ['required', 'string'],
         ];
     }
 }

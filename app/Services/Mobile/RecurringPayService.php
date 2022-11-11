@@ -14,12 +14,6 @@ use Exception;
 
 class RecurringPayService
 {
-    protected $user;
-    public function __construct()
-    {
-        $this->user = User::find(1);
-    }
-
     public function store($data)
     {
         $today = date('Y-m-d');
@@ -37,7 +31,7 @@ class RecurringPayService
             $payNumber = 1;
             $expenseData = $this->prepareExpenseData($data, $today);
 
-            $expense = $this->user->expenses()->create($expenseData);
+            $expense = Auth::user()->expenses()->create($expenseData);
         } else {
             $lastPayDate = $data['start_date'];
             $nextPayDate = $data['start_date'];
@@ -59,7 +53,7 @@ class RecurringPayService
             'status' => $data['status']
         ];
 
-        $recurringPayment = $this->user->recurringPayments()->create($rpData);
+        $recurringPayment = Auth::user()->recurringPayments()->create($rpData);
         if ($payNumber == 1) {
             $recurringPayment->repeatPayments()->create([
                 'amount' => $data['amount'],

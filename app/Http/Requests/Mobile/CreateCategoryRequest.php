@@ -14,8 +14,8 @@ class CreateCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        // return auth()->user()->can('create-expense');
-        return true;
+        return auth()->user()->can('create-expense');
+        // return true;
     }
 
     /**

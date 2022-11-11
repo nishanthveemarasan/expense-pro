@@ -14,7 +14,7 @@ class CreateRecurringPaymentRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::user()->can('create-expense');
     }
 
     /**

@@ -64,7 +64,7 @@ class ExpenseController extends Controller
     }
     public function delete(Expense $expense)
     {
-        // $this->authorize('delete', $expense);
+        $this->authorize('delete', $expense);
         try {
             DB::beginTransaction();
             $this->result = $this->expenseService->delete($expense);
