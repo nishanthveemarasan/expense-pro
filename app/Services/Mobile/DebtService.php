@@ -13,15 +13,9 @@ use Illuminate\Support\Facades\Auth;
 
 class DebtService
 {
-    protected $user;
-    public function __construct()
-    {
-        $this->user = User::find(1);
-    }
-
     public function store($data)
     {
-        $account = $this->user->mobileAccounts()->firstOrCreate(
+        $account = Auth::user()->mobileAccounts()->firstOrCreate(
             ['name' => $data['formData']['name']],
         );
 
@@ -43,7 +37,7 @@ class DebtService
     public function index()
     {
         // dd($this->user->mobileAccounts->toArray());
-        $userData = $this->user->load('mobileAccounts', 'mobileAccounts.mobileDebts');
+        $userData = Auth::user()->load('mobileAccounts', 'mobileAccounts.mobileDebts');
 
         $lend = collect();
         $borrow = collect();

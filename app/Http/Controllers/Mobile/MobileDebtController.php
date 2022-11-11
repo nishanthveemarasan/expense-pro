@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Mobile\DebtService;
 use App\Http\Requests\CreateDebtgRequest;
 use App\Http\Requests\Mobile\DeleteDebtRequest;
+use App\Http\Requests\Mobile\UpdateDebtRequest;
 
 class MobileDebtController extends Controller
 {
@@ -50,9 +51,8 @@ class MobileDebtController extends Controller
 
         return $this->result;
     }
-    public function update(CreateDebtgRequest $request, MobileDebt $mobileDebt)
+    public function update(UpdateDebtRequest $request, MobileDebt $mobileDebt)
     {
-        // $this->authorize('update', $debt);
         try {
             DB::beginTransaction();
             $this->result = $this->debtService->update($request->validated(), $mobileDebt);

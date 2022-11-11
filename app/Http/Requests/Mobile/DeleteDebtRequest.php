@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Mobile;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DeleteDebtRequest extends FormRequest
@@ -13,7 +14,8 @@ class DeleteDebtRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $user = Auth::user();
+        return $user->can('update-debt') && $user->id == $this->mobileDebt->mobileAccount->user->id;
     }
 
     /**
