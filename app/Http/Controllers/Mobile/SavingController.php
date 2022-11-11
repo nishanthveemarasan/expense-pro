@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Mobile\CreateSavingRequest;
 use App\Http\Requests\Mobile\DeleteSavingRequest;
+use App\Http\Requests\Mobile\UpdateSavingRequest;
+use App\Http\Requests\Mobile\ViewSavingRequest;
 use App\Models\MobileSaving;
 
 class SavingController extends Controller
@@ -22,7 +24,7 @@ class SavingController extends Controller
         $this->savingService = $savingService;
     }
 
-    public function index()
+    public function index(ViewSavingRequest $request)
     {
         // $this->authorize('viewAny', Saving::class);
         try {
@@ -51,7 +53,7 @@ class SavingController extends Controller
         return $this->result;
     }
 
-    public function update(CreateSavingRequest $request, MobileSaving $mobileSaving)
+    public function update(UpdateSavingRequest $request, MobileSaving $mobileSaving)
     {
         // dd($request->validated(), $mobileSaving);
         try {

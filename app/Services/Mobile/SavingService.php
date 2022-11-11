@@ -9,21 +9,15 @@ use App\Http\Resources\MobileSavingResource;
 
 class SavingService
 {
-    protected $user;
-    public function __construct()
-    {
-        $this->user = User::find(1);
-    }
-
     public function store($data)
     {
-        $saving = $this->user->mobileSavings()->create($data);
+        $saving = Auth::user()->mobileSavings()->create($data);
         return ['data' =>  new MobileSavingResource($saving)];
     }
 
     public function index()
     {
-        $savings = $this->user->mobileSavings()->orderBy('date', 'desc')->get();
+        $savings = Auth::user()->mobileSavings()->orderBy('date', 'desc')->get();
         return ['data' => MobileSavingResource::collection($savings)];
     }
 

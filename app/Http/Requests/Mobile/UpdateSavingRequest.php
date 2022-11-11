@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Mobile;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class CreateSavingRequest extends FormRequest
+class UpdateSavingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,8 @@ class CreateSavingRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->can('create-saving');
+        $user = Auth::user();
+        return $user && $user->id == $this->mobileSaving->user->id;
     }
 
     /**

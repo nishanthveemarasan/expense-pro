@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Mobile;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class DeleteSavingRequest extends FormRequest
+class ViewSavingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,8 +14,7 @@ class DeleteSavingRequest extends FormRequest
      */
     public function authorize()
     {
-        $user = Auth::user();
-        return $user && $user->id == $this->mobileSaving->user->id;
+        return Auth::user();
     }
 
     /**
