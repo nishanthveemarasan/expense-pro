@@ -11,6 +11,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\Mobile\CurrencyController;
 use App\Http\Controllers\Mobile\ExpenseController as MobileExpenseController;
 use App\Http\Controllers\Mobile\MobileDebtController;
 use App\Http\Controllers\RecurringPaymentController;
@@ -83,6 +84,7 @@ Route::middleware(['auth:api'])->name('api.')->group(function () {
     });
     //mobile
     Route::prefix('mobile')->group(function () {
+        Route::get('currencies', [CurrencyController::class, 'getCurrencies']);
         Route::prefix('expenses')->group(function () {
             Route::get('/', [MobileExpenseController::class, 'index']);
             Route::delete('/{expense:uuid}/delete', [MobileExpenseController::class, 'delete']);

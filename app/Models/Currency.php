@@ -11,4 +11,11 @@ class Currency extends Model
     protected $fillable = [
         'name', 'code', 'symbol_native', 'symbol'
     ];
+
+    protected $appends = ['currency_name'];
+
+    public function getCurrencyNameAttribute()
+    {
+        return "{$this->name}-{$this->code}-{$this->symbol}";
+    }
 }
