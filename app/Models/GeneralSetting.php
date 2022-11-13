@@ -11,7 +11,7 @@ class GeneralSetting extends Model
     use HasFactory;
 
     protected $fillable = [
-        'uuid', 'currency_code', 'currency_symbol', 'user_id'
+        'uuid', 'currency_code', 'currency_symbol', 'locale_code', 'user_id'
     ];
 
     protected $hidden = [

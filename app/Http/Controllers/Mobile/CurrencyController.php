@@ -33,13 +33,15 @@ class CurrencyController extends Controller
             $data = $request->validated();
 
             $currency = Currency::where('code', $data['currency_code'])->first();
+            $locale = LocaleLanguage::where('code', $data['locale_code'])->first();
             GeneralSetting::updateOrCreate(
                 ['user_id' => Auth::user()->id],
-                ['currency_code' => $currency->code, 'currency_symbol' => $currency->symbol_native]
+                ['currency_code' => $currency->code, 'currency_symbol' => $currency->symbol_native, 'locale_code' => $locale->code]
             );
             $this->result['data']['currency'] = [
                 'code' => $currency->code,
-                'symbol' => $currency->symbol_native
+                'symbol' => $currency->symbol_native,
+                'locale_code' => $locale->code
             ];
         } catch (Exception $e) {
             DB::rollBack();
