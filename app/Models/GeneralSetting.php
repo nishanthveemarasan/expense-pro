@@ -14,6 +14,13 @@ class GeneralSetting extends Model
         'uuid', 'currency_code', 'currency_symbol', 'user_id'
     ];
 
+    protected $hidden = [
+        'id',
+        'user_id',
+        'created_at',
+        'updated_at',
+    ];
+
     /**
      * Boot function from Laravel.
      */
@@ -25,5 +32,10 @@ class GeneralSetting extends Model
                 $model->uuid = (string)Str::orderedUuid();
             }
         });
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

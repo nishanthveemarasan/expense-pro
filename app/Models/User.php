@@ -100,4 +100,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(RecurringPayment::class);
     }
+
+    public function generalSetting()
+    {
+        return $this->hasOne(GeneralSetting::class);
+    }
 }
