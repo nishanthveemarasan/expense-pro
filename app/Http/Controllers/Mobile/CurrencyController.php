@@ -11,6 +11,12 @@ class CurrencyController extends Controller
 {
     public function getCurrencies()
     {
-        return ['data' => CurrencyResource::collection(Currency::all())];
+        return ['data' => [
+            "currencyList" => CurrencyResource::collection(Currency::all())
+        ]];
+    }
+
+    public function store()
+    {
     }
 }

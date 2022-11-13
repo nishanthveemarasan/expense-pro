@@ -84,7 +84,8 @@ Route::middleware(['auth:api'])->name('api.')->group(function () {
     });
     //mobile
     Route::prefix('mobile')->group(function () {
-        Route::get('currencies', [CurrencyController::class, 'getCurrencies']);
+        Route::get('settings/get', [CurrencyController::class, 'getCurrencies']);
+        Route::get('settings/store', [CurrencyController::class, 'store']);
         Route::prefix('expenses')->group(function () {
             Route::get('/', [MobileExpenseController::class, 'index']);
             Route::delete('/{expense:uuid}/delete', [MobileExpenseController::class, 'delete']);
