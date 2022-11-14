@@ -27,6 +27,7 @@ class CreateGeneralSettingRequest extends FormRequest
         return [
             'currency_code' => ['required', 'string'],
             'locale_code' => ['required', 'string'],
+            'name' => ['nullable', 'string'],
         ];
     }
 }
