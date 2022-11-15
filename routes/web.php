@@ -25,7 +25,7 @@ Route::get('/email', function () {
         'code' => '123434'
     ];
     Mail::to('iamnishanthveema@gmail.com')
-        ->send(new sendStatementMail($data));
+        ->send(new SendForgetPasswordEmail($data));
     dd('email sent');
 });
 
