@@ -11,6 +11,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\SavingController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\Mobile\CurrencyController;
 use App\Http\Controllers\Mobile\ExpenseController as MobileExpenseController;
 use App\Http\Controllers\Mobile\MobileDebtController;
@@ -122,3 +123,7 @@ Route::middleware(['auth:api'])->name('api.')->group(function () {
 Route::get('test', function () {
     return ['status' => true];
 })->name('test');
+
+Route::prefix('forget-password')->group(function () {
+    Route::post('store/email', [ForgetPasswordController::class, 'store'])->name('store.email');
+});

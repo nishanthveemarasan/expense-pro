@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Mobile\SavingController;
-
+use App\Mail\SendForgetPasswordEmail;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +20,12 @@ use App\Http\Controllers\Mobile\SavingController;
 */
 
 Route::get('/email', function () {
+    $data = [
+        'email' => 'iamnishanthveema@gmail.com',
+        'code' => '123434'
+    ];
     Mail::to('iamnishanthveema@gmail.com')
-        ->send(new sendStatementMail());
+        ->send(new sendStatementMail($data));
     dd('email sent');
 });
 
