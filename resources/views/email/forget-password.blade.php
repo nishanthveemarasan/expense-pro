@@ -116,7 +116,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 600px;" width="600">
+                                    <table align="center" border="0" cellpadding="0" cellspacing="0" class="row-content stack" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; color: #000000; width: 100%" width="100%">
                                         <tbody>
                                             <tr>
                                                 <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-left: 50px; padding-right: 50px; vertical-align: top; padding-top: 15px; padding-bottom: 15px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width=" 100%">
@@ -125,29 +125,18 @@
                                                             <td class="pad">
                                                                 <div style="font-family: sans-serif">
                                                                     <div class="" style="font-size: 14px; mso-line-height-alt: 16.8px; color: #506bec; line-height: 1.2; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
-                                                                        <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;"><strong><span style="font-size:38px;">Forgot your password?</span></strong></p>
+                                                                        <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;text-align:center"><strong><span style="font-size:15px;">Forgot your password?</span></strong></p>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                         </tr>
                                                     </table>
-                                                    <table border="0" cellpadding="10" cellspacing="0" class="text_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+                                                    <table border="0" cellpadding="10" cellspacing="0" class="text_block block-4" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
                                                         <tr>
                                                             <td class="pad">
                                                                 <div style="font-family: sans-serif">
                                                                     <div class="" style="font-size: 14px; mso-line-height-alt: 16.8px; color: #40507a; line-height: 1.2; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
-                                                                        <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;"><span style="font-size:16px;">Hey, we received a request to reset your password.</span></p>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <table border="0" cellpadding="10" cellspacing="0" class="text_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
-                                                        <tr>
-                                                            <td class="pad">
-                                                                <div style="font-family: sans-serif">
-                                                                    <div class="" style="font-size: 14px; mso-line-height-alt: 16.8px; color: #40507a; line-height: 1.2; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
-                                                                        <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;"><span style="font-size:16px;">Let’s get you a new one!</span></p>
+                                                                        <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;text-align:center"><span style="font-size:12px;">Hey, we received a request to reset your password.</span></p>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -158,7 +147,18 @@
                                                             <td class="pad">
                                                                 <div style="font-family: sans-serif">
                                                                     <div class="" style="font-size: 14px; mso-line-height-alt: 16.8px; color: #40507a; line-height: 1.2; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
-                                                                        <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;"><span style="font-size:16px;">Please use the code listed below to reset yuor password!</span></p>
+                                                                        <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;text-align:center"><span style="font-size:12px;">Let’s get you a new one</span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <table border="0" cellpadding="10" cellspacing="0" class="text_block block-3" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+                                                        <tr>
+                                                            <td class="pad">
+                                                                <div style="font-family: sans-serif">
+                                                                    <div class="" style="font-size: 14px; mso-line-height-alt: 16.8px; color: #40507a; line-height: 1.2; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
+                                                                        <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;text-align:center"><span style="font-size:12px;">Please use the code listed below to reset your password!</span></p>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -177,8 +177,8 @@
                                                         <tr>
                                                             <td class="pad">
                                                                 <div style="font-family: sans-serif">
-                                                                    <div class="" style="font-size: 14px; mso-line-height-alt: 16.8px; color: #40507a; line-height: 1.2; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
-                                                                        <p style="margin: 0; font-size: 14px; mso-line-height-alt: 16.8px;">Didn’t request a password reset? You can ignore this message.</p>
+                                                                    <div class="" style="font-size: 12px; mso-line-height-alt: 16.8px; color: #40507a; line-height: 1.2; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
+                                                                        <p style="margin: 0; font-size: 12px; mso-line-height-alt: 16.8px;text-align:center;">Didn’t request a password reset? You can ignore this message.</p>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -249,7 +249,7 @@
                                                             <td class="pad">
                                                                 <div style="font-family: sans-serif">
                                                                     <div class="" style="font-size: 14px; mso-line-height-alt: 16.8px; color: #97a2da; line-height: 1.2; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
-                                                                        <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;">This link will expire in the next 1 hour.<br />Please feel free to contact us at support@nkitservice.com. if having trouble </p>
+                                                                        <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;">This CODE will expire in the next 5 minutes.<br />Please feel free to contact us at support@nkitservice.com. if having trouble </p>
                                                                     </div>
                                                                 </div>
                                                             </td>

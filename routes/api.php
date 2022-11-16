@@ -124,6 +124,4 @@ Route::get('test', function () {
     return ['status' => true];
 })->name('test');
 
-Route::prefix('forget-password')->group(function () {
-    Route::post('store/email', [ForgetPasswordController::class, 'store'])->name('store.email');
-});
+

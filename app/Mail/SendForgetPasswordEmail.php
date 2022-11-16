@@ -29,7 +29,7 @@ class SendForgetPasswordEmail extends Mailable
      */
     public function build()
     {
-        $subject = "Welcome to NKITSERVICE to set the password";
+        $subject = "Welcome to NKITSERVICE admin";
         return $this->subject($subject)
             ->view('email.forget-password')
             ->with([
