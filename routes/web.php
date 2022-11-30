@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PageController;
 use App\Mail\sendStatementMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\Mobile\SavingController;
+use App\Mail\SendForgetPasswordEmail;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +20,13 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/email', function () {
-    Mail::to('iamnishanthveema@gmail.com')
-        ->send(new sendStatementMail());
+    $data = [
+        'email' => 'iamnishanthveema@gmail.com',
+        'code' => '123434'
+    ];
+    return new SendForgetPasswordEmail($data);
+    // Mail::to('iamnishanthveema@gmail.com')
+    //     ->send(new SendForgetPasswordEmail($data));
     dd('email sent');
 });
 
@@ -38,4 +45,11 @@ Route::get('/saving', [PageController::class, 'saving']);
 
 Route::get('/test', function () {
     return view('test');
+});
+
+Route::prefix('savings')->group(function () {
+    Route::get('/', [SavingController::class, 'index']);
+    Route::post('/store', [SavingController::class, 'store']);
+    Route::patch('/{mobileSaving:uuid}/update', [SavingController::class, 'update']);
+    Route::delete('/{mobileSaving:uuid}/delete', [SavingController::class, 'delete']);
 });

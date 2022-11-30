@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Debt;
+use App\Models\MobileDebt;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
@@ -51,6 +52,11 @@ class Account extends Model
     public function debts()
     {
         return $this->hasMany(Debt::class);
+    }
+
+    public function mobileDebts()
+    {
+        return $this->hasMany(MobileDebt::class);
     }
 
     public function getLendTotalAttribute()

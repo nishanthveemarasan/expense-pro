@@ -27,6 +27,7 @@ class User extends Authenticatable
     protected $fillable = [
         'email',
         'password',
+        'username',
         'remember_token'
     ];
 
@@ -40,7 +41,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $appends = ['names'];
+    // protected $appends = ['names','mobileNames'];
 
 
     /**
@@ -57,10 +58,18 @@ class User extends Authenticatable
         return $this->hasMany(Account::class);
     }
 
+    public function mobileAccounts()
+    {
+        return $this->hasMany(MobileAccount::class);
+    }
 
     public function savings()
     {
         return $this->hasMany(Saving::class);
+    }
+    public function mobileSavings()
+    {
+        return $this->hasMany(MobileSaving::class);
     }
 
     public function tasks()
@@ -71,6 +80,10 @@ class User extends Authenticatable
     public function getNamesAttribute()
     {
         return $this->accounts()->select('name as value', 'name as label')->get();
+    }
+    public function getMobileNamesAttribute()
+    {
+        return $this->mobileAccounts()->select('name as value', 'name as label')->get();
     }
 
     public function categories()
@@ -86,5 +99,10 @@ class User extends Authenticatable
     public function recurringPayments()
     {
         return $this->hasMany(RecurringPayment::class);
+    }
+
+    public function generalSetting()
+    {
+        return $this->hasOne(GeneralSetting::class);
     }
 }

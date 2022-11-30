@@ -1,0 +1,11 @@
+{
+  "folders": [
+	{
+		"path": ".."
+	},
+	{
+		"path": "../../../nkItService/relax-frontend"
+	}
+],
+  "settings": {}
+}

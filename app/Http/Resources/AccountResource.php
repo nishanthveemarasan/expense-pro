@@ -21,7 +21,7 @@ class AccountResource extends JsonResource
             "name" =>  $this->name,
             "lendTotal" =>  $this->lendTotal,
             "borrowTotal" =>  $this->borrowTotal,
-            "debts" => DebtResource::collection($this->debts)
+            "debts" => DebtResource::collection($this->mobileDebts)
         ];
     }
 }

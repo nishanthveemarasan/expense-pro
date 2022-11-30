@@ -15,7 +15,6 @@ class RecurringPaymentResource extends JsonResource
      */
     public function toArray($request)
     {
-
         return [
             "uuid" => $this->uuid,
             "type" => $this->type,

@@ -290,6 +290,7 @@ const expenseSlice = createSlice({
             state.mainPage = "expenseCategory";
             state.page = "dashboard";
         },
+        //dome
         calculateSummary(state, action) {
             const copySummary = { ...state.summary };
             const copyYearArray = state.expenseYearArray.slice();

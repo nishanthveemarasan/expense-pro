@@ -53,11 +53,7 @@ class DebtPolicy
      */
     public function update(User $user, Debt $debt)
     {
-        $debtAccountId = $debt->account->id;
-        $userAccount = $user->accounts()->where('id', $debtAccountId)->first();
-        if ($userAccount) {
-            return $user->can('update-debt') && $userAccount->id == $debtAccountId;
-        }
+        return $user->can('update-debt') && $user->id == $debt->account->user->id;
     }
 
     /**
