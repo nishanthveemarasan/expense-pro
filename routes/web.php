@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Mobile\SavingController;
+use App\Http\Controllers\TestController;
 use App\Mail\SendForgetPasswordEmail;
 
 /*
@@ -19,16 +20,7 @@ use App\Mail\SendForgetPasswordEmail;
 |
 */
 
-Route::get('/email', function () {
-    $data = [
-        'email' => 'iamnishanthveema@gmail.com',
-        'code' => '123434'
-    ];
-    return new SendForgetPasswordEmail($data);
-    // Mail::to('iamnishanthveema@gmail.com')
-    //     ->send(new SendForgetPasswordEmail($data));
-    dd('email sent');
-});
+Route::get('/test-data', [TestController::class, 'test']);
 
 
 Route::get('/auth', [PageController::class, 'login'])->name('login');

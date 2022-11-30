@@ -249,7 +249,7 @@
                                                             <td class="pad">
                                                                 <div style="font-family: sans-serif">
                                                                     <div class="" style="font-size: 14px; mso-line-height-alt: 16.8px; color: #97a2da; line-height: 1.2; font-family: Helvetica Neue, Helvetica, Arial, sans-serif;">
-                                                                        <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;">This CODE will expire in the next 5 minutes.<br />Please feel free to contact us at support@nkitservice.com. if having trouble </p>
+                                                                        <p style="margin: 0; font-size: 14px; text-align: center; mso-line-height-alt: 16.8px;">This CODE will expire in the next 10 minutes.<br />Please feel free to contact us at support@nkitservice.com. if having trouble </p>
                                                                     </div>
                                                                 </div>
                                                             </td>

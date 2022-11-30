@@ -24,9 +24,7 @@ class ForgetPasswordController extends Controller
         try {
             $data = $request->validated();
             $email  = $data['email'];
-            $numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-            $codeArray = Arr::random($numbers, 6);
-            $code = implode("", $codeArray);
+            $code = substr(number_format(time() * rand(), 0, '', ''), 0, 6);
 
             $checkActiveCode = ForgetPassword::where([
                 ['email', $email],
@@ -40,10 +38,10 @@ class ForgetPasswordController extends Controller
                 'code' => $code,
                 'email' => $email
             ]);
-            $this->result['data']['message'] = 'A Verification has been sent to your Email!. Use that code to retrieve the password';
+            $this->result['data']['message'] = 'We sent an EMAIL with the verification code to the specified Email. Use that code to retrieve your password!!';
 
-            // Mail::to('iamnishanthveema@gmail.com')
-            //     ->send(new SendForgetPasswordEmail(['code' => $code]));
+            Mail::to($email)
+                ->send(new SendForgetPasswordEmail(['code' => $code]));
         } catch (Exception $e) {
             $this->result['error'] = $e->getMessage();
         }
@@ -63,7 +61,7 @@ class ForgetPasswordController extends Controller
             if ($checkCode) {
                 $created = $checkCode->created_at;
                 $now = Carbon::now()->addMinutes();
-                $addMinutesToCodeCreated = $created->addMinutes(60);
+                $addMinutesToCodeCreated = $created->addMinutes(10);
                 if ($addMinutesToCodeCreated->greaterThan($now)) {
                     $this->result['data']['email'] = $checkCode->email;
                 } else {
