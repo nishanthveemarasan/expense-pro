@@ -19,7 +19,7 @@ use App\Http\Controllers\MobileRecurringPaymentController;
 |
 */
 
-Route::middleware(['auth:api'])->name('api.')->group(function () {
+Route::middleware(['auth:api'])->name('mobile.')->group(function () {
     //mobile
     Route::get('logout', function (Request $request) {
         $token = $request->user()->token();
