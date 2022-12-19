@@ -2,12 +2,13 @@
 
 use App\Mail\sendStatementMail;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\ActivationAwaitingEmail;
+use App\Mail\SendForgetPasswordEmail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\Mobile\SavingController;
 use App\Http\Controllers\TestController;
-use App\Mail\SendForgetPasswordEmail;
+use App\Http\Controllers\Mobile\SavingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,10 @@ Route::get('/saving', [PageController::class, 'saving']);
 // });
 
 Route::get('/test', function () {
-    return view('test');
+    Mail::to('iamnishanthveema@gmail.com')
+        ->send(new ActivationAwaitingEmail(['name' => 'Nishanth']));
+    dd('stop');
+    // return view('cholaAdmin.activation-waiting', ['name' => 'Nishanth']);
 });
 
 Route::prefix('savings')->group(function () {

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\Mobile\ExpenseController;
 use App\Http\Controllers\Mobile\SavingController;
+use App\Http\Controllers\Varman\Chola\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,4 +19,9 @@ Route::prefix('forget-password')->group(function () {
     Route::post('reset/password/check', [ForgetPasswordController::class, 'resetPasswordCheck'])->name('resetPassword.check');
     Route::post('reset/password/update', [ForgetPasswordController::class, 'updatePassword'])->name('resetPassword.update');
 });
-// });
+
+Route::middleware('client')->group(function () {
+    Route::prefix('auth')->name('auth.')->controller(UserController::class)->group(function () {
+        Route::post('company/register', 'registration');
+    });
+});

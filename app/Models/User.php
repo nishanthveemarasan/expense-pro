@@ -26,6 +26,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'email',
+        'status',
+        'name',
         'password',
         'username',
         'remember_token'
@@ -41,7 +43,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    // protected $appends = ['names','mobileNames'];
+    protected $appends = ['created_date'];
 
 
     /**
@@ -76,7 +78,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Task::class);
     }
-
     public function getNamesAttribute()
     {
         return $this->accounts()->select('name as value', 'name as label')->get();
@@ -104,5 +105,44 @@ class User extends Authenticatable
     public function generalSetting()
     {
         return $this->hasOne(GeneralSetting::class);
+    }
+
+    public function CholaInvoices()
+    {
+        return $this->hasMany(CholaInvoice::class);
+    }
+
+    public function CompanyInformation()
+    {
+        return $this->hasOne(CompanyInformation::class);
+    }
+
+    public function parents()
+    {
+        return $this->belongsToMany(User::class, 'company_child', 'user_id', 'company_id');
+    }
+    public function getCreatedDateAttribute()
+    {
+        return $this->created_at->format('Y-m-d');
+    }
+
+    public function companyParents()
+    {
+        return $this->hasMany(CompanyUser::class, 'user_id');
+    }
+
+    public function companyChilds()
+    {
+        return $this->hasMany(CompanyChild::class, 'user_id');
+    }
+
+    public function dailyReports()
+    {
+        return $this->hasMany(DailySaleReport::class);
+    }
+
+    public function saleReports()
+    {
+        return $this->hasMany(SaleReport::class);
     }
 }
