@@ -37,10 +37,7 @@ Route::get('/saving', [PageController::class, 'saving']);
 // });
 
 Route::get('/test', function () {
-    Mail::to('iamnishanthveema@gmail.com')
-        ->send(new ActivationAwaitingEmail(['name' => 'Nishanth']));
-    dd('stop');
-    // return view('cholaAdmin.activation-waiting', ['name' => 'Nishanth']);
+    return view('cholaAdmin.activation-confirmation', ['company' => 'New Company Ltd']);
 });
 
 Route::prefix('savings')->group(function () {

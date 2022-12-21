@@ -50,6 +50,7 @@ Route::middleware(['auth:api'])->name('api.')->group(function () {
     Route::get('/test', function () {
         return ['status' => true];
     })->name('test');
+    Route::get('activate/company/{companyId}/account/{accountId}',[AuthController::class,'activateCompany']);
     Route::prefix('tasks')->name('tasks.')->group(function () {
         Route::get('/', [TaskController::class, 'index'])->name('index');
         Route::post('/store', [TaskController::class, 'store'])->name('store');

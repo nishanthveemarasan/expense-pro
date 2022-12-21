@@ -150,7 +150,7 @@ class CompanyService
     {
         $user = Auth::user();
         $company = $this->company($user);
-        return $company->dailyReports()->without('user')->orderBy('date', 'DESC')->paginate(20);
+        return $company->dailyReports()->without('user')->orderBy('date', 'DESC')->paginate(10);
     }
 
     public function calculateDailySale($data)
@@ -170,8 +170,7 @@ class CompanyService
         $formattedTotalPayouts = $this->formatAmount($totalPayouts);
 
         $balance = $totalPayouts - $dailyTotalSale;
-
-        $formattedBalace = $balance < 0 ? -$this->formatAmount($balance) : $this->formatAmount($balance);
+        $formattedBalace = $this->formatAmount($balance);
 
         $data['totalDailySale'] = $formattedDailyTotalSale;
         $data['totalPayouts'] = $formattedTotalPayouts;

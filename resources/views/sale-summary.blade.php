@@ -168,9 +168,14 @@
                         <td class="sum-td" width="70%">
                             BALANCE
                         </td>
-                        <td style="text-align:left" width="30%">
+                        @if($summary['balance'] < 0) <td style="text-align:left;color:red" width="30%">
                             <strong>£{{$summary['balance']}}</strong>
-                        </td>
+                            </td>
+                            @else
+                            <td style="text-align:left;color:green" width="30%">
+                                <strong>£{{$summary['balance']}}</strong>
+                            </td>
+                            @endif
                     </tr>
                 </table>
             </tr>

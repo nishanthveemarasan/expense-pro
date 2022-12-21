@@ -68,7 +68,7 @@ trait CompanyHelper
 
     public function formatAmount($amount)
     {
-        return abs(round($amount, 2));
+        return $amount > 0 ? abs(round($amount, 2)) : -abs(round($amount, 2));
     }
 
     public function createStore($data, Company $company)

@@ -159,7 +159,7 @@
                                                     <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
                                                         <tr>
                                                             <td class="pad" style="text-align:center;width:100%;padding-top:35px;">
-                                                                <h5 style="margin: 0; color: #072b52; direction: ltr; font-family: 'Lora', Georgia, serif; font-size: 50px; font-weight: normal; letter-spacing: 1px; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><strong>Congratulations.</strong></h5>
+                                                                <h5 style="margin: 0; color: #072b52; direction: ltr; font-family: 'Lora', Georgia, serif; font-size: 25px; font-weight: normal; letter-spacing: 1px; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><strong>Congratulations.</strong></h5>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -184,11 +184,11 @@
                                                             <td class="pad" style="padding-bottom:40px;padding-left:15px;padding-right:15px;padding-top:40px;">
                                                                 <div style="font-family: Tahoma, Verdana, sans-serif">
                                                                     <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
-                                                                        <p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 24px;"><span style="font-size:16px;"><strong>Hey,</strong></span></p>
-                                                                        <p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 24px;"><span style="font-size:16px;">your Daily sale report <strong>{{$company}}</strong> has been Activated</span><span style="background-color:transparent;">.</span></p>
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 24px;"><span style="font-size:16px;text-align:left;"><strong>Hi,</strong></span></p>
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 24px;"><span style="font-size:16px;">Your registration for <span style="color: blue;font-weight:bold">{{$company}}</span> has been <span style="font-weight:bold;color:green">Activated</span></span><span style="background-color:transparent;">.</span></p>
                                                                         <p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 18px;"> </p>
-                                                                        <p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 24px;">Now you will be able to login and start your experience with our system.</p>
-                                                                        <p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 24px;">Best of luck.</p>
+                                                                        <p style="margin: 0; font-size: 16px; text-align: justify; mso-line-height-alt: 24px;">Now you will be able to login and start your experience with our system.</p>
+                                                                        <p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 24px;margin-top:10px;"><strong>Best of luck.</strong></p>
                                                                     </div>
                                                                 </div>
                                                             </td>

@@ -6,10 +6,13 @@ use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthRequest;
+use App\Mail\ActivationConfirmationEmail;
+use App\Models\Company;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 use SebastianBergmann\Environment\Console;
 
 class AuthController extends Controller
@@ -64,5 +67,23 @@ class AuthController extends Controller
                 'error' => 'Authentication Failed!! try again with correct details'
             ];
         }
+    }
+
+    public function activateCompany($companyId, $accountId)
+    {
+        $company = Company::find($companyId);
+        $user = User::find($accountId);
+
+        $company->status = 2;
+        $company->save();
+
+        $email = $user->email;
+
+        Mail::to($email)->send(new ActivationConfirmationEmail([
+            'name' => $user->name,
+            'company' => $company->name
+        ]));
+
+        return ['result' => 'Company is Activated'];
     }
 }

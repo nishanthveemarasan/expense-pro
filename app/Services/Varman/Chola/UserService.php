@@ -3,7 +3,6 @@
 namespace App\Services\Varman\Chola;
 
 use App\Http\Resources\CholaUserResource;
-use App\Mail\ActivationAwaitingEmail;
 use App\Models\Company;
 use App\Models\CompanyUser;
 use App\Models\User;
@@ -12,7 +11,6 @@ use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 
 class UserService
 {
@@ -135,13 +133,6 @@ class UserService
             'company_id' => $company->id,
             'user_id' => $user->id
         ]);
-        try {
-            Mail::to($userData['email'])
-                ->send(new ActivationAwaitingEmail(['name' => $userData['name']]));
-        } catch (Exception $e) {
-        }
-
-        dd('hi');
 
         return [
             'msg' => "Your Account is Created Succssfully!! you will receive an email once we Activate your account. Thanks for your patience!!"
@@ -151,18 +142,24 @@ class UserService
     public function login($data)
     {
         // return ['token' => '12345'];
-        $user = User::where('username', $data['username'])->first();
-        $email = $user->email;
-        $companyUser = CompanyUser::where('user_id', $user->id)->first();
-        $company = $companyUser->company;
-        if ($company->status == 2) {
-            if (Auth::attempt([
-                'email' => $email,
-                'password' => $data['password']
-            ])) {
-                $user  = Auth::user();
-                $token = $user->createToken('api-application')->accessToken;
-                return ['token' => $token];
+        $user = User::where('username', $data['username'])->where('status', 1)->first();
+        if ($user) {
+            $email = $user->email;
+            $companyUser = CompanyUser::where('user_id', $user->id)->first();
+            $company = $companyUser->company;
+            if ($company->status == 2) {
+                if (Auth::attempt([
+                    'email' => $email,
+                    'password' => $data['password']
+                ])) {
+                    $user  = Auth::user();
+                    $token = $user->createToken('api-application')->accessToken;
+                    return ['token' => $token];
+                } else {
+                    return [
+                        'error' => 'Incorrect Login details'
+                    ];
+                }
             } else {
                 return [
                     'error' => 'Incorrect Login details'
