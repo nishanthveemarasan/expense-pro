@@ -109,7 +109,7 @@ class CompanyService
         $isAdmin = $user->hasRole('chola_admin');
         $data['permissions'] = $user->getAllPermissions()->pluck('name');
         $data['payOuts'] = $company->payOuts()->count() > 0 ? $this->makeSelectArray($company->payOuts()->pluck('name')) : [];
-        $data['cards'] = $company->cardPayments()->count() > 0 ? $this->makeSelectArray(CardPayment::all()->pluck('name')) : [];
+        $data['cards'] = $company->cardPayments()->count() > 0 ? $this->makeSelectArray($company->cardPayments()->pluck('name')) : [];
         $data['user_role'] = $isAdmin ? 'admin' : 'user';
 
         if ($isAdmin) {
@@ -150,7 +150,7 @@ class CompanyService
     {
         $user = Auth::user();
         $company = $this->company($user);
-        return $company->dailyReports()->without('user')->orderBy('date', 'DESC')->paginate(10);
+        return $company->dailyReports()->without('user')->orderBy('date', 'DESC')->paginate(20);
     }
 
     public function calculateDailySale($data)
@@ -235,7 +235,7 @@ class CompanyService
         $isUserAdmin = $user->hasPermissionTo('view_daily_sale', 'api');
         $url = $isUserAdmin ? "/chola/company/daily-sales/report/{$dailySaleReport->uuid}/view" : "/chola/company/daily-sale-report-user/{$dailySaleReport->uuid}";
 
-        return ['msg' => 'Daily report has been UPDATED Successfully!!', 'redirect' => $url, 'status' => $dailySaleReport->status];
+        return ['msg' => 'Daily report has been UPDATED Successfully!!', 'report' => $data, 'redirect' => $url, 'status' => $dailySaleReport->status];
     }
 
     public function confirmDailySale(DailySaleReport $dailySaleReport)

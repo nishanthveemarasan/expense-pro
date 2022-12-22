@@ -26,7 +26,8 @@ class UpdateRoleUserRequest extends FormRequest
     public function rules()
     {
         return [
-            "role" => ['required']
+            "role" => ['required'],
+            'email' => ['nullable', 'unique:users,email'],
         ];
     }
 }

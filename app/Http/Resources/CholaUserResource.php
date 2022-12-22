@@ -16,6 +16,7 @@ class CholaUserResource extends JsonResource
     {
         return  [
             "name" =>  $this->name,
+            "email" => $this->roles[0]['name'] == 'chola_admin' ? $this->email : '',
             "username" =>  $this->username,
             "status" =>  $this->status,
             "roles" =>  $this->roles

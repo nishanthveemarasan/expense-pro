@@ -86,6 +86,10 @@ class UserService
             'name' => $data['role'],
             'guard_name' => 'api'
         ]);
+        if (isset($data['email']) && !empty($data['email']) && $data['role'] == 'chola_admin') {
+            $user->email = $data['email'];
+            $user->save();
+        }
         $user->syncRoles([$role]);
         return [
             'msg' => "User Role has been Updated Successfully!!"
