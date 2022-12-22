@@ -158,7 +158,7 @@
                     </tr>
                     <tr>
                         <td class="sum-td" style="border-bottom: 3px double black" width="70%">
-                            TOTAL EXPENSE
+                            TOTAL PAYOUT
                         </td>
                         <td style="text-align:left;border-bottom: 3px double black" width="30%">
                             £{{$summary['total_spending']}}
@@ -205,7 +205,7 @@
             @foreach($tableData['daily_sale'] as $dailySale)
             <tr>
                 <td style="text-align:center;font-size:10px;">{{$dailySale['date']}}</td>
-                <td style="text-align:center;font-size:10px;">{{$dailySale['sale_summary']['shopSale']}}</td>
+                <td style="text-align:center;font-size:10px;">{{$dailySale['sale_summary']['shopSale']['shop_sales']}}</td>
                 <td style="text-align:center;font-size:10px;">{{$dailySale['sale_summary']['payPoint']}}</td>
                 <td style="text-align:center;font-size:10px;">{{$dailySale['sale_summary']['lottery']}}</td>
                 <td style="text-align:center;font-size:10px;">{{$dailySale['sale_summary']['scratch']}}</td>

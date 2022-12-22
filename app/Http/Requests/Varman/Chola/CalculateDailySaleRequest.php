@@ -28,7 +28,10 @@ class CalculateDailySaleRequest extends FormRequest
     {
         return [
             "date" => ['required', 'date'],
-            "shopSale" => ['required', 'numeric'],
+            "shopSale" => ['required', 'array'],
+            "shopSale.shop_sales" => ['required', 'numeric'],
+            "shopSale.p_discounts" => ['required', 'numeric'],
+            "shopSale.g_discounts" => ['required', 'numeric'],
             "payPoint" => ['required', 'numeric'],
             "lottery" => ['required', 'numeric'],
             "lottery" => ['required', 'numeric'],

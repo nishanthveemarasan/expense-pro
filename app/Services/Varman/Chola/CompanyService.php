@@ -158,29 +158,13 @@ class CompanyService
         $user = Auth::user();
         $company = $this->company($user);
 
-        $this->storePayouts($data['payout'], $company);
-        $this->storeCards($data['cards'], $company);
-
-        $dailyTotalSale = $data['shopSale'] + $data['payPoint'] + $data['lottery'] + $data['scratch'];
-        $formattedDailyTotalSale = $this->formatAmount($dailyTotalSale);
-
-        $payouts = $this->totalPayouts($data['payout']);
-        $cards = $this->totalCardPayments($data['cards']);
-        $totalPayouts = $payouts + $cards + $data['cash'];
-        $formattedTotalPayouts = $this->formatAmount($totalPayouts);
-
-        $balance = $totalPayouts - $dailyTotalSale;
-        $formattedBalace = $this->formatAmount($balance);
-
-        $data['totalDailySale'] = $formattedDailyTotalSale;
-        $data['totalPayouts'] = $formattedTotalPayouts;
-        $data['balance'] = $formattedBalace;
-        $data['user'] = $user->name;
+        $data = $this->calculate($data, $company, $user);
 
         $dailyReport = $company->dailyReports()->create([
             'date' => $data['date'],
             'sale_summary' => $data,
             'total_daily_sale' => $data['totalDailySale'],
+            'only_payout_total' => $data['onlyPayoutTotal'],
             'total_payouts' => $data['totalPayouts'],
             'balance' => $data['balance'],
             'user_id' => $user->id,
@@ -191,7 +175,7 @@ class CompanyService
         $isUserAdmin = $user->hasPermissionTo('view_daily_sale', 'api');
         $url = $isUserAdmin ? "/chola/company/daily-sales/report/{$dailyReport->uuid}/view" : "/chola/company/daily-sale-report-user/{$dailyReport->uuid}";
 
-        return ['report' => $data, 'redirect' => $url, 'uuid' => $dailyReport->uuid, 'status' => $dailyReport->status];
+        return ['report' => $dailyReport, 'redirect' => $url, 'uuid' => $dailyReport->uuid, 'status' => $dailyReport->status];
     }
 
     public function storeDailySale($data)
@@ -235,7 +219,7 @@ class CompanyService
         $isUserAdmin = $user->hasPermissionTo('view_daily_sale', 'api');
         $url = $isUserAdmin ? "/chola/company/daily-sales/report/{$dailySaleReport->uuid}/view" : "/chola/company/daily-sale-report-user/{$dailySaleReport->uuid}";
 
-        return ['msg' => 'Daily report has been UPDATED Successfully!!', 'report' => $data, 'redirect' => $url, 'status' => $dailySaleReport->status];
+        return ['msg' => 'Daily report has been UPDATED Successfully!!', 'report' => $dailySaleReport, 'redirect' => $url, 'status' => $dailySaleReport->status];
     }
 
     public function confirmDailySale(DailySaleReport $dailySaleReport)

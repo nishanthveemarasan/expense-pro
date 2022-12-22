@@ -24,7 +24,7 @@ class CreateSaleReportsTable extends Migration
             $table->string('file_url');
             $table->string('file_name');
             $table->foreignId('company_id')->constrained('companies');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

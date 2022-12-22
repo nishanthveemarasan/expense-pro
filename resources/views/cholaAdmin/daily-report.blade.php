@@ -208,20 +208,82 @@
                                             <tr>
                                                 <td class="column column-1" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; padding-top: 0px; padding-bottom: 0px; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="100%">
                                                     <table border="0" cellpadding="0" cellspacing="0" class="text_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
+
+                                                        <tr>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%;background-color:lightgrey" colspan="2">
+                                                                <div style="font-family: Tahoma, Verdana, sans-serif">
+                                                                    <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;"><strong>SHOP SALE </strong></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
                                                         <tr>
                                                             <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%">
                                                                 <div style="font-family: Tahoma, Verdana, sans-serif">
                                                                     <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
-                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;"><strong>Shop Sale </strong></span></p>
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;"><strong>Shop Sales </strong></span></p>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td class="pad" style="padding-bottom:10px;padding-left:5px;padding-right:5px;padding-top:0px;">
                                                                 <div style="font-family: Tahoma, Verdana, sans-serif">
                                                                     <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
-                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;color:green;"><strong>£{{$report['sale_summary']['shopSale']}} </strong></span></p>
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;color:green;"><strong>£{{$report['sale_summary']['shopSale']['shop_sales']}} </strong></span></p>
                                                                     </div>
                                                                 </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%">
+                                                                <div style="font-family: Tahoma, Verdana, sans-serif">
+                                                                    <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;"><strong>Pro. Discounts </strong></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:5px;padding-right:5px;padding-top:0px;">
+                                                                <div style="font-family: Tahoma, Verdana, sans-serif">
+                                                                    <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;color:red;"><strong>£{{$report['sale_summary']['shopSale']['p_discounts']}} </strong></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%">
+                                                                <div style="font-family: Tahoma, Verdana, sans-serif">
+                                                                    <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;"><strong>Gen. Discounts </strong></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:5px;padding-right:5px;padding-top:0px;">
+                                                                <div style="font-family: Tahoma, Verdana, sans-serif">
+                                                                    <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;color:red;"><strong>£{{$report['sale_summary']['shopSale']['g_discounts']}} </strong></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%">
+                                                                <div style="font-family: Tahoma, Verdana, sans-serif">
+                                                                    <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;"><strong>Net Sale </strong></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:5px;padding-right:5px;padding-top:0px;border-top:3px double black">
+                                                                <div style="font-family: Tahoma, Verdana, sans-serif">
+                                                                    <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;color:green;"><strong>£{{$report['sale_summary']['shopSale']['net_sale']}} </strong></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%" colspan="2">
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -273,6 +335,10 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%" colspan="2">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
                                                             <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%">
                                                                 <div style="font-family: Tahoma, Verdana, sans-serif">
                                                                     <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
@@ -315,6 +381,10 @@
                                                             </td>
                                                         </tr>
                                                         @endforeach
+                                                        <tr>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%" colspan="2">
+                                                            </td>
+                                                        </tr>
                                                         <tr>
                                                             <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%;background-color:lightgrey" colspan="2">
                                                                 <div style="font-family: Tahoma, Verdana, sans-serif">
@@ -404,7 +474,12 @@
                                                             <td class="pad" style="padding-bottom:10px;padding-left:5px;padding-right:5px;padding-top:0px;">
                                                                 <div style="font-family: Tahoma, Verdana, sans-serif">
                                                                     <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
-                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;color:red;color:red;"><strong>£{{$report['balance']}} </strong></span></p>
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;">
+                                                                            @if($report['balance'] < 0) <span style="font-size:16px;color:red;color:red;"><strong>£{{$report['balance']}} </strong></span>
+                                                                                @else
+                                                                                <span style="font-size:16px;color:red;color:green;"><strong>£{{$report['balance']}} </strong></span>
+                                                                                @endif
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                             </td>

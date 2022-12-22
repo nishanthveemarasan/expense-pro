@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class sendStatementMail extends Mailable
+class SendSalesSummaryReport extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,9 +29,13 @@ class sendStatementMail extends Mailable
      */
     public function build()
     {
-        $subject = "Welcome to expense Panel";
+        $subject = "Sales Summary report for Last Week!";
         return $this->subject($subject)
-            ->view('email.test')
+            ->view('cholaAdmin.summary-report')
+            ->with([
+                'fromDate' => $this->data['from_date'],
+                'toDate' => $this->data['to_date']
+            ])
             ->attach($this->data['file'], [
                 'as' => $this->data['name'],
                 'mime' => 'application/pdf',

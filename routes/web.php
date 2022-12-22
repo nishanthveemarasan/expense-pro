@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Mobile\SavingController;
+use App\Models\DailySaleReport;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +38,9 @@ Route::get('/saving', [PageController::class, 'saving']);
 // });
 
 Route::get('/test', function () {
-    return view('cholaAdmin.activation-confirmation', ['company' => 'New Company Ltd']);
+    $dailtReport = DailySaleReport::find(27);
+
+    return view('cholaAdmin.daily-report', ['report' => $dailtReport->toArray()]);
 });
 
 Route::prefix('savings')->group(function () {

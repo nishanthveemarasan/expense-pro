@@ -29,44 +29,7 @@ class SummaryService
         $user = Auth::user();
         $company = $this->company($user);
 
-        $datePeriod = [$data['from_date'], $data['to_date']];
-        $dailySale = $company->dailyReports()->whereBetween('date', $datePeriod)->orderBy('date', 'DESC')->get();
-        $purchase = $company->cashAndCarries()->whereBetween('date', $datePeriod)->orderBy('date', 'DESC')->get();
-        $salary = $company->salaries()->whereBetween('date', $datePeriod)->orderBy('date', 'DESC')->get();
-        $extraExpense = $company->otherExpenses()->whereBetween('date', $datePeriod)->orderBy('date', 'DESC')->get();
-
-        $totalDailySale = $company->dailyReports()->whereBetween('date', $datePeriod)->sum('total_daily_sale');
-        $totalPurchase = $company->cashAndCarries()->whereBetween('date', $datePeriod)->sum('amount');
-        $totalSalary = $company->salaries()->whereBetween('date', $datePeriod)->sum('amount');
-        $totalExtraExpense = $company->otherExpenses()->whereBetween('date', $datePeriod)->sum('amount');
-
-        $totalSpending = $totalPurchase + $totalSalary + $totalExtraExpense;
-        $balance = $totalDailySale - $totalSpending;
-
-        $pdfData = [
-            'name' => $company->name,
-            'period' => [
-                'from' => $data['from_date'],
-                'to' => $data['to_date']
-            ],
-            'summary' => [
-                'total_earning' => $this->formatAmount($totalDailySale),
-                'total_spending' => $this->formatAmount($totalSpending),
-                'balance' => $this->formatAmount($balance)
-            ],
-            'categoryWise' => [
-                'total_daily_sale' => $this->formatAmount($totalDailySale),
-                'total_purchase' => $this->formatAmount($totalPurchase),
-                'total_salary' => $this->formatAmount($totalSalary),
-                'total_other_expense' => $this->formatAmount($totalExtraExpense),
-            ],
-            'tableData' => [
-                'daily_sale' => $dailySale->toArray(),
-                'purchase' => $purchase->toArray(),
-                'salary' => $salary->toArray(),
-                'extra_expense' => $extraExpense->toArray(),
-            ]
-        ];
+        $pdfData = $this->calculateSummary($data, $company);
 
         $timeStamp = Carbon::now()->timestamp;
         $fileName = "sale_report_{$timeStamp}_{$data['from_date']}_{$data['to_date']}";

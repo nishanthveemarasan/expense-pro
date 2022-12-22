@@ -18,6 +18,7 @@ class DailySaleReport extends Model
         'name',
         'sale_summary',
         'total_daily_sale',
+        'only_payout_total',
         'total_payouts',
         'balance',
         'company_id',
