@@ -222,9 +222,6 @@
                             <td class="tr-small">{{$payout['amount']}}</td>
                         </tr>
                         @endforeach
-                        <tr>
-                            <td class="tr-small" colspan="2">0</td>
-                        </tr>
                     </table>
                 </td>
                 @else
