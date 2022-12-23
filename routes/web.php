@@ -38,7 +38,7 @@ Route::get('/saving', [PageController::class, 'saving']);
 // });
 
 Route::get('/test', function () {
-    $dailtReport = DailySaleReport::find(27);
+    $dailtReport = DailySaleReport::find(29);
 
     return view('cholaAdmin.daily-report', ['report' => $dailtReport->toArray()]);
 });

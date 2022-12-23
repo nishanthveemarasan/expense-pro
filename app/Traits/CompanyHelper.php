@@ -38,8 +38,10 @@ trait CompanyHelper
     public function totalPayouts($payouts)
     {
         $total = 0;
-        foreach ($payouts as $payout) {
-            $total += $payout['amount'];
+        if (count($payouts) > 0) {
+            foreach ($payouts as $payout) {
+                $total += $payout['amount'];
+            }
         }
         return $total;
     }

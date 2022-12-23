@@ -209,6 +209,7 @@
                 <td style="text-align:center;font-size:10px;">{{$dailySale['sale_summary']['payPoint']}}</td>
                 <td style="text-align:center;font-size:10px;">{{$dailySale['sale_summary']['lottery']}}</td>
                 <td style="text-align:center;font-size:10px;">{{$dailySale['sale_summary']['scratch']}}</td>
+                @if(count($dailySale['sale_summary']['payout']) > 0)
                 <td style="vertical-align: top;padding:5px;">
                     <table class="header-table-with-border" width="100%">
                         <tr>
@@ -221,8 +222,14 @@
                             <td class="tr-small">{{$payout['amount']}}</td>
                         </tr>
                         @endforeach
+                        <tr>
+                            <td class="tr-small" colspan="2">0</td>
+                        </tr>
                     </table>
                 </td>
+                @else
+                <td style="text-align:center;font-size:10px;">0</td>
+                @endif
                 <td style="vertical-align: top;padding:5px;">
                     <table class="header-table-with-border" width="100%">
                         <tr>

@@ -363,6 +363,7 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
+                                                        @if(count($report['sale_summary']['payout']) > 0)
                                                         @foreach($report['sale_summary']['payout'] as $payout)
                                                         <tr>
                                                             <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%">
@@ -381,6 +382,17 @@
                                                             </td>
                                                         </tr>
                                                         @endforeach
+                                                        @else
+                                                        <tr>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:10px;" colspan="2">
+                                                                <div style="font-family: Tahoma, Verdana, sans-serif">
+                                                                    <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
+                                                                        <p style="margin: 0; font-size: 16px; text-align: center; mso-line-height-alt: 4px;"><span style="font-size:16px;"><strong>NO PAYOUT FOR THE DAY </strong></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        @endif
                                                         <tr>
                                                             <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%" colspan="2">
                                                             </td>

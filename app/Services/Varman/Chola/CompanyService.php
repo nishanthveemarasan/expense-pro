@@ -3,6 +3,8 @@
 namespace App\Services\Varman\Chola;
 
 use PDF;
+use Error;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\PayOut;
 use App\Models\Salary;
@@ -16,6 +18,7 @@ use App\Mail\SendDailyReport;
 use App\Traits\CompanyHelper;
 use App\Models\DailySaleReport;
 use App\Models\CompanyInformation;
+use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -156,7 +159,28 @@ class CompanyService
     public function calculateDailySale($data)
     {
         $user = Auth::user();
+        //check if the user is chola_user
+        $isUser = $user->hasRole('chola_user');
         $company = $this->company($user);
+
+        //check if the record already exists for report day
+        $reportExists = $company->dailyReports()->where('date', $data['date'])->exists();
+        if ($reportExists) {
+            $error = "Report Already Exists for {$data['date']}";
+            throw new Exception($error);
+        }
+
+        if ($isUser) {
+            $now = Carbon::now()->format('Y-m-d');
+            $today = Carbon::create($now);
+            $reportDate = Carbon::create($data['date']);
+            $checkReportDate = $reportDate->eq($today);
+            if (!$checkReportDate) {
+                throw new Exception("You are only allowed to do the report for {$now}");
+            }
+            //check if he 
+        }
+
 
         $data = $this->calculate($data, $company, $user);
 
