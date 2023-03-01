@@ -150,7 +150,7 @@
                     </tr>
                     <tr>
                         <td class="sum-td" width="70%">
-                            TOTAL SALE
+                            TOTAL EARNING
                         </td>
                         <td style="text-align:left" width="30%">
                             £{{$summary['total_earning']}}
@@ -158,7 +158,7 @@
                     </tr>
                     <tr>
                         <td class="sum-td" style="border-bottom: 3px double black" width="70%">
-                            TOTAL PAYOUT
+                            TOTAL SPENDING
                         </td>
                         <td style="text-align:left;border-bottom: 3px double black" width="30%">
                             £{{$summary['total_spending']}}
@@ -200,7 +200,7 @@
                 <th class="th-header-invoice">Cash</th>
                 <th class="th-header-invoice">Total Payouts</th>
                 <th class="th-header-invoice">Balance</th>
-                <th class="th-header-invoice">Total Sale</th>
+                <th class="th-header-invoice">Daily Sale</th>
             </tr>
             @foreach($tableData['daily_sale'] as $dailySale)
             <tr>
@@ -247,13 +247,25 @@
                     @else
                     <td style="text-align:center;font-size:10px;color:green">{{$dailySale['balance']}}</td>
                     @endif
-                    <td style="text-align:center;font-size:10px;">{{$dailySale['total_daily_sale']}}</td>
+                    <td style="text-align:center;font-size:10px;">{{$dailySale['sale_summary']['shopSale']['net_sale']}}</td>
 
             </tr>
             @endforeach
             <tr>
-                <td colspan="10" style="text-align: right;padding-right:5px; font-size:12px;background-color: white; border-bottom: 1px solid white;border-left: 1px solid white;padding-top:15px;padding-bottom:15px"><strong>TOTAL</strong></td>
-                <td style="text-align: center;font-size:12px;background-color: #f2f2f2"><strong>£{{$categoryWise['total_daily_sale']}}</strong></td>
+                <td style="text-align: right;padding-right:5px; font-size:12px;background-color: white;padding-top:15px;padding-bottom:15px"><strong>TOTAL</strong></td>
+                <td style="text-align: center;font-size:12px;background-color: #f2f2f2"><strong>£{{$dailySaleTotal['total_shop_sale']}}</strong></td>
+                <td style="text-align: center;font-size:12px;background-color: #f2f2f2"><strong>£{{$dailySaleTotal['total_pay_point']}}</strong></td>
+                <td style="text-align: center;font-size:12px;background-color: #f2f2f2"><strong>£{{$dailySaleTotal['total_lottery']}}</strong></td>
+                <td style="text-align: center;font-size:12px;background-color: #f2f2f2"><strong>£{{$dailySaleTotal['total_scrach']}}</strong></td>
+                <td style="text-align: center;font-size:12px;background-color: #f2f2f2"><strong>£{{$dailySaleTotal['total_only_payouts']}}</strong></td>
+                <td style="text-align: center;font-size:12px;background-color: #f2f2f2"><strong>£{{$dailySaleTotal['total_cards']}}</strong></td>
+                <td style="text-align: center;font-size:12px;background-color: #f2f2f2"><strong>£{{$dailySaleTotal['total_cash']}}</strong></td>
+                <td style="text-align: center;font-size:12px;background-color: #f2f2f2"><strong>£{{$dailySaleTotal['total_payouts']}}</strong></td>
+                @if($dailySaleTotal['total_balance'] < 0) <td style="text-align: center;font-size:12px;background-color: #f2f2f2;color:red"><strong>£{{$dailySaleTotal['total_balance']}}</strong></td>
+                    @else
+                    <td style="text-align: center;font-size:12px;background-color: #f2f2f2;color:green"><strong>£{{$dailySaleTotal['total_balance']}}</strong></td>
+                    @endif
+                    <td style="text-align: center;font-size:12px;background-color: #f2f2f2"><strong>£{{$categoryWise['total_daily_sale']}}</strong></td>
             </tr>
         </table>
         @endif

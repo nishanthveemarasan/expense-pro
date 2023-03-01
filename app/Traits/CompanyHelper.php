@@ -49,8 +49,10 @@ trait CompanyHelper
     public function totalCardPayments($cards)
     {
         $total = 0;
-        foreach ($cards as $card) {
-            $total += $card['amount'];
+        if (count($cards) > 0) {
+            foreach ($cards as $card) {
+                $total += $card['amount'];
+            }
         }
         return $total;
     }
@@ -101,6 +103,7 @@ trait CompanyHelper
         $formattedBalace = $this->formatAmount($balance);
 
         $data['totalDailySale'] = $formattedDailyTotalSale;
+        $data['totalCards'] = $this->formatAmount($cards);
         $data['onlyPayoutTotal'] = $payouts;
         $data['totalPayouts'] = $formattedTotalPayouts;
         $data['balance'] = $formattedBalace;
@@ -118,19 +121,45 @@ trait CompanyHelper
     public function calculateSummary($data, Company $company)
     {
         $datePeriod = [$data['from_date'], $data['to_date']];
-        $dailySale = $company->dailyReports()->whereBetween('date', $datePeriod)->orderBy('date', 'DESC')->get();
+        $dailySales = $company->dailyReports()->where('status', 2)->whereBetween('date', $datePeriod)->orderBy('date', 'DESC')->get();
         $purchase = $company->cashAndCarries()->whereBetween('date', $datePeriod)->orderBy('date', 'DESC')->get();
         $salary = $company->salaries()->whereBetween('date', $datePeriod)->orderBy('date', 'DESC')->get();
         $extraExpense = $company->otherExpenses()->whereBetween('date', $datePeriod)->orderBy('date', 'DESC')->get();
 
-        $totalDailySale = $company->dailyReports()->whereBetween('date', $datePeriod)->sum('total_daily_sale');
         $totalPurchase = $company->cashAndCarries()->whereBetween('date', $datePeriod)->sum('amount');
         $totalSalary = $company->salaries()->whereBetween('date', $datePeriod)->sum('amount');
         $totalExtraExpense = $company->otherExpenses()->whereBetween('date', $datePeriod)->sum('amount');
 
-        $totalSpending = $company->dailyReports()->whereBetween('date', $datePeriod)->sum('only_payout_total');
-        $balance = $totalDailySale - $totalSpending;
+        // $totalSpending = $company->dailyReports()->where('status', 2)->whereBetween('date', $datePeriod)->sum('only_payout_total');
+        $totalSpending = 0;
+        // $balance = $totalDailySale - $totalSpending;
+        $balance = 0;
 
+        $totalShopSale = 0;
+        $totalPaypoint = 0;
+        $totalLottery = 0;
+        $totalScarch = 0;
+        $totalOnlyPayout = 0;
+        $totalCards = 0;
+        $totalCash = 0;
+        $totalPayouts = 0;
+        $totalPayouts = 0;
+        $totalBalance = 0;
+        $totalDailySale = 0;
+        foreach ($dailySales as $dailySale) {
+            $sale = $dailySale->toArray();
+
+            $totalShopSale += $sale['sale_summary']['shopSale']['shop_sales'] ?? 0;
+            $totalPaypoint += $sale['sale_summary']['payPoint'] ?? 0;
+            $totalLottery += $sale['sale_summary']['lottery'] ?? 0;
+            $totalScarch += $sale['sale_summary']['scratch'] ?? 0;
+            $totalOnlyPayout += $sale['only_payout_total'] ?? 0;
+            $totalCards += $sale['cards_total'] ?? 0;
+            $totalCash += $sale['sale_summary']['cash'] ?? 0;
+            $totalPayouts += $sale['total_payouts'] ?? 0;
+            $totalBalance += $sale['balance'] ?? 0;
+            $totalDailySale += $sale['sale_summary']['shopSale']['net_sale'] ?? 0;
+        }
         $pdfData = [
             'name' => $company->name,
             'period' => [
@@ -139,8 +168,20 @@ trait CompanyHelper
             ],
             'summary' => [
                 'total_earning' => $this->formatAmount($totalDailySale),
-                'total_spending' => $this->formatAmount($totalSpending),
-                'balance' => $this->formatAmount($balance)
+                'total_spending' => 0,
+                'balance' => $this->formatAmount($totalDailySale)
+            ],
+            'dailySaleTotal' => [
+                'total_shop_sale' => $this->formatAmount($totalShopSale),
+                'total_pay_point' => $this->formatAmount($totalPaypoint),
+                'total_lottery' => $this->formatAmount($totalLottery),
+                'total_scrach' => $this->formatAmount($totalScarch),
+                'total_only_payouts' => $this->formatAmount($totalOnlyPayout),
+                'total_cards' => $this->formatAmount($totalCards),
+                'total_cash' => $this->formatAmount($totalCash),
+                'total_payouts' => $this->formatAmount($totalPayouts),
+                'total_balance' => $this->formatAmount($totalBalance),
+                'total_daily_sale' => $this->formatAmount($totalDailySale),
             ],
             'categoryWise' => [
                 'total_daily_sale' => $this->formatAmount($totalDailySale),
@@ -149,13 +190,13 @@ trait CompanyHelper
                 'total_other_expense' => $this->formatAmount($totalExtraExpense),
             ],
             'tableData' => [
-                'daily_sale' => $dailySale->toArray(),
+                'daily_sale' => $dailySales->toArray(),
                 'purchase' => $purchase->toArray(),
                 'salary' => $salary->toArray(),
                 'extra_expense' => $extraExpense->toArray(),
             ]
         ];
-
+        // dd($pdfData);
         return $pdfData;
     }
 }

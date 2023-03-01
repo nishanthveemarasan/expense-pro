@@ -22,6 +22,7 @@ class DailySaleReport extends Model
         'total_payouts',
         'balance',
         'company_id',
+        'cards_total',
         'user_id',
         'status',
         'user_name',

@@ -10,6 +10,7 @@ class Kernel extends ConsoleKernel
 
     protected $commands = [
         Commands\SendRecurringPayment::class,
+        commands\TestCommand::class
     ];
     /**
      * Define the application's command schedule.
@@ -19,7 +20,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('report:sales-summary')->dailyAt('5:53')->withoutOverlapping();
+        $schedule->command('report:sales-summary')->everyMinute()->withoutOverlapping();
     }
 
     /**

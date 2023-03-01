@@ -187,6 +187,7 @@ class CompanyService
         $dailyReport = $company->dailyReports()->create([
             'date' => $data['date'],
             'sale_summary' => $data,
+            'cards_total' => $data['totalCards'],
             'total_daily_sale' => $data['totalDailySale'],
             'only_payout_total' => $data['onlyPayoutTotal'],
             'total_payouts' => $data['totalPayouts'],
@@ -252,8 +253,6 @@ class CompanyService
         $company = $this->company($user);
 
         $updateData = [
-            'user_id' => $user->id,
-            'user_name' => $user->name,
             'status' => 2
         ];
 

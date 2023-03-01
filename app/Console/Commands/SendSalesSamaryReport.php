@@ -11,6 +11,7 @@ use App\Mail\sendStatementMail;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use App\Mail\SendSalesSummaryReport;
+use App\Models\CheckSaleReport;
 use Illuminate\Support\Facades\Mail;
 
 class SendSalesSamaryReport extends Command
@@ -47,11 +48,13 @@ class SendSalesSamaryReport extends Command
      */
     public function handle()
     {
-        Log::info("message");
-        $today = Carbon::now();
-        $dayOfWeek = $today->dayOfWeek;
-        if ($dayOfWeek == 4) {
-            $yerterDay = $today->subDay();
+        $currentDay = Carbon::now();
+        $checkReport = CheckSaleReport::where('date', $currentDay->format('Y-m-d'))->exists();
+        $dayOfWeek = $currentDay->dayOfWeek;
+
+        Log::info("Day of the week of ( " . $currentDay->format('Y-m-d') . " ) is : " . $dayOfWeek);
+        if ($dayOfWeek == 1 && !$checkReport) {
+            $yerterDay = $currentDay->subDay();
             $toDay = $yerterDay->format('Y-m-d');
             $fromDay = $yerterDay->subDays(6)->format('Y-m-d');
             $data['from_date'] = $fromDay;
@@ -101,6 +104,9 @@ class SendSalesSamaryReport extends Command
                     }
                 }
             }
+            CheckSaleReport::create(['date' => Carbon::now()->format('Y-m-d')]);
+        } else {
+            Log::info("Unfortunately today is not monday");
         }
         $this->info('finished!!');
     }
