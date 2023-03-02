@@ -47,7 +47,8 @@ class CholaPermissionSeeder extends Seeder
             'manage_cash_and_carry',
             'manage_extra_enpense',
             'manage_summary_report',
-            'view_shop_items'
+            'view_shop_items',
+            'manage_daily_scratch_card'
         ];
 
         $cholaUsersPermissions = [
@@ -55,7 +56,8 @@ class CholaPermissionSeeder extends Seeder
         ];
 
         $onlyUsersPermissions = [
-            'create_daily_sale'
+            'create_daily_sale',
+            'create_daily_scratch_card'
         ];
 
         $roles = [

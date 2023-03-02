@@ -32,6 +32,11 @@ class Company extends Model
         return $this->hasOne(CompanyUser::class, 'company_id');
     }
 
+    public function scratchCard()
+    {
+        return $this->hasOne(ScratchCard::class, 'company_id');
+    }
+
     public function children()
     {
         return $this->belongsToMany(User::class, 'company_child', 'company_id', 'user_id');
@@ -75,5 +80,10 @@ class Company extends Model
     public function saleReports()
     {
         return $this->hasMany(SaleReport::class);
+    }
+
+    public function dailyScratchCardSales()
+    {
+        return $this->hasMany(DailyScratchCardSale::class);
     }
 }

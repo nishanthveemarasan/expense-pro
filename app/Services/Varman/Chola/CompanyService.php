@@ -108,6 +108,7 @@ class CompanyService
     {
         $user = Auth::user();
         $company = $this->company($user);
+        $today = Carbon::now()->format('Y-m-d');
 
         $isAdmin = $user->hasRole('chola_admin');
         $data['permissions'] = $user->getAllPermissions()->pluck('name');
@@ -137,6 +138,7 @@ class CompanyService
                 }
                 $data['users'] = $array;
             }
+            $data['scratch_sale'] = $company->dailyScratchCardSales()->where('date', $today)->where('status', 3)->select('total_sale', 'uuid', 'date')->first();
         } else {
             $data['roles'] = [];
             $data['stores'] = [];

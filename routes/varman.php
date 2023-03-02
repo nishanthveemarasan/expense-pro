@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Varman\Chola\UserController;
 use App\Http\Controllers\Varman\Chola\CompanyController;
 use App\Http\Controllers\Varman\Chola\InvoiceController;
+use App\Http\Controllers\Varman\Chola\ScratchCardController;
 use App\Http\Controllers\Varman\Chola\SummaryController;
 use App\Mail\ActivationConfirmationEmail;
 use Illuminate\Support\Facades\Mail;
@@ -30,6 +31,20 @@ Route::prefix('user')->name('auth.')->controller(UserController::class)->group(f
 });
 Route::middleware(['auth:api', 'allowed'])->name('api.')->group(function () {
     Route::prefix('chola')->name('chola.')->group(function () {
+        Route::prefix('scratch-card')->controller(ScratchCardController::class)->group(function () {
+            Route::post('store', 'storeScratchCard');
+            Route::get('info', 'getInfo');
+            Route::prefix('daily-sales')->group(function () {
+                Route::get('list', 'list');
+                Route::get('todayInfo', 'getTodayInfo');
+                Route::get('{dailyScratchCardSale:uuid}/get', 'getDailyReportData');
+                Route::post('{dailyScratchCardSale:uuid}/update-price', 'updateCardPrice');
+                Route::post('{dailyScratchCardSale:uuid}/update-open-stock', 'updateDailySaleOpenStock');
+                Route::post('{dailyScratchCardSale:uuid}/update-close-stock', 'updateDailySaleCloseStock');
+                Route::get('{dailyScratchCardSale:uuid}/approve', 'approveDailySale');
+                Route::delete('{dailyScratchCardSale:uuid}/delete', 'deleteDailySale');
+            });
+        });
         Route::prefix('company')->name('company.')->controller(CompanyController::class)->group(function () {
             Route::prefix('dailySale')->group(function () {
                 Route::post('calculate', 'calculateDailySale'); //done
