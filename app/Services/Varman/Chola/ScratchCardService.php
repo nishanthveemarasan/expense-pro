@@ -93,6 +93,16 @@ class ScratchCardService
         $company = $this->company($user);
         $reportExists = $company->dailyScratchCardSales()->where('date', $data['date'])->where('status', 4)->exists();
         if (!$reportExists) {
+            $isUser = $user->hasRole('chola_user');
+            if ($isUser) {
+                $now = Carbon::now()->format('Y-m-d');
+                $today = Carbon::create($now);
+                $reportDate = Carbon::create($data['date']);
+                $checkReportDate = $reportDate->eq($today);
+                if (!$checkReportDate) {
+                    throw new Exception("You are only allowed to do the report for {$now}");
+                }
+            }
             $dailyScratchCardSale->update([
                 'open_sale_updated_by' => $user->name,
                 'date' => $data['date'],
@@ -109,6 +119,17 @@ class ScratchCardService
     {
         $user = Auth::user();
         $company = $this->company($user);
+
+        $isUser = $user->hasRole('chola_user');
+        if ($isUser) {
+            $now = Carbon::now()->format('Y-m-d');
+            $today = Carbon::create($now);
+            $reportDate = Carbon::create($data['date']);
+            $checkReportDate = $reportDate->eq($today);
+            if (!$checkReportDate) {
+                throw new Exception("You are only allowed to do the report for {$now}");
+            }
+        }
 
         $dailyScratchCardSale->update();
         $reportExists = $company->dailyScratchCardSales()->where('date', $data['date'])->where('status', 4)->first();
