@@ -1,6 +1,7 @@
 <?php
 
 use App\Mail\sendStatementMail;
+use App\Models\DailySaleReport;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ActivationAwaitingEmail;
 use App\Mail\SendForgetPasswordEmail;
@@ -9,7 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Mobile\SavingController;
-use App\Models\DailySaleReport;
+use App\Http\Controllers\Varman\Chola\DropboxAccessTokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,4 +49,9 @@ Route::prefix('savings')->group(function () {
     Route::post('/store', [SavingController::class, 'store']);
     Route::patch('/{mobileSaving:uuid}/update', [SavingController::class, 'update']);
     Route::delete('/{mobileSaving:uuid}/delete', [SavingController::class, 'delete']);
+});
+
+Route::prefix('dropbox')->group(function () {
+    Route::get('/authorize/app/{event}', [DropboxAccessTokenController::class, 'authorizeDropboxApp']);
+    Route::get('/authorize/code/{event}', [DropboxAccessTokenController::class, 'dropboxAuthorizeCode']);
 });

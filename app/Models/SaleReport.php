@@ -19,7 +19,8 @@ class SaleReport extends Model
         'company_id',
         'user_id',
         'file_url',
-        'file_name'
+        'file_name',
+        'dropbox_file_url'
     ];
 
     protected $casts = [
