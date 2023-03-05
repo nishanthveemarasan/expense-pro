@@ -138,13 +138,20 @@ class CompanyService
                 }
                 $data['users'] = $array;
             }
-            $data['scratch_sale'] = $company->dailyScratchCardSales()->where('date', $today)->where('status', 3)->select('total_sale', 'uuid', 'date')->first();
         } else {
             $data['roles'] = [];
             $data['stores'] = [];
             $data['users'] = [];
         }
         return $data;
+    }
+    public function scratchCardSaleSpecificDate($data)
+    {
+        $user = Auth::user();
+        $company = $this->company($user);
+        $date = $data['date'];
+        $response['scratch_sale'] = $company->dailyScratchCardSales()->where('date', $date)->where('status', 4)->select('total_sale', 'uuid', 'date')->first();
+        return $response;
     }
     public function getDailySale(DailySaleReport $dailySaleReport)
     {

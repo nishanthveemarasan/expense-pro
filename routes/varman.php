@@ -48,6 +48,7 @@ Route::middleware(['auth:api', 'allowed'])->name('api.')->group(function () {
         Route::prefix('company')->name('company.')->controller(CompanyController::class)->group(function () {
             Route::prefix('dailySale')->group(function () {
                 Route::post('calculate', 'calculateDailySale'); //done
+                Route::post('scratch-card-for-date', 'scratchCardSaleSpecificDate'); //done
                 Route::get('{dailySaleReport:uuid}/get', 'getDailySale'); //done
                 Route::get('{dailySaleReport:uuid}/confirm', 'confirmDailySale'); //done
                 Route::patch('{dailySaleReport:uuid}/update', 'updateDailySale'); //done

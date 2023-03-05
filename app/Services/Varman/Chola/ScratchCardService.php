@@ -31,13 +31,17 @@ class ScratchCardService
     {
         $user = Auth::user();
         $company = $this->company($user);
-        return $company->dailyScratchCardSales()->orderBy('id', 'DESC')->paginate(20);
+        return $company->dailyScratchCardSales()->where('status', '!=', '1')->orderBy('id', 'DESC')->paginate(20);
     }
 
     public function StoreScratchCard($data)
     {
         $user = Auth::user();
         $company = $this->company($user);
+        $recordExists = $company->dailyScratchCardSales()->whereIn('status', [1, 2, 3])->first();
+        if ($recordExists) {
+            $recordExists->delete();
+        }
         ScratchCard::updateOrCreate(
             ['company_id' => $company->id],
             $data
@@ -56,24 +60,27 @@ class ScratchCardService
     {
         $user = Auth::user();
         $company = $this->company($user);
-
-        $isUser = $user->hasRole('chola_user');
-        $today = Carbon::now()->format('Y-m-d');
-        //check if the record already exists for report day
-        $reportExists = $company->dailyScratchCardSales()->where('date', $today)->where('status', 3)->exists();
-        if ($reportExists) {
-            if ($isUser) {
-                throw new Exception("You are only allowed to do the report for {$today}");
-            }
+        $scratchCards = $company->scratchCard;
+        if (!$scratchCards) {
+            return [];
         }
 
-        $recordExists = $company->dailyScratchCardSales()->whereIn('status', [1, 2])->exists();
+        $recordExists = $company->dailyScratchCardSales()->whereIn('status', [1, 2, 3])->exists();
         if ($recordExists) {
-            return $company->dailyScratchCardSales()->whereIn('status', [1, 2])->first();
+            return $company->dailyScratchCardSales()->whereIn('status', [1, 2, 3])->first();
         } else {
+            //get the last approved data
+            $lastApprovedData = DailyScratchCardSale::where('company_id', $company->id)
+                ->where('status', 4)
+                ->orderBy('created_at', 'DESC')
+                ->first();
+            $date = Carbon::now()->format('Y-m-d');
+            if ($lastApprovedData) {
+                $date = Carbon::create($lastApprovedData->date)->addDay()->format('Y-m-d');
+            }
             $saleJsonData = $this->constractDailySaleJSonData($company);
             $dailySaleData = $company->dailyScratchCardSales()->Create([
-                'date' => $today,
+                'date' => $date,
                 'sale_data' => $saleJsonData
             ]);
             return $dailySaleData;
@@ -84,12 +91,13 @@ class ScratchCardService
     {
         $user = Auth::user();
         $company = $this->company($user);
-        $reportExists = $company->dailyScratchCardSales()->where('date', $data['date'])->where('status', 3)->exists();
+        $reportExists = $company->dailyScratchCardSales()->where('date', $data['date'])->where('status', 4)->exists();
         if (!$reportExists) {
             $dailyScratchCardSale->update([
                 'open_sale_updated_by' => $user->name,
                 'date' => $data['date'],
                 'sale_data' => $this->organiseDailySaleJsonData($data['sale_data']),
+                'status' => 2
             ]);
             return ['msg' => 'Open Stock has been Updated Successfully'];
         } else {
@@ -101,16 +109,31 @@ class ScratchCardService
     {
         $user = Auth::user();
         $company = $this->company($user);
-        $reportExists = $company->dailyScratchCardSales()->where('date', $data['date'])->where('status', 3)->first();
+
+        $dailyScratchCardSale->update();
+        $reportExists = $company->dailyScratchCardSales()->where('date', $data['date'])->where('status', 4)->first();
         if (!$reportExists || ($reportExists && $dailyScratchCardSale->uuid == $reportExists->uuid)) {
             $calculateSaleData = $this->calculateDailySaleData($data['sale_data']);
+            //next data
+            $nextDate = Carbon::create($data['date'])->addDay()->format('Y-m-d');
+
+            $newRecord = $company->dailyScratchCardSales()->where('date', $nextDate)
+                ->orWhere('date', null)->first();
+
+            if ($newRecord) {
+                if ($newRecord->status == 4) {
+                    return ['msg' => "You can not Edit as Record for {$nextDate} has already been approved!!"];
+                } else {
+                    $newRecord->delete();
+                }
+            }
 
             $dailyScratchCardSale->update([
                 'close_sale_updated_by' => $user->name,
                 'date' => $data['date'],
                 'sale_data' => $calculateSaleData['sale_data'],
                 'total_sale' => $calculateSaleData['total_amount'],
-                'status' => $dailyScratchCardSale->status == 3 ? 3 : 2
+                'status' => $dailyScratchCardSale->status == 4 ? 4 : 3
             ]);
             $dailyScratchCardSale->refresh();
             $isUserAdmin = $user->hasPermissionTo('manage_daily_scratch_card', 'api');
@@ -131,11 +154,11 @@ class ScratchCardService
         $company = $this->company($user);
 
         $dailyScratchCardSale->update([
-            'status' => 3
+            'status' => 4
         ]);
         $dailyScratchCardSale->refresh();
         $isUserAdmin = $user->hasPermissionTo('manage_daily_scratch_card', 'api');
-        $url = $isUserAdmin ? '/chola/company/daily-scratch-card' : 'chola/company/daily-sale-user';
+        $url = $isUserAdmin ? '/chola/company/daily-scratch-card' : '/chola/company/daily-scratch-card-user/create';
         return [
             'msg' => 'Daily Scratch Card Sale has been Approved Successfully!!!',
             'daily_sale_data' => $dailyScratchCardSale,
@@ -154,14 +177,14 @@ class ScratchCardService
         $user = Auth::user();
         $company = $this->company($user);
 
-        $reportExists = $company->dailyScratchCardSales()->where('date', $data['date'])->where('status', 3)->first();
+        $reportExists = $company->dailyScratchCardSales()->where('date', $data['date'])->where('status', 4)->first();
         if (!$reportExists) {
             $saleData = $data['sale_data'];
             $priceData = [];
             //update the peice in daily sale table
             foreach ($saleData as $key => $row) {
-                $saleData[$key]['open_stock'] = $data[$key]['open_stock'] ?? '';
-                $saleData[$key]['close_stock'] = $data[$key]['close_stock'] ?? '';
+                $saleData[$key]['open_stock'] = $row['open_stock'] ?? '';
+                $saleData[$key]['close_stock'] = $row['close_stock'] ?? '';
 
                 $price = [
                     'box_number' => $row['box_number'],
@@ -179,6 +202,7 @@ class ScratchCardService
             $dailyScratchCardSale->update([
                 'price_updated_by' => $user->name,
                 'sale_data' => $saleData,
+                'status' => 2
             ]);
             return ['msg' => 'Prices have been updated Successfully!!'];
         } else {
@@ -186,20 +210,14 @@ class ScratchCardService
         }
     }
 
-
-
-
-
-
-
-
-
-
-
     private function constractDailySaleJSonData(Company $company)
     {
 
-        $lastApprovedData = $company->dailyScratchCardSales->where('status', 3)->last();
+        // $lastApprovedData = $company->dailyScratchCardSales->where('status', 3)->orderBy('created_at', 'DESC')->latest();
+        $lastApprovedData = DailyScratchCardSale::where('company_id', $company->id)
+            ->where('status', 4)
+            ->orderBy('created_at', 'DESC')
+            ->first();
 
         $scratchCards = $company->scratchCard->cards ?? null;
         $jsonData = [];

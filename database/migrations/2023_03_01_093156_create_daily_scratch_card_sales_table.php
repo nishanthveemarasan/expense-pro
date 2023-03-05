@@ -22,7 +22,7 @@ class CreateDailyScratchCardSalesTable extends Migration
             $table->double('total_sale')->nullable();
             $table->string('open_sale_updated_by', 50)->nullable();
             $table->string('close_sale_updated_by', 50)->nullable();
-            $table->integer('status')->default(1)->comment('1 = draft , 2 = draft submitted, 3 = approved');
+            $table->integer('status')->default(1)->comment('1 = draft , 2 = processing, 3 = submitted, 4 = approved');
             $table->softDeletes();
             $table->timestamps();
         });

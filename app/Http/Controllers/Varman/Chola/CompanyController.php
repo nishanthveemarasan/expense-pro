@@ -16,6 +16,7 @@ use App\Http\Requests\Varman\Chola\CreateCashAndCarryRequest;
 use App\Http\Requests\Varman\Chola\CreateExpenseRequest;
 use App\Http\Requests\Varman\Chola\CreateSalaryRequest;
 use App\Http\Requests\Varman\Chola\DeleteDailyReportRequest;
+use App\Http\Requests\Varman\Chola\GetScratchSaleForDateRequest;
 use App\Http\Requests\Varman\Chola\manageExpenseRequest;
 use App\Http\Requests\Varman\Chola\ManageSalaryRequest;
 use App\Http\Requests\Varman\Chola\StoreDailySaleRequest;
@@ -485,6 +486,22 @@ class CompanyController extends Controller
         try {
             DB::beginTransaction();
             $result = $this->service->deleteExpense($otherExpense);
+            $response = $this->apiResponseService->success(200, $result);
+            DB::commit();
+            return $response;
+        } catch (Exception $e) {
+            DB::rollBack();
+            $error = $e->getMessage() . " GET FILE : " . $e->getFile() . " GET LINE : " . $e->getLine();
+            $this->storeError([], $error);
+            return $this->apiResponseService->failed($e->getMessage(), 500);
+        }
+    }
+
+    public function scratchCardSaleSpecificDate(GetScratchSaleForDateRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+            $result = $this->service->scratchCardSaleSpecificDate($request->validated());
             $response = $this->apiResponseService->success(200, $result);
             DB::commit();
             return $response;
