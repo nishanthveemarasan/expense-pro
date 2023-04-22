@@ -270,21 +270,19 @@ class CompanyService
 
         $dataArray = $dailySaleReport->toArray();
         $cardSales = $dataArray['sale_summary']['cards'];
-        if(count($cardSales) > 0){
-            $total = 0;
-            foreach($cardSales as $card){
+        $total = 0;
+        if (count($cardSales) > 0) {
+            foreach ($cardSales as $card) {
                 $total += $card['amount'];
             }
-            $dataArray['sale_summary']['cards']['total'] = $total; 
         }
-        dd($dataArray);
-
+        $dataArray['sale_summary']['cardsSubTotal'] = $this->formatAmount($total);
         $adminEmails = $this->getAdmins($company);
 
         try {
             foreach ($adminEmails as $email) {
                 Mail::to($email)
-                    ->send(new SendDailyReport(['report' => $dailySaleReport->toArray(), 'date' => $dailySaleReport->date]));
+                    ->send(new SendDailyReport(['report' => $dataArray, 'date' => $dailySaleReport->date]));
             }
         } catch (\Exception $e) {
             Log::info("{$e->getMessage()} {$e->getFile()} {$e->getLine()}");

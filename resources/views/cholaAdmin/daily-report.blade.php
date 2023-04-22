@@ -425,6 +425,22 @@
                                                         </tr>
                                                         @endforeach
                                                         <tr>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%">
+                                                                <div style="font-family: Tahoma, Verdana, sans-serif">
+                                                                    <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;color:blue;"><strong>CARDS SUB TOTAL </strong></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="pad" style="padding-bottom:10px;padding-left:5px;padding-right:5px;padding-top:0px;border-top:3px double black">
+                                                                <div style="font-family: Tahoma, Verdana, sans-serif">
+                                                                    <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
+                                                                        <p style="margin: 0; font-size: 16px; text-align: left; mso-line-height-alt: 4px;"><span style="font-size:16px;color:blue;"><strong>£{{$report['sale_summary']['cardsSubTotal']}} </strong></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
                                                             <td class="pad" style="padding-bottom:10px;padding-left:15px;padding-right:5px;padding-top:0px;width:60%;border-bottom:4px double black" colspan="2">
                                                                 <div style="font-family: Tahoma, Verdana, sans-serif">
                                                                     <div class="" style="font-size: 12px; font-family: 'Lato', Tahoma, Verdana, Segoe, sans-serif; mso-line-height-alt: 18px; color: #222222; line-height: 1.5;">
