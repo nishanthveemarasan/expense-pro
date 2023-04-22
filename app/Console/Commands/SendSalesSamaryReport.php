@@ -69,8 +69,7 @@ class SendSalesSamaryReport extends Command
                 $pdfData = $this->calculateSummary($data, $company);
                 $adminEmails = $this->getAdmins($company);
 
-                $timeStamp = Carbon::now()->timestamp;
-                $fileName = "sale_report_{$timeStamp}_{$data['from_date']}_{$data['to_date']}";
+                $fileName = "sale_report_{$data['from_date']}_{$data['to_date']}";
 
                 $pdf = PDF::loadView('sale-summary', $pdfData);
                 $pdf->setPaper('A4', 'portrait');

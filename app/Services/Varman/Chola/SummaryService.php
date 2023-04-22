@@ -44,39 +44,64 @@ class SummaryService
 
         $pdfData = $this->calculateSummary($data, $company);
 
-        $timeStamp = Carbon::now()->timestamp;
-        $fileName = "sale_report_{$timeStamp}_{$data['from_date']}_{$data['to_date']}";
+        $fileName = "sale_report_{$data['from_date']}_{$data['to_date']}";
 
         $pdf = PDF::loadView('sale-summary', $pdfData);
         $pdf->setPaper('A4', 'portrait');
+
+        $summaryReport = $company->saleReports()->where('from_date', $data['from_date'])
+            ->where('to_date', $data['to_date'])
+            ->first();
         if ($company->id == 5) {
             $reportDate = Carbon::create($data['from_date']);
             $filePath = "{$reportDate->year}/{$reportDate->format('F')}";
             $dropboxFilePath = "{$filePath}/{$fileName}.pdf";
             $this->dropbboxService->storePDFintoDropbox($pdfData, $filePath, $fileName, $dropboxFilePath);
-            $company->saleReports()->create([
-                'from_date' => $data['from_date'],
-                'to_date' => $data['to_date'],
-                'total_sale' => $pdfData['summary']['total_earning'],
-                'total_expemse' => $pdfData['summary']['total_spending'],
-                'total_balance' => $pdfData['summary']['balance'],
-                'dropbox_file_url' => $dropboxFilePath
-            ]);
+            if ($summaryReport) {
+                $summaryReport->update([
+                    'total_sale' => $pdfData['summary']['total_earning'],
+                    'total_expemse' => $pdfData['summary']['total_spending'],
+                    'total_balance' => $pdfData['summary']['balance'],
+                    'dropbox_file_url' => $dropboxFilePath,
+                    'user_id' => $user->id,
+                ]);
+            } else {
+
+                $company->saleReports()->create([
+                    'from_date' => $data['from_date'],
+                    'to_date' => $data['to_date'],
+                    'total_sale' => $pdfData['summary']['total_earning'],
+                    'total_expemse' => $pdfData['summary']['total_spending'],
+                    'total_balance' => $pdfData['summary']['balance'],
+                    'user_id' => $user->id,
+                    'dropbox_file_url' => $dropboxFilePath
+                ]);
+            }
             return Storage::disk('dropbox')->download($dropboxFilePath);
         } else {
 
             $pdf->save(public_path("/z/b/d/reports/{$fileName}.pdf"));
-
-            $company->saleReports()->create([
-                'from_date' => $data['from_date'],
-                'to_date' => $data['to_date'],
-                'total_sale' => $pdfData['summary']['total_earning'],
-                'total_expemse' => $pdfData['summary']['total_spending'],
-                'total_balance' => $pdfData['summary']['balance'],
-                'user_id' => $user->id,
-                'file_url' => '/z/b/d/reports',
-                'file_name' => $fileName
-            ]);
+            if ($summaryReport) {
+                $summaryReport->update([
+                    'total_sale' => $pdfData['summary']['total_earning'],
+                    'total_expemse' => $pdfData['summary']['total_spending'],
+                    'total_balance' => $pdfData['summary']['balance'],
+                    'user_id' => $user->id,
+                    'file_url' => '/z/b/d/reports',
+                    'file_name' => $fileName
+                ]);
+            } else {
+                $company->saleReports()->create([
+                    'from_date' => $data['from_date'],
+                    'to_date' => $data['to_date'],
+                    'total_sale' => $pdfData['summary']['total_earning'],
+                    'total_expemse' => $pdfData['summary']['total_spending'],
+                    'total_balance' => $pdfData['summary']['balance'],
+                    'user_id' => $user->id,
+                    'file_url' => '/z/b/d/reports',
+                    'file_name' => $fileName
+                ]);
+            }
 
             return $pdf->download($fileName);
         }

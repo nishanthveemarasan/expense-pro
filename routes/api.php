@@ -14,7 +14,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\Mobile\CurrencyController;
 use App\Http\Controllers\Mobile\ExpenseController as MobileExpenseController;
-use App\Http\Controllers\Mobile\MobileDebtController;
+// use App\Http\Controllers\Mobile\MobileDebtController;
 use App\Http\Controllers\RecurringPaymentController;
 use App\Http\Controllers\Mobile\SavingController as MobileSavingController;
 use App\Http\Controllers\MobileRecurringPaymentController;

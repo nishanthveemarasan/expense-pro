@@ -268,6 +268,17 @@ class CompanyService
         $dailySaleReport->update($updateData);
         $dailySaleReport->refresh();
 
+        $dataArray = $dailySaleReport->toArray();
+        $cardSales = $dataArray['sale_summary']['cards'];
+        if(count($cardSales) > 0){
+            $total = 0;
+            foreach($cardSales as $card){
+                $total += $card['amount'];
+            }
+            $dataArray['sale_summary']['cards']['total'] = $total; 
+        }
+        dd($dataArray);
+
         $adminEmails = $this->getAdmins($company);
 
         try {
