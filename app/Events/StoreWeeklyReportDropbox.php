@@ -14,14 +14,17 @@ class StoreWeeklyReportDropbox
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $data;
+    public $date;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data, $date)
     {
-        //
+        $this->data = $data;
+        $this->date = $date;
     }
 
     /**
